@@ -10,10 +10,7 @@ GreenMarket busca conectar a jardineros y vendedores locales con un mercado más
 - Base de datos relacional MariaDB
 - Frontend con Angular-ionic.
 
-# Parte Git
-
-## Soy colaborador de un proyecto y quiero traerlo a mi computador.
-Hay muchas formas de poder colaborar en un proyecto, en este caso nos enfocaremos en que eres un invitado a colaborar a un proyecto, por lo tanto, eres parte de él y tienes el enlace de este.
+# Solo para colaboradores del proyecto, Parte Git
 
 Con esto requerimientos cumplidos, procederemos a clonar el proyecto con el siguiente comando
 
