@@ -13,10 +13,7 @@ GreenMarket busca conectar a jardineros y vendedores locales con un mercado más
 # Parte backend y Frontend
 Antes de subir todo lo desarrollado, tenemos que sacar la carpeta generada por el virtualenv, en el backend y en el Fronted sacar la carpeta node_modules.
 
-# Parte Git
-
-## Soy colaborador de un proyecto y quiero traerlo a mi computador.
-Hay muchas formas de poder colaborar en un proyecto, en este caso nos enfocaremos en que eres un invitado a colaborar a un proyecto, por lo tanto, eres parte de él y tienes el enlace de este.
+# Solo para colaboradores del proyecto, Parte Git
 
 Con esto requerimientos cumplidos, procederemos a clonar el proyecto con el siguiente comando
 
@@ -66,3 +63,12 @@ git push <alias> <rama>
 
 * reemplazar <**alias**> con el sobrenombre que tiene tu enlace, los puedes ver con el comando ```git remote -v  ```.
 * reemplazar <**rama**> con el Branch que actualmente estas trabajando, por defecto puede ser **master** o **main**
+
+# Instalacion de Parte Backend
+Para iniciar el proyectos, primero tenemos que instalar las dependencias del proyecto:
+
+- Para instalar estas dependencias en la terminal ingresar:
+
+        activate.bat
+
+    Esto servira para instalar las dependencias e instalar y activar el entorno virtual.
