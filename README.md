@@ -62,13 +62,4 @@ git push <alias> <rama>
 ```
 
 * reemplazar <**alias**> con el sobrenombre que tiene tu enlace, los puedes ver con el comando ```git remote -v  ```.
-* reemplazar <**rama**> con el Branch que actualmente estas trabajando, por defecto puede ser **master** o **main**
-
-# Instalacion de Parte Backend
-Para iniciar el proyectos, primero tenemos que instalar las dependencias del proyecto:
-
-- Para instalar estas dependencias en la terminal ingresar:
-
-        activate.bat
-
-    Esto servira para instalar las dependencias e instalar y activar el entorno virtual.
+* reemplazar <**rama**> con el Branch que actualmente estas trabajando, por defecto puede ser **master** o **main**.
