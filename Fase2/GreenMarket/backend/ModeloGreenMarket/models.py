@@ -102,6 +102,7 @@ class Proveedor(models.Model):
     rut = models.CharField(max_length=10, primary_key=True)
     dv = models.CharField(max_length=1)
     correo_electronico = models.EmailField(max_length=50)
+    contrasena = models.CharField(max_length=50)
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
     verificacion = models.BooleanField(default=False)
@@ -188,7 +189,7 @@ class Producto (models.Model):
     codigo_producto = models.AutoField(primary_key=True)
     nombre_producto = models.CharField(max_length=50)
     precio = models.IntegerField()
-    imagen_producto = models.ImageField(upload_to='productos/')
+    imagen_producto = models.CharField(max_length=100)
     id_categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     id_proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
 
@@ -207,9 +208,8 @@ class CalificacionProducto(models.Model):
 
 class Carrito (models.Model):
     id_carrito = models.AutoField(primary_key=True)
-    fecha_agregado = models.DateField()
-    estado_carrito = models.CharField(max_length=50)
-    monto_total = models.IntegerField()
+    fecha_agregado = models.DateTimeField()
+    monto_total = models.PositiveBigIntegerField()
     cliente = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='carritos')
 
     def registrar_cliente(self, rut, correo_user, nom_user, ap_user):
@@ -250,10 +250,10 @@ class Carrito (models.Model):
             return None
 
 class Items (models.Model):
-    id_item = models.AutoField(primary_key=True)
-    cantidad = models.IntegerField()
-    precio_unitario = models.IntegerField()
-    subtotal = models.IntegerField()
+    id_items = models.AutoField(primary_key=True)
+    cantidad = models.PositiveBigIntegerField()
+    precio_unitario = models.PositiveBigIntegerField()
+    subtotal = models.PositiveBigIntegerField()
     id_carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE, related_name="items")
     id_producto = models.ForeignKey(Producto, on_delete=models.CASCADE, related_name="productos")
 

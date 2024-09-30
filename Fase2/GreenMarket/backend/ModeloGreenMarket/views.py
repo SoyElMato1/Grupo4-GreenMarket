@@ -10,12 +10,20 @@ from rest_framework.decorators import api_view
 
 # ---------------------------------------Proveedor---------------------------------------------
 @csrf_exempt
-@api_view(['GET'])
+@api_view(['GET', 'POST'])
 def Ver_proveedor(request):
     if request.method == 'GET':
         proveedores = models.Proveedor.objects.all()
         serializer = ProveedorSerializer(proveedores, many=True)
         return JsonResponse(serializer.data, safe=False)
+    elif request.method == 'POST':
+        proveedor_data = JSONParser().parse(request)
+        proveedor_serializer = ProveedorSerializer(data=proveedor_data)
+        if proveedor_serializer.is_valid():
+            proveedor_serializer.save()
+            return JsonResponse(proveedor_serializer.data, status=status.HTTP_201_CREATED)
+        return JsonResponse(proveedor_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
 @csrf_exempt
 @api_view(['POST'])
 def agregar_proveedor_admin(request):
@@ -181,36 +189,58 @@ def detalle_categoria(request, id):
 # --------------------------------- Vista de Carrito ---------------------------------------------
 @csrf_exempt
 @api_view(['GET'])
-def listar_carrito(request, id):
+def listar_carrito(request):
     if request.method == 'GET':
-        try:
-            carrito = Carrito.objects.get(id_usuario=id)
-        except Carrito.DoesNotExist:
+        # Intentamos obtener el carrito de la sesión
+        carrito = request.session.get('carrito', None)
+        if not carrito:
             return JsonResponse({"data": "null", "message": "No existe el carrito"}, status=status.HTTP_404_NOT_FOUND)
 
-        carrito_serializer = CarritoSerializer(carrito)
-        return JsonResponse({"data": carrito_serializer.data, "message": "Carrito encontrado"}, status=status.HTTP_200_OK)
+        return JsonResponse({"data": carrito, "message": "Carrito encontrado"}, status=status.HTTP_200_OK)
     
 @csrf_exempt
 @api_view(['POST'])
 def agregar_carrito(request):
     if request.method == 'POST':
+        # Obtenemos el carrito de la sesión o creamos uno nuevo si no existe
+        carrito = request.session.get('carrito', [])
+
+        # Parseamos los datos recibidos
         carrito_data = JSONParser().parse(request)
+
+        # Validamos los datos con el serializer
         carrito_serializer = AgregarCarritoSerializer(data=carrito_data)
         if carrito_serializer.is_valid():
-            carrito_serializer.save()
+            # Agregamos el producto al carrito
+            carrito.append(carrito_serializer.validated_data)
+            
+            # Actualizamos el carrito en la sesión
+            request.session['carrito'] = carrito
             return JsonResponse({"data": carrito_serializer.data, "message": "Producto agregado al carrito"}, status=status.HTTP_201_CREATED)
+
         return JsonResponse(carrito_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-    
+
 @csrf_exempt
 @api_view(['POST'])
 def eliminar_carritoitem(request):
     if request.method == 'POST':
+        # Obtenemos el carrito de la sesión
+        carrito = request.session.get('carrito', [])
+
+        # Parseamos los datos recibidos
         carritoitem_data = JSONParser().parse(request)
+        
+        # Validamos los datos con el serializer
         carritoitem_serializer = RestarCarritoSerializer(data=carritoitem_data)
         if carritoitem_serializer.is_valid():
-            carritoitem_serializer.save()
-            return JsonResponse({"data": carritoitem_serializer.data, "message": "Se elimino una unidad del producto seleccionado"}, status=status.HTTP_200_OK)
+            # Logica para eliminar un producto del carrito
+            producto_eliminar = carritoitem_serializer.validated_data
+            nuevo_carrito = [item for item in carrito if item['producto_id'] != producto_eliminar['producto_id']]
+            
+            # Actualizamos el carrito en la sesión
+            request.session['carrito'] = nuevo_carrito
+            return JsonResponse({"data": carritoitem_serializer.data, "message": "Se eliminó una unidad del producto seleccionado"}, status=status.HTTP_200_OK)
+
         return JsonResponse(carritoitem_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
 def limpiar_carrito(id_carrito:int):

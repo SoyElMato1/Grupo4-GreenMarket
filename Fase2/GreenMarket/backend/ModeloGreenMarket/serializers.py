@@ -28,7 +28,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ProveedorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Proveedor
-        fields = ['rut', 'dv', 'correo_electronico', 'nombre', 'apellido', 'recompensa', 'verificacion']
+        fields = ['rut', 'dv', 'correo_electronico', 'contrasena', 'nombre', 'apellido', 'recompensa', 'verificacion']
         read_only_fields = ['recompensa', 'verificacion']  # Para que estos campos no puedan ser modificados directamente
 
     def get_calificacion_productos(self, obj):
@@ -124,10 +124,10 @@ class CarritoSerializer(serializers.ModelSerializer):
 class AgregarCarritoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Items
-        fields = ["producto", "cantidad", "id_carrito"]
+        fields = ["id_producto", "cantidad", "id_carrito"]
 
     def save(self):
-        producto = self.validated_data["producto"]
+        producto = self.validated_data["id_producto"]
         cantidad = self.validated_data["cantidad"]
         id_carrito = self.validated_data["id_carrito"]
 

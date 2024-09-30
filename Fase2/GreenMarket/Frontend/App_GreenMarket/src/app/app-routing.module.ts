@@ -11,6 +11,22 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'proveedor',
+    loadChildren: () => import('./Paginas/proveedor/proveedor.module').then( m => m.ProveedorPageModule)
+  },
+  {
+    path: 'carrito',
+    loadChildren: () => import('./Paginas/Productos/carrito/carrito.module').then( m => m.CarritoPageModule)
+  },
+  {
+    path: 'catalogo-producto',
+    loadChildren: () => import('./Paginas/Productos/catalogo-producto/catalogo-producto.module').then( m => m.CatalogoProductoPageModule)
+  },
+  {
+    path: 'detalle-producto',
+    loadChildren: () => import('./Paginas/Productos/detalle-producto/detalle-producto.module').then( m => m.DetalleProductoPageModule)
+  },
 ];
 
 @NgModule({
