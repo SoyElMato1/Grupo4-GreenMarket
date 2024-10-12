@@ -42,6 +42,8 @@ class Admin (BaseUserManager):
         return user
 
     def create_proveedor(self, rut, correo_user, nom_user, ap_user, password=None, **extra_fields):
+        extra_fields.pop('username', None)
+        extra_fields.pop('rol', None)
         proveedor = self.model(
             username = rut,  # Se usará el RUT como username
             correo_user = self.normalize_email(correo_user),
@@ -159,10 +161,10 @@ class Proveedor(models.Model):
 
 class Cliente(models.Model):
     rut = models.CharField(max_length=10, primary_key=True)
-    dv = models.CharField(max_length=1)
-    correo_electronico = models.EmailField(max_length=50)
-    nombre = models.CharField(max_length=50)
-    direccion = models.CharField(max_length=50)
+    dv = models.CharField(max_length=1, null=True)
+    correo_electronico = models.EmailField(max_length=50, null=True)
+    nombre = models.CharField(max_length=50, null=True)
+    direccion = models.CharField(max_length=50, null=True)
 
     def __str__(self):
         return f'{self.nombre} (RUT: {self.rut})'
@@ -177,9 +179,7 @@ class CalificacionProveedor(models.Model):
     def __str__(self):
         return f'{self.proveedor} - Calificación: {self.puntuacion}'
     
-
 class Categoria (models.Model):
-    id_categoria = models.AutoField(primary_key=True)
     nombre_categoria = models.CharField(max_length=50)
 
     def __str__(self):
@@ -206,63 +206,6 @@ class CalificacionProducto(models.Model):
     def __str__(self):
         return f'Calificación de {self.producto}: {self.puntuacion}'
 
-class Carrito (models.Model):
-    id_carrito = models.AutoField(primary_key=True)
-    fecha_agregado = models.DateTimeField()
-    monto_total = models.PositiveBigIntegerField()
-    cliente = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, blank=True, related_name='carritos')
-
-    def registrar_cliente(self, rut, correo_user, nom_user, ap_user):
-        # Si no existe el usuario, lo registramos
-        cliente, created = User.objects.get_or_create(
-            username=rut,
-            defaults={
-                'correo_user': correo_user,
-                'nom_user': nom_user,
-                'ap_user': ap_user,
-                'is_staff': False,
-                'is_superuser': False,
-                'rol': 'cliente'
-            }
-        )
-        if created:
-            cliente.set_unusable_password()  # Se puede autogenerar una contraseña o deshabilitarla
-            cliente.save()
-        self.cliente = cliente
-        self.save()
-
-    def autocompletar_datos_cliente(rut=None, correo_user=None):
-        try:
-            if rut:
-                cliente = User.objects.get(username=rut)
-            elif correo_user:
-                cliente = User.objects.get(correo_user=correo_user)
-            else:
-                return None
-            
-            # Devuelve los datos para autocompletar
-            return {
-                'nombre': cliente.nom_user,
-                'apellido': cliente.ap_user,
-                'correo': cliente.correo_user
-            }
-        except User.DoesNotExist:
-            return None
-
-class Items (models.Model):
-    id_items = models.AutoField(primary_key=True)
-    cantidad = models.PositiveBigIntegerField()
-    precio_unitario = models.PositiveBigIntegerField()
-    subtotal = models.PositiveBigIntegerField()
-    id_carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE, related_name="items")
-    id_producto = models.ForeignKey(Producto, on_delete=models.CASCADE, related_name="productos")
-
-    def save(self, *args, **kwargs):
-        # Auto-calcular subtotal (precio_unitario * cantidad)
-        self.subtotal = self.precio_unitario * self.cantidad
-        super(Items, self).save(*args, **kwargs)
-
-
 class MetodoPago (models.Model):
     id_metodo_pago = models.AutoField(primary_key=True)
     nombre_metodo = models.CharField(max_length=50)
@@ -273,12 +216,42 @@ class transaccion (models.Model):
     fecha = models.DateField()
     id_metodo_pago = models.ForeignKey(MetodoPago, on_delete=models.CASCADE)
 
+class Orden(models.Model):
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
+    items = models.JSONField()  # Guarda los productos y cantidades en formato JSON
+    total = models.DecimalField(max_digits=10, decimal_places=2)
+    pagado = models.BooleanField(default=False)
+
+    def __str__(self):
+        return f"Orden {self.id} - Cliente {self.cliente.nombre}"
+
+class CarritoM(models.Model):
+    # Carrito asociado a un usuario, puede ser opcional si el carrito no está vinculado a usuarios autenticados
+    cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, null=True, blank=True)
+    session_key = models.CharField(max_length=255, unique=True, null=True, blank=True)  # Agrega este campo
+    creado_en = models.DateTimeField(auto_now_add=True)
+    actualizado_en = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return f"Carrito de {self.cliente.nombre if self.cliente else 'Cliente Anónimo'} - {self.creado_en}"
+
+class ItemCarrito(models.Model):
+    carrito = models.ForeignKey(CarritoM, related_name='items', on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.PositiveIntegerField(default=1)
+    precio = models.DecimalField(max_digits=10, decimal_places=2)  # Se almacena el precio al momento de la compra
+
+    def subtotal(self):
+        return self.precio * self.cantidad
+
+    def __str__(self):
+        return f"{self.cantidad} x {self.producto.nombre_producto} en carrito {self.carrito.id}"
+
 class Venta (models.Model):
     id_venta = models.AutoField(primary_key=True)
     fecha_venta = models.DateField()
     monto_total = models.IntegerField()
     id_cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    id_carrito = models.ForeignKey(Carrito, on_delete=models.CASCADE)
     metodo_pago = models.ForeignKey(MetodoPago, on_delete=models.SET_NULL, null=True)
     transaccion = models.ForeignKey(transaccion, on_delete=models.SET_NULL, null=True)
 

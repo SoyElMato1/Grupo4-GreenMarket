@@ -1,0 +1,61 @@
+ion-toolbar {
+  position: relative;
+}
+.center-button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+.margen {
+  margin-bottom: 10px;
+}
+ion-button {
+  --background: #363F1B;
+  --color: white;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+
+}
+.precioAbajo {
+  text-align: center;
+  font-size: large;
+  color: white;
+  background-color: #432201;
+  width: 100%;
+  height: 8%;
+  bottom: 0;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: 'Courier New', Courier, monospace;
+  font-weight: bold;
+
+}
+.arriba{
+  text-align: center;
+  font-size: large;
+  background-color: #432201;
+  width: 100%;
+  height: 8%;
+  top: 0;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.titulo {
+  margin: 5px;
+  color: white;
+  font-size: 25px;
+  font-weight: bold;
+  // font-style: italic;
+  font-family: 'Courier New', Courier, monospace;
+
+}
+ion-card {
+  --background: #B99E81 !important;
+}

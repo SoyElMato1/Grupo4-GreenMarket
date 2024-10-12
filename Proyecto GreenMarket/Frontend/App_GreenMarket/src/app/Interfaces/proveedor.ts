@@ -5,6 +5,6 @@ export interface Proveedor {
   contrasena: string;
   nombre: string;
   apellido: string;
-  verificacion: boolean;
-  recompensa: number;
+  verificacion?: boolean;
+  recompensa?: number;
 }

@@ -1,20 +1,25 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>
-      Blank
-    </ion-title>
+    <ion-title class="ion-text-center">GreenMarket</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="navigateToLogin()">
+        <ion-icon slot="start" name="log-in"></ion-icon>
+      </ion-button>
+      <ion-button [routerLink]="['/carrito']">
+        <ion-icon name="cart"></ion-icon>
+        <ion-badge color="danger" *ngIf="cartItemCount > 0">{{ cartItemCount }}</ion-badge>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
   <ion-header collapse="condense">
     <ion-toolbar>
-      <ion-title size="large">Blank</ion-title>
+      <ion-title size="large">GreenMarket</ion-title>
     </ion-toolbar>
   </ion-header>
-
   <div id="container">
-    <strong>Ready to create an app?</strong>
-    <p>Start with Ionic <a target="_blank" rel="noopener noreferrer" href="https://ionicframework.com/docs/components">UI Components</a></p>
+    <ion-button (click)="lista_de_provedores()" style="display: block;"> Proveedores</ion-button>
   </div>
 </ion-content>

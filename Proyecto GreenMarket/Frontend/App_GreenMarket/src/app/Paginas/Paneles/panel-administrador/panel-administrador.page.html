@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>Panel de Administración</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="onLogout()">
+        <ion-icon name="log-out"></ion-icon> <!-- Ícono de cerrar sesión -->
+        Cerrar Sesión
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-button (click)="toggleCrudForm()">Mostrar/Ocultar Formulario CRUD</ion-button> <!-- Botón para mostrar/ocultar el formulario CRUD --> <!-- Botón para el formulario CRUD -->
+      <!-- Agrega más botones según tus necesidades -->
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <h1>Bienvenido, Admin</h1>
+  <!-- Aquí puedes mostrar estadísticas, gráficas, etc. -->
+  <ion-card *ngIf="showCrudForm">
+    <ion-card-header>
+      <ion-card-title>Formulario de Registro de Proveedor</ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <form (ngSubmit)="onSubmit()">
+        <ion-item>
+          <ion-label position="floating">RUT</ion-label>
+          <ion-input type="text" [(ngModel)]="item.rut" name="rut" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">DV</ion-label>
+          <ion-input type="text" [(ngModel)]="item.dv" name="dv" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Correo Electrónico</ion-label>
+          <ion-input type="email" [(ngModel)]="item.correo_electronico" name="correo_electronico" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Contraseña</ion-label>
+          <ion-input type="password" [(ngModel)]="item.contrasena" name="contrasena" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Nombre</ion-label>
+          <ion-input type="text" [(ngModel)]="item.nombre" name="nombre" required></ion-input>
+        </ion-item>
+
+        <ion-item>
+          <ion-label position="floating">Apellido</ion-label>
+          <ion-input type="text" [(ngModel)]="item.apellido" name="apellido" required></ion-input>
+        </ion-item>
+
+        <ion-button expand="full" type="submit">Registrar Proveedor</ion-button>
+      </form>
+
+      <ion-list>
+        <ion-item *ngFor="let proveedor of proveedores">
+          <h2>{{ proveedor.nombre }} {{ proveedor.apellido }}</h2>
+          <p>RUT: {{ proveedor.rut }}</p>
+          <ion-button (click)="onEdit(proveedor)">Editar</ion-button>
+          <ion-button (click)="onDelete(proveedor)">Eliminar</ion-button>
+        </ion-item>
+      </ion-list>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

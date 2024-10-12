@@ -1,13 +1,64 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
-    <ion-title>Carrito</ion-title>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/catalogo-producto']">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+      <ion-title>Carrito de Compras</ion-title>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Carrito</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <!-- Mostrar los productos del carrito -->
+  <ion-card>
+    <ion-list *ngIf="carrito && carrito.items.length > 0; else noItems">
+      <ion-item *ngFor="let item of carrito.items">
+        <ion-label>
+          {{ item.nombre }} (x{{ item.cantidad }}) - ${{ item.precio }}
+        </ion-label>
+        <ion-button color="danger" (click)="removeItem(item.producto_id)">Eliminar</ion-button>
+      </ion-item>
+    </ion-list>
+
+    <ion-item>
+      <ion-label>Total: ${{ total }}</ion-label>
+    </ion-item>
+  </ion-card>
+
+  <form (ngSubmit)="checkout()">
+    <ion-item>
+      <ion-label position="floating">Rut</ion-label>
+      <ion-input [(ngModel)]="customer.rut" name="rut" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">DV</ion-label>
+      <ion-input [(ngModel)]="customer.dv" name="dv" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input [(ngModel)]="customer.correo_electronico" name="email" type="email" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Nombre</ion-label>
+      <ion-input [(ngModel)]="customer.nombre" name="nombre" required></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Dirección</ion-label>
+      <ion-input [(ngModel)]="customer.direccion" name="direccion" required></ion-input>
+    </ion-item>
+
+    <ion-button expand="block" type="submit">Pagar</ion-button>
+  </form>
+
+  <!-- Mostrar el mensaje de éxito o error aquí -->
+  <ion-item *ngIf="mensaje">
+    <ion-label color="primary">{{ mensaje }}</ion-label>
+  </ion-item>
 </ion-content>
+
+<ng-template #noItems>
+  <ion-item>
+    <ion-label>El carrito está vacío</ion-label>
+  </ion-item>
+</ng-template>
