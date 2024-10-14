@@ -1,66 +1,24 @@
 import { Component, OnInit } from '@angular/core';
-import { CarritoServiService } from '../../../Servicios/Carrito/carrito-servi.service';
+import { Router } from '@angular/router';
 import { Carrito } from 'src/app/Interfaces/carrito';
+import { CarritoServiService } from 'src/app/Servicios/Carrito/carrito-servi.service';
 
 @Component({
-  selector: 'app-carrito',
-  templateUrl: './carrito.page.html',
-  styleUrls: ['./carrito.page.scss'],
+  selector: 'app-crud-form',
+  templateUrl: './crud-form.page.html',
+  styleUrls: ['./crud-form.page.scss'],
 })
-export class CarritoPage implements OnInit {
+export class CrudFormPage implements OnInit {
 
   cartItems: any[] = [];
   total = 0;
   customer = { rut: '', dv: '', correo_electronico: '', nombre: '', direccion: '' };
   mensaje: string = '';   // Mensaje para mostrar éxito o error
   public carrito!: Carrito;
-  showClienteForm = false;
 
-  constructor(private cartService: CarritoServiService) { }
+  constructor(private router: Router, private cartService: CarritoServiService) {}
 
-  ngOnInit() {
-    this.loadCart();
-    this.loadCustomerData();
-  }
-
-  toggleClienteForm() {
-    this.showClienteForm = !this.showClienteForm;
-  }
-
-  loadCart() {
-    this.cartService.ver_carrito().subscribe(
-        (data) => {
-            this.carrito = data; // Asigna los datos del carrito
-            this.cartItems = data.items; // Asegúrate de que 'items' exista
-            this.total = Number(data.total); // Usa 'total' aquí en vez de 'monto_total'
-
-            // Logs para verificar los datos
-            console.log('Carrito cargado:', this.carrito);
-            console.log('Items del carrito:', this.cartItems);
-            console.log('Total del carrito:', this.total);
-        },
-        (error) => {
-            console.error('Error al cargar el carrito:', error);
-        }
-    );
-  }
-
-    // Función para cargar los datos del cliente desde local storage o API
-  loadCustomerData() {
-    const savedCustomer = localStorage.getItem('customerData');
-    if (savedCustomer) {
-      this.customer = JSON.parse(savedCustomer);
-    }
-  }
-
-  // Función para eliminar un producto del carrito
-  removeItem(productId: number) {
-    this.cartService.restar_carrito(productId).subscribe(() => {
-      this.loadCart();  // Volver a cargar el carrito después de eliminar un item
-    });
-  }
-
-  // Función para realizar el checkout
+   // Función para realizar el checkout
   checkout() {
     const customer = {
       rut: this.customer.rut,
@@ -95,6 +53,9 @@ export class CarritoPage implements OnInit {
         this.mensaje = 'Error al crear la orden. Inténtalo de nuevo.';
       }
     );
+  }
+
+  ngOnInit() {
   }
 
   // Función para iniciar el pago

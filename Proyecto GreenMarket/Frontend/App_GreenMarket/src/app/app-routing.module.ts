@@ -43,6 +43,10 @@ const routes: Routes = [
     path: 'registro-usuario',
     loadChildren: () => import('./Paginas/Paneles/registro-usuario/registro-usuario.module').then( m => m.RegistroUsuarioPageModule)
   },
+  {
+    path: 'cliente',
+    loadChildren: () => import('./Paginas/Productos/crud-form/crud-form.module').then(m => m.CrudFormPageModule)
+  }
 
 
 

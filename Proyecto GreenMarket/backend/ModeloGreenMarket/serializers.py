@@ -78,7 +78,7 @@ class ClienteSerializer(serializers.ModelSerializer):
 class CategoriaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Categoria
-        fields = ['id_categoria', 'nombre_categoria']
+        fields = [ 'nombre_categoria']
 
 class ProductoSerializer(serializers.ModelSerializer):
     class Meta:

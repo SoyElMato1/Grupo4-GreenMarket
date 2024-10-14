@@ -6,6 +6,7 @@ export interface ProductosEnCarrito {
 }
 
 export interface Carrito {
+  forEach(arg0: (item: any) => void): unknown;
   total: undefined;
   items: any;
   productos: any;

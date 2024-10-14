@@ -46,6 +46,8 @@ export class CarritoServiService {
     return this.http.post(url, {}, { withCredentials: true });
   }
 
-
+  iniciarPago(data: { total: number }): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}pago/iniciar/`, data);
+  }
 
 }

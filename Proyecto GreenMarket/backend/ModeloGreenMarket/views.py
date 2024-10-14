@@ -12,6 +12,8 @@ from django.contrib.auth import authenticate, login
 import json
 from django.contrib.auth import logout
 from .services import register_proveedor
+from transbank.webpay.webpay_plus.transaction import Transaction, WebpayOptions
+from transbank.common.integration_type import IntegrationType
 
 # Create your views here.
 
@@ -59,9 +61,8 @@ def producto(request):
         productos = Producto.objects.all()
         serializer = ProductoSerializer(productos, many=True)
         return JsonResponse(serializer.data, safe=False)
-    
-
-    
+@csrf_exempt
+@api_view([ 'POST'])
 def agregar_producto(request):
     if request.method == 'POST':
         productos_data = JSONParser().parse(request)
@@ -174,3 +175,82 @@ def register_proveedor_view(request):
         user, proveedor = register_proveedor(data)
         return Response({'message': 'Proveedor registrado exitosamente', 'user': str(user)}, status=status.HTTP_201_CREATED)
     return Response({'error': 'Método no permitido'}, status=status.HTTP_405_METHOD_NOT_ALLOWED)
+
+#------------------------Vista Transbank--------------------------------------
+
+@api_view(['POST'])
+def iniciar_pago(request):
+    try:
+        # Obtener el cuerpo de la solicitud y extraer el 'total'
+        data = json.loads(request.body)
+        total = data.get('total', 0)  # Captura el 'total', predeterminado a 0 si no existe
+
+        # Validación del monto
+        if total <= 0:
+            return JsonResponse({'success': False, 'message': 'Monto no válido'}, status=400)
+
+        # Procesar la transacción si el monto es válido
+        options = WebpayOptions(
+            commerce_code='597055555532',
+            api_key='579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C',
+        )
+        tx = Transaction(options)
+        response = tx.create(buy_order='order12345', session_id='session12345', amount=total, return_url='http://127.0.0.1:8000/modelo/pago_fallido/')
+
+        return JsonResponse({'success': True, 'transaction_url': response['url'], 'token': response['token']})
+
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
+
+@api_view(['POST'])
+def validar_pago(request):
+    token_ws = request.POST.get('token_ws')
+    if not token_ws:
+        return JsonResponse({'success': False, 'message': 'Token no proporcionado'}, status=400)
+
+    try:
+        # Configurar las opciones de Transbank
+        options = WebpayOptions(
+            commerce_code='597055555532',
+            api_key='579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C'
+        )
+
+        tx = Transaction(options)
+        response = tx.commit(token_ws)
+
+        # Validar el estado de la transacción
+        if response['status'] == 'AUTHORIZED':
+            return JsonResponse({'success': True, 'message': 'Pago autorizado correctamente'})
+        else:
+            return JsonResponse({'success': False, 'message': f"Transacción no autorizada, estado: {response['status']}"})
+
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)}, status=500)
+
+
+def pago_exitoso(request):
+    token = request.GET.get('TBK_TOKEN')
+    if not token:
+        return JsonResponse({'success': False, 'message': 'Token no proporcionado'})
+
+    try:
+        response = Transaction().commit(token)
+        
+        if response['status'] == 'AUTHORIZED':
+            # Si la transacción es exitosa, procesa el pedido
+            return render(request, 'pago_exitoso.html', {'order': response})
+        
+        elif response['status'] == 'ABORTED':
+            # Si la transacción fue abortada, redirige al pago fallido
+            return redirect('pago_fallido')
+        
+        else:
+            # Si cualquier otro estado es retornado, redirige al pago fallido
+            return redirect('pago_fallido')
+
+    except Exception as e:
+        return JsonResponse({'success': False, 'error': str(e)})
+
+def pago_fallido(request):
+    # Aquí puedes hacer cualquier lógica que necesites antes de redirigir
+    return redirect('http://localhost:4200/pago-fallido?message=El%20pago%20fue%20cancelado%20o%20fallido.%20Int%C3%A9ntalo%20de%20nuevo.')

@@ -10,39 +10,43 @@
     <ion-title class="ion-text-center">Lista Proveedores</ion-title> <!-- Clase para centrar el título -->
   </ion-toolbar>
 </ion-header>
-<ion-content padding>
-  <ion-grid>
-    <ion-row class="ion-text-center">
-      <ion-col size="4" *ngFor="let proveedor of proveedoresFiltrados">
-        <ion-card color="light">
-          <ion-card-header style="display: flex; justify-content: space-between; align-items: center;">
-            <ion-card-content>
-              <div class="imagen-container">
-                <img src="../../../assets/images/descarga.jpeg" style="width: 200px; height: 200px; border-color: black; border-radius: 10px;"/>
+<ion-content >
+  <div class="bigimage">
+    <ion-grid>
+      <ion-row class="ion-text-center">
+        <ion-col size="4" *ngFor="let proveedor of proveedoresFiltrados">
+          <div class="profile-container">
+            <ion-card class="profile-card">
+              <div class="profile-details">
+                <img src="../../../assets/images/descarga.jpeg" class="profile-image" />
               </div>
-              <div class="info-container">
-                <ion-card-title >{{ proveedor.nombre }} {{ proveedor.apellido }}</ion-card-title>
-              </div>
-              <div class="boton-container">
-                <ion-button expand="block" size="small" (click)=" catalogo_producto()">Productos</ion-button>
-              </div>
-            </ion-card-content>
-            <ion-card-content class="margen2">
-              <div>
-                <ion-img class="proveedor-imagen" [src]="proveedor.imagen_proveedor"></ion-img>
-              </div>
-            </ion-card-content>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-    <div class="marggen"></div>
-  </ion-grid>
-  <!-- <ion-infinite-scroll threshold="50px" (ionInfinite)="onIonInfinite($event)">
-    <ion-infinite-scroll-content>
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll> -->
+              <ion-card-content class="profile-stats">
+                <!-- el br es un apaño momentanio -->
+                <ion-card-header>
+                  <ion-card-title class="card-title">{{ proveedor.nombre }}<br/>
+                     {{ proveedor.apellido }}</ion-card-title>
+                </ion-card-header>
+                <div class="card-section">
+                  <ion-text>Calificación</ion-text>
+                </div>
+                <div>
+                  <div class="card-rating">
+                    <ion-text class="rating-value">4</ion-text>
+                  </div>
+                </div>
+                <div class="card-section button-div" (click)="catalogo_producto()">
+                  Productos
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
 </ion-content>
+
+
 <ion-footer>
   <ion-toolbar>
     <ion-buttons slot="start">
