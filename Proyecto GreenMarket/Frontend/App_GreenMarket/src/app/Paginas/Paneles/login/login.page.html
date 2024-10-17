@@ -9,22 +9,23 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-buttons slot="start">
-  <ion-button expand="full" (click)="toggleLoginForm()">
-    {{ showLoginForm ? 'Cancelar' : 'Ya tienes una cuenta inicia sesión' }}
-  </ion-button>
-  <!-- Agrega más botones según tus necesidades -->
-</ion-buttons>
+<ion-card>
+  <ion-card-content class="container">
+    <ion-buttons slot="">
+      <ion-button expand="full" (click)="toggleLoginForm()">
+        {{ showLoginForm ? 'Cancelar' : 'Ya tienes una cuenta inicia sesión' }}
+      </ion-button>
+    </ion-buttons>
 
-<ion-buttons slot="start">
-  <ion-button expand="full" (click)="toggleCrudForm()">
-    {{ showCrudForm ? 'Cancelar' : 'Registrate' }}
-  </ion-button>
-  <!-- Agrega más botones según tus necesidades -->
-</ion-buttons>
+    <ion-buttons slot="start">
+      <ion-button expand="full" (click)="toggleCrudForm()">
+        {{ showCrudForm ? 'Cancelar' : 'Registrate' }}
+      </ion-button>
+    </ion-buttons>
+  </ion-card-content>
+</ion-card>
 
 <ion-content>
-
   <!-- Formulario de inicio de sesión -->
   <div *ngIf="showLoginForm">
     <ion-card>

@@ -27,6 +27,10 @@ export class CarritoPage implements OnInit {
     this.showClienteForm = !this.showClienteForm;
   }
 
+  precioUnitario (precio: number, cantidad: number): number{
+    return precio * cantidad
+  }
+
   loadCart() {
     this.cartService.ver_carrito().subscribe(
         (data) => {
@@ -55,6 +59,17 @@ export class CarritoPage implements OnInit {
 
   // Función para eliminar un producto del carrito
   removeItem(productId: number) {
+    this.cartService.restar_carrito(productId).subscribe(() => {
+      this.loadCart();  // Volver a cargar el carrito después de eliminar un item
+    });
+  }
+
+  agregarItem(productId: number) {
+    this.cartService.agregar_Carrito(productId).subscribe(() => {
+      this.loadCart();  // Volver a cargar el carrito después de eliminar un item
+    });
+  }
+  bajarItem(productId: number) {
     this.cartService.restar_carrito(productId).subscribe(() => {
       this.loadCart();  // Volver a cargar el carrito después de eliminar un item
     });

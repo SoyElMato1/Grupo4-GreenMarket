@@ -1,0 +1,22 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button default-href="#"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">JardenBot</ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="chatbot">
+    <h2>JardenBot 🌿</h2>
+    <div class="messages">
+      <div *ngFor="let message of messages" [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'bot'}">
+        <strong *ngIf="message.sender === 'user'">Tú:</strong>
+        <strong *ngIf="message.sender === 'bot'">Bot:</strong> {{ message.text }}
+      </div>
+    </div>
+    <textarea [(ngModel)]="userMessage" placeholder="Escribe tu mensaje..." class="message-input"></textarea>
+    <button (click)="sendMessage()" class="send-button">Enviar</button>
+  </div>
+</ion-content>
+

@@ -3,6 +3,9 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
 import { ProveedorGuard } from './guards/proveedor.guard';
+import { PagoExitosoComponent } from './Paginas/pagos/pago-exitoso/pago-exitoso.component';
+import { PagoFallidoComponent } from './Paginas/pagos/pago-fallido/pago-fallido.component';
+import { ChatbotComponent } from './Paginas/chatbot/chatbot.component';  // Importa el componente del chatbot
 
 const routes: Routes = [
   {
@@ -39,14 +42,11 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./Paginas/Paneles/login/login.module').then( m => m.LoginPageModule)
   },
-  {
-    path: 'registro-usuario',
-    loadChildren: () => import('./Paginas/Paneles/registro-usuario/registro-usuario.module').then( m => m.RegistroUsuarioPageModule)
-  },
-  {
-    path: 'cliente',
-    loadChildren: () => import('./Paginas/Productos/crud-form/crud-form.module').then(m => m.CrudFormPageModule)
-  }
+  { path: 'pago-exitoso', component: PagoExitosoComponent },
+  { path: 'pago-fallido', component: PagoFallidoComponent },
+  { path: 'chatbot', component: ChatbotComponent },  // Añade la ruta del chatbot
+
+
 
 
 

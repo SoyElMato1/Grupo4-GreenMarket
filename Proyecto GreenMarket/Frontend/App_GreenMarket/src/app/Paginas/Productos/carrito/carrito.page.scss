@@ -1,0 +1,86 @@
+ion-toolbar {
+  position: relative;
+}
+
+ion-button {
+  --background: yellow;
+  --color: black;
+  padding: 4px;
+}
+
+button-div {
+  cursor: pointer;
+  background-color: rgba(231, 244, 86, 0.97);
+  color: rgb(0, 0, 0);
+  padding: 10px 20px;
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  text-align: center;
+  transition: background-color 0.3s;
+
+}
+.button-div:hover {
+  background-color: #0056b3;
+}
+.button-center {
+  padding: 10px;
+  color: black;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+.titulo {
+  text-align: center;
+  color: black;
+  font-weight: bold;
+  background-color: beige;
+  width: 100%; /* Asegúrate de que el ancho sea 100% */
+  padding: 10px; /* Agrega padding para espacio interior */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Añade sombra si lo deseas */
+}
+
+.tarjeta {
+  background-color: #BAF7E9;
+       /* Máximo ancho del formulario */
+}
+.card{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.total{
+  font-weight: bold;
+  text-align: right;
+}
+.formulario{
+  background-color: gray;
+  color: black;
+  font-weight: bold;
+}
+.fondo{
+  background: #FB773C;
+  min-height: 100%;
+
+}
+.titulo-label{
+  font-weight: bold ;
+}
+.aumentar-disminuir{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px; /* Añade espacio entre los botones */
+}
+.precio{
+  margin-left: auto; /* Empuja el subtotal hacia el lado derecho */
+  text-align: right;
+}
+ion-item {
+  display: flex;
+  flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas más pequeñas */
+  justify-content: space-between;
+  align-items: center;
+}

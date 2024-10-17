@@ -20,6 +20,9 @@ TRANSBANK_API_KEY = '579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A
 TRANSBANK_COMMERCE_CODE = '597055555532'
 TRANSBANK_ENVIRONMENT = 'integration'  # Usa 'integration' para el entorno de pruebas
 
+# OPENAI
+OPENAI_API_KEY = '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'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 

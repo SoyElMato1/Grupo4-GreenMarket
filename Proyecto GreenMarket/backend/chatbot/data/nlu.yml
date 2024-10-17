@@ -1,0 +1,64 @@
+version: "3.1"
+
+nlu:
+- intent: saludo
+  examples: |
+    - Hola
+    - Buenas
+    - Hola, ¿hay alguien ahí?
+    - Hey
+
+- intent: pregunta_producto
+  examples: |
+    - ¿Tienen [nombre_producto]?
+    - ¿Cuánto cuesta [nombre_producto]?
+    - Quiero saber más sobre [nombre_producto].
+
+- intent: cuidado_plantas
+  examples: |
+    - ¿Cómo cuido un [tipo_de_planta]?
+    - ¿Qué riego necesita un [tipo_de_planta]?
+    - ¿Es necesario abonar un [tipo_de_planta]?
+
+- intent: recomendacion_plantas
+  examples: |
+    - ¿Qué planta me recomiendas para interiores?
+    - Busco una planta que no requiera mucho sol.
+    - ¿Cuál es la mejor planta para principiantes?
+    - Me gustaría saber sobre plantas de bajo mantenimiento.
+
+- intent: informacion_general
+  examples: |
+    - ¿Qué es la jardinería?
+    - Cuéntame sobre la importancia de las plantas.
+    - ¿Por qué es bueno tener plantas en casa?
+
+- intent: tipos_plantas
+  examples: |
+    - ¿Cuáles son los tipos de plantas de interior?
+    - ¿Qué plantas son aptas para climas secos?
+    - ¿Qué tipo de plantas crecen en mi región?
+
+- intent: enfermedades_plantas
+  examples: |
+    - ¿Cómo identifico si mi planta tiene una enfermedad?
+    - ¿Qué hago si mis hojas están amarillas?
+    - ¿Cuáles son las enfermedades comunes de [tipo_de_planta]?
+
+- intent: fertilizantes
+  examples: |
+    - ¿Cuándo debo fertilizar mis plantas?
+    - ¿Qué tipo de fertilizante es mejor para [tipo_de_planta]?
+    - ¿Puedo usar fertilizante casero?
+
+- intent: herramientas_jardineria
+  examples: |
+    - ¿Qué herramientas necesito para empezar a jardinería?
+    - ¿Cuál es la mejor pala para plantar?
+    - ¿Qué tipo de tijeras de podar debo usar?
+
+- intent: pregunta_recomendacion
+  examples: |
+    - No tengo [nombre_producto], ¿qué me recomiendas?
+    - ¿Tienes alguna alternativa a [nombre_producto]?
+    - Estoy buscando algo similar a [nombre_producto].

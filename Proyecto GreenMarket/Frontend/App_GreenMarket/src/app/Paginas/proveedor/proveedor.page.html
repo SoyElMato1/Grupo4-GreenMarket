@@ -1,12 +1,8 @@
 <ion-header [translucent]="true">
-  <ion-toolbar color="light">
-    <!-- Botón de volver hacia atrás -->
+  <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button [routerLink]="['/']">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-button>
+      <ion-back-button default-href="/"></ion-back-button>
     </ion-buttons>
-    <!-- Botón de volver hacia atrás -->
     <ion-title class="ion-text-center">Lista Proveedores</ion-title> <!-- Clase para centrar el título -->
   </ion-toolbar>
 </ion-header>
@@ -14,7 +10,7 @@
   <div class="bigimage">
     <ion-grid>
       <ion-row class="ion-text-center">
-        <ion-col size="4" *ngFor="let proveedor of proveedoresFiltrados">
+        <ion-col size="12" size-md="6" size-lg="4" *ngFor="let proveedor of proveedoresFiltrados">
           <div class="profile-container">
             <ion-card class="profile-card">
               <div class="profile-details">
@@ -24,7 +20,7 @@
                 <!-- el br es un apaño momentanio -->
                 <ion-card-header>
                   <ion-card-title class="card-title">{{ proveedor.nombre }}<br/>
-                     {{ proveedor.apellido }}</ion-card-title>
+                    {{ proveedor.apellido }}</ion-card-title>
                 </ion-card-header>
                 <div class="card-section">
                   <ion-text>Calificación</ion-text>

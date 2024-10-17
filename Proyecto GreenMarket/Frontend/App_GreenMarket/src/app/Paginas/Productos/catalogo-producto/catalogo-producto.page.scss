@@ -1,6 +1,7 @@
 ion-toolbar {
   position: relative;
 }
+
 .center-button {
   position: absolute;
   left: 50%;
@@ -8,54 +9,171 @@ ion-toolbar {
   transform: translate(-50%, -50%);
   z-index: 1;
 }
-.margen {
+.bigimage {
+  width: 100%;
+  min-height: 100vh;
+  /* Asegura que el contenedor ocupe al menos el 100% del alto de la pantalla */
+  background: url("../../../../assets/images/fondo2.png");
+  background-repeat: repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: scroll;
+  /* Cambia a 'fixed' si quieres que el fondo esté fijo mientras el contenido se desplaza */
+  top: 0px;
+  left: 0px;
+}
+.button-text{
+  font-size: large;
+  font-weight: bold;
+}
+.bigimagef {
+  width: 100%;
+  height: 100%;
+  background: rgba(13, 42, 52, 0.8999999761581421);
+  opacity: 1;
+  position: relative;
+  top: 0px;
+  left: 0px;
+  overflow: hidden;
+}
+
+.gris {
+  color: red;
+}
+
+ion-button {
+  --background: yellow;
+  --color: black;
+}
+
+.bottom-bar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom-icon {
+  background-color: rgba(229, 249, 0, 0.97);
+  border-radius: 50%;
+  width: 71px;
+  height: 53px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom-icon img {
+  width: 43px;
+  height: 43px;
+}
+
+------------------------------------------------------------ ------------------------------------------------------------- ------------------------------------------------------------ ------------------------------------------------------------- ------------------------------------------------------------- --------------------------------------------------------- ------------------------------------------------------- ---------------------------------------------------- -----------------------------------------------------------
+
+/* Contenedor de perfiles */
+.profile-container {
+  width: 134px;
+  height: 209px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+
+}
+
+/* Estilo de la tarjeta */
+.profile-card {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  /* Cambiado a flex-start para que el contenido empiece desde el borde superior */
+  max-width: 440px;
+
+  max-height: 275px;
+  border: 1px solid black;
+  background-color: #f0f0f0ba;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Contenedor de detalles del perfil (solo la imagen) */
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+.profile-image {
+  height: 233px;
+  min-height: 200px;
+  width: 100%;
+  max-width: 320px;
+  min-width: 110px;
+  border-color: black;
+  border-radius: 10px;
+  object-fit: cover;
+  border: none;
+}
+.card-title {
+  background-color: #2F4232;
+  color: white;
+  min-width: 170px;
+  text-align: center;
+  font-weight: bold;
+  margin: 0;
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+}
+/* Sección de calificación y productos */
+.card-section {
+  background-color: rgba(231, 244, 86, 0.97);
+  padding: 10px;
+  color: black;
+  font-size: 20px;
+  text-align: center;
+  font-weight: bold;
   margin-bottom: 10px;
 }
-ion-button {
-  --background: #363F1B;
-  --color: white;
-  font-family: 'Courier New', Courier, monospace;
-  font-weight: bold;
 
+.card-rating {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px;
+  padding: 5px;
 }
-.precioAbajo {
-  text-align: center;
-  font-size: large;
-  color: white;
-  background-color: #432201;
-  width: 100%;
-  height: 8%;
-  bottom: 0;
-  position: absolute;
+
+.rating-value {
+  background-color: #5CF69A;
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-family: 'Courier New', Courier, monospace;
+  font-size: 20px;
   font-weight: bold;
-
+  color: rgb(6, 5, 5);
 }
-.arriba{
+
+.button-div {
+  cursor: pointer;
+  /* Cambia el cursor a un puntero */
+  background-color: rgba(231, 244, 86, 0.97);
+  color: rgb(0, 0, 0);
+  /* Color del texto */
+  padding: 10px 20px;
+  /* Espaciado interno */
+  font-size: 20px;
+  font-weight: bold;
+  border-radius: 5px;
+  /* Bordes redondeados */
   text-align: center;
-  font-size: large;
-  background-color: #432201;
-  width: 100%;
-  height: 8%;
-  top: 0;
-  position: absolute;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  /* Centra el texto */
+  transition: background-color 0.3s;
+  /* Transición para efectos de hover */
 }
 
-.titulo {
-  margin: 5px;
-  color: white;
-  font-size: 25px;
-  font-weight: bold;
-  // font-style: italic;
-  font-family: 'Courier New', Courier, monospace;
-
-}
-ion-card {
-  --background: #B99E81 !important;
+.button-div:hover {
+  background-color: #0056b3;
+  /* Color al pasar el mouse */
 }

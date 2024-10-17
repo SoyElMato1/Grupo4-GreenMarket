@@ -1,11 +1,9 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button [routerLink]="['/proveedor']">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-button>
+      <ion-back-button default-href="/proveedor"></ion-back-button>
     </ion-buttons>
-    <ion-title>Catalogo_Producto</ion-title>
+    <ion-title class="ion-text-center">GreenMarket</ion-title>
     <ion-buttons slot="end">
       <ion-button [routerLink]="['/carrito']">
         <ion-icon name="cart"></ion-icon>
@@ -15,19 +13,49 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-  <ion-grid>
+  <div class="bigimage">
+    <ion-grid>
+      <ion-row class="ion-text-center">
+        <ion-col size="12" size-md="6" size-lg="4" *ngFor="let producto of productosFiltrados">
+          <div class="profile-container">
+            <ion-card class="profile-card">
+              <div class="profile-details">
+                <img src="../../../../assets/images/imagen.jpg" class="profile-image" />
+              </div>
+              <ion-card-content class="profile-stats">
+                <ion-card-header>
+                  <ion-card-title class="card-title">{{ producto.nombre_producto }}</ion-card-title>
+                </ion-card-header>
+                <div>
+                </div>
+                <div class="card-section button-div" (click)="agregarAlCarrito(producto.codigo_producto)">
+                  <p class="button-text">Agregar al carrito</p>
+                </div>
+                <div class="card-section button-div">
+                  <p class="button-text">
+                    Mas info
+                  </p>
+                </div>
+                <div class="button div">
+                  <img src="../../../assets/images/JARDENBOT.png" style="width: 40px; height: 40px; " />
+                </div>
+              </ion-card-content>
+            </ion-card>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <!-- <ion-grid>
     <ion-row class="ion-text-center">
       <ion-col size="4" *ngFor="let producto of productosFiltrados">
         <ion-card style="background-image:url(../../../assets/images/enredadera.png)">
-
           <ion-card-header style="display: flex; justify-content: space-between; align-items: center;">
             <div class="arriba">
               <p class="titulo">{{ producto.nombre_producto }}</p>
             </div>
             <ion-card-content>
               <div class="margen">
-                <!-- <ion-button (click)=" catalogo_producto()" >Ver productos </ion-button> -->
-                <!-- <button (click)=>Agregar al carrito</button> -->
               </div>
               <div class="imagen-container" style="margin-bottom: 10px;">
                 <img src="../../../assets/images/productont.png"
@@ -48,18 +76,13 @@
             </ion-card-content>
             <div class="precioAbajo">
               Precio: {{ producto.precio }}
-              <!-- <ion-img class="proveedor-imagen" [src]="proveedor.imagen_proveedor"></ion-img> -->
             </div>
           </ion-card-header>
         </ion-card>
       </ion-col>
     </ion-row>
     <div class="marggen"></div>
-  </ion-grid>
-  <!-- <ion-infinite-scroll threshold="1500px" (ionInfinite)="onIonInfinite($event)">
-    <ion-infinite-scroll-content>
-    </ion-infinite-scroll-content>
-  </ion-infinite-scroll> -->
+  </ion-grid> -->
 </ion-content>
 <ion-footer>
   <ion-toolbar>
@@ -71,7 +94,7 @@
         style="margin: 10px;"></ion-searchbar>
     </ion-buttons>
     <div class="center-button">
-      <ion-button style="--padding-start: 0; --padding-end: 0; --border-radius: 50%; width: 40px; height: 40px;">
+      <ion-button [routerLink]="['/chatbot']" style="--padding-start: 0; --padding-end: 0; --border-radius: 50%; width: 40px; height: 40px;">
         <img src="../../../assets/images/JARDENBOT.png" style="width: 40px; height: 40px;" />
       </ion-button>
     </div>

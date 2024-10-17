@@ -3,9 +3,13 @@ from .views import *
 from .views_carrito import *
 
 urlpatterns = [
+
+#Producto
     path('producto/', producto, name='producto'),
     path('agregarPro/', agregar_producto, name='producto añadido'),
     path('categoria/', get_categoria, name='categoria'),
+
+#Proveedor
     path('provee/', Ver_proveedor, name='proveedor'),
     path('provee/<id>', detalle_proveedor, name='detalle_proveedores'),
 
@@ -24,5 +28,8 @@ urlpatterns = [
 #Login 
     path('login/', login_view, name='admin_login'),
     path('logout/', logout_view, name='logout'),
-    path('registro_proveedor/', register_proveedor_view, name='registro proveedor')
+    path('registro_proveedor/', register_proveedor_view, name='registro proveedor'),
+
+#Chatbot
+    # path('chatbot/', chat_with_bot, name='chat_with_bot'),
 ]
