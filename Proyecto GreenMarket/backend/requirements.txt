@@ -28,6 +28,8 @@ cycler==0.12.1
 dask==2022.10.2
 distlib==0.3.8
 Django==5.1.1
+django-cors-headers==4.5.0
+djangorestframework==3.15.2
 dnspython==2.3.0
 docopt==0.6.2
 fbmessenger==6.0.0
