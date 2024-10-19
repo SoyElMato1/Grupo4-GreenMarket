@@ -1,0 +1,87 @@
+<ion-split-pane contentId="adminContent">
+  <!-- Menú lateral -->
+  <ion-menu side="start" menuId="mainMenu" contentId="adminContent">
+    <ion-header>
+      <ion-toolbar color="primary">
+        <ion-title>Menú</ion-title>
+      </ion-toolbar>
+    </ion-header>
+
+    <ion-content>
+      <ion-list>
+
+        <ion-item (click)="setSection('dashboard')">
+          <ion-icon slot="start" name="home-outline"></ion-icon>
+          <ion-label>Dashboard</ion-label>
+        </ion-item>
+
+        <ion-item (click)="setSection('Productos')" >
+          <ion-icon slot="start" name="people-outline"></ion-icon>
+          <ion-label>Proveedores</ion-label>
+        </ion-item>
+
+        <ion-item (click)="setSection('configuracion')">
+          <ion-icon slot="start" name="settings-outline"></ion-icon>
+          <ion-label>Configuración</ion-label>
+        </ion-item>
+        <!-- Opción de Cerrar Sesión -->
+        <ion-item (click)="onLogout()">
+          <ion-icon slot="start" name="log-out-outline"></ion-icon>
+          <ion-label>Cerrar Sesión</ion-label>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <ion-content id="adminContent" class="main-content">
+    <div *ngIf="currentSection === 'dashboard'">
+      <h2>Dashboard</h2>
+      <p>Aquí puedes mostrar estadísticas, gráficos, y otros resúmenes.</p>
+    </div>
+
+    <div *ngIf="currentSection === 'Productos'">
+      <h2>Gestión de Productos</h2>
+      <ion-card>
+        <ion-card-content>
+          <ion-list>
+            <ion-item *ngFor="let product of products">
+              <ion-label>
+                <h2>{{ product.nombre_producto }}</h2>
+                <p>Precio: {{ product.precio | currency }}</p>
+                <p>{{ product.imagen_producto }}</p>
+              </ion-label>
+              <ion-button fill="outline" >Editar</ion-button>
+              <ion-button color="danger" >Eliminar</ion-button>
+            </ion-item>
+          </ion-list>
+        </ion-card-content>
+      </ion-card>
+
+
+      <ion-card >
+        <ion-card-header>
+          <ion-card-title>Formulario de Registro de Productos</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <form  novalidate>
+
+            <ion-item>
+              <ion-label position="stacked">Correo Electrónico</ion-label>
+              <ion-input type="email" formControlName="correo_electronico"></ion-input>
+            </ion-item>
+
+            <ion-button expand="full" type="submit">Agregar Producto</ion-button>
+          </form>
+        </ion-card-content>
+      </ion-card>
+    </div>
+
+    <!-- Configuración -->
+    <div *ngIf="currentSection === 'configuracion'">
+      <h2>Configuración</h2>
+      <p>Aquí puedes cambiar configuraciones del sistema, como ajustes generales o permisos.</p>
+    </div>
+  </ion-content>
+</ion-split-pane>
+
+

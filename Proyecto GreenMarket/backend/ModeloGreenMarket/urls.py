@@ -8,6 +8,7 @@ urlpatterns = [
     path('producto/', producto, name='producto'),
     path('agregarPro/', agregar_producto, name='producto añadido'),
     path('categoria/', get_categoria, name='categoria'),
+    # path('pruebaProducto/', ProductoViewSet, name='agregar_producto'),
 
 #Proveedor
     path('provee/', Ver_proveedor, name='proveedor'),

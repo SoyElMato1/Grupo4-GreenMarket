@@ -1,7 +1,7 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-back-button default-href="/"></ion-back-button>
+      <ion-back-button default-href="/" [routerLink]="['/']"></ion-back-button>
     </ion-buttons>
     <ion-title class="ion-text-center">Lista Proveedores</ion-title> <!-- Clase para centrar el título -->
   </ion-toolbar>
@@ -14,7 +14,7 @@
           <div class="profile-container">
             <ion-card class="profile-card">
               <div class="profile-details">
-                <img src="../../../assets/images/descarga.jpeg" class="profile-image" />
+                <img src="../../../../assets/images/descarga.jpeg" class="profile-image" />
               </div>
               <ion-card-content class="profile-stats">
                 <!-- el br es un apaño momentanio -->
@@ -53,7 +53,7 @@
     </ion-buttons>
     <div class="center-button">
       <ion-button style="--padding-start: 0; --padding-end: 0; --border-radius: 50%; width: 40px; height: 40px;">
-        <img src="../../../assets/images/JARDENBOT.png" style="width: 40px; height: 40px;" />
+        <img src="../../../../assets/images/JARDENBOT.png" style="width: 40px; height: 40px;" />
       </ion-button>
     </div>
     <ion-buttons slot="end" (click)="navigateToLogin()">

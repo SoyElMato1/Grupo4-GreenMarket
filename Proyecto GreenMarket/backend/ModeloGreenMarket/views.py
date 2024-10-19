@@ -256,35 +256,3 @@ def pago_exitoso(request):
 def pago_fallido(request):
     # Aquí puedes hacer cualquier lógica que necesites antes de redirigir
     return redirect('http://localhost:4200/pago-fallido?message=El%20pago%20fue%20cancelado%20o%20fallido.%20Int%C3%A9ntalo%20de%20nuevo.')
-
-# # Configurar la API Key de OpenAI
-# openai.api_key = settings.OPENAI_API_KEY
-
-# @csrf_exempt
-# def chat_with_bot(request):
-#     if request.method == 'POST':
-#         try:
-#             body = json.loads(request.body)
-#             user_message = body.get('message', '')
-
-#             # Definir los mensajes para la conversación
-#             messages = [
-#                 {"role": "system", "content": "Eres un asistente de jardinería experto. Responde solo preguntas relacionadas con jardinería, plantas y productos de jardín."},
-#                 {"role": "user", "content": user_message}
-#             ]
-
-#             # Solicitud a la API de OpenAI usando la nueva estructura
-#             response = openai.ChatCompletion.create(
-#                 model="gpt-3.5-turbo",  # Cambia al modelo que prefieras
-#                 messages=messages,
-#                 max_tokens=50  # Limitar la respuesta a un máximo de 150 tokens
-#             )
-
-#             # Devolver la respuesta al frontend
-#             return JsonResponse({'response': response['choices'][0]['message']['content'].strip()})
-#         except json.JSONDecodeError:
-#             return JsonResponse({'error': 'Error al decodificar el JSON'}, status=400)
-#         except Exception as e:
-#             return JsonResponse({'error': str(e)}, status=500)
-
-#     return JsonResponse({'error': 'Método no permitido'}, status=405)

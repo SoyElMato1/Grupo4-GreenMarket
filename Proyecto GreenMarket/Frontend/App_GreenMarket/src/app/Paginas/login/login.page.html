@@ -1,0 +1,118 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button [routerLink]="['/proveedor']">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-card>
+  <ion-card-content class="container">
+    <ion-buttons slot="">
+      <ion-button expand="full" (click)="toggleLoginForm()">
+        {{ showLoginForm ? 'Cancelar' : 'Ya tienes una cuenta inicia sesión' }}
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="start">
+      <ion-button expand="full" (click)="toggleCrudForm()">
+        {{ showCrudForm ? 'Cancelar' : 'Registrate' }}
+      </ion-button>
+    </ion-buttons>
+  </ion-card-content>
+</ion-card>
+
+<ion-content>
+  <!-- Formulario de inicio de sesión -->
+  <div *ngIf="showLoginForm">
+    <ion-card>
+      <form [formGroup]="loginForm" novalidate>
+        <ion-card-header>
+          <ion-card-title>Login</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <ion-item>
+            <ion-label position="floating">Nombre de Usuario o RUT</ion-label>
+            <ion-input type="text" formControlName="username"></ion-input>
+            <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
+              <ion-text color="danger">El nombre de usuario o rut es obligatorio y debe ser un rut válido.</ion-text>
+            </div>
+          </ion-item>
+          <ion-item>
+            <ion-label position="floating">Contraseña</ion-label>
+            <ion-input type="password" formControlName="password"></ion-input>
+            <div *ngIf="loginForm.get('password')?.invalid && loginForm.get('password')?.touched">
+              <ion-text color="danger">La contraseña es obligatoria y debe tener al menos 8 caracteres.</ion-text>
+            </div>
+          </ion-item>
+          <ion-button expand="block" (click)="login()" >Login</ion-button>
+        </ion-card-content>
+      </form>
+    </ion-card>
+  </div>
+  <!-- Formulario de Registro de Proveedor -->
+  <div *ngIf="showCrudForm">
+    <ion-card>
+      <ion-card-header>
+        <ion-card-title>Registrar Proveedor</ion-card-title>
+      </ion-card-header>
+      <ion-card-content>
+        <form [formGroup]="registerForm" novalidate>
+          <ion-item>
+            <ion-label position="stacked">RUT</ion-label>
+              <ion-row>
+                <!-- Campo para el RUT -->
+                <ion-col size="9"> <!-- 9 columnas para el RUT -->
+                  <ion-input type="text" formControlName="rut" placeholder="123456789"></ion-input>
+                </ion-col>
+                <!-- Campo para el Dígito Verificador (DV) -->
+                <ion-col size="3"> <!-- 3 columnas para el DV -->
+                  <ion-input type="text" formControlName="dv" placeholder="0"></ion-input>
+                </ion-col>
+              </ion-row>
+              <div *ngIf="registerForm.get('rut')?.invalid && registerForm.get('rut')?.touched && registerForm.get('dv')?.invalid && registerForm.get('dv')?.touched">
+                <ion-text color="danger">El RUT es obligatorio.</ion-text>
+              </div>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Correo Electrónico</ion-label>
+            <ion-input type="email" formControlName="correo_electronico"></ion-input>
+            <div *ngIf="registerForm.get('correo_electronico')?.invalid && registerForm.get('correo_electronico')?.touched">
+              <ion-text color="danger">El correo es obligatorio y debe ser válido.</ion-text>
+            </div>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Contraseña</ion-label>
+            <ion-input type="password" formControlName="contrasena"></ion-input>
+            <div *ngIf="registerForm.get('contrasena')?.invalid && registerForm.get('contrasena')?.touched">
+              <ion-text color="danger">La contraseña es obligatoria y debe tener al menos 8 caracteres.</ion-text>
+            </div>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Nombre</ion-label>
+            <ion-input type="text" formControlName="nom_user"></ion-input>
+            <div *ngIf="registerForm.get('nom_user')?.invalid && registerForm.get('nom_user')?.touched">
+              <ion-text color="danger">El nombre es obligatorio y debe contener solo letras.</ion-text>
+            </div>
+          </ion-item>
+
+          <ion-item>
+            <ion-label position="stacked">Apellido</ion-label>
+            <ion-input type="text" formControlName="ap_user"></ion-input>
+            <div *ngIf="registerForm.get('ap_user')?.invalid && registerForm.get('ap_user')?.touched">
+              <ion-text color="danger">El apellido es obligatorio y debe contener solo letras.</ion-text>
+            </div>
+          </ion-item>
+
+          <ion-button expand="full" type="submit" (click)="onRegister()">Registrar Proveedor</ion-button>
+        </form>
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

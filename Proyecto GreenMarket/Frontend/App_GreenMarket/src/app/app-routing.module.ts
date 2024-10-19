@@ -14,7 +14,7 @@ const routes: Routes = [
   },
   {
     path: 'proveedor',
-    loadChildren: () => import('./Paginas/proveedor/proveedor.module').then( m => m.ProveedorPageModule)
+    loadChildren: () => import('./Paginas/Proveedores/proveedor/proveedor.module').then( m => m.ProveedorPageModule)
   },
   {
     path: 'carrito',
@@ -30,17 +30,17 @@ const routes: Routes = [
   },
   {
     path: 'panel-administrador',
-    loadChildren: () => import('./Paginas/Paneles/panel-administrador/panel-administrador.module').then( m => m.PanelAdministradorPageModule),
+    loadChildren: () => import('./Paginas/panel-administrador/panel-administrador.module').then( m => m.PanelAdministradorPageModule),
     canActivate: [AuthGuard, AdminGuard]
   },
   {
     path: 'panel-proveedor',
-    loadChildren: () => import('./Paginas/Paneles/panel-proveedor/panel-proveedor.module').then( m => m.PanelProveedorPageModule),
+    loadChildren: () => import('./Paginas/Proveedores/panel-proveedor/panel-proveedor.module').then( m => m.PanelProveedorPageModule),
     canActivate: [AuthGuard, ProveedorGuard]
   },
   {
     path: 'login',
-    loadChildren: () => import('./Paginas/Paneles/login/login.module').then( m => m.LoginPageModule)
+    loadChildren: () => import('./Paginas/login/login.module').then( m => m.LoginPageModule)
   },
   { path: 'pago-exitoso', component: PagoExitosoComponent },
   { path: 'pago-fallido', component: PagoFallidoComponent },

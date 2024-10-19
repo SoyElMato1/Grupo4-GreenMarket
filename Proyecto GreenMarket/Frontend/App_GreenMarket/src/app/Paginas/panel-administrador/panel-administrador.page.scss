@@ -1,0 +1,32 @@
+ion-toolbar {
+  --background: #3880ff; /* Color de fondo del toolbar */
+  color: white; /* Color del texto */
+}
+
+ion-buttons {
+  color: white; /* Color de los botones */
+}
+
+/* Estilos para el menú lateral responsivo */
+
+/* Por defecto (móviles y pantallas pequeñas): el menú se oculta y solo se muestra al abrir con el botón */
+ion-menu {
+  --width: 80%;
+}
+
+/* Para pantallas grandes (ancho mayor a 768px): el menú estará siempre visible */
+@media (min-width: 768px) {
+  ion-menu {
+    --width: 250px;
+    display: block;
+  }
+
+  /* El contenido principal tendrá espacio para el menú en pantallas grandes */
+  .main-content {
+    margin-left: 250px;
+  }
+
+  ion-menu-button {
+    display: none; /* Ocultar el botón del menú en pantallas grandes */
+  }
+}
