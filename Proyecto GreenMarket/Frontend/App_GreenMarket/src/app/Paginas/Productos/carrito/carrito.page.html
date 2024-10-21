@@ -5,72 +5,93 @@
 </ion-header>
 
 <ion-content>
-  <div class="fondo" >
-    <ion-card>
-      <ion-item class="titulo-label">
+  <ion-grid class="fondo"  >
+    <ion-row>
+      <ion-col >
+          <!-- Encabezado del carrito -->
+          <ion-row class="header-row ion-justify-content-center ion-align-items-center">
+            <ion-col>
+              <ion-label>PRODUCTO</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>PRECIO</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label>CANTIDAD</ion-label>
+            </ion-col>
+            <ion-col>
+              <ion-label class="precio">SUBTOTAL</ion-label>
+            </ion-col>
+          </ion-row>
+          <!-- Lista de productos del carrito -->
+          <ion-row class="ion-justify-content-center ion-align-items-center">
+            <ion-col size-lg="8">
+              <ion-list class="listacarro" *ngIf="carrito && carrito.items.length > 0; else noItems">
+                <ion-item color="color" *ngFor="let item of carrito.items">
+                  <ion-label id="nombrep">
+                    {{ item.nombre }}
+                  </ion-label>
+                  <ion-label  class="precio-unitario">
+                    ${{ item.precio }} CLP$
+                  </ion-label>
+                  <div class="aumentar-disminuir">
+                    <ion-button (click)="bajarItem(item.producto_id)">-</ion-button>
+                    <p> {{ item.cantidad }} </p>
+                    <ion-button (click)="agregarItem(item.producto_id)">+</ion-button>
+                  </div>
+                  <ion-label class="precio">
+                    ${{ precioUnitario(item.precio, item.cantidad) }} CLP
+                  </ion-label>
+                  <ion-button color="danger" (click)="removeItem(item.producto_id)">
+                    <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                  </ion-button>
+                </ion-item>
+              </ion-list>
+            </ion-col>
+          </ion-row>
+      </ion-col>
+    </ion-row>
+    <ion-row class="botonespagar">
+      <!-- <div>           </div> -->
+      <ion-col>
         <ion-label>
-          PRODUCTO
-        </ion-label>
-        <ion-label>
-          PRECIO
-        </ion-label>
-        <ion-label>
-          CANTIDAD
-        </ion-label>
-        <ion-label class="precio">
-          SUBTOTAL
-        </ion-label>
-      </ion-item>
-      <ion-list *ngIf="carrito && carrito.items.length > 0; else noItems">
-        <ion-item *ngFor="let item of carrito.items">
-          <ion-label>
-            {{ item.nombre }}
-          </ion-label>
-          <ion-label>
-            ${{ item.precio }} CLP
-          </ion-label>
-          <div class="aumentar-disminuir">
-            <ion-button  (click)="bajarItem(item.producto_id)">-</ion-button>
-            <p> {{item.cantidad}}  </p>
-            <ion-button (click)="agregarItem(item.producto_id)">+</ion-button>
+          <div class="bpagar"  [routerLink]="['/catalogo-producto']">
+            Seguir comprando
           </div>
-          <ion-label class="precio">
-            ${{ precioUnitario(item.precio, item.cantidad) }} CLP
-          </ion-label>
-          <div class="margin"></div>
-          <ion-button color="danger" (click)="removeItem(item.producto_id)">
-            <ion-icon slot="icon-only"name="trash-outline"></ion-icon>
-          </ion-button>
-        </ion-item>
-      </ion-list>
-      <ion-item>
-        <ion-button color="warning" [routerLink]="['/catalogo-producto']"> Seguir comprando</ion-button>
-        <ion-label class="total">Total: ${{ total }}</ion-label>
-        <div>
-          <ion-button color="success" expand="full" (click)="toggleClienteForm()">
-            {{ showClienteForm ? 'Cancelar' : 'Continuar' }}
-          </ion-button>
-        </div>
-      </ion-item>
-    </ion-card>
+          <!-- <ion-button color="warning" [routerLink]="['/catalogo-producto']"> Seguir comprando</ion-button> -->
+        </ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label>
+        </ion-label>
+      </ion-col>
+      <ion-col class="total">
+          <ion-label >Total: <br>${{ total }}</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label>
+            <div class="bpagar" (click)="toggleClienteForm()">
+              {{ showClienteForm ? 'Cancelar' : 'Continuar' }}
+            </div>
+        </ion-label>
+      </ion-col>
+    </ion-row>
     <div *ngIf="showClienteForm">
-      <ion-card class="tarjeta" >
+      <ion-card class="tarjeta">
         <ion-card-header>
           <ion-card-title class="titulo">Datos</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <form  (ngSubmit)="checkout()">
+          <form (ngSubmit)="checkout()">
             <ion-input class="formulario" [(ngModel)]="customer.rut" name="rut" required placeholder="RUT"></ion-input>
             <br>
             <ion-input class="formulario" [(ngModel)]="customer.dv" name="dv" required placeholder="DV"></ion-input>
             <br>
-            <ion-input class="formulario" [(ngModel)]="customer.correo_electronico" name="email" type="email" required
-              placeholder="CORREO"></ion-input>
+            <ion-input class="formulario" [(ngModel)]="customer.correo_electronico" name="email" type="email" required placeholder="CORREO"></ion-input>
             <br>
             <ion-input class="formulario" [(ngModel)]="customer.nombre" name="nombre" required placeholder="NOMBRE"></ion-input>
             <br>
             <ion-input class="formulario" [(ngModel)]="customer.direccion" name="direccion" required placeholder="DIRECCIÓN"></ion-input>
-            <!-- Nuevo botón "Ir a pagar" para Transbank -->
             <div class="button-center">
               <ion-button class="submit" (click)="irAPagar()">Pagar</ion-button>
             </div>
@@ -78,18 +99,36 @@
         </ion-card-content>
       </ion-card>
     </div>
-  </div>
+  </ion-grid>
+</ion-content>
 
-
+<ng-template #noItems>
+  <ion-item >
+    <ion-label>El carrito está vacío</ion-label>
+  </ion-item>
+</ng-template>
 
   <!-- Mostrar el mensaje de éxito o error aquí -->
   <!-- <ion-item *ngIf="mensaje">
     <ion-label color="primary">{{ mensaje }}</ion-label>
   </ion-item> -->
-</ion-content>
 
-<ng-template #noItems>
-  <ion-item>
-    <ion-label>El carrito está vacío</ion-label>
-  </ion-item>
-</ng-template>
+
+
+    <!-- Aquí vendrían las filas de productos -->
+    <!-- <ion-row *ngFor="let item of items">
+      <ion-col>
+        <ion-label>{{ item.nombre }}</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label>{{ item.precio }}</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label>{{ item.cantidad }}</ion-label>
+      </ion-col>
+      <ion-col>
+        <ion-label>{{ item.subtotal }}</ion-label>
+      </ion-col>
+    </ion-row> -->
+
+    <!-- <ion-grid>  </ion-grid> -->

@@ -23,14 +23,14 @@ button-div {
 .button-div:hover {
   background-color: #0056b3;
 }
-.button-center {
-  padding: 10px;
-  color: black;
-  font-size: 20px;
-  text-align: center;
-  font-weight: bold;
-  margin-bottom: 10px;
-}
+// .button-center {
+//   padding: 10px;
+//   color: black;
+//   font-size: 20px;
+//   text-align: center;
+//   font-weight: bold;
+//   margin-bottom: 10px;
+// }
 .titulo {
   text-align: center;
   color: black;
@@ -52,8 +52,11 @@ button-div {
 }
 
 .total{
+  display: flex;  /* Flexbox para centrar */
+  justify-content: center;  /* Centrar horizontalmente */
+  align-items: center;  /* Centrar verticalmente */
+  text-align: center;  /* Alineación del texto */
   font-weight: bold;
-  text-align: right;
 }
 .formulario{
   background-color: gray;
@@ -61,26 +64,220 @@ button-div {
   font-weight: bold;
 }
 .fondo{
-  background: #FB773C;
-  min-height: 100%;
+  width: 100%;
+  min-height: 100vh;
+  background: linear-gradient(744deg,#8bfd9b,#52df65 60%,#9bc2a0);
+}
+
+
+
+
+
+// .label-verde {
+//   font-weight: bold;  /* Texto en negrita */
+//   font-size: 16px;    /* Tamaño de fuente ajustado */
+// }
+
+// .aumentar-disminuir{
+//   display: flex;
+//   align-items: center;
+//   justify-content: center;
+//   gap: 5px; /* Añade espacio entre los botones */
+// }
+// .precio{
+//   margin-left: auto; /* Empuja el subtotal hacia el lado derecho */
+//   text-align: right;
+// }
+// ion-item {
+//   display: flex;
+//   flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas más pequeñas */
+//   justify-content: space-between;
+//   align-items: center;
+// }
+// --------------------------------------------------------------
+// --------------------------------------------------------------
+// ----------------------------------------------------------------
+// --------------------------------------------------------------------
+.header-row ion-label {
+  font-weight: bold;
+  text-align: center;
+}
+
+
+
+// .precio {
+//   font-weight: bold;
+// }
+
+
+
+
+.header-row ion-col {
+  text-align: center; /* Centrar los textos */
+  padding: 10px; /* Añadir espacio dentro de cada columna */
+  border-right: 2px solid rgb(0, 0, 0); /* Línea blanca entre los títulos */
 
 }
-.titulo-label{
-  font-weight: bold ;
+
+.header-row ion-col:last-child {
+  border-right: none; /* Eliminar la línea en la última columna */
 }
-.aumentar-disminuir{
+// ---------------------------------------------
+// -----------------------------------------
+// -------------------------------------------
+// --------------------------------------------
+// COSAS DEL LISATDO DONDE VAN LOS PRODUCTOS
+
+
+// COSAS DEL LISATDO DONDE VAN LOS PRODUCTOS
+// ---------------------------------------------
+// -----------------------------------------
+// -------------------------------------------
+// --------------------------------------------
+// ---------------------------------------------
+// -----------------------------------------
+// -------------------------------------------
+// --------------------------------------------
+// ---------------------------------------------
+// -----------------------------------------
+// -------------------------------------------
+// --------------------------------------------
+// Ubicacion de los botones del carrito
+.botonespagar{
+  background-color: #2F4232;/* Fondo verde */
+  color: white; /* Color de texto blanco */
+  font-weight: bold;
+  // border-top-left-radius: 20px; /* Borde redondeado solo en la esquina superior izquierda */
+  // border-top-right-radius: 20px;
+
+  display: flex; /* Usamos Flexbox para centrar el contenido */
+  justify-content: space-between; /* Distribuye el contenido de cada columna */
+  align-items: center; /* Centra verticalmente */
+  text-align: center;
+
+  max-width: 928px;/* Aseguramos que el encabezado ocupe todo el ancho disponible */
+  padding: 10px 15px; /* Añadimos un poco de padding para que no quede tan justo */
+
+  margin: 0 auto;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.bpagar {
+
+  background-color: #37523b;  /* Fondo verde oscuro */
+  color: white;               /* Texto en blanco */
+  font-weight: bold;           /* Texto en negrita */
+  border-radius: 8px;          /* Bordes redondeados */
+  padding: 10px 0px;          /* Espaciado interno */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
+  transition: background-color 0.3s ease;   /* Animación suave de fondo */
+
+  display: flex;               /* Usamos Flexbox para centrar el contenido */
+  justify-content: center;     /* Centra horizontalmente */
+  align-items: center;         /* Centra verticalmente */
+  text-align: center;          /* Centrar texto en múltiples líneas */
+}
+
+.header-row {
+  background-color: #2F4232;/* Fondo verde */
+  color: white; /* Color de texto blanco */
+  font-weight: bold;
+  margin-top: 0; /* Elimina el margen superior */
+  padding-top: 0; /* Elimina el padding superior */
+  display: flex; /* Usamos Flexbox para centrar el contenido */
+  justify-content: space-between; /* Distribuye el contenido de cada columna */
+  align-items: center; /* Centra verticalmente */
+  text-align: center;
+  min-width: 800px;
+  max-width: 928px;/* Aseguramos que el encabezado ocupe todo el ancho disponible */
+  padding: 10px 15px; /* Añadimos un poco de padding para que no quede tan justo */
+  border-top-left-radius: 20px; /* Borde redondeado solo en la esquina superior izquierda */
+  border-top-right-radius: 20px; /* Borde redondeado solo en la esquina superior derecha */
+  margin: 0 auto; /* Centra horizontalmente el encabezado */
+}
+
+
+
+// .listacarro {
+//   max-width: 100%; /* Mantiene el mismo ancho que la cabecera */
+//   margin: 0 auto; /* Centra el listado dentro de la columna */
+// }
+
+.bpagar:hover {
+  background-color: #3b5942;   /* Color de fondo más claro al pasar el ratón */
+}
+
+.bpagar:active {
+  background-color: #233023;   /* Color de fondo más oscuro al hacer clic */
+}
+// /////////////////////////////
+// FORMAS DE DENTRO DEL CARRO
+/////////////////////////////
+// .listacarro{
+
+
+/* Ajuste del layout */
+.ion-row {
   display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 5px; /* Añade espacio entre los botones */
+  justify-content: center; /* Centra el contenido horizontalmente */
+  align-items: center; /* Centra el contenido verticalmente */
+  margin-top: 0; /* Elimina el margen superior */
+  padding-top: 0; /* Elimina el padding superior */
 }
-.precio{
-  margin-left: auto; /* Empuja el subtotal hacia el lado derecho */
-  text-align: right;
+
+.listacarro {
+  background-color: #889c79; /* Color de fondo para la lista */
+  width: 100%; /* Ocupa todo el ancho disponible */
+  max-width: 1000px;
+  // min-width: 800px;
+  border: #2F4232 2px solid;
+
 }
+
 ion-item {
   display: flex;
-  flex-wrap: wrap; /* Permite que los elementos se ajusten en pantallas más pequeñas */
-  justify-content: space-between;
+  justify-content: space-between; /* Distribuye el contenido de los items */
+  align-items: center; /* Alinea verticalmente los elementos dentro del item */
+  padding: 10px;
+  // text-align: center;
+  width: 100%;
+  max-width: 1000px;
+
+}
+
+/* Ajuste del ion-label para centrar los textos */
+ion-label {
+  flex: 1;
+  text-align: center;
+}
+
+.aumentar-disminuir {
+  display: flex;
+  justify-content: center; /* Centra los botones de cantidad */
   align-items: center;
+}
+
+ion-button {
+  --padding-start: 5px;
+  --padding-end: 5px;
+}
+
+/* Ajuste de precio */
+.precio {
+  flex: 1;
+  position: relative;
+  left: 8.9%;
+  text-align: center;
+}
+.precio-unitario{
+  flex: 1;
+  position: relative;
+  right: 8.3%;
+  text-align: center;
+}
+#nombrep{
+  flex: 1;
+  position: relative;
+  right: 4%;
+  text-align: center;
 }

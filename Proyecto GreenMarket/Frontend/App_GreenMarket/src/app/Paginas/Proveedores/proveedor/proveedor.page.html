@@ -6,21 +6,19 @@
     <ion-title class="ion-text-center">Lista Proveedores</ion-title> <!-- Clase para centrar el título -->
   </ion-toolbar>
 </ion-header>
-<ion-content >
+<ion-content>
   <div class="bigimage">
     <ion-grid>
       <ion-row class="ion-text-center">
         <ion-col size="12" size-md="6" size-lg="4" *ngFor="let proveedor of proveedoresFiltrados">
-          <div class="profile-container">
+          <div class="profile-container" #profileCard>
             <ion-card class="profile-card">
               <div class="profile-details">
                 <img src="../../../../assets/images/descarga.jpeg" class="profile-image" />
               </div>
               <ion-card-content class="profile-stats">
-                <!-- el br es un apaño momentanio -->
                 <ion-card-header>
-                  <ion-card-title class="card-title">{{ proveedor.nombre }}<br/>
-                    {{ proveedor.apellido }}</ion-card-title>
+                  <ion-card-title class="card-title">{{ proveedor.nombre }}<br/>{{ proveedor.apellido }}</ion-card-title>
                 </ion-card-header>
                 <div class="card-section">
                   <ion-text>Calificación</ion-text>
@@ -30,9 +28,7 @@
                     <ion-text class="rating-value">4</ion-text>
                   </div>
                 </div>
-                <div class="card-section button-div" (click)="catalogo_producto()">
-                  Productos
-                </div>
+                <div class="card-sectionp button-div" (click)="catalogo_producto()">Productos</div>
               </ion-card-content>
             </ion-card>
           </div>
