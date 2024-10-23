@@ -197,7 +197,7 @@ def iniciar_pago(request):
             api_key='579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A36B1C',
         )
         tx = Transaction(options)
-        response = tx.create(buy_order='order12345', session_id='session12345', amount=total, return_url='http://127.0.0.1:8000/modelo/pago_fallido/')
+        response = tx.create(buy_order='order12345', session_id='session12345', amount=total, return_url='http://127.0.0.1:8000/modelo/pago_exitoso/')
 
         return JsonResponse({'success': True, 'transaction_url': response['url'], 'token': response['token']})
 
@@ -231,26 +231,23 @@ def validar_pago(request):
 
 
 def pago_exitoso(request):
-    token = request.GET.get('TBK_TOKEN')
-    if not token:
+    token_ws = request.GET.get('token_ws')
+
+    if not token_ws:
         return JsonResponse({'success': False, 'message': 'Token no proporcionado'})
 
     try:
-        response = Transaction().commit(token)
-        
+        response = Transaction().commit(token_ws)
+        print("Response de Transbank:", response)  # Verificar la respuesta de Transbank
+
         if response['status'] == 'AUTHORIZED':
-            # Si la transacción es exitosa, procesa el pedido
-            return render(request, 'pago_exitoso.html', {'order': response})
-        
-        elif response['status'] == 'ABORTED':
-            # Si la transacción fue abortada, redirige al pago fallido
-            return redirect('pago_fallido')
-        
+            # Redirigir a la ruta de Angular con el resultado de la transacción
+            return redirect(f'http://localhost:4200/pago-exitoso?order={response}')
         else:
-            # Si cualquier otro estado es retornado, redirige al pago fallido
             return redirect('pago_fallido')
 
     except Exception as e:
+        print("Error durante el procesamiento del pago:", str(e))  # Registro del error
         return JsonResponse({'success': False, 'error': str(e)})
 
 def pago_fallido(request):

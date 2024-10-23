@@ -108,13 +108,6 @@
   </ion-item>
 </ng-template>
 
-  <!-- Mostrar el mensaje de éxito o error aquí -->
-  <!-- <ion-item *ngIf="mensaje">
-    <ion-label color="primary">{{ mensaje }}</ion-label>
-  </ion-item> -->
-
-
-
     <!-- Aquí vendrían las filas de productos -->
     <!-- <ion-row *ngFor="let item of items">
       <ion-col>
@@ -132,3 +125,18 @@
     </ion-row> -->
 
     <!-- <ion-grid>  </ion-grid> -->
+
+    <!-- <form (ngSubmit)="realizarCheckoutYPago()">
+      <ion-input class="formulario" [(ngModel)]="customer.rut" name="rut" required placeholder="RUT"></ion-input>
+      <br>
+      <ion-input class="formulario" [(ngModel)]="customer.dv" name="dv" required placeholder="DV"></ion-input>
+      <br>
+      <ion-input class="formulario" [(ngModel)]="customer.correo_electronico" name="email" type="email" required placeholder="CORREO"></ion-input>
+      <br>
+      <ion-input class="formulario" [(ngModel)]="customer.nombre" name="nombre" required placeholder="NOMBRE"></ion-input>
+      <br>
+      <ion-input class="formulario" [(ngModel)]="customer.direccion" name="direccion" required placeholder="DIRECCIÓN"></ion-input>
+      <div class="button-center">
+        <ion-button class="submit" type="submit">Pagar</ion-button>
+      </div>
+    </form> -->

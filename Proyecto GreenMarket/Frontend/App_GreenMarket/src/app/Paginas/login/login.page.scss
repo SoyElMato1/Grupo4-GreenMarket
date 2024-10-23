@@ -2,7 +2,108 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background: #094005;
 }
-.fondo{
-  background-color: #b9f7be;
+
+.wave-full{
+  position: absolute;
+  width: 100%;;
+  height: 100%;
+  opacity: 0.6;
+  left: 0;
+  top: 0;
+  margin-left: 0;
+  margin-top: 0;
+  background: linear-gradient(744deg,#169e0c,#1ba511 60%,#14e263);
 }
+ion-buttons{
+  font-size: bold;
+
+}
+
+.form {
+  --bg-light: #efefef;
+  --bg-dark: #707070;
+  --clr: #58bc82;
+  --clr-alpha: #9c9c9c60;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  max-width: 300px;
+}
+
+.form .input-span {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+
+.form input[type="email"]:focus,
+.form input[type="password"]:focus {
+  outline: 2px solid var(--clr);
+}
+
+.label {
+  align-self: flex-start;
+  color: #F5F5F5;
+  font-weight: 600;
+}
+
+.form .submit {
+  padding: 1rem 0.75rem;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  border-radius: 3rem;
+  background-color: #FFFF99;
+  color: var(--bg-light);
+  border: none;
+  cursor: pointer;
+  color:  black;
+
+  transition: all 300ms;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+
+.span {
+  text-decoration: none;
+  color: red;
+  opacity: 70%;
+}
+
+ion-input{
+  background-color: #F0F0F0;
+  font-size: large;
+  font-weight: bold;
+  color: black;
+}
+.boton{
+  --background-color: #FFFF99;
+  --background: #FFFF99;
+}
+.boton-cambiar{
+  color: rgba(23, 23, 255, 0.842);
+  font-weight: bold;
+  text-decoration: underline;
+}
+.title {
+  margin-bottom: 1rem;
+  font-size: 1.5em;
+  font-weight: 500;
+  color: #f5f5f5;
+ }
+ ion-label{
+    align-self: flex-start;
+    color: #F5F5F5;
+    font-weight: 600;
+ }
+ .margen{
+  margin-top: 50px;
+ }

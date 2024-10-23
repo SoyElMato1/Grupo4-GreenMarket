@@ -143,25 +143,7 @@ button-div {
 // -------------------------------------------
 // --------------------------------------------
 // Ubicacion de los botones del carrito
-.botonespagar{
-  background-color: #2F4232;/* Fondo verde */
-  color: white; /* Color de texto blanco */
-  font-weight: bold;
-  // border-top-left-radius: 20px; /* Borde redondeado solo en la esquina superior izquierda */
-  // border-top-right-radius: 20px;
 
-  display: flex; /* Usamos Flexbox para centrar el contenido */
-  justify-content: space-between; /* Distribuye el contenido de cada columna */
-  align-items: center; /* Centra verticalmente */
-  text-align: center;
-
-  max-width: 928px;/* Aseguramos que el encabezado ocupe todo el ancho disponible */
-  padding: 10px 15px; /* Añadimos un poco de padding para que no quede tan justo */
-
-  margin: 0 auto;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-}
 .bpagar {
 
   background-color: #37523b;  /* Fondo verde oscuro */
@@ -178,6 +160,21 @@ button-div {
   text-align: center;          /* Centrar texto en múltiples líneas */
 }
 
+.botonespagar{
+  background-color: #2F4232;/* Fondo verde */
+  color: white; /* Color de texto blanco */
+  font-weight: bold;
+  display: flex; /* Usamos Flexbox para centrar el contenido */
+  justify-content: space-between; /* Distribuye el contenido de cada columna */
+  align-items: center; /* Centra verticalmente */
+  text-align: center;
+
+  max-width: 928px;/* Aseguramos que el encabezado ocupe todo el ancho disponible */
+  padding: 10px 15px; /* Añadimos un poco de padding para que no quede tan justo */
+  margin: 0 auto;
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
 .header-row {
   background-color: #2F4232;/* Fondo verde */
   color: white; /* Color de texto blanco */
@@ -188,7 +185,7 @@ button-div {
   justify-content: space-between; /* Distribuye el contenido de cada columna */
   align-items: center; /* Centra verticalmente */
   text-align: center;
-  min-width: 800px;
+  // min-width: 800px;
   max-width: 928px;/* Aseguramos que el encabezado ocupe todo el ancho disponible */
   padding: 10px 15px; /* Añadimos un poco de padding para que no quede tan justo */
   border-top-left-radius: 20px; /* Borde redondeado solo en la esquina superior izquierda */
@@ -231,7 +228,17 @@ button-div {
   max-width: 1000px;
   // min-width: 800px;
   border: #2F4232 2px solid;
+  position: relative;
+  justify-content:center ;
+  align-items: center;
+  max-width: 928px;/* Aseguramos que el encabezado ocupe todo el ancho disponible */
+  padding: 10px 15px; /* Añadimos un poco de padding para que no quede tan justo */
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
 
+  border-top-left-radius: 20px; /* Borde redondeado solo en la esquina superior izquierda */
+  border-top-right-radius: 20px; /* Borde redondeado solo en la esquina superior derecha */
+  margin: 0 auto; /* Centra horizontalmente el encabezado */
 }
 
 ion-item {

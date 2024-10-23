@@ -25,10 +25,15 @@ export class LoginPage implements OnInit{
     ap_user: '',
   };
   showCrudForm = false;
-  showLoginForm = false;
+  showLoginForm = true;
 
   loginForm: FormGroup;
   registerForm: FormGroup;
+
+  handleButtonClick() {
+    this.toggleCrudForm();
+    this.toggleLoginForm();
+  }
 
   constructor(private router: Router, private authservice: AuthserviceService, private proveedorService: ProvedorServiService,
     private formBuilder: FormBuilder, private toast: ToastController) {
@@ -64,6 +69,7 @@ export class LoginPage implements OnInit{
     if (this.loginForm.invalid) {
       const toast = await this.toast.create({
         message: 'Rellene los campos',
+        position: 'top',
         duration: 2000
       });
       toast.present();
@@ -91,6 +97,7 @@ export class LoginPage implements OnInit{
           // Mostrar mensaje de bienvenida
           const toast = await this.toast.create({
             header: 'Bienvenido Usuario',
+            position: 'top',
             duration: 2000
           });
           await toast.present();
@@ -113,6 +120,7 @@ export class LoginPage implements OnInit{
         console.error('Error en el login', error);
         const toast = await this.toast.create({
           message: 'Error en el inicio de sesión',
+          position: 'top',
           duration: 2000
         });
         toast.present();
@@ -128,6 +136,7 @@ export class LoginPage implements OnInit{
     if (this.registerForm.invalid) {
       const toast = await this.toast.create({
         message: 'Rellene los campos',
+        position: 'top',
         duration: 2000
       });
       toast.present();
@@ -146,6 +155,7 @@ export class LoginPage implements OnInit{
         // Mostramos el mensaje de éxito
         const toast = await this.toast.create({
           message: 'Proveedor registrado correctamente',
+          position: 'top',
           duration: 2000
         });
         toast.present();
@@ -159,6 +169,7 @@ export class LoginPage implements OnInit{
         // Mostramos un mensaje de error en caso de fallo
         const toast = await this.toast.create({
           message: 'Error al registrar el proveedor. Intente nuevamente.',
+          position: 'top',
           duration: 2000
         });
         toast.present();

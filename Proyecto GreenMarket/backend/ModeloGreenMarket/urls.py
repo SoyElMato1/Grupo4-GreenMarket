@@ -20,9 +20,11 @@ urlpatterns = [
     path('limpiar/', limpiar_carrito, name= 'limpiar_carrito'),
     path('carrito/', ver_carrito, name='ver_carrito'),
     path('checkout/', checkout, name='checkout'),
+    path('eliminar/<int:producto_id>/', eliminar_del_carrito, name='eliminar del carrito'),
 
 # Transbank
     path('pago/iniciar/', iniciar_pago, name='iniciar_pago'),
+    path('validar_pago/', validar_pago, name='validar_pago'),
     path('pago_exitoso/', pago_exitoso, name='pago_exitoso'),
     path('pago_fallido/', pago_fallido, name='pago_fallido'),
 

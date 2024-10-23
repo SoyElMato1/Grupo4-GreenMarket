@@ -50,4 +50,17 @@ export class CarritoServiService {
     return this.http.post<any>(`${this.apiUrl}pago/iniciar/`, data);
   }
 
+  // Método para limpiar el carrito
+  limpiarCarrito(): Observable<any> {
+    const url = `${this.apiUrl}limpiar/`; // Asegúrate de que esta URL sea correcta
+    return this.http.post(url, {}, { withCredentials: true });
+  }
+
+  // Método para eliminar un item del carrito
+  eliminar_carrito(productId: number): Observable<any> {
+    const url = `${this.apiUrl}eliminar/${productId}/`;
+    return this.http.post(url, {}, { withCredentials: true });
+  }
+
+
 }
