@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders  } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -14,7 +14,22 @@ export class AuthserviceService {
 
 
   login(username: string, password: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}login/`, { username, password });
+    return this.http.post(`${this.apiUrl}login/`, { username, password }).pipe(
+      tap((response: any) => {
+        localStorage.setItem('authToken', response.token);
+        localStorage.setItem('rut', username); // Guarda el RUT para el perfil
+      })
+    );
+  }
+
+  getProveedorPerfil(): Observable<any> {
+    const rut = localStorage.getItem('rut');
+    return this.http.get(`${this.apiUrl}proveedores/${rut}/`);
+  }
+
+  actualizarPerfil(proveedor: any): Observable<any> {
+    const rut = localStorage.getItem('rut');
+    return this.http.patch(`${this.apiUrl}proveedores/${rut}/`, proveedor);
   }
 
   logout() {

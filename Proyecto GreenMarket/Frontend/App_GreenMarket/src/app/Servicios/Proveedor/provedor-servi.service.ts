@@ -26,20 +26,20 @@ export class ProvedorServiService {
     );
   }
 
-  // Obtener un proveedor por su RUT
-  getProveedor(rut: string): Observable<Proveedor> {
-    return this.http.get<Proveedor>(`${this.baseUrl}${rut}/`);
-  }
+  // // Obtener un proveedor por su RUT
+  // getProveedor(rut: string): Observable<Proveedor> {
+  //   return this.http.get<Proveedor>(`${this.baseUrl}${rut}/`);
+  // }
 
-  // Crear un nuevo proveedor
-  createProveedor(proveedor: Proveedor): Observable<Proveedor> {
-    return this.http.post<Proveedor>(this.baseUrl, proveedor);
-  }
+  // // Crear un nuevo proveedor
+  // createProveedor(proveedor: Proveedor): Observable<Proveedor> {
+  //   return this.http.post<Proveedor>(this.baseUrl, proveedor);
+  // }
 
-  // Actualizar un proveedor existente
-  updateProveedor(proveedor: Proveedor): Observable<Proveedor> {
-    return this.http.put<Proveedor>(`${this.baseUrl}${proveedor.rut}/`, proveedor);
-  }
+  // // Actualizar un proveedor existente
+  // updateProveedor(proveedor: Proveedor): Observable<Proveedor> {
+  //   return this.http.put<Proveedor>(`${this.baseUrl}${proveedor.rut}/`, proveedor);
+  // }
 
   // Eliminar un proveedor
   deleteProveedor(rut: string): Observable<void> {

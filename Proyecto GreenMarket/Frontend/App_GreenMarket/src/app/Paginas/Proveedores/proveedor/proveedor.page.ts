@@ -14,8 +14,6 @@ import { ProvedorServiService } from 'src/app/Servicios/Proveedor/provedor-servi
 })
 export class ProveedorPage implements OnInit {
 
-  imageBase64: any = []
-
   proveedores: any = [];
   showSearchBar = false;
   proveedoresFiltrados: any =[]
@@ -24,24 +22,18 @@ export class ProveedorPage implements OnInit {
               private router : Router,
               private http:HttpClient) { }
 
-  getImageBase64(imageUrl: string): Observable<string> {
-    return this.http.get<string>(imageUrl);  // O puede ser algún otro tipo de petición si la imagen está en la base de datos
-  }
-  imageUrl(imageBase64: any) {
-    throw new Error('Method not implemented.');
+  ngOnInit() {
+    this.getProveedores();
   }
 
   getProveedores() {
     this.proveedorService.getProveedores().subscribe(
       (data) => {
-        this.proveedores = data;  // Almacena los proveedores obtenidos
         this.proveedoresFiltrados = data;
-      },
-      (error) => {
-        console.error('Error al obtener los proveedores', error);
       }
     );
-    }
+  }
+
     catalogo_producto(){
       this.router.navigate(['/catalogo-producto'])
     }
@@ -58,10 +50,6 @@ export class ProveedorPage implements OnInit {
         (ev as InfiniteScrollCustomEvent).target.complete();
       }, 100);
     }
-
-  ngOnInit() {
-    this.getProveedores();
-  }
 
   toggleSearchBar() {
     this.showSearchBar = !this.showSearchBar;

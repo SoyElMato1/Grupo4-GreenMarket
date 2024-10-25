@@ -17,12 +17,12 @@
 
         <ion-item (click)="setSection('Productos')" >
           <ion-icon slot="start" name="people-outline"></ion-icon>
-          <ion-label>Proveedores</ion-label>
+          <ion-label>Productos</ion-label>
         </ion-item>
 
-        <ion-item (click)="setSection('configuracion')">
+        <ion-item (click)="setSection('Perfil')">
           <ion-icon slot="start" name="settings-outline"></ion-icon>
-          <ion-label>Configuración</ion-label>
+          <ion-label>Perfil</ion-label>
         </ion-item>
         <!-- Opción de Cerrar Sesión -->
         <ion-item (click)="onLogout()">
@@ -77,9 +77,34 @@
     </div>
 
     <!-- Configuración -->
-    <div *ngIf="currentSection === 'configuracion'">
-      <h2>Configuración</h2>
-      <p>Aquí puedes cambiar configuraciones del sistema, como ajustes generales o permisos.</p>
+    <div *ngIf="currentSection === 'Perfil'">
+      <h2>Mi Cuenta</h2>
+      <ion-card>
+        <ion-card-content>
+          <ion-list>
+            <ion-item>
+              <ion-label position="stacked">Nombre</ion-label>
+              <ion-input [(ngModel)]="proveedor.nombre"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Apellido</ion-label>
+              <ion-input [(ngModel)]="proveedor.apellido"></ion-input>
+            </ion-item>
+            <ion-item>
+              <ion-label position="stacked">Correo Electrónico</ion-label>
+              <ion-input [(ngModel)]="proveedor.correo_electronico"></ion-input>
+            </ion-item>
+            <!-- Otros campos necesarios -->
+
+            <ion-item>
+              <ion-label position="stacked">Foto</ion-label>
+              <!-- Campo de archivo nativo HTML para cargar la foto -->
+              <input type="file" (change)="actualizarFoto($event)" accept="image/*" />
+            </ion-item>
+          </ion-list>
+          <ion-button expand="full" (click)="actualizarPerfil()">Guardar Cambios</ion-button>
+        </ion-card-content>
+      </ion-card>
     </div>
   </ion-content>
 </ion-split-pane>

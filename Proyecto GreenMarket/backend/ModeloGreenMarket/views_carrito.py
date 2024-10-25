@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from rest_framework.parsers import JSONParser
@@ -91,34 +92,24 @@ def ver_carrito(request):
 
 @csrf_exempt
 def checkout(request):
-    print(request.method)
     if request.method == 'POST':
-        # Obtener datos del cliente desde la solicitud
-        cliente_data = JSONParser().parse(request)
-        rut = cliente_data.get('rut')
-        # Buscar si ya existe un cliente con ese rut o correo
-        try:
-            cliente = Cliente.objects.get(rut=rut)
-        except Cliente.DoesNotExist:
-            cliente = None
+        # Parsear los datos del cuerpo de la solicitud
+        data = json.loads(request.body)
+        rut_cliente = data.get('customer')
         
-        if cliente is None:
-            # Si no existe, crear un nuevo cliente
-            cliente_serializers = ClienteSerializer(data=cliente_data)
-            if cliente_serializers.is_valid():
-                cliente = cliente_serializers.save()
-            else:
-                return JsonResponse({'error': 'Datos de cliente inválidos'}, status=400)
-        else:
-            # Si existe, actualizar sus datos con los proporcionados
-            cliente.nombre = cliente_data.get('nombre', cliente.nombre)
-            cliente.direccion = cliente_data.get('direccion', cliente.direccion)
-            cliente.save()
+        # Obtener el cliente por su RUT
+        try:
+            cliente = Cliente.objects.get(rut=rut_cliente)
+        except Cliente.DoesNotExist:
+            return JsonResponse({'error': 'Cliente no encontrado'}, status=404)
+        
         # Obtener los datos del carrito
         carrito = Carrito(request)
         items, total = carrito.obtener_items()
+
         # Crear la lista de ítems para la orden
         items_orden = [{'producto_id': item['producto'].codigo_producto, 'cantidad': item['cantidad']} for item in items]
+
         # Crear la orden
         orden = Orden.objects.create(
             cliente=cliente,
@@ -126,65 +117,14 @@ def checkout(request):
             total=total,
             pagado=False,
         )
+
         # Limpiar el carrito después de crear la orden
         carrito.limpiar()
-        # Retornar la respuesta de éxito junto con los datos del cliente
-        return JsonResponse({'mensaje': 'Orden creada', 'orden_id': orden.id, 'cliente': ClienteSerializer(cliente).data})
-    return JsonResponse({'error': 'Método no permitido'}, status=405)
 
-# @csrf_exempt
-# def checkout(request):
-#     if request.method == 'POST':
-#         # Obtener datos del cliente desde la solicitud
-#         cliente_data = JSONParser().parse(request)
-#         rut = cliente_data.get('rut')
-#         guardar_cliente = cliente_data.get('guardar_cliente', False)  # nuevo campo desde el frontend
-        
-#         # Buscar si ya existe un cliente con ese rut
-#         try:
-#             cliente = Cliente.objects.get(rut=rut)
-#         except Cliente.DoesNotExist:
-#             cliente = None
-        
-#         if cliente is None and guardar_cliente:
-#             # Si no existe y la opción de guardar está marcada, crear un nuevo cliente
-#             cliente_serializers = ClienteSerializer(data=cliente_data)
-#             if cliente_serializers.is_valid():
-#                 cliente = cliente_serializers.save()
-#             else:
-#                 return JsonResponse({'error': 'Datos de cliente inválidos'}, status=400)
-#         elif cliente is not None and guardar_cliente:
-#             # Si existe y se elige guardar, actualizar los datos
-#             cliente.nombre = cliente_data.get('nombre', cliente.nombre)
-#             cliente.direccion = cliente_data.get('direccion', cliente.direccion)
-#             cliente.save()
-#         else:
-#             # Si el cliente no existe y no se elige guardar, crear un cliente temporal (no guardado en la base de datos)
-#             cliente = Cliente(
-#                 rut=rut,
-#                 nombre=cliente_data.get('nombre'),
-#                 direccion=cliente_data.get('direccion')
-#             )
-        
-#         # Obtener los datos del carrito
-#         carrito = Carrito(request)
-#         items, total = carrito.obtener_items()
-        
-#         # Crear la lista de ítems para la orden
-#         items_orden = [{'producto_id': item['producto'].codigo_producto, 'cantidad': item['cantidad']} for item in items]
-        
-#         # Crear la orden
-#         orden = Orden.objects.create(
-#             cliente=cliente,  # Asignar el cliente temporal o el guardado
-#             items=items_orden,
-#             total=total,
-#             pagado=False,
-#         )
-        
-#         # Limpiar el carrito después de crear la orden
-#         carrito.limpiar()
-        
-#         # Retornar la respuesta de éxito junto con los datos del cliente
-#         return JsonResponse({'mensaje': 'Orden creada', 'orden_id': orden.id, 'cliente': ClienteSerializer(cliente).data})
-    
-#     return JsonResponse({'error': 'Método no permitido'}, status=405)
+        # Retornar la respuesta de éxito junto con los datos del cliente
+        return JsonResponse({
+            'mensaje': 'Orden creada',
+            'orden_id': orden.id,
+            'cliente': ClienteSerializer(cliente).data
+        })
+    return JsonResponse({'error': 'Método no permitido'}, status=405)

@@ -25,21 +25,6 @@ export class CarritoServiService {
     return this.http.post(url, {}, { withCredentials: true });
   }
 
-  checkout(data: any) {
-    const headers = { 'Content-Type': 'application/json' }; // Asegúrate de tener las cabeceras
-    return this.http.post('http://127.0.0.1:8000/modelo/checkout/', data, { headers });
-  }
-
-  // Getter for the cart item count observable
-  getCartItemCount() {
-    return this.cartItemCount.asObservable();
-  }
-
-  // Method to update the cart item count
-  updateCartCount() {
-    this.ver_carrito();
-  }
-
    // Implementación del método restar_carrito
   restar_carrito(productId: number): Observable<any> {
     const url = `${this.apiUrl}restar/${productId}/`;
@@ -62,5 +47,29 @@ export class CarritoServiService {
     return this.http.post(url, {}, { withCredentials: true });
   }
 
+  // Getter for the cart item count observable
+  getCartItemCount() {
+    return this.cartItemCount.asObservable();
+  }
+
+  // Method to update the cart item count
+  updateCartCount() {
+    this.ver_carrito();
+  }
+
+  checkout(data: any) {
+    const headers = { 'Content-Type': 'application/json' }; // Asegúrate de tener las cabeceras
+    return this.http.post('http://127.0.0.1:8000/modelo/checkout/', data, { headers });
+  }
+
+  obtener_cliente(rut:string): Observable<any>{
+    return this.http.get(`${this.apiUrl}cliente/${rut}`);
+  }
+
+  // Crear un nuevo cliente
+  crearCliente(clienteData: any): Observable<any> {
+    const headers = { 'Content-Type': 'application/json' }; // Asegúrate de tener las cabeceras
+    return this.http.post(`${this.apiUrl}clienteAgre/`, clienteData, { headers });
+  }
 
 }

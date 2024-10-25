@@ -15,12 +15,57 @@ export class PanelProveedorPage implements OnInit {
 
   products: any[] = [];
   currentSection: string = 'dashboard'; // Sección por defecto
+  proveedor: any = {}; // Perfil del proveedor
+  fotoSeleccionada: File | null = null; // Variable para almacenar el archivo de foto
 
   constructor(private authService: AuthserviceService, private router: Router, private proService: ProductoServiService,
     private toast: ToastController,
   ) { }
 
   ngOnInit() {
+    this.loadPerfil();
+  }
+
+  loadPerfil() {
+    this.authService.getProveedorPerfil().subscribe(
+      (data) => {
+        this.proveedor = data;
+      },
+      (error) => {
+        console.error('Error al cargar el perfil', error);
+      }
+    );
+  }
+
+  actualizarFoto(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files[0]) {
+      this.fotoSeleccionada = input.files[0];
+    }
+  }
+
+  // Método para guardar cambios en el perfil, incluyendo la foto
+  actualizarPerfil() {
+    const formData = new FormData();
+    formData.append('nombre', this.proveedor.nombre);
+    formData.append('apellido', this.proveedor.apellido);
+    formData.append('correo_electronico', this.proveedor.correo_electronico);
+    if (this.fotoSeleccionada) {
+      formData.append('foto', this.fotoSeleccionada); // Adjunta la foto seleccionada
+    }
+
+    this.authService.actualizarPerfil(formData).subscribe(
+      async (response) => {
+        const toast = await this.toast.create({
+          message: 'Perfil actualizado correctamente.',
+          duration: 2000,
+        });
+        toast.present();
+      },
+      (error) => {
+        console.error('Error al actualizar el perfil', error);
+      }
+    );
   }
 
   // Cambiar la sección actual

@@ -24,8 +24,8 @@ export class LoginPage implements OnInit{
     nom_user: '',
     ap_user: '',
   };
-  showCrudForm = false;
-  showLoginForm = true;
+  showCrudForm = true;
+  showLoginForm = false;
 
   loginForm: FormGroup;
   registerForm: FormGroup;

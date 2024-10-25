@@ -86,7 +86,7 @@ export class PanelAdministradorPage implements OnInit {
     }
 
     // Llamamos al servicio para registrar el proveedor
-    this.proveedorService.createProveedor(this.item).subscribe({
+    this.authService.registerProveedor(this.item).subscribe({
       next: async (response) => {
         console.log('Proveedor registrado exitosamente', response);
 

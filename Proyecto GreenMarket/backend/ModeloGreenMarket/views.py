@@ -1,5 +1,5 @@
 from django.conf import settings
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.http import HttpResponse, JsonResponse
 from rest_framework.parsers import JSONParser
 from rest_framework.response import Response
@@ -29,7 +29,26 @@ def Ver_proveedor(request):
         return Response(serializer.data, status=status.HTTP_200_OK)
 
 @csrf_exempt
-@api_view(['GET', 'PUT', 'DELETE'])
+@api_view(['GET', 'PUT', 'PATCH'])
+@permission_classes([IsAuthenticated])
+def proveedor_detalle(request, rut):
+    try:
+        proveedor = Proveedor.objects.get(rut=rut)
+    except Proveedor.DoesNotExist:
+        return Response({"error": "Proveedor no encontrado"}, status=404)
+
+    if request.method == 'GET':
+        serializer = ProveedorSerializer(proveedor)
+        return Response(serializer.data)
+    elif request.method in ['PUT', 'PATCH']:
+        serializer = ProveedorSerializer(proveedor, data=request.data, partial=True)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=400)
+    
+@csrf_exempt
+@api_view(['GET', 'DELETE'])
 def detalle_proveedor(request, id):
     """
     Recupera, actualiza o elimina un proveedor.
@@ -41,13 +60,13 @@ def detalle_proveedor(request, id):
     if request.method == 'GET': 
         proveedor_serializer = ProveedorSerializer(proveedor) 
         return JsonResponse(proveedor_serializer.data) 
-    elif request.method == 'PUT': 
-        proveedor_data = JSONParser().parse(request) 
-        proveedor_serializer = ProveedorSerializer(proveedor, data=proveedor_data) 
-        if proveedor_serializer.is_valid(): 
-            proveedor_serializer.save() 
-            return JsonResponse(proveedor_serializer.data) 
-        return JsonResponse(proveedor_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
+    # elif request.method == 'PUT': 
+    #     proveedor_data = JSONParser().parse(request) 
+    #     proveedor_serializer = ProveedorSerializer(proveedor, data=proveedor_data) 
+    #     if proveedor_serializer.is_valid(): 
+    #         proveedor_serializer.save() 
+    #         return JsonResponse(proveedor_serializer.data) 
+    #     return JsonResponse(proveedor_serializer.errors, status=status.HTTP_400_BAD_REQUEST) 
     elif request.method == 'DELETE': 
         proveedor.delete() 
         return JsonResponse({'message': 'Proveedor eliminado correctamente!'}, status=status.HTTP_204_NO_CONTENT)
@@ -253,3 +272,29 @@ def pago_exitoso(request):
 def pago_fallido(request):
     # Aquí puedes hacer cualquier lógica que necesites antes de redirigir
     return redirect('http://localhost:4200/pago-fallido?message=El%20pago%20fue%20cancelado%20o%20fallido.%20Int%C3%A9ntalo%20de%20nuevo.')
+
+# -------------------------- Cliente -----------------------------
+@csrf_exempt
+def cliente_obtener(request, rut):
+    cliente = get_object_or_404(Cliente, rut=rut) 
+    response_data = {
+        'dv': cliente.dv,
+        'correo_electronico': cliente.correo_electronico,
+        'nombre': cliente.nombre,
+        'direccion': cliente.direccion,
+    }
+    return JsonResponse(response_data)
+        
+@csrf_exempt
+@api_view(['POST'])
+def guardar_cliente(request):
+    if request.method == 'POST':
+        cliente_data = JSONParser().parse(request)
+        cliente_serializer = ClienteSerializer(data=cliente_data)
+        
+        if cliente_serializer.is_valid():
+            cliente_serializer.save()
+            return JsonResponse(cliente_serializer.data, status=status.HTTP_201_CREATED)
+        
+        return JsonResponse(cliente_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+    return JsonResponse({'error': 'Método no permitido'}, status=405)

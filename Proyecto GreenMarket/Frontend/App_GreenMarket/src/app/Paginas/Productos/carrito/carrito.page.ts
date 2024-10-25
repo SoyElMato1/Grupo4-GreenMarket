@@ -112,43 +112,6 @@ export class CarritoPage implements OnInit {
     return total;
   }
 
-  // Función para realizar el checkout
-  checkout() {
-    const customer = {
-      rut: this.customer.rut,
-      dv: this.customer.dv,
-      correo_electronico: this.customer.correo_electronico,
-      nombre: this.customer.nombre,
-      direccion: this.customer.direccion
-    };
-
-    const items = this.cartItems.map(item => ({
-      producto_id: item.producto_id,
-      cantidad: item.cantidad
-    }));
-
-    const checkoutData = {
-      ...customer,
-      items: items,
-      total: this.total
-    };
-
-    const headers = { 'Content-Type': 'application/json' };
-    this.cartService.checkout(checkoutData).subscribe(
-      (response: any) => {
-        if (response && response.orden_id) {
-          this.mensaje = `Orden creada. ID de la orden: ${response.orden_id}`;
-        } else {
-          this.mensaje = 'Error: No se recibió el ID de la orden.';
-        }
-      },
-      (error) => {
-        console.error('Error al crear la orden', error);
-        this.mensaje = 'Error al crear la orden. Inténtalo de nuevo.';
-      }
-    );
-  }
-
   irAPagar() {
     if (!this.customer.rut || !this.customer.dv || !this.customer.correo_electronico || !this.customer.nombre || !this.customer.direccion) {
           this.mostrarToast('Por favor, completa todos los campos.');
@@ -183,13 +146,86 @@ export class CarritoPage implements OnInit {
     );
   }
 
-  // async realizarCheckoutYPago() {
-  //   // Validación de campos del cliente
-  //   if (!this.customer.rut || !this.customer.dv || !this.customer.correo_electronico || !this.customer.nombre || !this.customer.direccion) {
-  //     this.mostrarToast('Por favor, completa todos los campos.');
-  //     return;
-  //   }
+  buscar_cliente(rut: string) {
+    if (!rut) return; // Si el RUT está vacío, no hacer nada
+    this.cartService.obtener_cliente(rut).subscribe(
+      (response: any) => {
+        if (response) {
+          this.customer.dv = response.dv;
+          this.customer.correo_electronico = response.correo_electronico;
+          this.customer.nombre = response.nombre;
+          this.customer.direccion = response.direccion;
+        }
+      },
+    );
+  }
 
+  guardar_cliente(){
+    this.cartService.crearCliente(this.customer).subscribe(
+      (response) => {
+        console.log('Cliente creado exitosamente', response);
+      },
+    );
+  }
+
+  // Método para generar la orden de compra
+  checkout() {
+    const items = this.cartItems.map(item => ({
+      producto_id: item.producto_id,
+      cantidad: item.cantidad
+    }));
+
+    const checkoutData = {
+      customer: this.customer.rut, // Enviar el RUT como 'customer'
+      items: items,
+      total: this.total
+    };
+
+    const headers = { 'Content-Type': 'application/json' };
+    this.cartService.checkout(checkoutData).subscribe(
+      (response: any) => {
+        if (response && response.orden_id) {
+          this.mensaje = `Orden creada. ID de la orden: ${response.orden_id}`;
+        } else {
+          this.mensaje = 'Error: No se recibió el ID de la orden.';
+        }
+      },
+      (error) => {
+        console.error('Error al crear la orden', error);
+        this.mensaje = 'Error al crear la orden. Inténtalo de nuevo.';
+      }
+    );
+  }
+
+  // checkout(rut: string) {
+  //   const customer = rut;
+  //   const items = this.cartItems.map(item => ({
+  //     producto_id: item.producto_id,
+  //     cantidad: item.cantidad
+  //   }));
+  //   const checkoutData = {
+  //     customer,
+  //     items: items,
+  //     total: this.total
+  //   };
+  //   const headers = { 'Content-Type': 'application/json' };
+  //   this.cartService.checkout(checkoutData).subscribe(
+  //     (response: any) => {
+  //       if (response && response.orden_id) {
+  //         this.mensaje = `Orden creada. ID de la orden: ${response.orden_id}`;
+  //       } else {
+  //         this.mensaje = 'Error: No se recibió el ID de la orden.';
+  //       }
+  //     },
+  //     (error) => {
+  //       console.error('Error al crear la orden', error);
+  //       this.mensaje = 'Error al crear la orden. Inténtalo de nuevo.';
+  //     }
+  //   );
+  // }
+
+  // // Función para realizar el checkout
+  // checkout() {
   //   const customer = {
   //     rut: this.customer.rut,
   //     dv: this.customer.dv,
@@ -209,88 +245,20 @@ export class CarritoPage implements OnInit {
   //     total: this.total
   //   };
 
-  //   // Realizar checkout
+  //   const headers = { 'Content-Type': 'application/json' };
   //   this.cartService.checkout(checkoutData).subscribe(
-  //     async (response: any) => {
+  //     (response: any) => {
   //       if (response && response.orden_id) {
-  //         // await this.mostrarToast(`Orden creada. ID de la orden: ${response.orden_id}`);
-
-  //         // Si el checkout fue exitoso, iniciamos el pago
-  //         this.cartService.iniciarPago({ total: this.total }).subscribe(
-  //           response => {
-  //             if (response.success) {
-  //               const form = document.createElement('form');
-  //               form.method = 'POST';
-  //               form.action = response.transaction_url;
-
-  //               const tokenField = document.createElement('input');
-  //               tokenField.type = 'hidden';
-  //               tokenField.name = 'token_ws';
-  //               tokenField.value = response.token;
-
-  //               form.appendChild(tokenField);
-  //               document.body.appendChild(form);
-
-  //               form.submit(); // Redirige al usuario al formulario de pago de Transbank
-  //             } else {
-  //               this.mostrarToast('Error al iniciar pago: ' + response.message);
-  //             }
-  //           },
-  //           error => {
-  //             console.error(error);
-  //             this.mostrarToast('Ocurrió un error al iniciar el pago.');
-  //           }
-  //         );
+  //         this.mensaje = `Orden creada. ID de la orden: ${response.orden_id}`;
+  //       } else {
+  //         this.mensaje = 'Error: No se recibió el ID de la orden.';
   //       }
-  //       // else {
-  //       //   await this.mostrarToast('Error: No se recibió el ID de la orden.');
-  //       // }
   //     },
-  //     async (error) => {
+  //     (error) => {
   //       console.error('Error al crear la orden', error);
-  //       await this.mostrarToast('Error al crear la orden. Inténtalo de nuevo.');
+  //       this.mensaje = 'Error al crear la orden. Inténtalo de nuevo.';
   //     }
   //   );
   // }
-
-
-//   // Función para realizar el checkout
-// checkout() {
-//   const customer = {
-//     rut: this.customer.rut,
-//     dv: this.customer.dv,
-//     correo_electronico: this.customer.correo_electronico,
-//     nombre: this.customer.nombre,
-//     direccion: this.customer.direccion,
-//     guardar_cliente: this.guardarCliente // Nuevo campo para el checklist
-//   };
-
-//   const items = this.cartItems.map(item => ({
-//     producto_id: item.producto_id,
-//     cantidad: item.cantidad
-//   }));
-
-//   const checkoutData = {
-//     ...customer,
-//     items: items,
-//     total: this.total
-//   };
-
-//   const headers = { 'Content-Type': 'application/json' };
-//   this.cartService.checkout(checkoutData).subscribe(
-//     (response: any) => {
-//       if (response && response.orden_id) {
-//         this.mensaje = `Orden creada. ID de la orden: ${response.orden_id}`;
-//       } else {
-//         this.mensaje = 'Error: No se recibió el ID de la orden.';
-//       }
-//     },
-//     (error) => {
-//       console.error('Error al crear la orden', error);
-//       this.mensaje = 'Error al crear la orden. Inténtalo de nuevo.';
-//     }
-//   );
-// }
-
 
 }

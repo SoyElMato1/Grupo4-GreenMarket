@@ -14,7 +14,9 @@
           <div class="profile-container" #profileCard>
             <ion-card class="profile-card">
               <div class="profile-details">
-                <img src="../../../../assets/images/descarga.jpeg" class="profile-image" />
+                <!-- <img src="../../../../assets/images/descarga.jpeg" class="profile-image" /> -->
+                <img *ngIf="proveedor.foto" [src]="'http://localhost:8000' + proveedor.foto" alt="Foto del proveedor">
+                <img *ngIf="!proveedor.foto" src="assets/images/descarga.jpeg" alt="Imagen por defecto">
               </div>
               <ion-card-content class="profile-stats">
                 <ion-card-header>

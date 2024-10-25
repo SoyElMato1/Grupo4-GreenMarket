@@ -82,8 +82,8 @@
           <ion-card-title class="titulo">Datos</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <form (ngSubmit)="checkout()">
-            <ion-input class="formulario" [(ngModel)]="customer.rut" name="rut" required placeholder="RUT"></ion-input>
+          <form>
+            <ion-input class="formulario" [(ngModel)]="customer.rut" name="rut" required placeholder="RUT" (ionBlur)="buscar_cliente(customer.rut)"></ion-input>
             <br>
             <ion-input class="formulario" [(ngModel)]="customer.dv" name="dv" required placeholder="DV"></ion-input>
             <br>
@@ -92,6 +92,10 @@
             <ion-input class="formulario" [(ngModel)]="customer.nombre" name="nombre" required placeholder="NOMBRE"></ion-input>
             <br>
             <ion-input class="formulario" [(ngModel)]="customer.direccion" name="direccion" required placeholder="DIRECCIÓN"></ion-input>
+            <div class="button-center">
+              <ion-button class="submit" type="submit" (click)="guardar_cliente()" >Guardar Datos</ion-button>
+            </div>
+            <ion-button class="submit" type="submit" (click)="checkout()">Generar Orden de Compra</ion-button>
             <div class="button-center">
               <ion-button class="submit" (click)="irAPagar()">Pagar</ion-button>
             </div>

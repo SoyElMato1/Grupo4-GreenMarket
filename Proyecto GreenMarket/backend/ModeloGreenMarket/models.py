@@ -109,6 +109,7 @@ class Proveedor(models.Model):
     apellido = models.CharField(max_length=50)
     verificacion = models.BooleanField(default=False)
     recompensa = models.IntegerField(default=0)
+    foto = models.ImageField(upload_to='proveedor_images/', null=True, blank=True)  # Campo de imagen
 
     def __str__(self):
         return f'{self.nombre} {self.apellido} (RUT: {self.rut})'
