@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
-
-import { Router } from '@angular/router';
-
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { ProvedorServiService } from 'src/app/Servicios/Proveedor/provedor-servi.service';
@@ -24,6 +23,12 @@ export class ProveedorPage implements OnInit {
 
   ngOnInit() {
     this.getProveedores();
+    this.router.events
+    .pipe(filter(event => event instanceof NavigationEnd))
+    .subscribe(() => {
+      // Aquí puedes actualizar los datos del carrito cuando la navegación termine
+      this.getProveedores();
+  });
   }
 
   getProveedores() {

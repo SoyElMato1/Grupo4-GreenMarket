@@ -7,9 +7,12 @@ from .carrito import Carrito
 from django.views.decorators.csrf import csrf_exempt
 from .serializers import ClienteSerializer
 from django.views.decorators.http import require_POST
+from rest_framework.decorators import api_view, permission_classes, authentication_classes
+from rest_framework.permissions import IsAuthenticated, AllowAny
 
 @csrf_exempt
 @require_POST
+@permission_classes([AllowAny])
 def agregar_al_carrito(request, producto_id):
     # Obtener el usuario autenticado o dejar como None para usuarios anónimos
     usuario = request.user if request.user.is_authenticated else None
@@ -42,6 +45,7 @@ def agregar_al_carrito(request, producto_id):
     return JsonResponse({'mensaje': 'Producto agregado al carrito', 'items': items_serializados, 'total': str(total)})
 
 @csrf_exempt
+@permission_classes([AllowAny])
 def eliminar_del_carrito(request, producto_id):
     if request.method == 'POST':  # Asegúrate de que solo se acepte POST
         carrito = Carrito(request)
@@ -56,6 +60,7 @@ def eliminar_del_carrito(request, producto_id):
     return JsonResponse({'error': 'Método no permitido'}, status=405)
 
 @csrf_exempt
+@permission_classes([AllowAny])
 def restar_producto(request, producto_id):
     if request.method == 'POST':  # Asegúrate de que solo se acepte POST
         carrito = Carrito(request)
@@ -69,6 +74,7 @@ def restar_producto(request, producto_id):
     return JsonResponse({'error': 'Método no permitido'}, status=405)
 
 @csrf_exempt
+@permission_classes([AllowAny])
 def limpiar_carrito(request):
     if request.method == 'POST':
         carrito = Carrito(request)
@@ -77,6 +83,7 @@ def limpiar_carrito(request):
     return JsonResponse({'error': 'Método no permitido'}, status=405)
 
 @csrf_exempt
+@permission_classes([AllowAny])
 def ver_carrito(request):
     carrito = Carrito(request)
     items, total = carrito.obtener_items()  # Asegúrate de que esta función esté funcionando correctamente
@@ -91,6 +98,7 @@ def ver_carrito(request):
     return JsonResponse({'items': items_serializados, 'total': str(total)})
 
 @csrf_exempt
+@permission_classes([AllowAny])
 def checkout(request):
     if request.method == 'POST':
         # Parsear los datos del cuerpo de la solicitud

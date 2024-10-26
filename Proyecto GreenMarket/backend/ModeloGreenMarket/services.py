@@ -1,7 +1,12 @@
 from django.shortcuts import get_object_or_404
 from .models import User, Proveedor
+from django.core.files.base import ContentFile
 
 def register_proveedor(data):
+    foto = None
+    if 'foto' in data:
+        foto = ContentFile(data['foto'].read(), name=data['foto'].name)
+
     # Crear el usuario
     user = User.objects.create_proveedor(
         username=data['correo_electronico'],
@@ -20,7 +25,8 @@ def register_proveedor(data):
         correo_electronico=data['correo_electronico'],
         contrasena=data['contrasena'],
         nombre=data['nom_user'],
-        apellido=data['ap_user']
+        apellido=data['ap_user'],
+        foto=foto
     )
     
     return user, proveedor

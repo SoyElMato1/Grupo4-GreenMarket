@@ -4,6 +4,8 @@ import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { CarritoServiService } from 'src/app/Servicios/Carrito/carrito-servi.service';
 import { ProductoServiService } from 'src/app/Servicios/Producto/producto-servi.service';
 import { ToastController } from '@ionic/angular';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-catalogo-producto',
@@ -22,10 +24,16 @@ export class CatalogoProductoPage implements OnInit {
   constructor(private productoService: ProductoServiService,
               private serviciocarrito: CarritoServiService,
               private http: HttpClient,
-              private toastController: ToastController) { }
+              private toastController: ToastController, private router: Router) { }
 
   ngOnInit(): void {
     this.loadProductos();
+    this.router.events
+    .pipe(filter(event => event instanceof NavigationEnd))
+    .subscribe(() => {
+      // Aquí puedes actualizar los datos del carrito cuando la navegación termine
+      this.loadProductos();
+    });
   }
 
   toggleSearchBar() {

@@ -1,20 +1,23 @@
 from django.urls import path
 from .views import *
 from .views_carrito import *
-from django.conf import settings
-from django.conf.urls.static import static
+
 
 urlpatterns = [
 
 #Producto
     path('producto/', producto, name='producto'),
-    path('agregarPro/', agregar_producto, name='producto añadido'),
+    path('agregarPro/', agregar_productos, name='producto añadido'),
     path('categoria/', get_categoria, name='categoria'),
+
+    path('productos/', obtener_productos, name='obtener_productos'),
+    path('agreproductos/', agregar_producto, name='agregar_productos'),
+    path('productos/<int:id>/', actualizar_eliminar_producto, name='actualizar_eliminar_producto'),
 
 #Proveedor
     path('provee/', Ver_proveedor, name='proveedor'),
-    path('provee/<id>', detalle_proveedor, name='detalle_proveedores'),
-    path('proveedores/<str:rut>/', proveedor_detalle, name='proveedor_detalle'),
+    path('provee/<int:id>/', detalle_proveedor, name='detalle_proveedores'),
+    path('proveedores/<int:id>/', proveedor_detalle, name='proveedor_detalle'),
 
 # Carrito
     path('agregar/<int:producto_id>/', agregar_al_carrito, name='agregar_al_carrito'),
@@ -40,4 +43,4 @@ urlpatterns = [
     path('registro_proveedor/', register_proveedor_view, name='registro proveedor'),
 
 
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+]

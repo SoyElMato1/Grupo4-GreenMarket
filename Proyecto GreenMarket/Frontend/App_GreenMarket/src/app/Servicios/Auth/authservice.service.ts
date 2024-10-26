@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient,HttpHeaders  } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
+import { Proveedor } from 'src/app/Interfaces/proveedor';
 
 @Injectable({
   providedIn: 'root'
@@ -12,28 +13,45 @@ export class AuthserviceService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-
   login(username: string, password: string): Observable<any> {
     return this.http.post(`${this.apiUrl}login/`, { username, password }).pipe(
       tap((response: any) => {
-        localStorage.setItem('authToken', response.token);
-        localStorage.setItem('rut', username); // Guarda el RUT para el perfil
+        if (response.token) {
+          localStorage.setItem('authToken', response.token); // Guarda el token en localStorage
+          localStorage.setItem('userRole', response.user.rol); // Guarda el rol del usuario si lo necesitas
+          localStorage.setItem('rut', username);
+        } else {
+          console.error('Token no encontrado en la respuesta');
+        }
       })
     );
   }
 
   getProveedorPerfil(): Observable<any> {
     const rut = localStorage.getItem('rut');
-    return this.http.get(`${this.apiUrl}proveedores/${rut}/`);
+    const token = localStorage.getItem('authToken');
+
+    const headers = new HttpHeaders({
+      'Authorization': `Token ${token}`  // O usa 'Bearer' si usas JWT
+    });
+
+    return this.http.get(`${this.apiUrl}proveedores/${rut}/`, { headers });
   }
 
-  actualizarPerfil(proveedor: any): Observable<any> {
-    const rut = localStorage.getItem('rut');
-    return this.http.patch(`${this.apiUrl}proveedores/${rut}/`, proveedor);
-  }
+  // Método para actualizar el perfil del proveedor
+  actualizarPerfilProveedor(proveedor: any): Observable<any> {
+    const rut = localStorage.getItem('rut');  // Obtén el RUT del proveedor a actualizar
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+        'Authorization': `Token ${token}`,
+        'Accept': 'application/json', // Asegúrate de que el tipo de contenido sea correcto
+    });
 
-  logout() {
-    localStorage.removeItem('authToken');  // Elimina el token del almacenamiento local
+    return this.http.put(`${this.apiUrl}proveedores/${rut}/`, proveedor, { headers });
+}
+
+  logout(headers: HttpHeaders): Observable<any> {
+    return this.http.post(`${this.apiUrl}logout/`, {}, { headers });
   }
 
   // Método para obtener el token

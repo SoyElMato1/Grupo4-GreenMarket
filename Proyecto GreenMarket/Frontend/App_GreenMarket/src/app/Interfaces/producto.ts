@@ -6,8 +6,8 @@ export interface Producto {
   nombre_producto: string;
   precio: number;
   imagen_producto: string;
-  categoria: Categoria;
-  id_proveedor: Proveedor;
+  id_categoria: Categoria | null;
+  id_proveedor?: Proveedor; // Cambiado a opcional
 }
 
 export interface Productoid extends Producto {

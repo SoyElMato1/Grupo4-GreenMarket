@@ -5,6 +5,7 @@ import { ProvedorServiService } from 'src/app/Servicios/Proveedor/provedor-servi
 import { Proveedor } from 'src/app/Interfaces/proveedor';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ToastController } from '@ionic/angular';
+import { HttpHeaders } from '@angular/common/http';
 
 
 @Component({
@@ -49,17 +50,40 @@ export class PanelAdministradorPage implements OnInit {
   }
 
   async onLogout() {
-    const toast = await this.toast.create({
-      message: 'Has cerrado sesión correctamente.',
-      duration: 2000,
+    // Primero, realizamos la llamada al backend para cerrar sesión
+    const token = localStorage.getItem('authToken');
+    const headers = new HttpHeaders({
+      'Authorization': `Token ${token}`  // O 'Bearer' si usas JWT
     });
-    toast.present();
 
-    // Aquí puedes realizar la lógica de cerrar sesión, como limpiar el token, etc.
-    console.log('Cerrando sesión...');
+    this.authService.logout(headers).subscribe(
+        async (response) => {
+            // Mostrar mensaje de éxito
+            const toast = await this.toast.create({
+                message: 'Has cerrado sesión correctamente.',
+                duration: 2000,
+            });
+            toast.present();
 
-    // Redirigimos al usuario a la página de login
-    this.router.navigate(['/login']);
+            // Limpiar el almacenamiento local
+            localStorage.removeItem('authToken');
+            localStorage.removeItem('userRole');
+            localStorage.removeItem('user_data');
+            localStorage.removeItem('rut');
+
+            // Redirigir al usuario a la página de login
+            this.router.navigate(['/login']);
+        },
+        async (error) => {
+            console.error('Error al cerrar sesión:', error);
+            // Manejar el error si es necesario
+            const toast = await this.toast.create({
+                message: 'Error al cerrar sesión. Intenta de nuevo.',
+                duration: 2000,
+            });
+            toast.present();
+        }
+    );
   }
 
   loadProveedores() {
