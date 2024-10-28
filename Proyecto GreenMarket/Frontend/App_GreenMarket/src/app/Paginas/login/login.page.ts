@@ -42,13 +42,13 @@ export class LoginPage implements OnInit{
         password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(12)]],
       });
       this.registerForm = this.formBuilder.group({
-        rut: ['', [Validators.required, Validators.pattern('^[0-9]+$')]],
-        dv: ['', [Validators.required, Validators.pattern('^[0-9Kk]{1}$')]],
-        correo_electronico: ['', [Validators.required, Validators.email]],
-        contrasena: ['', [Validators.required, Validators.minLength(8)]],
-        nom_user: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
-        ap_user: ['', [Validators.required, Validators.pattern('^[a-zA-Z]+$')]],
-      });
+        rut: ['', [Validators.required, Validators.pattern('^[0-9]+$')]], // Solo números
+        dv: ['', [Validators.required, Validators.pattern('^[0-9Kk]{1}$')]], // Solo dígito verificador o K
+        correo_electronico: ['', [Validators.required, Validators.email]], // Correo electrónico válido
+        contrasena: ['', [Validators.required, Validators.minLength(8)]], // Contraseña mínima de 8 caracteres
+        nom_user: ['', [Validators.required, Validators.pattern('^[a-zA-ZñÑ]+$')]], // Letras con "ñ" y "Ñ" permitidas
+        ap_user: ['', [Validators.required, Validators.pattern('^[a-zA-ZñÑ]+$')]], // Letras con "ñ" y "Ñ" permitidas
+    });
   }
 
   ngOnInit() {}

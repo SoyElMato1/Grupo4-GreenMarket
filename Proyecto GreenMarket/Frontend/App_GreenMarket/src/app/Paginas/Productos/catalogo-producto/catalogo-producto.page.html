@@ -1,43 +1,49 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
+  <ion-toolbar color="A " class="colormenus" >
     <ion-buttons slot="start">
-      <ion-back-button default-href="/" [routerLink]="['/proveedor']"></ion-back-button>
+      <ion-button [routerLink]="['/proveedor']">
+        <ion-icon name="arrow-back-outline"></ion-icon>
+      </ion-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">GreenMarket</ion-title>
     <ion-buttons slot="end">
       <ion-button [routerLink]="['/carrito']">
         <ion-icon name="cart"></ion-icon>
         <ion-badge color="danger" *ngIf="cartItemCount > 0">{{ cartItemCount }}</ion-badge>
       </ion-button>
     </ion-buttons>
+    <ion-title class="titulo">GreenMarket</ion-title> <!-- Clase para centrar el tÃ­tulo -->
   </ion-toolbar>
 </ion-header>
+
 <ion-content>
   <div class="bigimage">
     <ion-grid>
+      <ion-row>
+        <ion-col class="centrar">
+          <div class="titular" id="productos">
+            Lista de productos
+          </div>
+        </ion-col>
+
+      </ion-row>
       <ion-row class="ion-text-center">
         <ion-col size="12" size-md="6" size-lg="4" *ngFor="let producto of productosFiltrados">
-          <div class="profile-container">
+          <div class="profile-container" #profileCard>
             <ion-card class="profile-card">
               <div class="profile-details">
-                <img src="../../../../assets/images/imagen.jpg" class="profile-image" />
+                <img src="../../../../assets/images/imagen.jpg" class="profile-image"/>
               </div>
               <ion-card-content class="profile-stats">
                 <ion-card-header>
                   <ion-card-title class="card-title">{{ producto.nombre_producto }}</ion-card-title>
                 </ion-card-header>
-                <div>
-                </div>
                 <div class="card-section button-div" (click)="agregarAlCarrito(producto.codigo_producto)">
-                  <p class="button-text">Agregar al carrito</p>
+                  Agregar al carrito
                 </div>
-                <div class="card-section button-div">
-                  <p class="button-text">
-                    Mas info
-                  </p>
+                <div class="card-rating" >
+                  <img class="rating-value " src="../../../assets/images/JARDENBOT.png" style="width: 60px; height: 60px;" />
                 </div>
-                <div class="button div">
-                  <img src="../../../assets/images/JARDENBOT.png" style="width: 40px; height: 40px; " />
+                <div class="card-sectionp button-div">Detalle del producto
                 </div>
               </ion-card-content>
             </ion-card>
@@ -46,46 +52,10 @@
       </ion-row>
     </ion-grid>
   </div>
-  <!-- <ion-grid>
-    <ion-row class="ion-text-center">
-      <ion-col size="4" *ngFor="let producto of productosFiltrados">
-        <ion-card style="background-image:url(../../../assets/images/enredadera.png)">
-          <ion-card-header style="display: flex; justify-content: space-between; align-items: center;">
-            <div class="arriba">
-              <p class="titulo">{{ producto.nombre_producto }}</p>
-            </div>
-            <ion-card-content>
-              <div class="margen">
-              </div>
-              <div class="imagen-container" style="margin-bottom: 10px;">
-                <img src="../../../assets/images/productont.png"
-                  style="width: 200px; height: 200px; border-color: black; border-radius: 10px;" />
-              </div>
-              <div class="margen">
-                <ion-button (click)="agregarAlCarrito(producto.codigo_producto)">Agregar al carrito</ion-button>
-              </div>
-              <div class="margen">
-                <ion-button>MÃs info</ion-button>
-              </div>
-              <div class="margen">
-                <ion-button
-                  style="--padding-start: 0; --padding-end: 0; --border-radius: 50%; width: 40px; height: 40px;">
-                  <img src="../../../assets/images/JARDENBOT.png" style="width: 40px; height: 40px;" />
-                </ion-button>
-              </div>
-            </ion-card-content>
-            <div class="precioAbajo">
-              Precio: {{ producto.precio }}
-            </div>
-          </ion-card-header>
-        </ion-card>
-      </ion-col>
-    </ion-row>
-    <div class="marggen"></div>
-  </ion-grid> -->
 </ion-content>
+
 <ion-footer>
-  <ion-toolbar>
+  <ion-toolbar color="A " class="colormenus" >
     <ion-buttons slot="start">
       <ion-button (click)="toggleSearchBar()" style="background-color: yellow; border-radius: 50%;">
         <ion-icon name="search-outline" style="color: black;"></ion-icon>
@@ -98,7 +68,7 @@
         <img src="../../../assets/images/JARDENBOT.png" style="width: 40px; height: 40px;" />
       </ion-button>
     </div>
-    <ion-buttons slot="end">
+    <ion-buttons slot="end" (click)="navigateToLogin()">
       <ion-button style="background-color: yellow; border-radius: 50%;">
         <ion-icon name="person-outline" style="color: black;"></ion-icon>
       </ion-button>

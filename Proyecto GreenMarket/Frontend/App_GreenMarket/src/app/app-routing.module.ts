@@ -3,8 +3,8 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import { AdminGuard } from './guards/admin.guard';
 import { ProveedorGuard } from './guards/proveedor.guard';
-import { PagoExitosoComponent } from './Paginas/pagos/pago-exitoso/pago-exitoso.component';
-import { PagoFallidoComponent } from './Paginas/pagos/pago-fallido/pago-fallido.component';
+import { PagoExitosoComponent } from './Paginas/Productos/pagos/pago-exitoso/pago-exitoso.component';
+import { PagoFallidoComponent } from './Paginas/Productos/pagos/pago-fallido/pago-fallido.component';
 import { ChatbotComponent } from './Paginas/chatbot/chatbot.component';  // Importa el componente del chatbot
 
 const routes: Routes = [

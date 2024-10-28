@@ -1,17 +1,24 @@
 <ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
+  <ion-toolbar  color="A " class="colormenus">
+    <ion-buttons  slot="start" >
       <ion-back-button default-href="/" [routerLink]="['/']"></ion-back-button>
     </ion-buttons>
-    <ion-title class="ion-text-center">Lista Proveedores</ion-title> <!-- Clase para centrar el título -->
+    <ion-title class="titulo">GreenMarket</ion-title> <!-- Clase para centrar el título -->
   </ion-toolbar>
 </ion-header>
 <ion-content>
   <div class="bigimage">
     <ion-grid>
+      <ion-row >
+        <ion-col  class="centrar">
+          <div class="titular">
+            Lista de proveedores
+          </div>
+        </ion-col>
+      </ion-row>
       <ion-row class="ion-text-center">
         <ion-col size="12" size-md="6" size-lg="4" *ngFor="let proveedor of proveedoresFiltrados">
-          <div class="profile-container" #profileCard>
+          <div >
             <ion-card class="profile-card">
               <div class="profile-details">
                 <!-- <img src="../../../../assets/images/descarga.jpeg" class="profile-image" /> -->
@@ -30,7 +37,7 @@
                     <ion-text class="rating-value">4</ion-text>
                   </div>
                 </div>
-                <div class="card-sectionp button-div" (click)="catalogo_producto()">Productos</div>
+                <div class="card-sectionp button-div" (click)="catalogo_producto()">Ver Productos</div>
               </ion-card-content>
             </ion-card>
           </div>
@@ -42,7 +49,7 @@
 
 
 <ion-footer>
-  <ion-toolbar>
+  <ion-toolbar color="a" class="colormenus">
     <ion-buttons slot="start">
       <ion-button (click)="toggleSearchBar()" style="background-color: yellow; border-radius: 50%;">
         <ion-icon name="search-outline" style="color: black;"></ion-icon>
@@ -51,7 +58,7 @@
     </ion-buttons>
     <div class="center-button">
       <ion-button style="--padding-start: 0; --padding-end: 0; --border-radius: 50%; width: 40px; height: 40px;">
-        <img src="../../../../assets/images/JARDENBOT.png" style="width: 40px; height: 40px;" />
+        <img src="../../../assets/images/JARDENBOT.png" style="width: 40px; height: 40px;" />
       </ion-button>
     </div>
     <ion-buttons slot="end" (click)="navigateToLogin()">

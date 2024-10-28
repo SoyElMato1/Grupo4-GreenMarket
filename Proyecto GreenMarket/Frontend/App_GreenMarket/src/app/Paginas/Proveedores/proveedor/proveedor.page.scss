@@ -1,7 +1,7 @@
+//AYUDA A CENTRAR EKL BOT
 ion-toolbar {
   position: relative;
 }
-
 .center-button {
   position: absolute;
   left: 50%;
@@ -9,13 +9,13 @@ ion-toolbar {
   transform: translate(-50%, -50%);
   z-index: 1;
 }
-
-
-
+//AYUDA A CENTRAR EKL BOT
+//Fondo de la plataforma
 .bigimage {
   width: 100%;
   min-height: 100vh; /* Asegura que el contenedor ocupe al menos el 100% del alto de la pantalla */
-  background: url("../../../../assets/images/fondo2.png");
+  // background:rgb(114, 191, 120) ;
+  background:whitesmoke;
   background-repeat: repeat;
   background-position: center center;
   background-size: cover;
@@ -23,23 +23,28 @@ ion-toolbar {
   top: 0px;
   left: 0px;
 }
-.bigimagef {
-  width: 100%;
-  height: 100%;
-  background: rgba(13,42,52,0.8999999761581421);
-  opacity: 1;
-  position: relative;
-  top: 0px;
-  left: 0px;
-  overflow: hidden;
-}
-.gris{
-  color:red;
-}
-ion-button {
-  --background: yellow;
-  --color: black;
-}
+//Fondo de la plataforma
+
+//APARENTEMENTE NO HACE NADA
+// .bigimagef {
+//   width: 100%;
+//   height: 100%;
+//   background: rgba(13,42,52,0.8999999761581421);
+//   opacity: 1;
+//   position: relative;
+//   top: 0px;
+//   left: 0px;
+//   overflow: hidden;
+// }
+
+// .gris{
+//   color:red;
+// }
+// ion-button {
+//   --background: yellow;
+//   --color: black;
+// }
+//APARENTEMENTE NO HACE NADA
 // -------------------------------------------------------------------------
 // -------------------------------------------------------------------------
 // -------------------------------------------------------------------------
@@ -56,14 +61,114 @@ ion-button {
 }
 
 /* Barra superior */
-.status-bar {
-  width: 100%;
-  height: 49px;
-  background-color: #d9d9d9;
+// .status-bar {
+//   width: 100%;
+//   height: 49px;
+//   background-color: #d9d9d9;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+// }
+
+.colormenus{
+  // background: rgb(160, 214, 131);
+  background: rgb(114, 191, 120);
+  color: black;
+
+}
+.titulo{
+  font-weight: bold;
+
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 50px;
+  border: 10px;
+  border-color: palevioletred;
+  position: relative;
+  // text-align: end;
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  // font-weight: 900; /* Valores comunes: 400 (normal), 700 (negrita) */
+  // font-family: 'Courier New', Courier, monospace;
+}
+
+// .titular{
+//   background-color: bisque;
+//   color: black;
+//   width: 300px;
+//   height: 60px;
+
+
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+
+//   font-weight: bold;
+//   text-align: center;
+//   font-family: 'Bebas Neue', sans-serif;
+//   font-size: 40px;
+// }
+.ajustar{
+text-align: center;
+display: flex;
+justify-content: center; /* Centra horizontalmente */
+align-items: center;
+}
+.centrar {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  // height: 100vh; /* O el tamaño del contenedor */
+}
+
+.titular {
+  background-color: rgb(160, 214, 131);
+  color: black;
+  width: 300px;
+  height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
+  font-weight: bold;
+  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px;
 }
+
+//////////////////////////
+// INTENTO DE ANIMACION
+/////////////////////////
+
+// ESTE ESTE EL QUE SAQUE DEL JOTA2
+// .titular {
+//   background-color: bisque;
+//   color: black;
+//   width: 300px;
+//   height: 60px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   font-weight: bold;
+//   text-align: center;
+//   font-family: 'Bebas Neue', sans-serif;
+//   font-size: 40px;
+//   transition: all 0.3s ease; /* Animación para el cambio de estilo */
+// }
+
+// .blurred {
+//   filter: blur(3px); /* Desenfoque aplicado */
+//   opacity: 0.5; /* Reducir la opacidad */
+// }
+
+// .active {
+//   filter: blur(0);
+//   opacity: 1;
+//   color: black; /* Color de texto más visible */
+// }
+
+//////////////////////////
+// INTENTO DE ANIMACION
+/////////////////////////
 
 .status-time {
   font-weight: 590;
@@ -152,59 +257,31 @@ ion-button {
 -------------------------------------------------------
 ----------------------------------------------------
 -----------------------------------------------------------
-
-
-
-
-
-// /* Contenedor de detalles del perfil (solo la imagen) */
-// .profile-details {
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   padding: 10px;
-// }
-
-// .profile-image {
-//   width: 200px; /* Ocupa el 100% del ancho del contenedor */
-//   height: 233px; /* Ocupa el 100% del alto del contenedor */
-//   object-fit: cover; /* Asegura que la imagen cubra todo el área */
-// }
-
-
 /* Contenedor de perfiles */
+
+// Da forma a el div de dentro de la tarjeta
 .profile-container {
   width:134px; /* El contenedor ocupa el 100% del ancho del padre */
   max-width: 400px; /* Tamaño máximo para el contenedor */
   height: 09px; /* Altura automática para mantener la proporción */
-  overflow: hidden; /* Oculta cualquier parte que sobresalga */
+  // overflow: hidden; /* Oculta cualquier parte que sobresalga */
   margin: 0 auto; /* Centra el contenedor en su padre */
-  border: 1px solid #000000; /* Borde negro */
+  // border: 1px solid #000000; /* Borde negro */
   border-radius: 15px; /* Redondeo de los bordes */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra ligera */
-  background-color: #c3f6ca; /* Fondo blanco */
+  // box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra ligera */
 }
 
+//Este es el que controla la forma del perfio y el color
 .profile-card {
   display: flex;
   align-items: flex-start;
   min-width: 100px;
   max-width: 600px;
   max-height: 275px;
-  background-color: #e6e5e5;
-  // width: 100%;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-
+  background-color:rgb(114, 191, 120) ;
+  // border:rgb(160, 214, 131) 2px solid;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
 }
-.profile-container {
-  border: 1px solid #000000; /* Borde verde similar */
-  border-radius: 15px; /* Redondeo de los bordes */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra ligera */
-  background-color: #c3f6ca; /* Fondo similar */
-  max-width: 630px;
-  max-height: 350px;
-}
-
 
 
 /* Contenedor de detalles del perfil (información adicional) */
@@ -240,15 +317,11 @@ ion-button {
   object-fit: cover; /* La imagen cubrirá el contenedor sin distorsionarse */
   position: relative;
 
-  border-radius: 8px; /* Opcional: Redondeo de bordes para un toque visual */
+  // border-radius: 8px; /* Opcional: Redondeo de bordes para un toque visual */
 }
 
 /* Media Query para dispositivos móviles */
-@media (max-width: 768px) {
-  .profile-image {
-    top: 24px; /* Este ajuste solo se aplicará en pantallas con un ancho máximo de 768px (típico de móviles) */
-  }
-}
+
 
 /* Estilo para la parte blanca o el área que rodea la imagen */
 // .profile-image-container {
@@ -264,8 +337,9 @@ ion-button {
 // -----------------------------------------------------------------
 // -----------------------------------------------------------------
 // -----------------------------------------------------------------
+//circulo que contiene la calñificacion
 .rating-value {
-  background-color: #5CF69A;
+  background-color: rgb(160, 214, 131);
   border-radius: 50%;
   width: 45px;
   height: 45px;
@@ -277,32 +351,30 @@ ion-button {
   color: rgb(6, 5, 5);
 }
 
-
-
+//color del boton a pasar el mause por encima
 .button-div:hover {
-  background-color: #727272bc; /* Color al pasar el mouse */
+  background-color: rgb(252, 255, 94); /* Color al pasar el mouse */
 }
 ////////////////////////////////////////////////////////////////
 ///AminMCIONES
 ///
 ///
 /* Título de la tarjeta (Responsivo) */
-
 .card-title {
   display: flex;
   flex-direction: column;
-  background-color: #2F4232;
-  color: white;
+  background-color:rgb(160, 214, 131);
+  color: black;
   bottom: 16px;
-  left: 13% ;
-  width: 294px;
-  min-width: 10px;
+  left: 8%;
+  min-width: 100px;
   padding: 7px;
   font-weight: bold;
   width: 100%; /* Ocupa todo el ancho disponible */
-  max-width: 300px; /* Asegura que no crezca demasiado */
+  max-width: 310px; /* Asegura que no crezca demasiado */
   min-width: 150px; /* No debe ser más pequeño que este tamaño */
   box-sizing: border-box; /* Evita que el padding rompa el diseño */
+  border: black 1px solid;
 }
 
 /* Sección de estadísticas (calificación y productos) */
@@ -320,35 +392,43 @@ ion-button {
 
 /* Sección de calificación y productos */
 .card-section {
-  background-color: rgba(231, 244, 86, 0.97);
-  padding: 16px;
+  background-color: rgb(254, 255, 159);
+  // background-color: rgb(160, 214, 131);
+   padding: 16px;
   color: black;
   font-size: 20px; /* Ajusta este valor según tus necesidades */
   text-align: center;
   font-weight: bold;
   position: relative;
-  left: 16.5%;
-  bottom: 32px;
+  left: 12%;
+  bottom: 33px;
   width: 100%; /* Se adapta al contenedor */
-  max-width: 300px;
+  max-width: 299px;
   min-width: 150px;
+  border: black 1px solid;
   box-sizing: border-box; /* Mantiene el padding dentro del contenedor */
 }
 
 .card-sectionp {
-  background-color: rgba(231, 244, 86, 0.97);
+  background-color: rgb(254, 255, 159);
   padding: 16px;
   color: black;
   font-size: 20px; /* Ajusta este valor según tus necesidades */
   text-align: center;
   font-weight: bold;
   position: relative;
-  left: 16.5%;
+  left: 12%;
   top: 9px;
   width: 100%; /* Se adapta al contenedor */
-  max-width: 300px;
+  max-width: 299px;
   min-width: 150px;
-  box-sizing: border-box;
+  // box-sizing: border-box;
+
+  // border-radius: 10px;          /* Bordes redondeados */
+  padding: 10px 0px;          /* Espaciado interno */
+  box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.905); /* Sombra ligera */
+  transition: background-color 0.3s ease;   /* Animación suave de fondo */
+  border: rgba(0, 0, 0, 0.905)k 1px solid;
 }
 
 .card-rating {
@@ -386,5 +466,11 @@ ion-button {
     font-size: 16px; /* Reduce el tamaño de la fuente aún más en móviles */
     padding: 8px; /* Reduce el padding para un ajuste mejor en móviles */
     max-width: 200px; /* Limita el ancho máximo en móviles */
+  }
+}
+
+@media (max-width: 768px) {
+  .profile-image {
+    top: 24px; /* Este ajuste solo se aplicará en pantallas con un ancho máximo de 768px (típico de móviles) */
   }
 }

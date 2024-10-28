@@ -98,4 +98,8 @@ export class CatalogoProductoPage implements OnInit {
     }, 100);
   }
 
+  navigateToLogin() {
+    this.router.navigate(['/login']); // Redirigir a la página de login
+  }
+
 }

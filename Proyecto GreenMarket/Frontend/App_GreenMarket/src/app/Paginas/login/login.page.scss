@@ -2,19 +2,67 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #094005;
+  background: rgb(114, 191, 120);
+  border-radius: 20px;
+  font-size: 18px; /* Tamaño del texto ingresado */
+
+}
+.colormenus{
+  // background: rgb(160, 214, 131);
+  background: rgb(114, 191, 120);
+  color: black;
+
+}
+.titulo{
+  font-weight: bold;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 50px;
+  color: black;
+  // border: 10px;
+  // border-color: palevioletred;
+  position: relative;
+  text-align: start;
+  display: flex;
+  justify-content: start; /* Centra horizontalmente */
+  align-items: start; /* Centra verticalmente */
+  // font-weight: 900; /* Valores comunes: 400 (normal), 700 (negrita) */
+  // font-family: 'Courier New', Courier, monospace;
 }
 
+.titular {
+  background-color: rgb(160, 214, 131);
+  color: black;
+  width: 320px ;
+  height: 60px;
+  display: flex;
+
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  text-align: center;
+  position: relative;
+  font-family: 'Bebas Neue', sans-serif;
+
+  top: 10px;
+  font-size: 40px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+}
+.ajustar{
+  text-align: center;
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;
+  }
+  .centrar {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    // height: 100vh; /* O el tamaño del contenedor */
+  }
 .wave-full{
-  position: absolute;
-  width: 100%;;
-  height: 100%;
-  opacity: 0.6;
-  left: 0;
-  top: 0;
-  margin-left: 0;
-  margin-top: 0;
-  background: linear-gradient(744deg,#169e0c,#1ba511 60%,#14e263);
+  width: 100%;
+  min-height: 100vh;
+  background:whitesmoke;
 }
 ion-buttons{
   font-size: bold;
@@ -31,7 +79,17 @@ ion-buttons{
   align-items: center;
   gap: 1rem;
   width: 100%;
-  max-width: 300px;
+
+
+  color: black;
+  font-weight: bold;
+  font-size: 18px; /* Tamaño del texto ingresado */
+
+  padding: 10px;
+  max-width: 500px;
+  min-width: 300px;
+
+
 }
 
 .form .input-span {
@@ -39,6 +97,7 @@ ion-buttons{
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+
 }
 
 
@@ -49,8 +108,11 @@ ion-buttons{
 
 .label {
   align-self: flex-start;
-  color: #F5F5F5;
+  color: black;
   font-weight: 600;
+  font-weight: bold;
+  font-size: 18px; /* Tamaño del texto ingresado */
+
 }
 
 .form .submit {
@@ -65,6 +127,7 @@ ion-buttons{
   border: none;
   cursor: pointer;
   color:  black;
+  font-size: 18px; /* Tamaño del texto ingresado */
 
   transition: all 300ms;
   font-weight: bold;
@@ -79,10 +142,11 @@ ion-buttons{
 }
 
 ion-input{
-  background-color: #F0F0F0;
+  background-color: rgb(160, 214, 131);
   font-size: large;
   font-weight: bold;
   color: black;
+
 }
 .boton{
   --background-color: #FFFF99;
@@ -98,12 +162,29 @@ ion-input{
   font-size: 1.5em;
   font-weight: 500;
   color: #f5f5f5;
+
  }
  ion-label{
     align-self: flex-start;
     color: #F5F5F5;
     font-weight: 600;
+      font-size: 18px; /* Tamaño del texto ingresado */
+
  }
  .margen{
   margin-top: 50px;
+
  }
+ .cuadrado{
+  width: 100%;
+  height: 500px;
+  background: rgb(114, 191, 120);
+  // background-color: rgb(160, 214, 131);
+
+}
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+ ////////////////////////////////////////////////////////
+ ///

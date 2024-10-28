@@ -86,7 +86,6 @@ class ProductoSerializer(serializers.ModelSerializer):
         fields = ['codigo_producto', 'nombre_producto', 'precio', 'imagen_producto', 'id_categoria', 'id_proveedor']
 
 # Venta
-
 class MetodoPagoSerializer(serializers.ModelSerializer):
     class Meta:
         model = MetodoPago
