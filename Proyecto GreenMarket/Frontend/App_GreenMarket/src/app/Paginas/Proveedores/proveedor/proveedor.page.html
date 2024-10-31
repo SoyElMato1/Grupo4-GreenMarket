@@ -20,15 +20,16 @@
         <ion-col size="12" size-md="6" size-lg="4" *ngFor="let proveedor of proveedoresFiltrados">
           <div >
             <ion-card class="profile-card">
-              <div class="profile-details">
+              <div class="profile-image">
                 <!-- <img src="../../../../assets/images/descarga.jpeg" class="profile-image" /> -->
-                <img *ngIf="proveedor.foto" [src]="'http://localhost:8000' + proveedor.foto" alt="Foto del proveedor">
-                <img *ngIf="!proveedor.foto" src="assets/images/descarga.jpeg" alt="Imagen por defecto">
+                <img *ngIf="proveedor.foto" [src]="'http://localhost:8000' + proveedor.foto" class="profile-image" alt="Foto del proveedor">
+                <img *ngIf="!proveedor.foto" src="assets/images/descarga.jpeg" class="profile-image" alt="Imagen por defecto" >
               </div>
               <ion-card-content class="profile-stats">
-                <ion-card-header>
-                  <ion-card-title class="card-title">{{ proveedor.nombre }}<br/>{{ proveedor.apellido }}</ion-card-title>
-                </ion-card-header>
+                  <!-- <ion-card-title "></ion-card-title> -->
+                <div  class="card-title">
+                  {{ proveedor.nombre }}<br/>{{ proveedor.apellido }}
+                </div>
                 <div class="card-section">
                   <ion-text>Calificación</ion-text>
                 </div>
@@ -37,7 +38,7 @@
                     <ion-text class="rating-value">4</ion-text>
                   </div>
                 </div>
-                <div class="card-sectionp button-div" (click)="catalogo_producto()">Ver Productos</div>
+                <div class="boton-verp button-div" (click)="catalogo_producto()">Ver Productos</div>
               </ion-card-content>
             </ion-card>
           </div>
@@ -46,7 +47,6 @@
     </ion-grid>
   </div>
 </ion-content>
-
 
 <ion-footer>
   <ion-toolbar color="a" class="colormenus">
@@ -57,7 +57,7 @@
     <ion-searchbar *ngIf="showSearchBar" placeholder="Buscar..." (ionInput)="onSearch($event)" style="margin: 10px;"></ion-searchbar>
     </ion-buttons>
     <div class="center-button">
-      <ion-button style="--padding-start: 0; --padding-end: 0; --border-radius: 50%; width: 40px; height: 40px;">
+      <ion-button [routerLink]="['/chatbot']" style="--padding-start: 0; --padding-end: 0; --border-radius: 50%; width: 40px; height: 40px;">
         <img src="../../../assets/images/JARDENBOT.png" style="width: 40px; height: 40px;" />
       </ion-button>
     </div>

@@ -1,20 +1,25 @@
 version: "3.1"
 
 stories:
-- story: Preguntar sobre la disponibilidad de un producto
-  steps:
-  - intent: pregunta_producto
-  - action: utter_ask_about_plants
-  - intent: pregunta_recomendacion
-  - action: utter_recomendar_producto_similar
 
-- story: Consultar sobre el cuidado de una planta
+- story: consultar planta
   steps:
-  - intent: cuidado_plantas
-  - action: utter_ask_plant_care
+  - intent: get_plant_info
+    entities:
+      - plant_name
+  - action: action_get_plant_info
 
-- story: Obtener una recomendación de planta
+- story: saludo
   steps:
-  - intent: recomendacion_plantas
-  - action: utter_ask_product_recommendation
+  - intent: greet
+  - action: utter_greet
 
+- story: despedida
+  steps:
+  - intent: goodbye
+  - action: utter_goodbye
+
+- story: bot desafiante
+  steps:
+  - intent: bot_challenge
+  - action: utter_iamabot

@@ -40,3 +40,9 @@
 #  username: username
 #  password: password
 #  queue: queue
+
+action_endpoint:
+  url: "http://localhost:5055/webhook"
+
+rest:
+  cors: ["http://localhost:8100"]  # Especifica el origen permitido

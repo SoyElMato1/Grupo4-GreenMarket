@@ -1,78 +1,50 @@
 version: "3.1"
 
 intents:
-  - greet
+  - saludo
   - goodbye
-  - affirm
-  - deny
-  - mood_great
-  - mood_unhappy
   - bot_challenge
-  - ask_about_plants
-  - ask_plant_care
-  - ask_product_recommendation
-  - ask_about_pests
-  - ask_gardening_tips
-  - ask_plant_characteristics
-  - inquire_about_products
-  - request_help
-  - enfermedades_plantas
   - pregunta_producto
+  - pregunta_recomendacion
   - cuidado_plantas
   - recomendacion_plantas
-  - pregunta_recomendacion
-  - saludo
-  - informacion_general
+  - identify_plant
+  - get_plant_info
+  - greet
+  - ask_about_plants
+  - ask_plant_care
+
+entities:
+  - plant_name
+
+
+
+slots:
+  plant_name:
+    type: text
+    mappings:
+      - type: from_entity
+        entity: plant_name
+
 
 responses:
   utter_greet:
-    - text: "¡Hola! ¿Cómo estás?"
-
-  utter_saludo:
-    - text: "Hola, ¿qué necesitas? Puedes preguntar por recomendaciones, búsqueda de productos, disponibilidad de productos o consultar información sobre productos."
-
+    - text: "¡Hola! ¿En qué puedo ayudarte hoy?"
   utter_goodbye:
-    - text: "¡Adiós! Si necesitas más ayuda, no dudes en volver."
-
-  utter_ask_about_plants:
-    - text: "Las amapolas son excelentes flores para el jardín, requieren sol y suelo bien drenado. ¿Te gustaría comprar una?"
-    - text: "Las suculentas necesitan poca agua y mucha luz solar. ¿Te interesa alguna variedad en particular?"
-    - text: "¿Tienes alguna planta específica en mente de la que quieras saber más?"
-
-  utter_ask_plant_care:
-    - text: "La mayoría de las plantas necesitan un riego regular, pero las suculentas prefieren un suelo seco. ¿Te gustaría saber cómo cuidar alguna planta en particular?"
-
-  utter_ask_product_recommendation:
-    - text: "Para un jardín soleado, te recomiendo usar tierra para macetas de alta calidad. ¿Te gustaría que te muestre opciones?"
-
-  utter_recomendar_producto_similar:
-    - text: "Lamentablemente, no tenemos [nombre_producto] en este momento. Pero puedo recomendarte [nombre_producto_similar]. ¿Te gustaría saber más?"
-
-  utter_ask_about_pests:
-    - text: "Los pulgones son comunes en muchas plantas. Una solución natural es el jabón insecticida. ¿Tienes alguna planta afectada?"
-
-  utter_ask_gardening_tips:
-    - text: "Asegúrate de rotar tus cultivos cada temporada para mantener el suelo saludable. ¿Buscas consejos específicos para un tipo de planta?"
-
-  utter_ask_plant_characteristics:
-    - text: "Las orquídeas necesitan luz indirecta brillante y un sustrato especial. ¿Te gustaría saber más sobre otra planta?"
-
-  utter_inquire_about_products:
-    - text: "Ofrecemos una variedad de productos, desde herramientas de jardinería hasta fertilizantes. ¿Hay algo en particular que estés buscando?"
-
-  utter_request_help:
-    - text: "Estoy aquí para ayudarte. ¿Sobre qué tema te gustaría aprender más?"
-
-  utter_did_that_help:
-    - text: "¿Te ayudó eso?"
-
-  utter_happy:
-    - text: "¡Genial! Si tienes más preguntas, no dudes en preguntar."
-
+    - text: "¡Hasta luego! Cuida de tus plantas."
   utter_iamabot:
-    - text: "Soy un bot, potenciado por Rasa."
+    - text: "Soy un bot aquí para ayudarte con tus preguntas sobre plantas."
+  utter_ask_about_plants:
+    - text: "¿Qué planta te gustaría conocer?"
+  utter_ask_plant_care:
+    - text: "¿Sobre qué planta te gustaría saber más? Por favor, menciona el nombre."
+  utter_ask_product_recommendation:
+    - text: "¿Qué tipo de planta te gustaría recomendar?"
+  utter_ask_plant_name:
+    - text: "¿Podrías decirme el nombre de la planta que quieres conocer?"
 
-session_config:
-  session_expiration_time: 60
-  carry_over_slots_to_new_session: true
-
+actions:
+  - action_get_plant_info
+  - utter_greet
+  - utter_goodbye
+  - utter_iamabot

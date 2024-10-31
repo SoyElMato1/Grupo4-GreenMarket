@@ -1,22 +1,27 @@
 from django.urls import path
 from .views import *
 from .views_carrito import *
+from .views_transbank import *
+from .views_login import *
+from .views_producto import *
 
 
 urlpatterns = [
-
-#Producto
-    path('producto/', producto, name='producto'),
-    path('agregarPro/', agregar_productos, name='producto añadido'),
+# Views Categoria
     path('categoria/', get_categoria, name='categoria'),
 
+# Views Producto
+    path('producto/', producto, name='producto'),
+    path('agregarPro/', agregar_productos, name='producto añadido'),
+    
+
     path('productos/', obtener_productos, name='obtener_productos'),
-    path('agreproductos/', agregar_producto, name='agregar_productos'),
+    path('producto/<int:id>/', producto_proveedor, name='obtener_producto'),
+    path('agreproducto/', agregar_producto, name='producto añadido'),
     path('productos/<int:id>/', actualizar_eliminar_producto, name='actualizar_eliminar_producto'),
 
 #Proveedor
     path('provee/', Ver_proveedor, name='proveedor'),
-    path('provee/<int:id>/', detalle_proveedor, name='detalle_proveedores'),
     path('proveedores/<int:id>/', proveedor_detalle, name='proveedor_detalle'),
 
 # Carrito

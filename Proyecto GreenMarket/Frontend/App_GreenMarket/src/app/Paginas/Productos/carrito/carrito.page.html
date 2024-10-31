@@ -4,9 +4,9 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content >
-  <ion-grid class="fondo" >
-    <ion-row >
+<ion-content>
+  <ion-grid class="fondo">
+    <ion-row>
       <ion-col class="centrar">
         <div class="titular">
         Tu carrito de compras
@@ -99,27 +99,52 @@
                   <ion-col size="9">
                     <!-- 9 columnas para el RUT -->
                     <ion-label class="label" position="stacked">RUT</ion-label>
-                    <ion-input class="formulario" [(ngModel)]="customer.rut" name="rut" required placeholder="RUT" (ionBlur)="buscar_cliente(customer.rut)"></ion-input>
+                    <ion-input class="formulario" [(ngModel)]="customer.rut" name="rut"
+                    placeholder="RUT" (ionBlur)="buscar_cliente(customer.rut)" (ngModelChange)="validateRut(customer.rut)"></ion-input>
+                    <ion-text color="danger" *ngIf="!validateRut(customer.rut) && customer.rut">
+                      Por favor, ingresa un RUT válido.
+                    </ion-text>
                   </ion-col>
                   <ion-col>
                     <!-- 3 columnas para el DV -->
                     <ion-label class="label" position="stacked">DV</ion-label>
-                    <ion-input type="text"class="dv-input" [(ngModel)]="customer.dv" name="dv" required placeholder="DV"></ion-input>
+                    <ion-input type="text" class="dv-input" [(ngModel)]="customer.dv" name="dv"
+                    placeholder="DV" (ngModelChange)="validateDV(customer.dv)"></ion-input>
+                    <ion-text color="danger" *ngIf="!validateDV(customer.dv) && customer.dv">
+                      Por favor, ingresa un dígito verificador válido.
+                    </ion-text>
                   </ion-col>
                 </ion-row>
                 <ion-row class="rutcompleto">
                   <ion-col >
                     <ion-label class="label" position="stacked">Correo Electrónico</ion-label>
-                    <ion-input type="email" class="formulario" [(ngModel)]="customer.correo_electronico" name="correo_electronico" required placeholder="CORREO"></ion-input>
-
+                    <ion-input type="email" class="formulario" [(ngModel)]="customer.correo_electronico" name="correo_electronico"
+                    placeholder="CORREO" (ngModelChange)="validateEmail(customer.correo_electronico)"></ion-input>
+                    <ion-text color="danger" *ngIf="!validateEmail(customer.correo_electronico) && customer.correo_electronico">
+                      Por favor, ingresa un correo electrónico válido.
+                    </ion-text>
                   </ion-col>
                   <ion-col >
                     <ion-label class="label" position="stacked">Nombre</ion-label>
-                    <ion-input type="text" class="formulario" [(ngModel)]="customer.nombre" name="nombre" required placeholder="NOMBRE"></ion-input>
+                    <ion-input
+                      type="text"
+                      class="formulario"
+                      [(ngModel)]="customer.nombre"
+                      name="nombre"
+                      placeholder="NOMBRE"
+                      (ngModelChange)="validateName(customer.nombre)">
+                    </ion-input>
+                    <ion-text color="danger" *ngIf="!validateName(customer.nombre) && customer.nombre">
+                      Por favor, ingresa un nombre.
+                    </ion-text>
                   </ion-col>
                   <ion-col>
                     <ion-label class="label" position="stacked">Dirección</ion-label>
-                    <ion-input type="text" class="formulario" [(ngModel)]="customer.direccion" name="direccion" required placeholder="DIRECCIÓN"></ion-input>
+                    <ion-input type="text" class="formulario" [(ngModel)]="customer.direccion" name="direccion"
+                    placeholder="DIRECCIÓN" (ngModelChange)="validateAddress(customer.direccion)"></ion-input>
+                    <ion-text color="danger" *ngIf="!validateAddress(customer.direccion) && customer.direccion">
+                      Por favor, ingresa una dirección.
+                    </ion-text>
                   </ion-col>
                 </ion-row>
 

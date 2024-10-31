@@ -26,24 +26,33 @@ export class ProductoServiService {
     return this.http.get(`${this.apiUrl}productos/?rut=${rut}`, { headers });
   }
 
+  getProductoById(id: number | null): Observable<any> {
+    const token = localStorage.getItem('authToken'); // Asegúrate de que este sea el nombre correcto
+    const headers = new HttpHeaders({
+      'Authorization': `Token ${token}` // Cambia a 'Bearer' si usas JWT
+    });
+    return this.http.get(`${this.apiUrl}producto/${id}/`, { headers });
+  }
+
   // 2. Agregar un nuevo producto
-  agregarProducto(producto: any, rutProveedor: string): Observable<any> {
+  agregarProducto(producto: any): Observable<any> {
+    const rut_proveedor = localStorage.getItem('rut')
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Token ${token}`
     });
-
-    return this.http.post(`${this.apiUrl}agreproductos/`, { ...producto, rut_proveedor: rutProveedor }, { headers });
+    return this.http.post(`${this.apiUrl}agreproducto/`, {producto, rut_proveedor }, { headers });
   }
 
   // 3. Actualizar un producto existente por su ID
   modificarProducto(id: number, producto: any): Observable<any> {
+    const rut_proveedor = localStorage.getItem('rut')
     const token = localStorage.getItem('authToken');
     const headers = new HttpHeaders({
       'Authorization': `Token ${token}`
     });
 
-    return this.http.put(`${this.apiUrl}productos/${id}/`, producto, { headers });
+    return this.http.put(`${this.apiUrl}productos/${id}/`, {producto, rut_proveedor  }, { headers });
   }
 
   // 4. Eliminar un producto por su ID

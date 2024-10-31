@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { AuthserviceService } from 'src/app/Servicios/Auth/authservice.service';
 import { ProductoServiService } from 'src/app/Servicios/Producto/producto-servi.service';
 import { ToastController } from '@ionic/angular';
 import { HttpClient, HttpHeaders } from '@angular/common/http';  // Asegúrate de que HttpHeaders esté aquí
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-panel-proveedor',
@@ -13,32 +14,46 @@ import { filter } from 'rxjs/operators';
 })
 export class PanelProveedorPage implements OnInit {
 
+  productoSeleccionado: number | null = null
   products: any[] = [];
-  rutProveedor!: string | null;
-  nuevoProducto = {
-    nombre_producto: '',
-    precio: null,
-    imagen_producto: '',
-    id_categoria: null, // ID de categoría, a configurar
-  };
-  categorias: any[] = [];
+  productoForm: FormGroup;
+  editarForm: FormGroup;
+  selectedImage: File | null = null
   isEditMode = false;
+
+  categorias: any[] = [];
   currentSection: string = 'dashboard'; // Sección por defecto
-  proveedor: any = {}; // Perfil del proveedor
-  fotoSeleccionada: File | null = null; // Variable para almacenar el archivo de foto
   alertController: any;
 
+  rutProveedor!: string | null;
+  proveedor: any = {}; // Perfil del proveedor
+  fotoSeleccionada: File | null = null; // Variable para almacenar el archivo de foto
+
   constructor(private authService: AuthserviceService, private router: Router, private proService: ProductoServiService,
-    private toast: ToastController,
-  ) { }
+    private toast: ToastController, private formBuilder: FormBuilder, private cdr: ChangeDetectorRef
+  ) {
+    this.productoForm = this.formBuilder.group({
+      nombre_producto: ['', [Validators.required,]],
+      precio: [0, [Validators.required,]],
+      imagen_producto: ['', [Validators.required,]],
+      id_categoria: [0, [Validators.required]],
+    })
+    this.editarForm = this.formBuilder.group({
+      nombre_producto: [''],
+      precio: [0],
+      imagen_producto: [''],
+      id_categoria: [0],
+      id_proveedor: ['']
+    })
+  }
 
   ngOnInit() {
-    // this.loadPerfil();
     this.router.events
     .pipe(filter(event => event instanceof NavigationEnd))
     .subscribe(() => {
-      // Aquí puedes actualizar los datos del carrito cuando la navegación termine
+      // Aquí puedes actualizar cuando la navegación termine
       this.loadPerfil();
+      this.getProductos();
     });
     this.getCategorias();
     this.rutProveedor = localStorage.getItem('rut');
@@ -48,7 +63,7 @@ export class PanelProveedorPage implements OnInit {
       console.error("No se encontró el RUT del proveedor en el localStorage");
     }
   }
-
+                                // Proveedor funciones
   loadPerfil() {
     this.authService.getProveedorPerfil().subscribe(
       (data) => {
@@ -97,7 +112,37 @@ export class PanelProveedorPage implements OnInit {
     this.currentSection = section;
   }
 
+  /// Cosas de producto
+
+  // onFileSelected(event: Event) {
+  //   const input = event.target as HTMLInputElement;
+  //   if (input.files && input.files[0]) {
+  //     this.selectedImage = input.files[0];
+  //   }
+  // }
+
+  onFileSelected(event: any) {
+    const file = event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e: any) => {
+        this.selectedImage = e.target.result; // Aquí almacenamos la imagen como base64
+      };
+      reader.readAsDataURL(file); // Leer el archivo como una URL de datos
+    }
+  }
+
   // Obtener productos del proveedor
+  // Método para mostrar el toast
+  async showToast(message: string) {
+    const toast = await this.toast.create({
+      message: message,
+      duration: 2000,
+      position: 'top'
+    });
+    toast.present();
+  }
+
   getProductos() {
     if (this.rutProveedor) {
       this.proService.getProductosByProveedor(this.rutProveedor).subscribe(data => {
@@ -108,13 +153,82 @@ export class PanelProveedorPage implements OnInit {
     }
   }
 
+  async postProducto() {
+    this.productoForm.value.imagen_producto = this.selectedImage;
+    this.proService.agregarProducto(this.productoForm.value).subscribe(
+      async response => {
+        this.showToast('Producto agregado correctamente.');
+        this.getProductos();
+        this.productoForm.reset(); // Resetea los campos del formulario
+        this.selectedImage = null; // Restablece la imagen seleccionada
+      },
+      async error => {
+        console.error('Error al crear el producto:', error);
+        await this.showToast('Error al agregar el producto.')
+      }
+    );
+  }
+
+  editar(productId: number) {
+    this.isEditMode = !this.isEditMode
+    this.productoSeleccionado = productId;
+    this.proService.getProductoById(productId).subscribe(productData => {
+      this.editarForm.patchValue({
+        nombre_producto: productData.nombre,
+        precio: productData.precio,
+        id_categoria: productData.id_categoria,
+        id_proveedor: productData.id_proveedor,
+        imagen_producto: productData.imagen_producto,
+        rut_proveedor: productData.id_proveedor
+    })
+    console.log(productData);
+      console.log(this.editarForm.value)
+      this.cdr.detectChanges();
+    });
+  }
+
+  desEditar() {
+    this.productoSeleccionado = null;
+    this.isEditMode = !this.isEditMode
+  }
+
+  putProducto(id: number) {
+    if (this.selectedImage != null) {
+      this.editarForm.value.imagen_producto = this.selectedImage;
+    }
+    console.log('Valores a modificar',this.editarForm.value)
+    this.proService.modificarProducto(id, this.editarForm.value).subscribe(
+      async response => {
+        await this.showToast('Producto modificado correctamente.');
+        this.getProductos();
+      },
+      async error => {
+        console.error('Error al modificar el producto:', error);
+        await this.showToast('Error al modificar el producto.');
+      }
+    );
+    this.productoSeleccionado = null;
+    this.isEditMode = !this.isEditMode
+  }
+
+  async eliminar(id_eliminar: number) {
+    this.proService.eliminarProducto(id_eliminar).subscribe(
+      async response => {
+        await this.showToast('Producto eliminado correctamente.');
+        this.getProductos();
+      },
+      async error => {
+        console.error('Error al eliminar el producto:', error);
+        await this.showToast('Error al eliminar el producto.');
+      }
+    );
+  }
+
   getCategorias(){
     this.proService.getCategorias().subscribe(data => {
       this.categorias = data;
     });
   }
-
-
 
   async onLogout() {
     // Primero, realizamos la llamada al backend para cerrar sesión

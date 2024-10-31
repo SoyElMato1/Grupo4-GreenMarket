@@ -30,9 +30,20 @@ export class LoginPage implements OnInit{
   loginForm: FormGroup;
   registerForm: FormGroup;
 
+  showPasswordLogin: boolean = false;
+  showPasswordRegister: boolean = false;
+
   handleButtonClick() {
     this.toggleCrudForm();
     this.toggleLoginForm();
+  }
+
+  togglePasswordVisibility(form: string) {
+    if (form === 'login') {
+      this.showPasswordLogin = !this.showPasswordLogin;
+    } else if (form === 'register') {
+      this.showPasswordRegister = !this.showPasswordRegister;
+    }
   }
 
   constructor(private router: Router, private authservice: AuthserviceService, private proveedorService: ProvedorServiService,
@@ -42,7 +53,7 @@ export class LoginPage implements OnInit{
         password: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(12)]],
       });
       this.registerForm = this.formBuilder.group({
-        rut: ['', [Validators.required, Validators.pattern('^[0-9]+$')]], // Solo números
+        rut: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(7), Validators.maxLength(8)]], // Solo números
         dv: ['', [Validators.required, Validators.pattern('^[0-9Kk]{1}$')]], // Solo dígito verificador o K
         correo_electronico: ['', [Validators.required, Validators.email]], // Correo electrónico válido
         contrasena: ['', [Validators.required, Validators.minLength(8)]], // Contraseña mínima de 8 caracteres
@@ -62,6 +73,10 @@ export class LoginPage implements OnInit{
 
   toggleLoginForm() {
     this.showLoginForm = !this.showLoginForm;
+    if (!this.showLoginForm) {
+      this.loginForm.reset();
+      this.loginForm.updateValueAndValidity();
+    }
   }
 
   async login() {
@@ -130,6 +145,10 @@ export class LoginPage implements OnInit{
 
   toggleCrudForm() {
     this.showCrudForm = !this.showCrudForm;
+    if (!this.showCrudForm) {
+      this.registerForm.reset();
+      this.registerForm.updateValueAndValidity();
+    }
   }
 
   async onRegister() {

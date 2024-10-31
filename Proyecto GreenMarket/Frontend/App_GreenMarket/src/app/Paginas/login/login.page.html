@@ -32,7 +32,14 @@
           </span>
           <span class="input-span">
             <label for="password" class="label">Contraseña</label>
-            <ion-input (keydown.enter)="login()" type="password" formControlName="password"></ion-input>
+            <ion-input (keydown.enter)="login()" type="password" formControlName="password" [type]="showPasswordLogin ? 'text' : 'password'">
+              <ion-icon
+                [name]="showPasswordLogin ? 'eye-off' : 'eye'"
+                slot="end"
+                (click)="togglePasswordVisibility('login')"
+                style="cursor: pointer;">
+              </ion-icon>
+            </ion-input>
           </span>
           <ion-buttons>
             <ion-button class="submit" expand="block" (click)="login()">Login</ion-button>
@@ -57,17 +64,18 @@
             </div>
           <ion-label class="label" position="stacked">RUT</ion-label>
           <ion-row>
-            <!-- Campo para el RUT -->
             <ion-col size="9"> <!-- 9 columnas para el RUT -->
-              <ion-input type="text" formControlName="rut" placeholder="123456789"></ion-input>
+              <ion-input type="text" formControlName="rut" placeholder="12345678"></ion-input>
             </ion-col>
-            <!-- Campo para el Dígito Verificador (DV) -->
             <ion-col size="3"> <!-- 3 columnas para el DV -->
               <ion-input type="text" formControlName="dv" placeholder="0"></ion-input>
             </ion-col>
           </ion-row>
-          <div *ngIf="registerForm.get('rut')?.invalid && registerForm.get('rut')?.touched && registerForm.get('dv')?.invalid && registerForm.get('dv')?.touched">
+          <div *ngIf="registerForm.get('rut')?.invalid && registerForm.get('rut')?.touched">
             <ion-text color="danger">El RUT es obligatorio.</ion-text>
+          </div>
+          <div *ngIf="registerForm.get('dv')?.invalid && registerForm.get('dv')?.touched">
+            <ion-text color="danger">El dv es obligatorio.</ion-text>
           </div>
           <ion-label class="label" position="stacked">Correo Electrónico</ion-label>
           <ion-input type="email" formControlName="correo_electronico"></ion-input>
@@ -75,7 +83,15 @@
             <ion-text color="danger">El correo es obligatorio y debe ser válido.</ion-text>
           </div>
           <ion-label class="label" position="stacked">Contraseña</ion-label>
-          <ion-input type="password" formControlName="contrasena"></ion-input>
+          <ion-input [type]="showPasswordRegister ? 'text' : 'password'" type="password" formControlName="contrasena">
+            <ion-icon
+            [name]="showPasswordRegister ? 'eye-off' : 'eye'"
+            slot="end"
+            (click)="togglePasswordVisibility('register')"
+            style="cursor: pointer;">
+            </ion-icon>
+          </ion-input>
+
           <div *ngIf="registerForm.get('contrasena')?.invalid && registerForm.get('contrasena')?.touched">
             <ion-text color="danger">La contraseña es obligatoria y debe tener al menos 8 caracteres.</ion-text>
           </div>

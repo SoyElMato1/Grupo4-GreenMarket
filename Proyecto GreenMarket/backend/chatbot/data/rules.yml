@@ -1,18 +1,14 @@
 version: "3.1"
 
 rules:
-
-- rule: Saludo
+- rule: Responder información de planta
   steps:
-  - intent: saludo
-  - action: utter_saludo
+  - intent: get_plant_info
+    entities:
+      - plant_name
+  - action: action_get_plant_info
 
-- rule: Say goodbye anytime the user says goodbye
+- rule: Preguntar por el nombre de la planta si no está presente
   steps:
-  - intent: goodbye
-  - action: utter_goodbye
-
-- rule: Say 'I am a bot' anytime the user challenges
-  steps:
-  - intent: bot_challenge
-  - action: utter_iamabot
+  - intent: get_plant_info
+  - action: utter_ask_plant_name

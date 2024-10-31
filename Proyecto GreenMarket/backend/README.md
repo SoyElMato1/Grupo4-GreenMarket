@@ -80,4 +80,12 @@ cd backend/chatbot
 
 - Luego ejecutar el chatbot:
 
+        rasa run --enable-api --cors "http://localhost:8100"
 
+- Antes de eso deben hacer el rasa train
+
+        rasa train
+
+- y por último el raza run actions
+
+        rasa run actions

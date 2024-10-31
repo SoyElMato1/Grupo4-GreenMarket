@@ -36,7 +36,21 @@ export class CarritoPage implements OnInit {
   }
 
   toggleClienteForm() {
+    if (this.showClienteForm) {
+      this.resetClienteForm();
+    }
     this.showClienteForm = !this.showClienteForm;
+  }
+
+  resetClienteForm() {
+    this.customer = {
+      rut: '',
+      dv: '',
+      correo_electronico: '',
+      nombre: '',
+      direccion: ''
+    };
+    this.guardarCliente = false;
   }
 
   precioUnitario (precio: number, cantidad: number): number{
@@ -108,7 +122,7 @@ export class CarritoPage implements OnInit {
     const toast = await this.toastController.create({
       message: mensaje,
       duration: 3000, // Duración en milisegundos
-      position: 'bottom', // Posición del Toast
+      position: 'top', // Posición del Toast
       color: 'dark' // Puedes cambiar el color según tu preferencia
     });
     await toast.present();
@@ -147,12 +161,69 @@ export class CarritoPage implements OnInit {
             }
         );
     }
-}
+  }
 
-  checkout_pago(){
-    if (!this.customer.rut || !this.customer.dv || !this.customer.correo_electronico || !this.customer.nombre || !this.customer.direccion) {
-      this.mostrarToast('Por favor, completa todos los campos.');
-      return;
+  // Valida el RUT usando una expresión regular (formato chileno)
+  validateRut(rut: string): boolean {
+    const rutRegex = /^\d{7,8}$/; // Ejemplo para RUTs de 7 a 8 dígitos
+    return rutRegex.test(rut);
+  }
+
+  // Valida el dígito verificador
+  validateDV(dv: string): boolean {
+    return dv.length === 1 && /^[0-9kK]$/.test(dv);
+  }
+
+  // Valida el correo electrónico
+  validateEmail(email: string): boolean {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+
+  // Valida que el nombre no esté vacío
+  validateName(name: string): boolean {
+    return name.trim().length > 0;
+  }
+
+  // Valida que la dirección no esté vacía
+  validateAddress(address: string): boolean {
+    return address.trim().length > 0;
+  }
+
+  validateForm(): boolean {
+    if (!this.validateRut(this.customer.rut)) {
+      this.mostrarToast('Por favor, ingresa un RUT válido.');
+      return false;
+    }
+    if (!this.validateDV(this.customer.dv)) {
+      this.mostrarToast('Por favor, ingresa un dígito verificador válido.');
+      return false;
+    }
+    if (!this.validateEmail(this.customer.correo_electronico)) {
+      this.mostrarToast('Por favor, ingresa un correo electrónico válido.');
+      return false;
+    }
+    if (!this.validateName(this.customer.nombre)) {
+      this.mostrarToast('Por favor, ingresa un nombre.');
+      return false;
+    }
+    if (!this.validateAddress(this.customer.direccion)) {
+      this.mostrarToast('Por favor, ingresa una dirección.');
+      return false;
+    }
+    return true;
+  }
+
+  checkout_pago() {
+    // Validar que el carrito tenga productos
+    if (this.cartItems.length === 0) {
+      this.mostrarToast('El carrito está vacío. Agrega productos antes de proceder al pago.')
+      return; // Detener la función si no hay productos en el carrito
+    }
+
+    if (!this.validateForm()) {
+      this.mostrarToast('Completa el formulario antes de seguir')
+      return; // Detener si la validación falla
     }
 
     const items = this.cartItems.map(item => ({
@@ -169,7 +240,7 @@ export class CarritoPage implements OnInit {
     this.cartService.checkout(checkoutData).subscribe(
       (response: any) => {
         if (response && response.orden_id) {
-          this.mensaje = `Orden creada. ID de la orden: ${response.orden_id}`;
+          this.mostrarToast  (`Orden creada. ID de la orden: ${response.orden_id}`)
 
           this.cartService.iniciarPago({ total: this.total }).subscribe(
             response => {
@@ -190,25 +261,23 @@ export class CarritoPage implements OnInit {
 
                     form.submit(); // Redirige al usuario al formulario de pago de Transbank
                 } else {
-                    alert('Error al iniciar pago: ' + response.message);
+                  this.mostrarToast('Error al iniciar pago: ' + response.message);
                 }
             },
             error => {
                 console.error(error);
-                alert('Ocurrió un error al iniciar el pago.');
+                this.mostrarToast('Ocurrió un error al iniciar el pago.');
             }
           );
         } else {
-          this.mensaje = 'Error: No se recibió el ID de la orden.';
+          this.mostrarToast ('Error: No se recibió el ID de la orden.')
         }
       },
       (error) => {
         console.error('Error al crear la orden', error);
-        this.mensaje = 'Error al crear la orden. Inténtalo de nuevo.';
+        this.mostrarToast('Error al crear la orden. Inténtalo de nuevo.')
       }
     );
-
-
   }
 
 
