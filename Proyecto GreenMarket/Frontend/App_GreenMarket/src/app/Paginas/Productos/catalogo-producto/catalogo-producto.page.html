@@ -24,36 +24,31 @@
             Lista de productos
           </div>
         </ion-col>
-
       </ion-row>
       <ion-row class="ion-text-center">
         <ion-col size="12" size-md="6" size-lg="4" *ngFor="let producto of productosFiltrados">
           <div>
             <ion-card class="profile-card">
-
               <div class="profile-image">
                 <!-- <img src="../../../../assets/images/descarga.jpeg" class="profile-image" /> -->
                 <img *ngIf="producto.imagen_producto" [src]="'http://localhost:8000' + producto.imagen_producto"  class="profile-image" alt="Foto del proveedor">
                 <img *ngIf="!producto.imagen_producto" src="assets/images/descarga.jpeg" class="profile-image" alt="Imagen por defecto" >
               </div>
               <ion-card-content class="profile-stats">
-
                 <div  class="card-title">
                   {{ producto.nombre_producto }}
                 </div>
-
                 <div class="boton-verp button-div" (click)="agregarAlCarrito(producto.codigo_producto)">
                   Agregar al carrito
                 </div>
                 <div class="card-rating" >
                   <img class="rating-value " src="../../../assets/images/JARDENBOT.png" style="width: 60px; height: 60px;" />
                 </div>
-                <div class="card-section button-div">Detalle del producto
+                <div class="card-section button-div" (click)="verDetalleProducto(producto.codigo_producto)">
+                  Detalle del producto
                 </div>
               </ion-card-content>
             </ion-card>
-
-
           </div>
         </ion-col>
       </ion-row>

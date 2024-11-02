@@ -28,7 +28,7 @@ class UserSerializer(serializers.ModelSerializer):
 class ProveedorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Proveedor
-        fields = ['rut', 'dv', 'correo_electronico', 'contrasena', 'nombre', 'apellido', 'recompensa', 'verificacion','foto']
+        fields = ['rut', 'dv', 'correo_electronico', 'contrasena', 'nombre', 'apellido', 'direccion','recompensa', 'verificacion','foto']
         read_only_fields = ['recompensa', 'verificacion']  # Para que estos campos no puedan ser modificados directamente
 
     def get_calificacion_productos(self, obj):
@@ -83,7 +83,7 @@ class CategoriaSerializer(serializers.ModelSerializer):
 class ProductoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Producto
-        fields = ['codigo_producto', 'nombre_producto', 'precio', 'imagen_producto', 'id_categoria', 'id_proveedor']
+        fields = ['codigo_producto', 'nombre_producto', 'precio', 'imagen_producto', 'descripcion', 'id_categoria', 'id_proveedor']
 
 # Venta
 class MetodoPagoSerializer(serializers.ModelSerializer):

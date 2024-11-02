@@ -1,0 +1,200 @@
+
+
+.fondomenu {
+  // margin: 16px;
+  // width: 200px;
+  border-right: none;
+  border-radius: 20px;
+  // padding: 16px;
+  text-align: center;
+  align-items: center;
+
+}
+
+.avatar {
+  margin-top: 16px;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  align-items: center;
+}
+
+.name {
+  margin-top: 8px;
+  font-weight: normal;
+  text-align: center;
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;
+}
+
+.menu-button {
+  width: 100%;
+  // display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  font-size: 1rem;
+  ion-item, ion-icon, ion-label {
+      margin-right: 8px;
+      color: white;
+  }
+}
+
+.colormenus{
+  // background: rgb(160, 214, 131);
+  background: rgb(114, 191, 120);
+  color: black;
+}
+
+.titulo{
+  font-weight: bold;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 50px;
+  border: 10px;
+  position: relative;
+  text-align: start;
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  // font-weight: 900; /* Valores comunes: 400 (normal), 700 (negrita) */
+  // font-family: 'Courier New', Courier, monospace;
+}
+
+//Fondo de la plataforma
+.bigimage {
+  width: 100%;
+  min-height: 100vh; /* Asegura que el contenedor ocupe al menos el 100% del alto de la pantalla */
+  background:whitesmoke;
+  background-repeat: repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: scroll; /* Cambia a 'fixed' si quieres que el fondo esté fijo mientras el contenido se desplaza */
+  top: 0px;
+  left: 0px;
+}
+
+/* Estilos generales */
+.full-width-height {
+  width: 100%;
+  height: 800px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.centrar {
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center; /* Centra verticalmente */
+  // height: 100vh; /* O el tamaño del contenedor */
+}
+
+.titular {
+  background-color: rgb(160, 214, 131);
+  color: black;
+  width: 300px;
+  height: 60px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px;
+}
+
+.profile-card {
+  display: flex;
+  justify-content: space-between; /* Ajusta el espacio entre las cajas */
+  position: relative;
+  // max-width: 500px; /* Ocupa todo el ancho de la carta */
+
+  background-color:rgb(114, 191, 120) ;
+  border:rgb(160, 214, 131) 2px solid;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-image {
+  flex: 1;
+  display: flex;
+  padding: 16;
+  justify-content: center; /* Centra horizontalmente la imagen */
+  align-items: center; /* Centra verticalmente la imagen */
+  // background: red; /* Fondo de la caja para referencia */
+  width: 420px;
+
+  height: 265px; /* Altura fija de la caja */
+}
+.profile-image img {
+  min-width: 145px;
+  width: 100%; /* La imagen ocupa todo el ancho del contenedor */
+  height: 100%; /* Ajusta la altura proporcionalmente para evitar deformaciones */
+
+}
+
+/* Sección de estadísticas (calificación y productos) */
+.profile-stats {
+
+  flex-direction: column;
+  padding: 0 10px 10px; /* Ajuste en padding para eliminar espacio arriba */
+  min-width: 280px;
+  display: flex;
+  align-items: center; /* Alinea las cajas verticalmente */
+  width: 100%;
+  max-width: 200px;
+}
+
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  position: absolute;
+  background-color: rgb(160, 214, 131);
+  right: 0;
+  padding: 16px;
+  width: 280px;
+  height: 60px;
+  box-sizing: border-box;
+  border: black 1px solid;
+  margin-top: 30px;
+
+}
+
+/* Sección de calificación y productos */
+.card-section {
+  font-size: 20px;
+  text-align: center;
+  align-items: center;
+  color: black;
+  position: absolute;
+  background-color: rgb(254, 255, 159);
+  right: 0;
+  bottom: 126px;
+  padding: 16px;
+  width: 280px;
+  height: 60px;
+  box-sizing: border-box;
+  border: black 1px solid;
+  font-weight: bold;
+}
+
+.button-group {
+  margin-top: 150px;
+  display: flex;
+  gap: 8px; /* Espacio entre botones */
+}
+
+
+@media (max-width: 768px) {
+  .card-title, .card-section, .boton-verp,.card-rating {
+    font-size: 18px; /* Reduce el tamaño de la fuente */
+    padding: 12px; /* Reduce el padding */
+    width: 170px; /* Ajusta el ancho */
+    height: 70px; /* Ajusta la altura para que se adapte mejor */
+  }
+}
+@media (max-width: 768px) {
+  .profile-stats {
+    min-width: 90px;
+  }
+}

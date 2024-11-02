@@ -69,9 +69,10 @@ def producto_proveedor(request, id):
         producto = get_object_or_404(Producto, codigo_producto=id)
         producto_data = {
             'codigo_producto': producto.codigo_producto,
-            'nombre': producto.nombre_producto,
+            'nombre_producto': producto.nombre_producto,
             'precio': producto.precio,
             'imagen_producto': producto.imagen_producto.url,
+            'descripcion': producto.descripcion,
             'id_categoria': producto.id_categoria.id_categoria,
             'id_proveedor': producto.id_proveedor.rut
         }

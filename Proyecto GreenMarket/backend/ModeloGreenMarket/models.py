@@ -109,6 +109,7 @@ class Proveedor(models.Model):
     apellido = models.CharField(max_length=50)
     verificacion = models.BooleanField(default=False)
     recompensa = models.IntegerField(default=0)
+    direccion = models.CharField(max_length=200, null=True, blank=True)
     foto = models.ImageField(upload_to='proveedor_images/', null=True, blank=True)  # Campo de imagen
 
     def __str__(self):
@@ -192,6 +193,7 @@ class Producto (models.Model):
     nombre_producto = models.CharField(max_length=50)
     precio = models.IntegerField()
     imagen_producto = models.ImageField(upload_to='producto_images/', null=True, blank=True)
+    descripcion = models.CharField(max_length=300)
     id_categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     id_proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
 

@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';  // Asegúrate d
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MenuController } from '@ionic/angular';
 
 @Component({
   selector: 'app-panel-proveedor',
@@ -29,19 +30,23 @@ export class PanelProveedorPage implements OnInit {
   proveedor: any = {}; // Perfil del proveedor
   fotoSeleccionada: File | null = null; // Variable para almacenar el archivo de foto
 
+  descripcion: string = '';
+
   constructor(private authService: AuthserviceService, private router: Router, private proService: ProductoServiService,
-    private toast: ToastController, private formBuilder: FormBuilder, private cdr: ChangeDetectorRef
+    private toast: ToastController, private formBuilder: FormBuilder, private cdr: ChangeDetectorRef,
   ) {
     this.productoForm = this.formBuilder.group({
       nombre_producto: ['', [Validators.required,]],
       precio: [0, [Validators.required,]],
       imagen_producto: ['', [Validators.required,]],
+      descripcion: ['', [Validators.required]],
       id_categoria: [0, [Validators.required]],
     })
     this.editarForm = this.formBuilder.group({
       nombre_producto: [''],
       precio: [0],
       imagen_producto: [''],
+      descripcion: ['', [Validators.required]],
       id_categoria: [0],
       id_proveedor: ['']
     })
@@ -89,6 +94,7 @@ export class PanelProveedorPage implements OnInit {
     formData.append('nombre', this.proveedor.nombre);
     formData.append('apellido', this.proveedor.apellido);
     formData.append('correo_electronico', this.proveedor.correo_electronico);
+    formData.append('direccion',this.proveedor.direccion)
     if (this.fotoSeleccionada) {
       formData.append('foto', this.fotoSeleccionada); // Adjunta la foto seleccionada
     }
@@ -160,6 +166,7 @@ export class PanelProveedorPage implements OnInit {
         this.showToast('Producto agregado correctamente.');
         this.getProductos();
         this.productoForm.reset(); // Resetea los campos del formulario
+        this.descripcion = ''; // Reinicia el contador de caracteres
         this.selectedImage = null; // Restablece la imagen seleccionada
       },
       async error => {
@@ -167,6 +174,11 @@ export class PanelProveedorPage implements OnInit {
         await this.showToast('Error al agregar el producto.')
       }
     );
+  }
+
+  contarCaracteres() {
+    // Actualiza la longitud de la descripción para mostrar el contador
+    this.descripcion = this.productoForm.get('descripcion')?.value || '';
   }
 
   editar(productId: number) {
@@ -179,7 +191,8 @@ export class PanelProveedorPage implements OnInit {
         id_categoria: productData.id_categoria,
         id_proveedor: productData.id_proveedor,
         imagen_producto: productData.imagen_producto,
-        rut_proveedor: productData.id_proveedor
+        rut_proveedor: productData.id_proveedor,
+        descripcion: productData.descripcion
     })
     console.log(productData);
       console.log(this.editarForm.value)

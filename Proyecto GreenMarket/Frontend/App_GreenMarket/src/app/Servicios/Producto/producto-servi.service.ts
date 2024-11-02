@@ -34,6 +34,11 @@ export class ProductoServiService {
     return this.http.get(`${this.apiUrl}producto/${id}/`, { headers });
   }
 
+  getdetalleProducto(id: number): Observable<any> {
+
+    return this.http.get(`${this.apiUrl}producto/${id}/`);
+  }
+
   // 2. Agregar un nuevo producto
   agregarProducto(producto: any): Observable<any> {
     const rut_proveedor = localStorage.getItem('rut')

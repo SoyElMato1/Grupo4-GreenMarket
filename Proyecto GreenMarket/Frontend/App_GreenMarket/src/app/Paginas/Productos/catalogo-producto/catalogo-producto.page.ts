@@ -102,4 +102,9 @@ export class CatalogoProductoPage implements OnInit {
     this.router.navigate(['/login']); // Redirigir a la página de login
   }
 
+  // Dentro del componente CatalogoProductoPage
+  verDetalleProducto(productoId: number) {
+    this.router.navigate(['/detalle-producto', productoId]);
+  }
+
 }
