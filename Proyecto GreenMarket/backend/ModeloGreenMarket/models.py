@@ -210,15 +210,22 @@ class CalificacionProducto(models.Model):
     def __str__(self):
         return f'Calificación de {self.producto}: {self.puntuacion}'
 
-class MetodoPago (models.Model):
-    id_metodo_pago = models.AutoField(primary_key=True)
-    nombre_metodo = models.CharField(max_length=50)
+# class MetodoPago (models.Model):
+#     id_metodo_pago = models.AutoField(primary_key=True)
+#     nombre_metodo = models.CharField(max_length=50)
 
-class transaccion (models.Model):
-    id_transaccion = models.AutoField(primary_key=True)
-    monto = models.IntegerField()
-    fecha = models.DateField()
-    id_metodo_pago = models.ForeignKey(MetodoPago, on_delete=models.CASCADE)
+# class transaccion (models.Model):
+#     id_transaccion = models.AutoField(primary_key=True)
+#     monto = models.IntegerField()
+#     fecha = models.DateField()
+#     id_metodo_pago = models.ForeignKey(MetodoPago, on_delete=models.CASCADE)
+class transaccion(models.Model):
+    metodo_pago = models.CharField(max_length=2)  # Ahora es un campo CharField para almacenar códigos como 'VD', 'VN'
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    buy_order = models.CharField(max_length=50)
+    status = models.CharField(max_length=20)
+    session_id = models.CharField(max_length=50)
+    transaction_date = models.DateTimeField()
 
 class Orden(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
@@ -256,7 +263,6 @@ class Venta (models.Model):
     fecha_venta = models.DateField()
     monto_total = models.IntegerField()
     id_cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    metodo_pago = models.ForeignKey(MetodoPago, on_delete=models.SET_NULL, null=True)
     transaccion = models.ForeignKey(transaccion, on_delete=models.SET_NULL, null=True)
 
     def save(self, *args, **kwargs):

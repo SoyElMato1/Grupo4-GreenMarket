@@ -10,7 +10,7 @@ import { Carrito } from 'src/app/Interfaces/carrito';
 export class CarritoServiService {
 
   private apiUrl = 'http://127.0.0.1:8000/modelo/';
-
+  // private apiUrl = 'https://web-production-8ca5.up.railway.app/modelo/';
   // BehaviorSubject to track number of items in the cart
   private cartItemCount = new BehaviorSubject<number>(0);
 
@@ -59,17 +59,27 @@ export class CarritoServiService {
 
   checkout(data: any) {
     const headers = { 'Content-Type': 'application/json' }; // Asegúrate de tener las cabeceras
-    return this.http.post('http://127.0.0.1:8000/modelo/checkout/', data, { headers });
+    return this.http.post('http://127.0.0.1:8000/modelo/crear_oden/', data, { headers });
   }
 
-  obtener_cliente(rut:string): Observable<any>{
+  //PRODUCCION
+  // checkout(data: any) {
+  //   const headers = { 'Content-Type': 'application/json' }; // Asegúrate de tener las cabeceras
+  //   return this.http.post('https://web-production-8ca5.up.railway.app/modelo/crear_oden/', data, { headers });
+  // }
+
+  cliente_obtener(rut: string): Observable<any> {
+    console.log(`Fetching client with RUT: ${rut}`);  // Agrega esto para verificar el RUT en consola
     return this.http.get(`${this.apiUrl}cliente/${rut}`);
   }
-
   // Crear un nuevo cliente
   crearCliente(clienteData: any): Observable<any> {
     const headers = { 'Content-Type': 'application/json' }; // Asegúrate de tener las cabeceras
     return this.http.post(`${this.apiUrl}clienteAgre/`, clienteData, { headers });
+  }
+// CarritoServiService (servicio de Angular)
+  obtenerDetallesPagoExitoso(order: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}detalles-pago-exitoso/?order=${order}`);
   }
 
 }

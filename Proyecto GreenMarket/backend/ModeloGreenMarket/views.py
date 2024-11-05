@@ -94,7 +94,7 @@ def cliente_obtener(request, rut):
         'direccion': cliente.direccion,
     }
     return JsonResponse(response_data)
-        
+
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes([AllowAny])

@@ -86,17 +86,17 @@ class ProductoSerializer(serializers.ModelSerializer):
         fields = ['codigo_producto', 'nombre_producto', 'precio', 'imagen_producto', 'descripcion', 'id_categoria', 'id_proveedor']
 
 # Venta
-class MetodoPagoSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = MetodoPago
-        fields = ['id_metodo_pago', 'nombre_metodo']
+# class MetodoPagoSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = MetodoPago
+#         fields = ['id_metodo_pago', 'nombre_metodo']
 
 class TransaccionSerializer(serializers.ModelSerializer):
     class Meta:
         model = transaccion
-        fields = ['id_transaccion', 'monto', 'fecha', 'id_metodo_pago']
+        fields = ['id_transaccion', 'monto', 'fecha']
 
 class VentaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Venta
-        fields = ['id_venta', 'fecha_venta', 'monto_total', 'id_cliente', 'id_carrito', 'metodo_pago', 'transaccion']
+        fields = ['id_venta', 'fecha_venta', 'monto_total', 'id_cliente', 'id_carrito', 'transaccion']

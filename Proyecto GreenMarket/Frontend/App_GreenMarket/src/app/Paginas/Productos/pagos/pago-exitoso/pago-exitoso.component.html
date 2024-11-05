@@ -1,5 +1,48 @@
-<div class="container">
-  <h1>Pago Exitoso</h1>
-  <p *ngIf="token">¡Gracias por tu compra! Tu transacción fue exitosa.</p>
-  <p *ngIf="!token">No se pudo obtener la información del pago.</p>
-</div>
+<ion-header [translucent]="true">
+  <ion-toolbar  color="A " class="colormenus">
+    <ion-title class="titulo">GreenMarket</ion-title> <!-- Clase para centrar el título -->
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid class="fondo">
+    <ion-row>
+      <ion-col class="centrar">
+        <div class="titular">
+          Detalle de tu compra
+        </div>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <div class="container">
+          <h1>Pago Exitoso</h1>
+
+          <!-- Mensaje de confirmación general -->
+
+          <p *ngIf="!transaccionData && token">Cargando detalles de la transacción...</p>
+          <p *ngIf="!transaccionData && !token">No se pudo obtener la información del pago.</p>
+
+          <!-- Detalles de la transacción -->
+          <div *ngIf="transaccionData">
+            <p><strong>Método de Pago:</strong> {{ transaccionData.metodo_pago }}</p>
+            <p><strong>Monto:</strong> ${{ transaccionData.amount }}</p>
+            <p><strong>Orden de Compra:</strong> {{ transaccionData.buy_order }}</p>
+            <p><strong>Estado:</strong> {{ transaccionData.status }}</p>
+            <p><strong>ID de Sesión:</strong> {{ transaccionData.session_id }}</p>
+            <p><strong>Fecha de Transacción:</strong> {{ transaccionData.transaction_date | date: 'medium' }}</p>
+          </div>
+        </div>
+
+      </ion-col>
+    </ion-row>
+
+
+    <ion-row>
+      <ion-col>
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
+

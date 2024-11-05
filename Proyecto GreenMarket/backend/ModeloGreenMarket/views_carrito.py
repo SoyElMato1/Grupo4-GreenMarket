@@ -97,20 +97,30 @@ def ver_carrito(request):
 
     return JsonResponse({'items': items_serializados, 'total': str(total)})
 
+
 @csrf_exempt
-@permission_classes([AllowAny])
 def checkout(request):
     if request.method == 'POST':
-        # Parsear los datos del cuerpo de la solicitud
-        data = json.loads(request.body)
-        rut_cliente = data.get('customer')
-        
-        # Obtener el cliente por su RUT
-        try:
-            cliente = Cliente.objects.get(rut=rut_cliente)
-        except Cliente.DoesNotExist:
-            return JsonResponse({'error': 'Cliente no encontrado'}, status=404)
-        
+        # Obtener datos del cliente desde la solicitud
+        cliente_data = JSONParser().parse(request)
+        rut = cliente_data.get('rut')
+        correo_electronico = cliente_data.get('correo_electronico')
+
+        # Buscar o crear el cliente automáticamente
+        cliente, created = Cliente.objects.get_or_create(
+            rut=rut,
+            correo_electronico=correo_electronico,
+            defaults={
+                'nombre': cliente_data.get('nombre'),
+                'direccion': cliente_data.get('direccion'),
+                'dv': cliente_data.get('dv')
+            }
+        )
+
+        # Verificar si hubo algún problema con los datos de cliente
+        if not created and not cliente:
+            return JsonResponse({'error': 'Datos de cliente inválidos'}, status=400)
+
         # Obtener los datos del carrito
         carrito = Carrito(request)
         items, total = carrito.obtener_items()
@@ -130,9 +140,6 @@ def checkout(request):
         carrito.limpiar()
 
         # Retornar la respuesta de éxito junto con los datos del cliente
-        return JsonResponse({
-            'mensaje': 'Orden creada',
-            'orden_id': orden.id,
-            'cliente': ClienteSerializer(cliente).data
-        })
+        return JsonResponse({'mensaje': 'Orden creada', 'orden_id': orden.id, 'cliente': ClienteSerializer(cliente).data})
+
     return JsonResponse({'error': 'Método no permitido'}, status=405)

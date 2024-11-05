@@ -130,7 +130,7 @@ export class CarritoPage implements OnInit {
 
   buscar_cliente(rut: string) {
     if (!rut) return; // Si el RUT está vacío, no hacer nada
-    this.cartService.obtener_cliente(rut).subscribe(
+    this.cartService.cliente_obtener(rut ).subscribe(
       (response: any) => {
         if (response) {
           this.customer.dv = response.dv;
@@ -150,18 +150,7 @@ export class CarritoPage implements OnInit {
   //   );
   // }
 
-  guardarClienteSiEsSeleccionado() {
-    if (this.guardarCliente) { // Verifica si el checkbox está seleccionado
-        this.cartService.crearCliente(this.customer).subscribe(
-            (response) => {
-                console.log('Cliente creado exitosamente', response);
-            },
-            (error) => {
-                console.error('Error al guardar el cliente', error);
-            }
-        );
-    }
-  }
+
 
   // Valida el RUT usando una expresión regular (formato chileno)
   validateRut(rut: string): boolean {
@@ -214,134 +203,164 @@ export class CarritoPage implements OnInit {
     return true;
   }
 
-  checkout_pago() {
-    // Validar que el carrito tenga productos
-    if (this.cartItems.length === 0) {
-      this.mostrarToast('El carrito está vacío. Agrega productos antes de proceder al pago.')
-      return; // Detener la función si no hay productos en el carrito
-    }
 
-    if (!this.validateForm()) {
-      this.mostrarToast('Completa el formulario antes de seguir')
-      return; // Detener si la validación falla
-    }
+// checkout_pago() {
+//   // Verificar si el carrito tiene productos y si el formulario es válido
+//   if (this.cartItems.length === 0) {
+//     this.mostrarToast('El carrito está vacío. Agrega productos antes de proceder al pago.');
+//     return;
+//   }
 
-    const items = this.cartItems.map(item => ({
-      producto_id: item.producto_id,
-      cantidad: item.cantidad
-    }));
+//   if (!this.validateForm()) {
+//     this.mostrarToast('Completa el formulario antes de seguir.');
+//     return;
+//   }
 
-    const checkoutData = {
-      customer: this.customer.rut, // Enviar el RUT como 'customer'
-      items: items,
-      total: this.total
-    };
+//   // Crear los datos para el checkout
+//   const items = this.cartItems.map(item => ({
+//     producto_id: item.producto_id,
+//     cantidad: item.cantidad
+//   }));
 
-    this.cartService.checkout(checkoutData).subscribe(
-      (response: any) => {
-        if (response && response.orden_id) {
-          this.mostrarToast  (`Orden creada. ID de la orden: ${response.orden_id}`)
+//   const checkoutData = {
+//     rut: this.customer.rut,
+//     dv: this.customer.dv,
+//     correo_electronico: this.customer.correo_electronico,
+//     nombre: this.customer.nombre,
+//     direccion: this.customer.direccion,
+//     items: items,
+//     total: this.total
+//   };
 
-          this.cartService.iniciarPago({ total: this.total }).subscribe(
-            response => {
-                console.log(response);
+//   // Realizar el checkout y crear la orden
+//   this.cartService.checkout(checkoutData).subscribe(
+//     (response: any) => {
+//       if (response && response.orden_id) {
+//         this.mostrarToast(`Orden creada. ID de la orden: ${response.orden_id}`);
+//         // Aquí puedes continuar con el proceso de pago
+//       } else {
+//         this.mostrarToast('Error: No se recibió el ID de la orden.');
+//       }
+//     },
+//     (error) => {
+//       console.error('Error al crear la orden', error);
+//       this.mostrarToast('Error al crear la orden. Inténtalo de nuevo.');
+//     }
+//   );
+// }
 
-                if (response.success) {
-                    const form = document.createElement('form');
-                    form.method = 'POST';
-                    form.action = response.transaction_url;
 
-                    const tokenField = document.createElement('input');
-                    tokenField.type = 'hidden';
-                    tokenField.name = 'token_ws';
-                    tokenField.value = response.token;
+//   irAPagar() {
+//     if (!this.customer.rut || !this.customer.dv || !this.customer.correo_electronico || !this.customer.nombre || !this.customer.direccion) {
+//           this.mostrarToast('Por favor, completa todos los campos.');
+//           return;
+//         }
+//     this.cartService.iniciarPago({ total: this.total }).subscribe(
+//         response => {
+//             console.log(response);
 
-                    form.appendChild(tokenField);
-                    document.body.appendChild(form);
+//             if (response.success) {
+//                 const form = document.createElement('form');
+//                 form.method = 'POST';
+//                 form.action = response.transaction_url;
 
-                    form.submit(); // Redirige al usuario al formulario de pago de Transbank
-                } else {
-                  this.mostrarToast('Error al iniciar pago: ' + response.message);
-                }
-            },
-            error => {
-                console.error(error);
-                this.mostrarToast('Ocurrió un error al iniciar el pago.');
-            }
-          );
-        } else {
-          this.mostrarToast ('Error: No se recibió el ID de la orden.')
-        }
-      },
-      (error) => {
-        console.error('Error al crear la orden', error);
-        this.mostrarToast('Error al crear la orden. Inténtalo de nuevo.')
-      }
-    );
+//                 const tokenField = document.createElement('input');
+//                 tokenField.type = 'hidden';
+//                 tokenField.name = 'token_ws';
+//                 tokenField.value = response.token;
+
+//                 form.appendChild(tokenField);
+//                 document.body.appendChild(form);
+
+//                 form.submit(); // Redirige al usuario al formulario de pago de Transbank
+//             } else {
+//                 alert('Error al iniciar pago: ' + response.message);
+//             }
+//         },
+//         error => {
+//             console.error(error);
+//             alert('Ocurrió un error al iniciar el pago.');
+//         }
+//     );
+//   }
+checkout_pago() {
+  // Verificar si el carrito tiene productos y si el formulario es válido
+  if (this.cartItems.length === 0) {
+    this.mostrarToast('El carrito está vacío. Agrega productos antes de proceder al pago.');
+    return;
   }
 
+  if (!this.validateForm()) {
+    this.mostrarToast('Completa el formulario antes de seguir.');
+    return;
+  }
 
-  // irAPagar() {
-  //   if (!this.customer.rut || !this.customer.dv || !this.customer.correo_electronico || !this.customer.nombre || !this.customer.direccion) {
-  //         this.mostrarToast('Por favor, completa todos los campos.');
-  //         return;
-  //       }
-  //   this.cartService.iniciarPago({ total: this.total }).subscribe(
-  //       response => {
-  //           console.log(response);
+  // Crear los datos para el checkout
+  const items = this.cartItems.map(item => ({
+    producto_id: item.producto_id,
+    cantidad: item.cantidad
+  }));
 
-  //           if (response.success) {
-  //               const form = document.createElement('form');
-  //               form.method = 'POST';
-  //               form.action = response.transaction_url;
+  const checkoutData = {
+    rut: this.customer.rut,
+    dv: this.customer.dv,
+    correo_electronico: this.customer.correo_electronico,
+    nombre: this.customer.nombre,
+    direccion: this.customer.direccion,
+    items: items,
+    total: this.total
+  };
 
-  //               const tokenField = document.createElement('input');
-  //               tokenField.type = 'hidden';
-  //               tokenField.name = 'token_ws';
-  //               tokenField.value = response.token;
+  // Realizar el checkout y crear la orden
+  this.cartService.checkout(checkoutData).subscribe(
+    (response: any) => {
+      if (response && response.orden_id) {
+        this.mostrarToast(`Orden creada. ID de la orden: ${response.orden_id}`);
+        this.irAPagar(); // Llama a irAPagar después de crear la orden
+      } else {
+        this.mostrarToast('Error: No se recibió el ID de la orden.');
+      }
+    },
+    (error) => {
+      console.error('Error al crear la orden', error);
+      this.mostrarToast('Error al crear la orden. Inténtalo de nuevo.');
+    }
+  );
+}
 
-  //               form.appendChild(tokenField);
-  //               document.body.appendChild(form);
+irAPagar() {
+  if (!this.customer.rut || !this.customer.dv || !this.customer.correo_electronico || !this.customer.nombre || !this.customer.direccion) {
+    this.mostrarToast('Por favor, completa todos los campos.');
+    return;
+  }
 
-  //               form.submit(); // Redirige al usuario al formulario de pago de Transbank
-  //           } else {
-  //               alert('Error al iniciar pago: ' + response.message);
-  //           }
-  //       },
-  //       error => {
-  //           console.error(error);
-  //           alert('Ocurrió un error al iniciar el pago.');
-  //       }
-  //   );
-  // }
+  this.cartService.iniciarPago({ total: this.total }).subscribe(
+    response => {
+      console.log(response);
 
-  // // Método para generar la orden de compra
-  // checkout() {
-  //   const items = this.cartItems.map(item => ({
-  //     producto_id: item.producto_id,
-  //     cantidad: item.cantidad
-  //   }));
+      if (response.success) {
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = response.transaction_url;
 
-  //   const checkoutData = {
-  //     customer: this.customer.rut, // Enviar el RUT como 'customer'
-  //     items: items,
-  //     total: this.total
-  //   };
+        const tokenField = document.createElement('input');
+        tokenField.type = 'hidden';
+        tokenField.name = 'token_ws';
+        tokenField.value = response.token;
 
-  //   const headers = { 'Content-Type': 'application/json' };
-  //   this.cartService.checkout(checkoutData).subscribe(
-  //     (response: any) => {
-  //       if (response && response.orden_id) {
-  //         this.mensaje = `Orden creada. ID de la orden: ${response.orden_id}`;
-  //       } else {
-  //         this.mensaje = 'Error: No se recibió el ID de la orden.';
-  //       }
-  //     },
-  //     (error) => {
-  //       console.error('Error al crear la orden', error);
-  //       this.mensaje = 'Error al crear la orden. Inténtalo de nuevo.';
-  //     }
-  //   );
-  // }
+        form.appendChild(tokenField);
+        document.body.appendChild(form);
+
+        form.submit(); // Redirige al usuario al formulario de pago de Transbank
+      } else {
+        alert('Error al iniciar pago: ' + response.message);
+      }
+    },
+    error => {
+      console.error(error);
+      alert('Ocurrió un error al iniciar el pago.');
+    }
+  );
+}
 
 }

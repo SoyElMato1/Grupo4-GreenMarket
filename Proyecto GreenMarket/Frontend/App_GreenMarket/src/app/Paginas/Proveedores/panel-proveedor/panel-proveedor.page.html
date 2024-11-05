@@ -1,31 +1,32 @@
-<ion-split-pane contentId="adminContent">
+<ion-split-pane  contentId="adminContent">
 
-  <ion-menu side="start" menuId="mainMenu" contentId="adminContent" class="fondomenu">
-    <ion-header>
+  <ion-menu  side="start" menuId="mainMenu" contentId="adminContent" class="fondomenu" color="a">
+    <ion-header >
       <!-- <ion-toolbar color="primary">
         <ion-title>Menú</ion-title>
       </ion-toolbar> -->
       <ion-toolbar color="A" class="colormenus">
+
         <img class="avatar" [src]="'http://localhost:8000' + proveedor.foto" alt="Avatar" />
-        <h4 class="name">{{ proveedor.nombre }}  {{ proveedor.apellido }} </h4>
+        <h4 class="name">{{ proveedor.nombre }} <br> {{ proveedor.apellido }} </h4>
       </ion-toolbar>
     </ion-header>
 
-    <ion-content>
-      <ion-list class="menu-button">
-        <ion-item (click)="setSection('dashboard')">
+    <ion-content class="fondodelmenu" color="a" >
+      <ion-list color="a" class="menu-button">
+        <ion-item color="a" class="coloritem" (click)="setSection('dashboard')">
           <ion-icon slot="start" name="home-outline"></ion-icon>
           <ion-label>Dashboard</ion-label>
         </ion-item>
-        <ion-item (click)="setSection('Productos')" >
+        <ion-item color="a" class="coloritem" (click)="setSection('Productos')" >
           <ion-icon slot="start" name="flower-outline"></ion-icon>
           <ion-label>Productos</ion-label>
         </ion-item>
-        <ion-item (click)="setSection('Perfil')">
+        <ion-item color="a" class="coloritem" (click)="setSection('Perfil')">
           <ion-icon slot="start" name="people-outline"></ion-icon>
           <ion-label>Perfil</ion-label>
         </ion-item>
-        <ion-item (click)="onLogout()">
+        <ion-item color="a" class="coloritem" (click)="onLogout()">
           <ion-icon slot="start" name="log-out-outline"></ion-icon>
           <ion-label>Cerrar Sesión</ion-label>
         </ion-item>
@@ -35,9 +36,9 @@
 
   <ion-content id="adminContent" class="main-content">
     <ion-header>
-      <ion-toolbar color="A " class="colormenus">
+      <ion-toolbar color="A" class="colormenus">
         <ion-menu-button slot="start"></ion-menu-button> <!-- Este es el botón para abrir el menú -->
-        <ion-title class="titulo">Mi Aplicación</ion-title>
+        <ion-title class="titulo">Mi espacio</ion-title>
       </ion-toolbar>
     </ion-header>
     <div *ngIf="currentSection === 'dashboard'">
@@ -160,8 +161,24 @@
                   {{ descripcion.length }} / 300 caracteres
                 </ion-text>
                 <ion-item>
+                  <div class="container">
+                    <div class="folder">
+                      <div class="front-side">
+                        <div class="tip"></div>
+                        <div class="cover"></div>
+                      </div>
+                      <div class="back-side cover"></div>
+                    </div>
+                    <label class="custom-file-upload">
+                      <input type="file" accept=".png, .jpg, .jpeg, .bmp" (change)="onFileSelected($event)">
+                      Choose a file
+                      <!-- <input class="title" type="file" /> -->
+
+                    </label>
+                  </div>
+<!--
                   <ion-label position="stacked">Imagen del Producto</ion-label>
-                  <input type="file" accept=".png, .jpg, .jpeg, .bmp" (change)="onFileSelected($event)">
+                  <input type="file" accept=".png, .jpg, .jpeg, .bmp" (change)="onFileSelected($event)"> -->
                 </ion-item>
                 <ion-item>
                   <ion-label position="stacked">Categoría</ion-label>

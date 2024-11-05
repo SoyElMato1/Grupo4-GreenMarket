@@ -10,7 +10,7 @@ import { Proveedor } from 'src/app/Interfaces/proveedor';
 export class AuthserviceService {
 
   private apiUrl = 'http://localhost:8000/modelo/';
-
+  // private apiUrl = '  https://web-production-8ca5.up.railway.app/modelo/';
   constructor(private http: HttpClient, private router: Router) { }
 
   login(username: string, password: string): Observable<any> {
