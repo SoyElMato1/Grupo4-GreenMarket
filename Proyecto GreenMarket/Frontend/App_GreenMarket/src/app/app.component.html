@@ -1,3 +1,33 @@
-<ion-app>
-  <ion-router-outlet></ion-router-outlet>
-</ion-app>
+<ion-header *ngIf="showHeader">
+  <ion-toolbar color="a" class="colormenus">
+    <div class="container">
+      <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
+        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+          <img src="../../../../assets/images/logo.png" alt="Logo GreenMarket" class="me-2" width="40" height="32"> <!-- Reemplaza con la ruta de tu imagen -->
+          <span class="fs-1 mb-0">GreenMarket</span> <!-- Ajusta aquí el margen -->
+        </a>
+      <ul class="nav nav-pills align-items-center"> <!-- Añade 'align-items-center' aquí -->
+          <li class="nav-item"><a href="login" class="nav-link active" aria-current="page">Inicio sesión</a></li>
+          <li class="nav-item"><a href="proveedor" class="nav-link">Provedores</a></li>
+          <li class="nav-item"><a href="catalogo-producto" class="nav-link">Productos</a></li>
+          <li class="nav-item"><a href="historial-compra" class="nav-link">Historial compras</a></li>
+          <ion-button color="a" class="carrito-icon" [routerLink]="['/carrito']">
+            <span class="cart-count">{{cantidadCarrito}}</span>
+            <ion-icon name="cart" class="big-icon"></ion-icon>
+            <!-- <ion-badge color="danger" *ngIf="cartItemCount > 0">{{ cartItemCount }}</ion-badge> -->
+          </ion-button>
+      </ul>
+      </header>
+    </div>
+  </ion-toolbar>
+
+</ion-header>
+<ion-content>
+
+  <ion-app>
+    <ion-router-outlet>
+
+
+    </ion-router-outlet>
+  </ion-app>
+</ion-content>

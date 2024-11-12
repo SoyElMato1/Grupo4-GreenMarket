@@ -13,7 +13,7 @@ urlpatterns = [
 # Views Producto
     path('producto/', producto, name='producto'),
     path('agregarPro/', agregar_productos, name='producto añadido'),
-    
+    path('obtener_producto/<int:id>/', obtener_producto, name='obtener_producto'),
 
     path('productos/', obtener_productos, name='obtener_productos'),
     path('producto/<int:id>/', producto_proveedor, name='obtener_producto'),
@@ -35,7 +35,7 @@ urlpatterns = [
 # Cliente
     path('cliente/<int:rut>', cliente_obtener, name='cliente_obtener'),
     path('clienteAgre/', guardar_cliente, name='guardar_cliente'),
-
+    path('historial/<str:rut>/', historial_compras, name='historial_compras'),
 # Transbank
     path('pago/iniciar/', iniciar_pago, name='iniciar_pago'),
     path('validar_pago/', validar_pago, name='validar_pago'),

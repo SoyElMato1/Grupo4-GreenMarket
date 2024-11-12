@@ -10,7 +10,7 @@ from .models import transaccion
 from transbank.webpay.webpay_plus.transaction import Transaction
 import uuid
 import logging
-
+from .models import Orden
 
 #------------------------Vista Transbank---------------------------------------
 logger = logging.getLogger(__name__)
@@ -24,7 +24,8 @@ def iniciar_pago(request):
         # Obtener el cuerpo de la solicitud y extraer el 'total'
         data = json.loads(request.body)
         total = data.get('total', 0)  # Captura el 'total', predeterminado a 0 si no existe
-
+        orden_id = data.get('orden_id')
+        print(orden_id)
         # Validación del monto
         if total <= 0:
             return JsonResponse({'success': False, 'message': 'Monto no válido'}, status=400)
@@ -32,7 +33,9 @@ def iniciar_pago(request):
         # Generar valores únicos para buy_order y session_id
         buy_order = str(uuid.uuid4())[:26]  # Limitar a 26 caracteres
         session_id = str(uuid.uuid4())[:26]  # Limitar a 26 caracteres
-
+        Orden.objects.filter(id=orden_id).update(
+        buy_order = buy_order
+        )
         # Procesar la transacción si el monto es válido
         options = WebpayOptions(
             commerce_code='597055555532',
@@ -101,7 +104,10 @@ def pago_exitoso(request):
                 transaction_date=fecha
             )
             nueva_transaccion.save()
-
+            Orden.objects.filter(buy_order = response['buy_order']).update(
+            pagado = True,
+            orden_date = parse_datetime(response['transaction_date'])
+            )
             # Redirigir a la ruta de Angular con el resultado de la transacción
             return redirect(f'http://localhost:8100/pago-exitoso?order={response["buy_order"]}')
         else:

@@ -1,79 +1,108 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="A " class="colormenus" >
-    <ion-buttons slot="start">
-      <ion-button [routerLink]="['/proveedor']">
-        <ion-icon name="arrow-back-outline"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button [routerLink]="['/carrito']">
-        <ion-icon name="cart" class="big-icon"></ion-icon>
-        <ion-badge color="danger" *ngIf="cartItemCount > 0">{{ cartItemCount }}</ion-badge>
-      </ion-button>
-    </ion-buttons>
-    <ion-title class="titulo">GreenMarket</ion-title> <!-- Clase para centrar el tÃ­tulo -->
-  </ion-toolbar>
-</ion-header>
+<ion-content >
+  <main class="bigimage">
+    <!-- Carousel -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
 
-<ion-content>
-  <div class="bigimage">
-    <ion-grid>
-      <ion-row>
-        <ion-col class="centrar">
-          <div class="titular" id="productos">
-            Lista de productos
-          </div>
-        </ion-col>
-      </ion-row>
-      <ion-row class="ion-text-center">
-        <ion-col size="12" size-md="6" size-lg="4" *ngFor="let producto of productosFiltrados">
-          <div>
-            <ion-card class="profile-card">
-              <div class="profile-image">
-                <!-- <img src="../../../../assets/images/descarga.jpeg" class="profile-image" /> -->
-                <img *ngIf="producto.imagen_producto" [src]="'http://localhost:8000' + producto.imagen_producto"  class="profile-image" alt="Foto del proveedor">
-                <img *ngIf="!producto.imagen_producto" src="assets/images/descarga.jpeg" class="profile-image" alt="Imagen por defecto" >
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Categorias</a>
+            </li>
+
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Filtro de seleccion
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Plantas</a></li>
+                <li><a class="dropdown-item" href="#">Plantas</a></li>
+                       <li><a class="dropdown-item" href="#">Plantas</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <ion-input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" (ionInput)="onSearch($event)"></ion-input>
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
+        </div>
+      </div>
+    </nav>
+    <section class="text-center container" style="color: black;">
+      <ion-grid>
+        <ion-row class="ion-justify-content-center py-4">
+          <ion-col size-md="8" size-sm="12" class="ion-text-center">
+            <!-- Imagen antes del título -->
+            <img src="../../../../assets/images/logo.png" alt="Imagen descriptiva" class="img-fluid mb-4">
+            <h1 class="fw-light">Productos Destacados</h1>
+            <p class="lead text-secondary">ESTE APARTADO ESTARA PROXIMAMENTE DISPONIBLE</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </section>
+    <!-- Product Grid -->
+
+    <div >
+      <div class="container" >
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+
+
+          <ion-col size="12" size-md="6" size-lg="4" *ngFor="let producto of productosFiltrados">
+
+            <div class="card shadow-sm">
+              <img *ngIf="producto.imagen_producto"
+              [src]="'http://localhost:8000/' + producto.imagen_producto"
+              class="bd-placeholder-img card-img-top"
+              alt="Foto del producto"
+              width="200" height="200">
+              <img *ngIf="!producto.imagen_producto" src="assets/images/descarga.jpeg" class="bd-placeholder-img card-img-top" alt="Imagen por defecto">
+              <div class="card-body">
+                <h5>{{ producto.nombre_producto }}</h5>
+                <h5>${{ producto.precio }}</h5>
+
+            <div class="rating">
+              <input [value]="5" [name]="'rating' + producto.codigo_producto" [id]="'star5-' + producto.codigo_producto" type="radio">
+              <label [for]="'star5-' + producto.codigo_producto"></label>
+
+              <input [value]="4" [name]="'rating' + producto.codigo_producto" [id]="'star4-' + producto.codigo_producto" type="radio">
+              <label [for]="'star4-' + producto.codigo_producto"></label>
+
+              <input [value]="3" [name]="'rating' + producto.codigo_producto" [id]="'star3-' + producto.codigo_producto" type="radio">
+              <label [for]="'star3-' + producto.codigo_producto"></label>
+
+              <input [value]="2" [name]="'rating' + producto.codigo_producto" [id]="'star2-' + producto.codigo_producto" type="radio">
+              <label [for]="'star2-' + producto.codigo_producto"></label>
+
+              <input [value]="1" [name]="'rating' + producto.codigo_producto" [id]="'star1-' + producto.codigo_producto" type="radio">
+              <label [for]="'star1-' + producto.codigo_producto"></label>
+            </div>
+                <p class="card-text">{{ producto.descripcion }}</p>
+
+                <div class="d-flex justify-content-between align-items-center">
+                  <button class="btn btn-primary" (click)="agregarAlCarrito(producto.codigo_producto)">Agregar al carrito</button>
+                  <!-- <button class="btn btn-outline-secondary" (click)="verDetalleProducto(producto.codigo_producto)">Detalle</button> -->
+                </div>
               </div>
-              <ion-card-content class="profile-stats">
-                <div  class="card-title">
-                  {{ producto.nombre_producto }}
-                </div>
-                <div class="boton-verp button-div" (click)="agregarAlCarrito(producto.codigo_producto)">
-                  Agregar al carrito
-                </div>
-                <div class="card-rating" >
-                  <img class="rating-value " src="../../../assets/images/JARDENBOT.png" style="width: 60px; height: 60px;" />
-                </div>
-                <div class="card-section button-div" (click)="verDetalleProducto(producto.codigo_producto)">
-                  Detalle del producto
-                </div>
-              </ion-card-content>
-            </ion-card>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-  </div>
+            </div>
+          </ion-col>
+
+        </div>
+      </div>
+
+    </div>
+    <hr class="featurette-divider">
+    <!-- Footer -->
+
+  </main>
+  <footer class="container">
+    <p class="float-end"><a href="#">Back to top</a></p>
+    <p style="color: black;">&copy; 2024 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+  </footer>
 </ion-content>
 
-<ion-footer>
-  <ion-toolbar color="A " class="colormenus" >
-    <ion-buttons slot="start">
-      <ion-button (click)="toggleSearchBar()" style="background-color: yellow; border-radius: 50%;">
-        <ion-icon name="search-outline" style="color: black;"></ion-icon>
-      </ion-button>
-      <ion-searchbar *ngIf="showSearchBar" placeholder="Buscar..." (ionInput)="onSearch($event)"
-        style="margin: 10px;"></ion-searchbar>
-    </ion-buttons>
-    <div class="center-button">
-      <ion-button [routerLink]="['/chatbot']" style="--padding-start: 0; --padding-end: 0; --border-radius: 50%; width: 40px; height: 40px;">
-        <img src="../../../assets/images/JARDENBOT.png" style="width: 40px; height: 40px;" />
-      </ion-button>
-    </div>
-    <ion-buttons slot="end" (click)="navigateToLogin()">
-      <ion-button style="background-color: yellow; border-radius: 50%;">
-        <ion-icon name="person-outline" style="color: black;"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-footer>

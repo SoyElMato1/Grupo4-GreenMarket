@@ -1,0 +1,418 @@
+//AYUDA A CENTRAR EKL BOT
+//AYUDA A CENTRAR EKL BOT
+ion-toolbar {
+  position: relative;
+}
+.center-button {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+}
+.big-icon {
+  font-size: 52px; /* Ajusta el tamaño según tus necesidades */
+  color: #000000; /* Opcional: Cambia el color del icono */
+}
+ion-buttons{
+  font-size: bold;
+
+}
+//Define el color del tolvar donde se encutra el menu y el logo de GREENMARKET
+.colormenus{
+  background: rgb(114, 191, 120);
+  color: black;
+
+}
+.nav-pills .nav-link {
+  font-weight: bold;
+
+  color:black;
+}
+
+.nav-pills .nav-link:hover {
+  background-color: rgb(254, 255, 159); /* Color de fondo al pasar el mouse */
+}
+
+.nav-pills .nav-link.active {
+
+  background-color: rgb(160, 214, 131); /* Color de fondo para el enlace activo */
+}
+
+
+
+//AYUDA A CENTRAR EKL BOT
+//Fondo de la plataforma
+.bigimage {
+  width: 100%;
+  min-height: 100vh; /* Asegura que el contenedor ocupe al menos el 100% del alto de la pantalla */
+  background:whitesmoke;
+  background-repeat: repeat;
+  background-position: center center;
+  background-size: cover;
+  background-attachment: scroll; /* Cambia a 'fixed' si quieres que el fondo esté fijo mientras el contenido se desplaza */
+  top: 0px;
+  left: 0px;
+}
+
+//APARENTEMENTE NO HACE NADA
+// -------------------------------------------------------------------------
+// -------------------------------------------------------------------------
+// -------------------------------------------------------------------------
+// -------------------------------------------------------------------------
+// -------------------------------------------------------------------------
+
+/* Estilos generales */
+.full-width-height {
+  width: 100%;
+  height: 800px;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+/* Barra superior */
+
+.ajustar{
+  text-align: center;
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;
+  }
+  .centrar {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    align-items: center; /* Centra verticalmente */
+    // height: 100vh; /* O el tamaño del contenedor */
+  }
+  .fs-1{
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: bold;
+  }
+
+  // .titulo{
+
+
+
+  //   // border: 10px;
+
+  //   // position: relative;
+  //   // text-align: start;
+  //   // display: flex;
+  //   // justify-content: center; /* Centra horizontalmente */
+  //   // align-items: center; /* Centra verticalmente */
+  //   // font-weight: 900; /* Valores comunes: 400 (normal), 700 (negrita) */
+  //   // font-family: 'Courier New', Courier, monospace;
+  // }
+  .titular {
+    background-color: rgb(160, 214, 131);
+    color: black;
+    width: 300px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+  }
+
+
+
+
+.status-time {
+  font-weight: 590;
+  font-size: 17px;
+}
+
+.status-icons {
+  display: flex;
+  gap: 8px;
+  margin-left: auto;
+  margin-right: 16px;
+}
+
+.icon-rect {
+  width: 19px;
+  height: 12px;
+  background-color: black;
+}
+
+.icon-signal {
+  width: 17px;
+  height: 12px;
+  background-color: black;
+}
+
+.icon-battery {
+  width: 27px;
+  height: 13px;
+  position: relative;
+}
+
+.battery-outline {
+  width: 25px;
+  height: 13px;
+  border: 1px solid black;
+  opacity: 0.35;
+}
+
+.battery-tip {
+  width: 1.3px;
+  height: 4px;
+  background-color: black;
+  opacity: 0.4;
+  position: absolute;
+  top: 4.7px;
+  left: 26px;
+}
+
+.battery-inner {
+  width: 21px;
+  height: 9px;
+  background-color: black;
+  border-radius: 2.5px;
+  position: absolute;
+  top: 2px;
+  left: 2px;
+}
+
+
+/* Barra inferior con iconos */
+.bottom-bar {
+  display: flex;
+  justify-content: space-between;
+}
+
+.bottom-icon {
+  background-color: rgba(229, 249, 0, 0.97);
+  border-radius: 50%;
+  width: 71px;
+  height: 53px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.bottom-icon img {
+  width: 43px;
+  height: 43px;
+}
+
+//Este es el que controla la forma del perfio y el color
+
+.profile-card {
+  display: flex;
+  justify-content: space-between; /* Ajusta el espacio entre las cajas */
+  position: relative;
+  // max-width: 500px; /* Ocupa todo el ancho de la carta */
+
+  background-color:rgb(114, 191, 120) ;
+  border:rgb(160, 214, 131) 2px solid;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+/* Contenedor de detalles del perfil (información adicional) */
+.profile-details {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+}
+
+
+.profile-image {
+  flex: 1;
+  display: flex;
+  padding: 16;
+  justify-content: center; /* Centra horizontalmente la imagen */
+  align-items: center; /* Centra verticalmente la imagen */
+  // background: red; /* Fondo de la caja para referencia */
+  width: 420px;
+  height: 265px; /* Altura fija de la caja */
+}
+.profile-image img {
+  min-width: 145px;
+  width: 100%; /* La imagen ocupa todo el ancho del contenedor */
+  height: 100%;/* Ajusta la altura proporcionalmente para evitar deformaciones */
+}
+/* Media Query para dispositivos móviles */
+
+
+
+
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
+// -----------------------------------------------------------------
+//circulo que contiene la calñificacion
+.rating-value {
+  background-color: rgb(160, 214, 131);
+  border-radius: 50%;
+  width: 45px;
+  height: 45px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  font-weight: bold;
+  color: rgb(6, 5, 5);
+}
+
+//color del boton a pasar el mause por encima
+.button-div:hover {
+  background-color: rgb(252, 255, 94); /* Color al pasar el mouse */
+}
+////////////////////////////////////////////////////////////////
+///AminMCIONES
+///
+///
+/* Título de la tarjeta (Responsivo) */
+
+.card-title {
+  font-size: 20px;
+  font-weight: bold;
+  color: black;
+  position: absolute;
+  background-color: rgb(160, 214, 131);
+  right: 0;
+  padding: 16px;
+  width: 280px;
+  height: 80px;
+  box-sizing: border-box;
+  border: black 1px solid;
+
+
+}
+
+/* Sección de estadísticas (calificación y productos) */
+.profile-stats {
+  display: flex;
+  flex-direction: column;
+  padding: 0 10px 10px; /* Ajuste en padding para eliminar espacio arriba */
+  min-width: 280px;
+  display: flex;
+  align-items: center; /* Alinea las cajas verticalmente */
+  width: 100%;
+  max-width: 200px;
+}
+
+
+/* Sección de calificación y productos */
+.card-section {
+  font-size: 20px;
+  text-align: center;
+  align-items: center;
+  color: black;
+  position: absolute;
+  background-color: rgb(254, 255, 159);
+  right: 0;
+  bottom: 126px;
+  padding: 16px;
+  width: 280px;
+  height: 60px;
+  box-sizing: border-box;
+  border: black 1px solid;
+  font-weight: bold;
+}
+.boton-verp {
+  font-size: 20px; /* Ajusta este valor según tus necesidades */
+  font-weight: bold;
+  text-align: center;
+  align-items: center;
+  color: black;
+  position: absolute;
+  background-color: rgb(254, 255, 159);  padding: 16px;
+  right: 0; /* Fija esta caja a la derecha */
+  padding: 16px;
+  width: 280px;
+  height: 60px;
+  bottom: 0;
+  box-sizing: border-box; /* Evita que el padding rompa el diseño */
+  border: black 1px solid;
+  font-weight: bold;
+}
+.carrito-icon{
+  color: rgb(160, 214, 131);
+  background-color: rgb(160, 214, 131);
+}
+
+
+.card-rating {
+  display: flex;
+  justify-content: center;
+  position: relative;
+
+  box-sizing: border-box;
+  font-size: 20px; /* Ajusta este valor según tus necesidades */
+
+
+  font-weight: bold;
+  text-align: center;
+  align-items: center;
+  color: black;
+  position: absolute;
+  right: 0; /* Fija esta caja a la derecha */
+  padding: 16px;
+  width: 280px;
+  height: 60px;
+  bottom: 64px;
+  box-sizing: border-box; /* Evita que el padding rompa el diseño */
+
+}
+.big-icon {
+  font-size: 30px; /* Ajusta el tamaño según tus necesidades */
+  color: #000000; /* Opcional: Cambia el color del icono */
+}
+
+header {
+  border-bottom: 1px solid #000000 !important; /* Cambia el color y grosor */
+}
+/* Asegura que el dropdown se posicione fuera del flujo */
+
+
+/* Asegura que el dropdown se muestre encima de otros elementos */
+/* Para que el dropdown se vea correctamente */
+.nav-item .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1050;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 0.375rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  max-height: 300px;
+  overflow-y: auto;
+  display: none; /* Asegúrate de que esté oculto inicialmente */
+}
+
+.nav-item .dropdown-menu.show {
+  display: block;  /* Lo muestra cuando la clase 'show' está activa */
+}
+
+
+.btn-icon-esquina {
+  position: absolute;
+  top: 10px; /* Ajusta el margen superior */
+  left: 10px; /* Ajusta el margen izquierdo */
+  z-index: 1; /* Asegúrate de que esté encima del contenido */
+}
+
+@media (max-width: 768px) {
+  .card-title, .card-section, .boton-verp,.card-rating {
+    font-size: 18px; /* Reduce el tamaño de la fuente */
+    padding: 12px; /* Reduce el padding */
+    width: 200px; /* Ajusta el ancho */
+    height: 70px; /* Ajusta la altura para que se adapte mejor */
+  }
+}
+@media (max-width: 768px) {
+  .profile-stats {
+    min-width: 100px;
+  }
+}

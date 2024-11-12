@@ -44,7 +44,13 @@ const routes: Routes = [
   },
   { path: 'pago-exitoso', component: PagoExitosoComponent },
   { path: 'pago-fallido', component: PagoFallidoComponent },
-  { path: 'chatbot', component: ChatbotComponent },  // Añade la ruta del chatbot
+  { path: 'chatbot', component: ChatbotComponent },
+  {
+    path: 'historial-compra',
+    loadChildren: () => import('./Paginas/historial-compra/historial-compra.module').then( m => m.HistorialCompraPageModule)
+  },
+
+ // Añade la ruta del chatbot
 
 
 

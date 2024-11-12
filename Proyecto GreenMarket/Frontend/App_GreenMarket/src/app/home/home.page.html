@@ -1,28 +1,161 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title class="ion-text-center">GreenMarket</ion-title>
-    <ion-buttons slot="end">
-      <ion-button (click)="navigateToLogin()">
-        <ion-icon slot="start" name="log-in"></ion-icon>
-      </ion-button>
-      <ion-button [routerLink]="['/carrito']">
-        <ion-icon name="cart"></ion-icon>
-        <ion-badge color="danger" *ngIf="cartItemCount > 0">{{ cartItemCount }}</ion-badge>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-</ion-header>
+  <ion-content [fullscreen]="true" scroll-y="true">
 
-<ion-content [fullscreen]="true">
-  <div class="loader">
-    <span></span>
-  </div>
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">GreenMarket</ion-title>
-    </ion-toolbar>
-  </ion-header>
-  <div id="container">
-    <ion-button (click)="lista_de_provedores()" style="display: block;"> Proveedores</ion-button>
-  </div>
-</ion-content>
+    <main class="bigimage">
+      <!-- Carrusel adaptado -->
+      <div id="myCarousel" class="carousel slide" data-bs-ride="carousel" >
+        <!-- Indicadores del carrusel -->
+        <div class="carousel-indicators" >
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+          <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+
+        <!-- Items del carrusel -->
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <ion-img class="bd-placeholder-img" src="../../assets/images/Carruseluno.jpg" alt="Image 1"></ion-img>
+            <div class="container">
+              <div class="carousel-caption text-start">
+                <h1>¿Quieres vender tus productos?</h1>
+                <p>Unete a nosotros </p>
+                <p><a  class="btn btn-lg btn-primary btn-custom"  href="login">Unete aqui</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <ion-img class="bd-placeholder-img" src="../../assets/images/Carruseldos.jpg"  alt="Image 2"></ion-img>
+            <div class="container">
+              <div class="carousel-caption">
+                <h1>¿Desas encontras tiendas cercanas a ti?</h1>
+                <p>Encuentra las jardinerias locales cerca de tu zona</p>
+                <p><a  class="btn btn-lg btn-primary btn-custom"  href="#">Geolocalizacion</a></p>
+              </div>
+            </div>
+          </div>
+          <div class="carousel-item">
+            <ion-img class="bd-placeholder-img" src="../../assets/images/caruseltrss.jpg"  alt="Image 3"></ion-img>
+            <div class="container">
+              <div class="carousel-caption text-end">
+                <h1>¿Deseas aprender sobre jarineria?</h1>
+                <p>Aprender de tus plantas preferidas de una forma facil</p>
+                <p><a  class="btn btn-lg btn-primary btn-custom" href="chatbot">JardernBot</a></p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Controles del carrusel -->
+
+          <button  class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Previous</span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Next</span>
+          </button>
+
+      </div>
+
+
+      <!-- Sección de marketing debajo del carrusel -->
+
+
+      <!-- /////////////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////// -->
+
+      <section class="album py-5 bg-body-tertiary">
+        <div  class="container">
+          <hr class="featurette-divider">
+
+          <div  class="row featurette">
+            <div class="col-md-7">
+              <h2 class="featurette-heading fw-normal lh-1">¿Quieres vender tus productos? <span class="text-body-secondary"> Unete a nosotros </span></h2>
+              <p class="lead">Al unirte a notros, podras disponer de un espacio para ti el cual vas a poder, dar mas visibilidad los
+                porductos que vender en tu dia a dia
+              </p>
+            </div>
+            <div class="col-md-5">
+              <svg  class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Soy un perro</title>
+                <!-- <rect width="100%" height="50%" fill="var(--bs-secondary-bg)"/> -->
+                <image href="https://images.pexels.com/photos/2253275/pexels-photo-2253275.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" x="0" y="0" width="100%" height="100%" />
+              </svg>
+            </div>
+          </div>
+
+          <hr class="featurette-divider">
+
+          <div class="row featurette">
+            <div class="col-md-7 order-md-2">
+              <h2 class="featurette-heading fw-normal lh-1">¿Desas encontras tiendas cercanas a ti? <span class="text-body-secondary">Encuentra las jardinerias locales de tu zona</span></h2>
+              <p class="lead">Another featurette? Of course. More placeholder content here to give you an idea of how this layout would work with some actual real-world content in place.</p>
+            </div>
+            <div class="col-md-5 order-md-1">
+              <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <!-- <rect width="100%" height="100%" fill="var(--bs-secondary-bg)"/> -->
+                <image href="https://img.freepik.com/fotos-premium/venta-plantas-interior-exterior-vivero-local_105322-394.jpg?w=360" x="0" y="0" width="100%" height="100%" />
+              </svg>
+            </div>
+          </div>
+
+          <hr class="featurette-divider">
+
+          <div class="row featurette">
+            <div class="col-md-7">
+              <h2 class="featurette-heading fw-normal lh-1">¿Deseas aprender sobre jarineria? <span class="text-body-secondary"> Aprende de tus plantas preferidas de una forma facil</span></h2>
+              <p class="lead">Gracais a la incorporacion de neustro gran amigo JardenBot, podras aprender de jardineria de una forma sencilla, est concieste en ser un chat de ayuda inpulsado con Inteligecia artificial con el cual podras interactuar paradescubri sobre nuevas cosa de la jardineria o recordar cosas que ya saber </p>
+            </div>
+            <div class="col-md-5">
+              <svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder: 500x500" preserveAspectRatio="xMidYMid slice" focusable="false">
+                <title>Placeholder</title>
+                <!-- <rect width="100%" height="100%" fill="var(--bs-secondary-bg)"/> -->
+                <image href="../../assets/images/Designer.png" x="0" y="0" width="100%" height="100%" />
+              </svg>
+            </div>
+          </div>
+
+          <hr class="featurette-divider">
+        </div>
+        <div >
+          <div class="container marketingmarketing-full-width ">
+            <!-- Contenido aquí -->
+            <div class="row">
+              <div class="col-lg-4">
+                <img src="https://i.blogs.es/759769/trucosinstagram/1024_2000.webp" alt="Placeholder" class="rounded-circle custom-image" width="140" height="140">
+                <h2 class="fw-normal">Intragram</h2>
+                <p>greenmarket_natural</p>
+              </div>
+              <div class="col-lg-4">
+                <img src="https://play-lh.googleusercontent.com/bYtqbOcTYOlgc6gqZ2rwb8lptHuwlNE75zYJu6Bn076-hTmvd96HH-6v7S0YUAAJXoJN"  class="rounded-circle custom-image" alt="Placeholder" width="140" height="140">
+                <h2 class="fw-normal">Whatsapp</h2>
+                <p>+1 (234) 567-8901</p>
+
+              </div>
+              <div class="col-lg-4">
+                <img src="https://www.internetmatters.org/wp-content/uploads/2024/08/facebook-logo-new.png"  class="rounded-circle custom-image" alt="Placeholder"  width="140" height="140">
+                <h2 class="fw-normal">fecebook</h2>
+                <p>Facebook: GreenMarket -
+                  Jardinería y Productos Naturales</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </section>
+      <!-- /////////////////////////////////////////////////////////////
+      /////////////////////////////////////////////////////////////
+      ///////////////////////////////////////////////////////////// -->
+      <hr class="featurette-divider">
+      <!-- Footer -->
+      <footer class="container">
+        <p class="float-end"><a href="#">Back to top</a></p>
+        <p style="color: black;">&copy; 2024 Company, Inc. &middot; <a href="#">Privacy</a> &middot; <a href="#">Terms</a></p>
+      </footer>
+    </main>
+
+    <!-- Importa Bootstrap JavaScript bundle para la funcionalidad del carrusel -->
+    <script src="../../../node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+  </ion-content>

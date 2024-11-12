@@ -17,16 +17,21 @@ export class ProductoServiService {
   }
 
   // 1. Obtener productos por RUT del proveedor
+  // getProductosByProveedor(rut: string): Observable<any> {
+  //   const token = localStorage.getItem('authToken'); // Asegúrate de que este sea el nombre correcto
+  //   console.log('el token es', token)
+  //   const headers = new HttpHeaders({
+  //     'Authorization': `Token ${token}` // Cambia a 'Bearer' si usas JWT
+  //   });
+
+  //   return this.http.get(`${this.apiUrl}productos/?rut=${rut}`, { headers });
+  // }
   getProductosByProveedor(rut: string): Observable<any> {
-    const token = localStorage.getItem('authToken'); // Asegúrate de que este sea el nombre correcto
-    console.log('el token es', token)
-    const headers = new HttpHeaders({
-      'Authorization': `Token ${token}` // Cambia a 'Bearer' si usas JWT
-    });
+    // Elimina la obtención y el uso del token si ya no es necesario
+    const headers = new HttpHeaders(); // No añadimos nada a las cabeceras
 
     return this.http.get(`${this.apiUrl}productos/?rut=${rut}`, { headers });
   }
-
   getProductoById(id: number | null): Observable<any> {
     const token = localStorage.getItem('authToken'); // Asegúrate de que este sea el nombre correcto
     const headers = new HttpHeaders({
@@ -36,7 +41,6 @@ export class ProductoServiService {
   }
 
   getdetalleProducto(id: number): Observable<any> {
-
     return this.http.get(`${this.apiUrl}producto/${id}/`);
   }
 
@@ -73,6 +77,13 @@ export class ProductoServiService {
 
   getCategorias(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}categoria/`);
+  }
+
+  getHistorial(rut : string): Observable<any[]>{
+    return this.http.get<any[]>(`${this.apiUrl}historial/${rut}/`);
+  }
+  productoId(producto_id: number | null): Observable<any> {
+    return this.http.get(`${this.apiUrl}obtener_producto/${producto_id}/`);
   }
 
 }

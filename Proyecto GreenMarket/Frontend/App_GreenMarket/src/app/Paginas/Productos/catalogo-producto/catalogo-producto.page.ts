@@ -17,8 +17,9 @@ export class CatalogoProductoPage implements OnInit {
   carrito: any[] = []; // Propiedad para almacenar el carrito
   productos: any[] = [];
   console: any;
-  cartItemCount: number = 0;
+  cantidadCarrito: number = 0;
   showSearchBar = false
+
   productosFiltrados: any[] = []
 
   constructor(private productoService: ProductoServiService,
@@ -105,6 +106,13 @@ export class CatalogoProductoPage implements OnInit {
   // Dentro del componente CatalogoProductoPage
   verDetalleProducto(productoId: number) {
     this.router.navigate(['/detalle-producto', productoId]);
+  }
+  añadioracarrito() {
+    // Escucha los cambios de cantidadCarrito desde el servicio
+    this.cantidadCarrito = this. serviciocarrito.obtenerCantidadCarrito();
+    this. serviciocarrito.cantidadCarrito.subscribe(cantidad => {
+      this.cantidadCarrito = cantidad;
+    });
   }
 
 }

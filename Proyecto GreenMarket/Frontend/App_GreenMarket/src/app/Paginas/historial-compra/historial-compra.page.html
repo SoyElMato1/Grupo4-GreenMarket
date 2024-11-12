@@ -1,0 +1,58 @@
+<ion-content [fullscreen]="true">
+  <div class="bigimage">
+    <div class="container" style="max-width: 400px;">
+      <!-- Formulario para verificar historial por RUT -->
+      <form [formGroup]="rutForm" (ngSubmit)="verificarHistorial()" novalidate>
+        <h2 class="mb-4 titular text-center">Consulta Historial de Compras</h2>
+
+        <!-- Campo de RUT -->
+        <div class="form-group mb-3">
+          <label class="label mb-2">Ingrese su RUT</label>
+          <ion-input formControlName="rut" placeholder="Ej: 12345678" class="form-control" [(ngModel)]="rut"></ion-input>
+          <div *ngIf="campo('rut')?.invalid && campoTocado('rut')" class="text-danger">
+            El RUT es obligatorio y debe ser válido.
+          </div>
+        </div>
+
+        <!-- Botón para consultar historial -->
+        <ion-button color="light" type="submit" expand="block" (click)="consultarHistorial()" >Consultar Historial</ion-button>
+      </form>
+    </div>
+
+
+    <!-- Tabla de historial de compras -->
+    <div *ngIf="orders && orders.length > 0" class="container mt-4">
+      <h2 class="text-center">Historial de Compras</h2>
+      <ion-grid>
+        <ion-row>
+          <ion-col>Cliente</ion-col>
+          <ion-col>Items</ion-col>
+          <ion-col>Total</ion-col>
+          <ion-col>Estado de Pago</ion-col>
+          <ion-col>Fecha de Compra</ion-col>
+        </ion-row>
+        <ion-row *ngFor="let order of orders">
+          <div>
+            <ion-col>{{ rut }}</ion-col>
+            <ion-col>{{ order.total | currency }}</ion-col>
+            <ion-col>{{ order.pagado? 'Pagado' : 'Rechazado'  }}</ion-col>
+            <ion-col>{{ order.orden_date }}</ion-col>
+            <ion-col>
+              <ul>
+                <li *ngFor="let item of order.items">
+                  <strong>Producto:   </strong> {{ item.nombre }},
+                  <strong>Cantidad:</strong> {{ item.cantidad }}
+                </li>
+              </ul>
+            </ion-col>
+          </div>
+
+        </ion-row>
+      </ion-grid>
+    </div>
+  </div>
+  <!-- Mensaje cuando no hay órdenes -->
+  <div *ngIf="orders && orders.length === 0" class="text-center mt-4">
+    <p>No tienes órdenes en tu historial.</p>
+  </div>
+</ion-content>

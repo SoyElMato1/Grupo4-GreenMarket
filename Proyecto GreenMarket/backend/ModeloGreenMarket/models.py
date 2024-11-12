@@ -232,7 +232,8 @@ class Orden(models.Model):
     items = models.JSONField()  # Guarda los productos y cantidades en formato JSON
     total = models.DecimalField(max_digits=10, decimal_places=2)
     pagado = models.BooleanField(default=False)
-
+    buy_order = models.CharField(max_length=150)
+    orden_date = models.DateTimeField(auto_now_add=True, blank=True)
     def __str__(self):
         return f"Orden {self.id} - Cliente {self.cliente.nombre}"
 

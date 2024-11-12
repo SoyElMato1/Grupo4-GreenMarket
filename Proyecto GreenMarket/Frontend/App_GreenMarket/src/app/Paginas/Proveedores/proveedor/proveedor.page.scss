@@ -18,13 +18,34 @@ ion-buttons{
   font-size: bold;
 
 }
+//Define el color del tolvar donde se encutra el menu y el logo de GREENMARKET
+.colormenus{
+  background: rgb(114, 191, 120);
+  color: black;
+
+}
+.nav-pills .nav-link {
+  font-weight: bold;
+
+  color:black;
+}
+
+.nav-pills .nav-link:hover {
+  background-color: rgb(254, 255, 159); /* Color de fondo al pasar el mouse */
+}
+
+.nav-pills .nav-link.active {
+
+  background-color: rgb(160, 214, 131); /* Color de fondo para el enlace activo */
+}
+
+
 
 //AYUDA A CENTRAR EKL BOT
 //Fondo de la plataforma
 .bigimage {
   width: 100%;
   min-height: 100vh; /* Asegura que el contenedor ocupe al menos el 100% del alto de la pantalla */
-
   background:whitesmoke;
   background-repeat: repeat;
   background-position: center center;
@@ -64,98 +85,45 @@ ion-buttons{
     align-items: center; /* Centra verticalmente */
     // height: 100vh; /* O el tamaño del contenedor */
   }
-  .titulo{
-    font-weight: bold;
+  .fs-1{
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 50px;
-    border: 10px;
-
-    position: relative;
-    text-align: start;
-    display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    // font-weight: 900; /* Valores comunes: 400 (normal), 700 (negrita) */
-    // font-family: 'Courier New', Courier, monospace;
+    font-weight: bold;
   }
-  .titular {
-    background-color: rgb(160, 214, 131);
-    color: black;
-    width: 300px;
-    height: 60px;
+
+  // .titulo{
+
+
+
+  //   // border: 10px;
+
+  //   // position: relative;
+  //   // text-align: start;
+  //   // display: flex;
+  //   // justify-content: center; /* Centra horizontalmente */
+  //   // align-items: center; /* Centra verticalmente */
+  //   // font-weight: 900; /* Valores comunes: 400 (normal), 700 (negrita) */
+  //   // font-family: 'Courier New', Courier, monospace;
+  // }}
+  .container {
+    // background-color: rgb(160, 214, 131);
+    width: 100% !important;
+    max-width: 1890px !important; /* Ajusta este tamaño según lo que necesitas */
+    padding: 20px !important;
+    min-height: 500px !important; /* Ajusta la altura según lo deseado */
     display: flex;
     justify-content: center;
     align-items: center;
-    font-weight: bold;
-    text-align: center;
+    border: 2px solid  black; /* Cambia el color del borde */
+
+}
+
+  .fw-light{
+    color: black;
     font-family: 'Bebas Neue', sans-serif;
-    font-size: 40px;
+    font-weight: bold;
+    // background-color: rgb(160, 214, 131);
   }
 
-.colormenus{
-  // background: rgb(160, 214, 131);
-  background: rgb(114, 191, 120);
-  color: black;
-
-}
-
-
-.status-time {
-  font-weight: 590;
-  font-size: 17px;
-}
-
-.status-icons {
-  display: flex;
-  gap: 8px;
-  margin-left: auto;
-  margin-right: 16px;
-}
-
-.icon-rect {
-  width: 19px;
-  height: 12px;
-  background-color: black;
-}
-
-.icon-signal {
-  width: 17px;
-  height: 12px;
-  background-color: black;
-}
-
-.icon-battery {
-  width: 27px;
-  height: 13px;
-  position: relative;
-}
-
-.battery-outline {
-  width: 25px;
-  height: 13px;
-  border: 1px solid black;
-  opacity: 0.35;
-}
-
-.battery-tip {
-  width: 1.3px;
-  height: 4px;
-  background-color: black;
-  opacity: 0.4;
-  position: absolute;
-  top: 4.7px;
-  left: 26px;
-}
-
-.battery-inner {
-  width: 21px;
-  height: 9px;
-  background-color: black;
-  border-radius: 2.5px;
-  position: absolute;
-  top: 2px;
-  left: 2px;
-}
 
 
 /* Barra inferior con iconos */
@@ -181,42 +149,42 @@ ion-buttons{
 
 //Este es el que controla la forma del perfio y el color
 
-.profile-card {
-  display: flex;
-  justify-content: space-between; /* Ajusta el espacio entre las cajas */
-  position: relative;
-  // max-width: 500px; /* Ocupa todo el ancho de la carta */
+// .profile-card {
+//   display: flex;
+//   justify-content: space-between; /* Ajusta el espacio entre las cajas */
+//   position: relative;
+//   // max-width: 500px; /* Ocupa todo el ancho de la carta */
 
-  background-color:rgb(114, 191, 120) ;
-  border:rgb(160, 214, 131) 2px solid;
-  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
-}
+//   background-color:rgb(114, 191, 120) ;
+//   border:rgb(160, 214, 131) 2px solid;
+//   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+// }
 
 
 /* Contenedor de detalles del perfil (información adicional) */
-.profile-details {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 10px;
-}
+// .profile-details {
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   padding: 10px;
+// }
 
 
-.profile-image {
-  flex: 1;
-  display: flex;
-  padding: 16;
-  justify-content: center; /* Centra horizontalmente la imagen */
-  align-items: center; /* Centra verticalmente la imagen */
-  // background: red; /* Fondo de la caja para referencia */
-  width: 420px;
-  height: 265px; /* Altura fija de la caja */
-}
-.profile-image img {
-  min-width: 145px;
-  width: 100%; /* La imagen ocupa todo el ancho del contenedor */
-  height: 100%;/* Ajusta la altura proporcionalmente para evitar deformaciones */
-}
+// .profile-image {
+//   flex: 1;
+//   display: flex;
+//   padding: 16;
+//   justify-content: center; /* Centra horizontalmente la imagen */
+//   align-items: center; /* Centra verticalmente la imagen */
+//   // background: red; /* Fondo de la caja para referencia */
+//   width: 420px;
+//   height: 265px; /* Altura fija de la caja */
+// }
+// .profile-image img {
+//   min-width: 145px;
+//   width: 100%; /* La imagen ocupa todo el ancho del contenedor */
+//   height: 100%;/* Ajusta la altura proporcionalmente para evitar deformaciones */
+// }
 /* Media Query para dispositivos móviles */
 
 
@@ -229,18 +197,18 @@ ion-buttons{
 // -----------------------------------------------------------------
 // -----------------------------------------------------------------
 //circulo que contiene la calñificacion
-.rating-value {
-  background-color: rgb(160, 214, 131);
-  border-radius: 50%;
-  width: 45px;
-  height: 45px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 20px;
-  font-weight: bold;
-  color: rgb(6, 5, 5);
-}
+// .rating-value {
+//   background-color: rgb(160, 214, 131);
+//   border-radius: 50%;
+//   width: 45px;
+//   height: 45px;
+//   display: flex;
+//   justify-content: center;
+//   align-items: center;
+//   font-size: 20px;
+//   font-weight: bold;
+//   color: rgb(6, 5, 5);
+// }
 
 //color del boton a pasar el mause por encima
 .button-div:hover {
@@ -252,94 +220,153 @@ ion-buttons{
 ///
 /* Título de la tarjeta (Responsivo) */
 
-.card-title {
+////////////////////////////////////////////////
+/// ///////////////////////////////////////////
+///
+/// ///////////////////////////////////////////
+/* Fondo y borde de la tarjeta */
+.card-custom {
+  background-color:rgb(114, 191, 120); /* Fondo de la tarjeta */
+  border: rgb(0, 0, 0) 2px solid ;/* Borde de la tarjeta */
+  // border-radius: 40px; /* Bordes redondeados */
+
+}
+// .card-border {
+//   // border: 2px solid black; /* Ajusta el grosor y color del borde */
+//   background-color:rgb(114, 191, 120); /* Fondo de la tarjeta */
+// }
+
+/* Botón personalizado */
+// .btn-custom {
+//   background-color: #007bff; /* Color de fondo del botón */
+//   border-color: #007bff;
+//   color: #ffffff; /* Color del texto del botón */
+// }
+
+// .btn-custom:hover {
+//   background-color: #0056b3; /* Color del botón al pasar el cursor */
+//   border-color: #0056b3;
+// }
+
+/* Estilo de énfasis para el nombre del proveedor */
+  // .text-primary-emphasis {
+  //   color: #5a5a5a; /* Color del texto de énfasis */
+  //   font-weight: bold;
+  // }
+
+// /* Estilo de texto secundario (email, descripción) */
+// .text-body-secondary {
+//   color: #757575; /* Color del texto secundario */
+// }
+
+/* Título principal */
+// .titular {
+//   font-size: 24px;
+//   font-weight: bold;
+//   margin-top: 20px;
+//   color: #333333; /* Color del título */
+// }
+
+//MODAL
+.container-fluid{
+  font-weight: 900;
   font-size: 20px;
-  font-weight: bold;
-  color: black;
-  position: absolute;
-  background-color: rgb(160, 214, 131);
-  right: 0;
-  padding: 16px;
-  width: 280px;
-  height: 80px;
-  box-sizing: border-box;
-  border: black 1px solid;
-
-
+    // background-color: rgb(160, 214, 131);
+    // border: #000000 2px solid;
+  }
+.modal-sheet .modal-dialog {
+  width: 480px;
+  transition: bottom .75s ease-in-out;
+  color: #000000;
+}
+.modal-sheet .modal-footer {
+  padding-bottom: 2rem;
+  color: #000000;
 }
 
-/* Sección de estadísticas (calificación y productos) */
-.profile-stats {
-  display: flex;
-  flex-direction: column;
-  padding: 0 10px 10px; /* Ajuste en padding para eliminar espacio arriba */
-  min-width: 280px;
-  display: flex;
-  align-items: center; /* Alinea las cajas verticalmente */
-  width: 100%;
-  max-width: 200px;
-}
-
-
-/* Sección de calificación y productos */
-.card-section {
-  font-size: 20px;
+//////////////////////////////
+/// ESTRELLAS
+.rating {
+  display: inline-block;
   text-align: center;
-  align-items: center;
-  color: black;
-  position: absolute;
-  background-color: rgb(254, 255, 159);
-  right: 0;
-  bottom: 126px;
-  padding: 16px;
-  width: 280px;
-  height: 60px;
-  box-sizing: border-box;
-  border: black 1px solid;
-  font-weight: bold;
-}
-.boton-verp {
-  font-size: 20px; /* Ajusta este valor según tus necesidades */
-  font-weight: bold;
-  text-align: center;
-  align-items: center;
-  color: black;
-  position: absolute;
-  background-color: rgb(254, 255, 159);  padding: 16px;
-  right: 0; /* Fija esta caja a la derecha */
-  padding: 16px;
-  width: 280px;
-  height: 60px;
-  bottom: 0;
-  box-sizing: border-box; /* Evita que el padding rompa el diseño */
-  border: black 1px solid;
-  font-weight: bold;
-}
-
-
-
-.card-rating {
-  display: flex;
   justify-content: center;
-  position: relative;
-
-  box-sizing: border-box;
-  font-size: 20px; /* Ajusta este valor según tus necesidades */
-
-
-  font-weight: bold;
-  text-align: center;
-  align-items: center;
-  color: black;
-  position: absolute;
-  right: 0; /* Fija esta caja a la derecha */
-  padding: 16px;
-  width: 280px;
-  height: 60px;
-  bottom: 64px;
-  box-sizing: border-box; /* Evita que el padding rompa el diseño */
-
 }
+
+.rating input {
+  display: none;
+  text-align: center;
+  justify-content: center;
+}
+
+.rating label {
+  float: right;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.3s;
+  text-align: center;
+  justify-content: center;
+}
+
+.rating label:before {
+  content: '\2605';
+  font-size: 30px;
+  text-align: center;
+  justify-content: center;
+}
+
+.rating input:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+  color: rgb(254, 255, 159);
+  transition: color 0.3s;
+}
+.d-inline-block {
+  font-size: 25px;
+}
+
+
+
+/* Fondo y bordes del modal */
+.modal-sheet {
+  background:  rgb(160, 214, 131) ;
+  background-color:  rgb(160, 214, 131)  ; /* Cambia a un color más claro */
+  border: 2px solid  rgb(160, 214, 131) ; /* Cambia el color del borde */
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra más suave */
+}
+
+/* Cambia el color del fondo */
+.bg-body-secondary {
+  height: 450px;
+  // background:  rgb(160, 214, 131) ;
+  // background-color:  rgb(160, 214, 131)  ; /* Cambia a un color más claro */
+  // // border: 2px solid  rgb(255, 255, 255) ; /* Cambia el color del borde */
+  // background-color: rgb(160, 214, 131) ; /* Color de fondo personalizado */
+}
+
+/* Título del modal */
+.fw-bold {
+  color: #000000; /* Color personalizado para el título */
+  font-weight: 600;
+}
+
+/* Estilo del botón */
+.btn-primary {
+  background-color: rgb(160, 214, 131);/* Color de fondo personalizado */
+  border-color: rgb(160, 214, 131);     /* Color del borde */
+  color: #000000;            /* Color del texto */
+}
+.list-unstyled{
+  color: #000000;
+}
+
+/* Hover en el botón para resaltar cuando el cursor esté sobre él */
+.btn-primary:hover {
+  background-color: rgb(254, 255, 159); /* Color al pasar el ratón */
+  border-color: rgb(254, 255, 159);
+}
+
+
 @media (max-width: 768px) {
   .card-title, .card-section, .boton-verp,.card-rating {
     font-size: 18px; /* Reduce el tamaño de la fuente */
@@ -353,3 +380,22 @@ ion-buttons{
     min-width: 100px;
   }
 }
+
+
+
+// .card-img-top {
+//   height: 200px;
+//   object-fit: cover;
+// }
+
+// .fw-light {
+//   font-weight: 300;
+// }
+
+// .text-secondary {
+//   color: #6c757d;
+// }
+
+// .ion-padding {
+//   padding: 1rem;
+// }

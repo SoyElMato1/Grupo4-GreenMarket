@@ -316,7 +316,7 @@ checkout_pago() {
     (response: any) => {
       if (response && response.orden_id) {
         this.mostrarToast(`Orden creada. ID de la orden: ${response.orden_id}`);
-        this.irAPagar(); // Llama a irAPagar después de crear la orden
+        this.irAPagar(response.orden_id); // Llama a irAPagar después de crear la orden
       } else {
         this.mostrarToast('Error: No se recibió el ID de la orden.');
       }
@@ -328,13 +328,13 @@ checkout_pago() {
   );
 }
 
-irAPagar() {
+irAPagar(orden_id: any) {
   if (!this.customer.rut || !this.customer.dv || !this.customer.correo_electronico || !this.customer.nombre || !this.customer.direccion) {
     this.mostrarToast('Por favor, completa todos los campos.');
     return;
   }
 
-  this.cartService.iniciarPago({ total: this.total }).subscribe(
+  this.cartService.iniciarPago({ total: this.total,orden_id : orden_id }).subscribe(
     response => {
       console.log(response);
 

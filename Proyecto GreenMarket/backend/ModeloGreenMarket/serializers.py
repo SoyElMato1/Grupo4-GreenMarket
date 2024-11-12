@@ -100,3 +100,8 @@ class VentaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Venta
         fields = ['id_venta', 'fecha_venta', 'monto_total', 'id_cliente', 'id_carrito', 'transaccion']
+
+class OrdenSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Orden
+        fields = ['cliente','total','pagado', 'items', 'buy_order', 'orden_date']

@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { ChatbotComponent } from './Paginas/chatbot/chatbot.component';
 import { PagoExitosoComponent } from './Paginas/Productos/pagos/pago-exitoso/pago-exitoso.component';
@@ -14,7 +14,7 @@ import {HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [AppComponent, ChatbotComponent, PagoExitosoComponent, PagoFallidoComponent],
-  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule],
+  imports: [BrowserModule, IonicModule.forRoot(), AppRoutingModule, HttpClientModule, FormsModule, ReactiveFormsModule,],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],
 })

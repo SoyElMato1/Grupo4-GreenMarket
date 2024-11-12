@@ -3,19 +3,25 @@
   border: 1px solid #ccc; /* Borde ligero */
   border-radius: 10px; /* Bordes redondeados */
   padding: 15px; /* Espaciado interno */
-  width: 400px; /* Ancho fijo */
-  max-height: 500px; /* Altura máxima */
-  overflow-y: auto; /* Desplazamiento vertical si es necesario */
+  width: 100%; /* Ancho completo */
+  height:90vh; /* Altura completa de la pantalla */
+  display: flex;
+  flex-direction: column;
+  box-sizing: border-box;
 }
 
 h2 {
   font-size: 1.5em; /* Tamaño del texto del título */
   text-align: center; /* Centrar el título */
   color: black; /* Cambia el color del texto del título a negro */
+  margin-bottom: 15px; /* Espacio inferior */
 }
 
 .messages {
+  flex: 1; /* Ocupa el espacio disponible */
+  overflow-y: auto; /* Desplazamiento vertical si es necesario */
   margin-bottom: 10px; /* Espacio inferior */
+  padding-right: 10px; /* Espaciado interno para mejorar visibilidad */
 }
 
 .user-message {
@@ -31,12 +37,13 @@ h2 {
 }
 
 .message-input {
-  width: 100%; /* Ancho completo */
+  width: calc(100% - 90px); /* Ajuste de ancho para que el botón y campo quepan juntos */
   height: 50px; /* Altura de la caja de texto */
   border-radius: 5px; /* Bordes redondeados */
   border: 1px solid #ccc; /* Borde ligero */
   padding: 10px; /* Espaciado interno */
   margin-bottom: 10px; /* Espacio inferior */
+  box-sizing: border-box;
 }
 
 .send-button {
@@ -46,9 +53,10 @@ h2 {
   border-radius: 5px; /* Bordes redondeados */
   padding: 10px 15px; /* Espaciado interno del botón */
   cursor: pointer; /* Cambiar el cursor al pasar sobre el botón */
+  width: 800px; /* Ajuste de ancho para que el botón no ocupe demasiado espacio */
+  margin-left: 10px;
 }
 
 .send-button:hover {
   background-color: #0056b3; /* Color de fondo en hover */
 }
-

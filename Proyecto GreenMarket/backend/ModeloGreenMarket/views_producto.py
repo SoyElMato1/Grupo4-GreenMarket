@@ -37,14 +37,38 @@ def agregar_productos(request):
         return JsonResponse(productos_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 # Todos los productos de un Proveedor
+# @csrf_exempt
+# @api_view(['GET'])
+# @permission_classes([IsAuthenticated])  # Requiere autenticación
+# def obtener_productos(request):
+#     """
+#     Lista productos por el RUT del proveedor o agrega un nuevo producto.
+#     """
+#     # Filtrar productos por el RUT del proveedor
+#     if request.method == 'GET':
+#         rut_proveedor = request.GET.get('rut')
+        
+#         if rut_proveedor:
+#             try:
+#                 proveedor = Proveedor.objects.get(rut=rut_proveedor)
+#                 productos = Producto.objects.filter(id_proveedor=proveedor)
+#             except Proveedor.DoesNotExist:
+#                 return JsonResponse({"error": "Proveedor no encontrado"}, status=status.HTTP_404_NOT_FOUND)
+#         else:
+#             productos = Producto.objects.all()
+        
+#         serializer = ProductoSerializer(productos, many=True)
+#         return JsonResponse(serializer.data, safe=False)
+
+
+
 @csrf_exempt
 @api_view(['GET'])
-@permission_classes([IsAuthenticated])  # Requiere autenticación
+@permission_classes([AllowAny])  # Permite acceso sin autenticación
 def obtener_productos(request):
     """
     Lista productos por el RUT del proveedor o agrega un nuevo producto.
     """
-    # Filtrar productos por el RUT del proveedor
     if request.method == 'GET':
         rut_proveedor = request.GET.get('rut')
         
@@ -59,6 +83,20 @@ def obtener_productos(request):
         
         serializer = ProductoSerializer(productos, many=True)
         return JsonResponse(serializer.data, safe=False)
+
+#Traer los productos del franco
+@csrf_exempt
+@api_view(["GET"])
+@permission_classes([AllowAny])
+def obtener_producto(request, id):
+    try:
+        producto = Producto.objects.get(codigo_producto=id)
+        serializer = ProductoSerializer(producto)
+        return JsonResponse(serializer.data)
+    except Producto.DoesNotExist:
+        return JsonResponse({"detail": "Producto no encontrado"}, status=404)
+    
+
 
 # Trae el producto del proveedor
 @csrf_exempt

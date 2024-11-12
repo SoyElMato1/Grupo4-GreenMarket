@@ -1,124 +1,148 @@
-<ion-header [translucent]="true">
-  <ion-toolbar color="A" class="colormenus" >
-      <ion-buttons  slot="start">
-        <ion-back-button default-href="/proveedor"></ion-back-button>
-      </ion-buttons>
-      <ion-title class="titulo">GreenMarket</ion-title> <!-- Clase para centrar el título -->
-    </ion-toolbar>
-  </ion-header>
+<ion-content >
 
-<ion-content class="e-card playing">
-  <ion-grid class="wave-full">
-    <!-- <ion-row>
-      <ion-col class="centrar">
-        <div class="cuadrado">
-          Tu carrito de compras
-          </div>
-      </ion-col>
-    </ion-row> -->
-    <!-- Formulario de inicio de sesión -->
-    <div class="margen" *ngIf="showLoginForm">
-      <ion-card class="container">
-        <form class="form" [formGroup]="loginForm" novalidate>
-          <div class="titular">
-            Inicio de sesion
-          </div>
-          <span class="input-span">
-            <label class="label">Nombre de Usuario o RUT</label>
-            <ion-input (keydown.enter)="login()" type="email" formControlName="username"></ion-input>
-            <div *ngIf="loginForm.get('username')?.invalid && loginForm.get('username')?.touched">
-              <ion-text color="danger">El nombre de usuario o rut es obligatorio y debe ser un rut válido.</ion-text>
+  <div class="bigimage">
+
+
+    <div class="container" style="max-width: 500px;">
+
+      <!-- Formulario de Inicio de Sesión -->
+      <div *ngIf="showLoginForm">
+        <!-- <ion-card class="container py-5 my-5">        </ion-card> -->
+          <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
+            <h2 class="mb-4 titular text-center">Inicio de sesión</h2>
+
+            <!-- Nombre de Usuario o RUT -->
+            <div class="form-group mb-3">
+              <label class="label mb-2">Nombre de Usuario o RUT</label>
+              <ion-input formControlName="username" placeholder="Ingrese su usuario o RUT" class="form-control"></ion-input>
+              <div *ngIf="campo('username')?.invalid && campoTocado('username')" class="text-danger">
+                El nombre de usuario o RUT es obligatorio.
+              </div>
             </div>
-          </span>
-          <span class="input-span">
-            <label for="password" class="label">Contraseña</label>
-            <ion-input (keydown.enter)="login()" type="password" formControlName="password" [type]="showPasswordLogin ? 'text' : 'password'">
-              <ion-icon
-                [name]="showPasswordLogin ? 'eye-off' : 'eye'"
-                slot="end"
-                (click)="togglePasswordVisibility('login')"
-                style="cursor: pointer;">
-              </ion-icon>
-            </ion-input>
-          </span>
-          <ion-buttons>
-            <ion-button class="submit" expand="block" (click)="login()">Login</ion-button>
-          </ion-buttons>
-          <span class="span">¿No tienes cuenta?
-          </span>
-          <ion-buttons>
-            <ion-button class="boton-cambiar" (click)="handleButtonClick()">
-              {{ showCrudForm ? 'Cancelar' : 'Registrate' }}
-            </ion-button>
-          </ion-buttons>
-          <br>
-        </form>
-      </ion-card>
-    </div>
-    <!-- Formulario de Registro de Proveedor -->
-    <div class="margen" *ngIf="showCrudForm">
-      <ion-card class="container">
-        <form class="form" [formGroup]="registerForm" novalidate>
-          <div class="titular">
-            Registrate aquí
+
+            <!-- Contraseña -->
+            <div class="form-group mb-3">
+              <label class="label mb-2">Contraseña</label>
+              <ion-input [type]="showPasswordLogin ? 'text' : 'password'" formControlName="password" class="form-control">
+                <ion-icon
+                  [name]="showPasswordLogin ? 'eye-off' : 'eye'"
+                  slot="end"
+                  (click)="togglePasswordVisibility('login')"
+                  style="cursor: pointer;">
+                </ion-icon>
+              </ion-input>
+              <div *ngIf="campo('password')?.invalid && campoTocado('password')" class="text-danger">
+                La contraseña es obligatoria y debe tener entre 8 y 12 caracteres.
+              </div>
             </div>
-          <ion-label class="label" position="stacked">RUT</ion-label>
-          <ion-row>
-            <ion-col size="9"> <!-- 9 columnas para el RUT -->
-              <ion-input type="text" formControlName="rut" placeholder="12345678"></ion-input>
-            </ion-col>
-            <ion-col size="3"> <!-- 3 columnas para el DV -->
-              <ion-input type="text" formControlName="dv" placeholder="0"></ion-input>
-            </ion-col>
-          </ion-row>
-          <div *ngIf="registerForm.get('rut')?.invalid && registerForm.get('rut')?.touched">
-            <ion-text color="danger">El RUT es obligatorio.</ion-text>
-          </div>
-          <div *ngIf="registerForm.get('dv')?.invalid && registerForm.get('dv')?.touched">
-            <ion-text color="danger">El dv es obligatorio.</ion-text>
-          </div>
-          <ion-label class="label" position="stacked">Correo Electrónico</ion-label>
-          <ion-input type="email" formControlName="correo_electronico"></ion-input>
-          <div *ngIf="registerForm.get('correo_electronico')?.invalid && registerForm.get('correo_electronico')?.touched">
-            <ion-text color="danger">El correo es obligatorio y debe ser válido.</ion-text>
-          </div>
-          <ion-label class="label" position="stacked">Contraseña</ion-label>
-          <ion-input [type]="showPasswordRegister ? 'text' : 'password'" type="password" formControlName="contrasena">
-            <ion-icon
-            [name]="showPasswordRegister ? 'eye-off' : 'eye'"
-            slot="end"
-            (click)="togglePasswordVisibility('register')"
-            style="cursor: pointer;">
-            </ion-icon>
-          </ion-input>
 
-          <div *ngIf="registerForm.get('contrasena')?.invalid && registerForm.get('contrasena')?.touched">
-            <ion-text color="danger">La contraseña es obligatoria y debe tener al menos 8 caracteres.</ion-text>
-          </div>
-          <ion-label class="label" position="stacked">Nombre</ion-label>
-          <ion-input type="text" formControlName="nom_user"></ion-input>
-          <div *ngIf="registerForm.get('nom_user')?.invalid && registerForm.get('nom_user')?.touched">
-            <ion-text color="danger">El nombre es obligatorio y debe contener solo letras.</ion-text>
-          </div>
-          <ion-label class="label" position="stacked">Apellido</ion-label>
-          <ion-input type="text" formControlName="ap_user"></ion-input>
-          <div *ngIf="registerForm.get('ap_user')?.invalid && registerForm.get('ap_user')?.touched">
-            <ion-text color="danger">El apellido es obligatorio y debe contener solo letras.</ion-text>
-          </div>
-          <ion-buttons>
-            <ion-button class="submit" expand="block" (click)="onRegister()">Registrar proveedor</ion-button>
-          </ion-buttons>
-          <span class="span">¿Ya tienes cuenta?
-          </span>
-          <ion-buttons>
-            <ion-button class="boton-cambiar" (click)="handleButtonClick()">
-              {{ showCrudForm ? 'Inicia sesión': '' }}
-            </ion-button>
-          </ion-buttons>
-          <br>
-        </form>
-      </ion-card>
+            <!-- Botón de inicio de sesión -->
+            <ion-button color="a" type="submit" expand="block">Login</ion-button>
+
+            <!-- Alternar a registro -->
+
+            <div class="text-center mt-3">
+              <span style="color: black; font-weight: bold; ">¿No tienes cuenta?</span>
+
+              <ion-button color="a" (click)="handleButtonClick()">Regístrate aquí</ion-button>
+              <!-- <ion-button/ion-button> -->
+            </div>
+          </form>
+
+      </div>
+
+      <!-- Formulario de Registro -->
+      <div *ngIf="!showLoginForm" >
+        <!-- <ion-card class="container py-5 my-5">        </ion-card> -->
+          <form [formGroup]="registerForm" (ngSubmit)="onRegister()" novalidate>
+            <h2 class="mb-4 titulardo  text-center">Regístrate aquí</h2>
+
+            <!-- RUT y DV -->
+            <div class="form-group mb-3">
+              <label class="label mb-2">RUT</label>
+              <div class="row">
+                <div class="col-9">
+                  <ion-input type="text" formControlName="rut" placeholder="12345678" class="form-control"></ion-input>
+                </div>
+                <div class="col-3">
+                  <ion-input type="text" formControlName="dv" placeholder="0" class="form-control"></ion-input>
+                </div>
+              </div>
+              <div *ngIf="registerForm.get('rut')?.invalid && registerForm.get('rut')?.touched" class="text-danger">
+                El RUT es obligatorio.
+              </div>
+              <div *ngIf="registerForm.get('dv')?.invalid && registerForm.get('dv')?.touched" class="text-danger">
+                El DV es obligatorio.
+              </div>
+            </div>
+
+            <!-- Correo Electrónico -->
+            <div class="form-group mb-3">
+              <label class="label mb-2">Correo Electrónico</label>
+              <ion-input type="email" formControlName="correo_electronico" class="form-control"></ion-input>
+              <div *ngIf="registerForm.get('correo_electronico')?.invalid && registerForm.get('correo_electronico')?.touched" class="text-danger">
+                El correo es obligatorio y debe ser válido.
+              </div>
+            </div>
+
+            <!-- Contraseña -->
+            <div class="form-group mb-3">
+              <label class="label mb-2">Contraseña</label>
+              <ion-input [type]="showPasswordRegister ? 'text' : 'password'" formControlName="contrasena" class="form-control">
+                <ion-icon
+                  [name]="showPasswordRegister ? 'eye-off' : 'eye'"
+                  slot="end"
+                  (click)="togglePasswordVisibility('register')"
+                  style="cursor: pointer;">
+                </ion-icon>
+              </ion-input>
+              <div *ngIf="registerForm.get('contrasena')?.invalid && registerForm.get('contrasena')?.touched" class="text-danger">
+                La contraseña es obligatoria y debe tener al menos 8 caracteres.
+              </div>
+            </div>
+
+            <!-- Nombre -->
+            <div class="form-group mb-3">
+              <label class="label mb-2">Nombre</label>
+              <ion-input type="text" formControlName="nom_user" class="form-control"></ion-input>
+              <div *ngIf="registerForm.get('nom_user')?.invalid && registerForm.get('nom_user')?.touched" class="text-danger">
+                El nombre es obligatorio y debe contener solo letras.
+              </div>
+            </div>
+
+            <!-- Apellido -->
+            <div class="form-group mb-3">
+              <label class="label mb-2">Apellido</label>
+              <ion-input type="text" formControlName="ap_user" class="form-control"></ion-input>
+              <div *ngIf="registerForm.get('ap_user')?.invalid && registerForm.get('ap_user')?.touched" class="text-danger">
+                El apellido es obligatorio y debe contener solo letras.
+              </div>
+            </div>
+
+            <!-- Botón de registro -->
+            <!-- <button   type="submit" class="btn btn-primary w-100 mt-3" expand="block">Registrar Proveedor<button> -->
+
+            <ion-button color="a" type="submit"   expand="block">Registrar Proveedor</ion-button>
+
+            <!-- Alternar a inicio de sesión -->
+            <div class="text-center mt-3">
+              <span style="color: black; font-weight: bold; ">¿Ya tienes cuenta?</span>
+              <ion-button color="a"  (click)="handleButtonClick()">Inicia sesión aquí</ion-button>
+            </div>
+          </form>
+
+      </div>
+
     </div>
-
-  </ion-grid>
+  </div>
+<div class="card">
+  <div class="card-header">
+    Featured
+  </div>
+  <!-- <div class="card-body">
+    <h5 class="card-title">Special title treatment</h5>
+    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+    <a href="#" class="btn btn-primary">Go somewhere</a>
+  </div> -->
+</div>
 </ion-content>

@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, tap } from 'rxjs';
 import { Observable } from 'rxjs';
 import { Carrito } from 'src/app/Interfaces/carrito';
-
+import { EventEmitter } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
@@ -13,7 +13,8 @@ export class CarritoServiService {
   // private apiUrl = 'https://web-production-8ca5.up.railway.app/modelo/';
   // BehaviorSubject to track number of items in the cart
   private cartItemCount = new BehaviorSubject<number>(0);
-
+  cantidadCarrito = new EventEmitter<number>();
+  private cantidadActual = 0;
   constructor(private http: HttpClient) { }
 
   ver_carrito(): Observable<any> {
@@ -22,7 +23,10 @@ export class CarritoServiService {
 
   agregar_Carrito(productoId: number): Observable<any> {
     const url = `${this.apiUrl}agregar/${productoId}/`;
+    this.cantidadActual++;
+    this.cantidadCarrito.emit(this.cantidadActual);
     return this.http.post(url, {}, { withCredentials: true });
+
   }
 
    // Implementación del método restar_carrito
@@ -31,7 +35,7 @@ export class CarritoServiService {
     return this.http.post(url, {}, { withCredentials: true });
   }
 
-  iniciarPago(data: { total: number }): Observable<any> {
+  iniciarPago(data: { total: number,orden_id:number }): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}pago/iniciar/`, data);
   }
 
@@ -81,5 +85,7 @@ export class CarritoServiService {
   obtenerDetallesPagoExitoso(order: string): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}detalles-pago-exitoso/?order=${order}`);
   }
-
+  obtenerCantidadCarrito() {
+    return this.cantidadActual;
+  }
 }
