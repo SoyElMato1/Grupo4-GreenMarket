@@ -104,14 +104,13 @@ def checkout(request):
         # Obtener datos del cliente desde la solicitud
         cliente_data = JSONParser().parse(request)
         rut = cliente_data.get('rut')
-        correo_electronico = cliente_data.get('correo_electronico')
 
         # Buscar o crear el cliente automáticamente
         cliente, created = Cliente.objects.get_or_create(
             rut=rut,
-            correo_electronico=correo_electronico,
             defaults={
                 'nombre': cliente_data.get('nombre'),
+                'correo_electronico': cliente_data.get('correo_electronico'),
                 'direccion': cliente_data.get('direccion'),
                 'dv': cliente_data.get('dv')
             }

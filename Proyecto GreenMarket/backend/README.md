@@ -65,27 +65,3 @@ Para luego en la terminal poner lo siguiente:
         python manage.py runserver (numero de puerto opcional)
 
 - El numero de puerto es opcional. Si no ingresa ningun puerto, por defecto el proyecto se ejecutara en el puerto 8000 en el localhost.
-
-## Ejecutar el chatbot.
-primero es ir a la carpeta del chatbot, la cual esta dentro de la carpeta backend:
-
-```bash
-cd backend/chatbot
-```
-- luego ingresar el siguiente comando:
-
-        pip install rasa
-
-- Este les instalara todo lo necesario para ejecutar el chatbot
-
-- Luego ejecutar el chatbot:
-
-        rasa run --enable-api --cors "http://localhost:8100"
-
-- Antes de eso deben hacer el rasa train
-
-        rasa train
-
-- y por último el raza run actions
-
-        rasa run actions
