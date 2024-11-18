@@ -8,6 +8,16 @@
  * For more information on global stylesheets, visit the documentation:
  * https://ionicframework.com/docs/layout/global-stylesheets
  */
+ ion-app {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Asegúrate de que ocupe toda la pantalla */
+}
+
+ion-router-outlet {
+  flex: 1;
+  overflow-y: auto;  /* Habilita el scroll vertical */
+}
 
 /* Core CSS required for Ionic components to work properly */
 @import "@ionic/angular/css/core.css";
@@ -40,3 +50,4 @@
 // src/styles.scss
 @import "~bootstrap/dist/css/bootstrap.min.css";
 @import 'bootstrap/dist/css/bootstrap.min.css';
+

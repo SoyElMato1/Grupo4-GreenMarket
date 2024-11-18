@@ -68,39 +68,35 @@
           </ion-row>
           <ion-row class="ion-text-center" *ngIf="products.length > 0; else noProducts">
             <ion-col size="12" size-md="6" size-lg="5.5" *ngFor="let product of products">
-              <ion-card *ngIf="isEditMode == false" class="profile-card">
-                <div class="profile-image">
-                  <!-- <img src="../../../../assets/images/descarga.jpeg" class="profile-image" /> -->
-                  <img *ngIf="product.imagen_producto" [src]="'http://localhost:8000' + product.imagen_producto"  class="profile-image" alt="Foto del proveedor">
-                  <img *ngIf="!product.imagen_producto" src="assets/images/descarga.jpeg" class="profile-image" alt="Imagen por defecto" >
+              <ion-card *ngIf="isEditMode == false" class="container">
+                <div class="card-body">
+                  <img *ngIf="product.imagen_producto"
+                       [src]="'http://localhost:8000' + product.imagen_producto"
+                       class="profile-image"
+                       alt="Foto del producto">
+                  <img *ngIf="!product.imagen_producto"
+                       src="assets/images/descarga.jpeg"
+                       class="profile-image"
+                       alt="Imagen por defecto">
                 </div>
-                <ion-card-content class="profile-stats">
-                  <!-- <ion-list *ngIf="products.length > 0; else noProducts"> -->
-                    <!-- <ion-item *ngFor="let product of products" > -->
-                      <!-- <ion-thumbnail slot="start">
-                        <img *ngIf="product.imagen_producto" [src]="'http://localhost:8000' + product.imagen_producto" alt="{{ product.nombre_producto }}" />
-                      </ion-thumbnail> -->
-                      <div  class="card-title">
-                        {{ product.nombre_producto }}
-                      </div>
 
-                      <div class="card-section">
-                        Precio: {{ product.precio | currency }}
-                      </div>
-                      <div class="button-group">
-                        <ion-button fill="outline" (click)="editar(product.codigo_producto)">Editar</ion-button>
-                        <ion-button color="danger" (click)="eliminar(product.codigo_producto)">Eliminar</ion-button>
-                      </div>
-                      <!-- <ion-label>
-                        <h2>{{ product.nombre_producto }}</h2>
-                        <p>Precio: {{ product.precio | currency }}</p>
-                      </ion-label> -->
-                      <!-- <ion-button fill="outline" (click)="editar(product.codigo_producto)">Editar</ion-button>
-                      <ion-button color="danger" (click)="eliminar(product.codigo_producto)">Eliminar</ion-button> -->
-                    <!-- </ion-item> -->
-                  <!-- </ion-list> -->
+                <ion-card-content class="profile-stats" style="font-size: 20px;">
+                  <div class="">
+                    {{ product.nombre_producto }}
+                  </div>
+
+                  <div class="card-section">
+                    Precio: {{ product.precio | currency }}
+                  </div>
+
+                  <div >
+                    <ion-button fill="outline" (click)="editar(product.codigo_producto)">Editar</ion-button>
+                    <ion-button color="danger" (click)="eliminar(product.codigo_producto)">Eliminar</ion-button>
+                  </div>
                 </ion-card-content>
               </ion-card>
+
+
             </ion-col>
           </ion-row>
           <ng-template #noProducts>
@@ -161,24 +157,10 @@
                   {{ descripcion.length }} / 300 caracteres
                 </ion-text>
                 <ion-item>
-                  <div class="container">
-                    <div class="folder">
-                      <div class="front-side">
-                        <div class="tip"></div>
-                        <div class="cover"></div>
-                      </div>
-                      <div class="back-side cover"></div>
-                    </div>
-                    <label class="custom-file-upload">
-                      <input type="file" accept=".png, .jpg, .jpeg, .bmp" (change)="onFileSelected($event)">
-                      Choose a file
-                      <!-- <input class="title" type="file" /> -->
 
-                    </label>
-                  </div>
-<!--
-                  <ion-label position="stacked">Imagen del Producto</ion-label>
-                  <input type="file" accept=".png, .jpg, .jpeg, .bmp" (change)="onFileSelected($event)"> -->
+
+                  <ion-label position="stacked"></ion-label>
+                  <input type="file" accept=".png, .jpg, .jpeg, .bmp" (change)="onFileSelected($event)">
                 </ion-item>
                 <ion-item>
                   <ion-label position="stacked">Categoría</ion-label>

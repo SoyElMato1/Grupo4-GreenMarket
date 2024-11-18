@@ -1,69 +1,96 @@
-.container{
+.container {
   color: black;
   display: flex;
   justify-content: center;
   align-items: center;
   text-align: center;
+  background-color: rgb(160, 214, 131);
+  // border-radius: 20px;
+  width: 480px;
+  height: auto;
+  padding: 20px;
+  position: relative;
+  bottom:30px;
 }
 
-//es la parte del fotmulario
-.ajustar{
-text-align: center;
-display: flex;
-justify-content: center; /* Centra horizontalmente */
-align-items: center;
-}
 .centrar {
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
-  // height: 100vh; /* O el tamaño del contenedor */
+  justify-content: center;
+  align-items: center;
 }
+
 .titular {
   background-color: rgb(160, 214, 131);
   color: black;
-  width: 320px;
+  width: 520px;
   height: 60px;
   display: flex;
   justify-content: center;
   align-items: center;
   font-weight: bold;
-  text-align: center;
-  font-family: 'Bebas Neue', sans-serif;
   font-size: 40px;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+  position: relative;
+  top: 10px;
 }
-.fondo{
+
+.fondo {
   width: 100%;
   min-height: 100vh;
-  background:whitesmoke;
-  // background: linear-radient(744deg,#8bfd9b,#52df65 60%,#9bc2a0);
+  background: whitesmoke;
 }
 
-.colormenus{
-  // background: rgb(160, 214, 131);
-  background: rgb(114, 191, 120);
-  color: black;
-
-}
-
-.titulo{
+.table-title {
+  text-align: right;
+  padding: 10px;
   font-weight: bold;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 50px;
-  color: black;
-  // border: 10px;
-  // border-color: palevioletred;
-  position: relative;
-  text-align: start;
-  display: flex;
-  justify-content: start; /* Centra horizontalmente */
-  align-items: start; /* Centra verticalmente */
-  // font-weight: 900; /* Valores comunes: 400 (normal), 700 (negrita) */
-  // font-family: 'Courier New', Courier, monospace;
 }
 
-// -----------------------------------------------------------------------------------------------
-// -----------------------------------------------------------------------------------------------
-// -----------------------------------------------------------------------------------------------
-// SACADO DEL CSS DEL LOGIN Y REGISTRO
+.table-data {
+  text-align: left;
+  padding: 10px;
+}
+
+ion-row {
+  margin-bottom: 20px; /* Aumento del margen para más separación */
+}
+
+ion-col {
+  padding: 0 10px;
+}
+
+ion-col.size-6 {
+  flex: 1;
+}
+
+/* Estilos para la imagen centrada */
+.imagen-contenedor {
+  text-align: center;
+  margin-bottom: 20px; /* Separación entre imagen y tabla */
+}
+
+.imagen-centro {
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 20px; /* Separación adicional debajo de la imagen */
+}
+
+/* Mejorando la separación en la tabla */
+table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0 15px; /* Separación entre filas de la tabla */
+}
+
+table td {
+  padding: 15px;
+  border-bottom: 1px solid #dddddd00;
+}
+
+table td strong {
+  font-weight: bold;
+}
+
+table tr:last-child td {
+  border-bottom: none;
+}

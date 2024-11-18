@@ -194,40 +194,50 @@ ion-input{
   color: black;
 
 }
-// .boton{
-//   --background-color: #FFFF99;
-//   --background: #FFFF99;
-// }
-// .boton-cambiar{
-//   color: rgba(23, 23, 255, 0.842);
-//   font-weight: bold;
-//   text-decoration: underline;
-// }
-// .title {
-//   margin-bottom: 1rem;
-//   font-size: 1.5em;
-//   font-weight: 500;
-//   color: #f5f5f5;
-//  }
-//  ion-label{
-//     align-self: flex-start;
-//     color: #F5F5F5;
-//     font-weight: 600;
-//       font-size: 18px; /* Tamaño del texto ingresado */
-//  }
-//  .margen{
-//   margin-top: 50px;
-//  }
-//  .cuadrado{
-//   width: 100%;
-//   height: 500px;
-//   background: rgb(114, 191, 120);
-//   // background-color: rgb(160, 214, 131);
+/* Estilo general del footer */
+.footer {
+  background: rgb(114, 191, 120); /* Color principal (60%) */
+  color: black;
+  text-align: center;
+  padding: 20px 0;
+  // border-top: 4px solid rgb(160, 214, 131); /* Línea superior (30%) */
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+}
 
-// }
-////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////
- ////////////////////////////////////////////////////////
- ///
+/* Enlaces dentro del footer */
+.footer a {
+  color: rgb(254, 255, 159); /* Color destacado (10%) */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* Texto del footer */
+.footer-text {
+  font-size: 14px;
+  margin: 0;
+}
+
+.footer strong {
+  color: rgb(160, 214, 131); /* Destacar GreenMarket */
+}
+
+/* Botón "Volver arriba" */
+.back-to-top {
+  background-color: rgb(160, 214, 131); /* Botón en verde claro */
+  color: black;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.back-to-top:hover {
+  background-color: rgb(254, 255, 159); /* Hover en amarillo */
+  color: black;
+}

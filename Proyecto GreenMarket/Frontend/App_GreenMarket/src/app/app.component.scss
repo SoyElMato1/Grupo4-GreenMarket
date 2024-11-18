@@ -403,6 +403,19 @@ header {
   z-index: 1; /* Asegúrate de que esté encima del contenido */
 }
 
+// footer {
+//   position: fixed;
+//   bottom: 0;
+//   width: 100%;
+//   background-color: #f8f9fa;
+//   padding: 10px 0;
+//   text-align: center;
+// }
+// ion-content {
+//   overflow-y: auto;
+// }
+
+
 @media (max-width: 768px) {
   .card-title, .card-section, .boton-verp,.card-rating {
     font-size: 18px; /* Reduce el tamaño de la fuente */

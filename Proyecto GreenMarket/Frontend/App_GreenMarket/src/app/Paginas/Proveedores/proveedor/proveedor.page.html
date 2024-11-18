@@ -1,113 +1,128 @@
-<!-- ESTE ES EL LUGAR DONDE ESATRAN LÑO FILTROS Y EL BUSCAR -->
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page">Categorias</a>
-        </li>
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">Filtro</a>
-          <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="#">Mas populares</a></li>
-            <li><a class="dropdown-item" href="#">Mejor calificación</a></li>
+<ion-content [fullscreen]="true">
+  <main class="bigimage">
+    <!-- Barra de navegación -->
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Categorías</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Filtro
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Más Populares</a></li>
+                <li><a class="dropdown-item" href="#">Mejor Calificación</a></li>
+              </ul>
+            </li>
           </ul>
-        </li>
-      </ul>
-      <form class="d-flex" role="search">
-        <ion-input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" (ionInput)="onSearch($event)"></ion-input>
-        <button class="btn btn-outline-success" type="submit">Search</button>
-      </form>
-    </div>
-  </div>
-</nav>
-<!-- ESTE ES EL LUGAR DONDE ESATRAN LÑO FILTROS Y EL BUSCAR
-  FIN -->
+          <form class="d-flex" role="search">
+            <ion-input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search" (ionInput)="onSearch($event)"></ion-input>
+            <button class="btn btn-outline-success" type="submit">Buscar</button>
+          </form>
+        </div>
+      </div>
+    </nav>
 
-<!-- ESTO ES EL LUGAR EN DONDE EAT UBUCADO EL PODIO DONDE ESATRAN LLOS PROVEDORES CON MEJOR CALIFICACION -->
-<ion-content class="">
-  <div class="bigimage">
-
-     <!-- Encabezado de la página -->
-     <section class="text-center container">
+    <!-- Encabezado -->
+    <section class="text-center container"  style="color: black;">
       <ion-grid>
         <ion-row class="ion-justify-content-center py-4">
           <ion-col size-md="8" size-sm="12" class="ion-text-center">
-            <!-- Imagen antes del título -->
-            <img src="../../../../assets/images/logo.png" alt="Imagen descriptiva" class="img-fluid mb-4">
+            <img src="../../../../assets/images/logo.png" alt="Logo" class="img-fluid mb-4">
             <h1 class="fw-light">Proveedores Destacados</h1>
             <p class="lead text-secondary">ESTE APARTADO ESTARA PROXIMAMENTE DISPONIBLE</p>
           </ion-col>
         </ion-row>
       </ion-grid>
     </section>
-<!-- ESTO ES EL LUGAR EN DONDE EAT UBUCADO EL PODIO DONDE ESATRAN LLOS PROVEDORES CON MEJOR CALIFICACION
- FIN -->
 
-  <!-- Lista de proveedores y modal en dos columnas -->
-  <ion-grid>
-    <ion-row class="ion-justify-content-start">
-      <!-- Lista de proveedores -->
-      <ion-col  size="12" size-md="8">
-        <div class="row justify-content-center">
-          <div class="col-12 col-md-6 col-lg-6 mb-4 card-border" *ngFor="let proveedor of proveedoresFiltrados">
-            <div class="row g-0 border rounded shadow-sm card-custom">
-              <!-- Imagen del proveedor -->
-              <div class="col-auto d-none d-lg-block">
-                <img *ngIf="proveedor.foto" [src]="'http://localhost:8000' + proveedor.foto" class="bd-placeholder-img" alt="Foto del proveedor" width="240" height="240">
-                <img *ngIf="!proveedor.foto" src="assets/images/descarga.jpeg" class="bd-placeholder-img" alt="Imagen por defecto" width="240" height="240">
+    <!-- Lista de Proveedores -->
+    <div class="container">
+      <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+        <ion-col size="12" size-md="6" size-lg="4" *ngFor="let proveedor of proveedoresFiltrados">
+          <div class="card shadow-sm">
+            <!-- Imagen del proveedor -->
+            <img *ngIf="proveedor.foto"
+              [src]="'http://localhost:8000/' + proveedor.foto"
+              class="bd-placeholder-img card-img-top"
+              alt="Foto del proveedor"
+              width="200" height="200">
+            <img *ngIf="!proveedor.foto" src="assets/images/descarga.jpeg" class="bd-placeholder-img card-img-top" alt="Imagen por defecto" width="200" height="200">
+
+            <!-- Información del proveedor -->
+            <div class="card-body">
+              <h5>{{ proveedor.nombre }} {{ proveedor.apellido }}</h5>
+              <p>{{ proveedor.correo_electronico }}</p>
+
+              <!-- Dirección del proveedor con mensaje cuando no está disponible -->
+              <p class="card-text">
+                <ng-container *ngIf="proveedor.direccion; else direccionNoDisponible">
+                  {{ proveedor.direccion }}
+                </ng-container>
+                <ng-template #direccionNoDisponible>
+                  <span class="text-muted">Dirección no disponible</span>
+                </ng-template>
+              </p>
+
+              <div class="d-flex justify-content-between align-items-center">
+                <button class="btn btn-primary" (click)="verProductosProveedor(proveedor.rut, proveedor.nombre)">Ver Productos</button>
               </div>
-
-              <!-- Detalles del proveedor -->
-              <div class="col p-4 d-flex flex-column position-static">
-                <strong class="d-inline-block mb-2 text-primary-emphasis">{{ proveedor.nombre }} {{ proveedor.apellido }}</strong>
-                <div class="mb-1 text-body-secondary">{{ proveedor.correo_electronico }}</div>
-                <!-- <div class="mb-1 text-body-secondary">{{ proveedor.direccion }}</div> -->
-                <button class="btn btn-primary btn-custom" (click)="verProductosProveedor(proveedor.rut, proveedor.nombre)">Ver Productos</button>
-
-                <div class="d-flex justify-content-between align-items-center">
-                  <div class="rating my-2">
-                    <!-- Estrellas de calificación -->
-                    <input [value]="5" [name]="'rating' + proveedor.rut" [id]="'star5-' + proveedor.rut" type="radio">
-                    <label [for]="'star5-' + proveedor.rut"></label>
-                    <input [value]="4" [name]="'rating' + proveedor.rut" [id]="'star4-' + proveedor.rut" type="radio">
-                    <label [for]="'star4-' + proveedor.rut"></label>
-                    <input [value]="3" [name]="'rating' + proveedor.rut" [id]="'star3-' + proveedor.rut" type="radio">
-                    <label [for]="'star3-' + proveedor.rut"></label>
-                    <input [value]="2" [name]="'rating' + proveedor.rut" [id]="'star2-' + proveedor.rut" type="radio">
-                    <label [for]="'star2-' + proveedor.rut"></label>
-                    <input [value]="1" [name]="'rating' + proveedor.rut" [id]="'star1-' + proveedor.rut" type="radio">
-                    <label [for]="'star1-' + proveedor.rut"></label>
-                  </div>
-                </div>
-              </div>
-
             </div>
           </div>
-        </div>
-      </ion-col>
+        </ion-col>
+      </div>
+    </div>
 
-      <!-- Modal de productos -->
-      <ion-col size="12" size-md="4" class="d-flex justify-content-end">
-        <div *ngIf="mostrarModal" class="p-4 modal-sheet bg-body-secondary rounded-4 shadow" style="z-index: 1050;">
-          <h2 class="fw-bold mb-3">Productos más destacados del proveedor</h2>
-          <h4 style="color: black;">{{ nombreProveedorSeleccionado }}</h4>
-          <ul class="list-unstyled small">
-            <li *ngFor="let producto of productos" class="mb-3">
-              <h5 class="mb-0">{{ producto.nombre_producto }}</h5>
-              <p>{{ producto.precio | currency }}</p>
-            </li>
-          </ul>
-          <button type="button" class="btn btn-lg btn-primary mt-3 w-100" (click)="cerrarModal()">Cerrar</button>
+
+    <!-- Modal para productos del proveedor -->
+<!-- Modal para productos -->
+<div *ngIf="mostrarModal && productos && productos.length > 0" class="modal-container bg-body-secondary rounded-4 shadow p-4" style="z-index: 1050; color: black;">
+  <h2 class="fw-bold mb-3">Productos del Proveedor</h2>
+  <h4 style="color: black; text-align: center;">{{ nombreProveedorSeleccionado }}</h4>
+  <div class="row row-cols-1 row-cols-sm-2 g-3">
+    <div class="col" *ngFor="let producto of productos">
+      <div class="producto-item">
+        <img *ngIf="producto.imagen_producto"
+          [src]="'http://localhost:8000/' + producto.imagen_producto"
+          class="producto-img"
+          alt="Foto del producto"
+          width="200" height="200">
+        <img *ngIf="!producto.imagen_producto" src="assets/images/descarga.jpeg" class="producto-img" alt="Imagen por defecto">
+
+        <div class="producto-info">
+          <h5>{{ producto.nombre_producto }}</h5>
+          <p>${{ producto.precio }}</p>
+
+          <!-- <p>{{ producto.descripcion }}</p> -->
         </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+      </div>
+    </div>
+  </div>
+  <button class="btn btn-lg btn-primary mt-3 w-100" (click)="cerrarModal()">Cerrar</button>
+</div>
+
+<!-- Alerta cuando no hay productos -->
+  <div *ngIf="mostrarAlerta" class="alert alert-warning" role="alert" style="z-index: 1050;">
+    <strong>Lo sentimos</strong>, pero el proveedor {{ nombreProveedorSeleccionado }} no ha destacado ningún producto.
   </div>
 
-</ion-content>
 
-<ion-footer class="ion-text-center ion-padding">
-  <p>Plataforma de proveedores &copy; 2024</p>
-  <ion-button fill="clear" size="small" (click)="scrollToTop()">Volver arriba</ion-button>
-</ion-footer>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <p class="float-end">
+        <a href="#" class="back-to-top">Volver arriba</a>
+      </p>
+      <p class="footer-text">
+        &copy; 2024 <strong>GreenMarket</strong> Portafolio.
+        <a href="#">Privacidad</a> &middot;
+        <a href="#">Términos</a>
+      </p>
+    </div>
+  </footer>
+</ion-content>

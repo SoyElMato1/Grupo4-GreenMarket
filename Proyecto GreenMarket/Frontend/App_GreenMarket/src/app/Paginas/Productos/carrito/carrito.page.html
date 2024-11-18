@@ -1,16 +1,15 @@
-
 <ion-content>
   <ion-grid class="fondo">
+    <!-- Título principal -->
     <ion-row>
       <ion-col class="centrar">
-        <div class="titular">
-        Tu carrito de compras
-        </div>
+        <div class="titular">Tu carrito de compras</div>
       </ion-col>
     </ion-row>
+
+    <!-- Encabezado de productos en el carrito -->
     <ion-row>
       <ion-col>
-        <!-- Encabezado del carrito -->
         <ion-row class="header-row ion-justify-content-center ion-align-items-center">
           <ion-col>
             <ion-label>PRODUCTO</ion-label>
@@ -25,25 +24,20 @@
             <ion-label class="precio">SUBTOTAL</ion-label>
           </ion-col>
         </ion-row>
-        <!-- Lista de productos del carrito -->
+
+        <!-- Lista de productos -->
         <ion-row class="ion-justify-content-center ion-align-items-center">
           <ion-col size="12" size-md="10" size-lg="8">
             <ion-list class="listacarro" *ngIf="carrito && carrito.items.length > 0; else noItems">
               <ion-item color="color2" *ngFor="let item of carrito.items">
-                <ion-label id="nombrep">
-                  {{ item.nombre }}
-                </ion-label>
-                <ion-label class="precio-unitario">
-                  ${{ item.precio }} CLP$
-                </ion-label>
+                <ion-label id="nombrep">{{ item.nombre }}</ion-label>
+                <ion-label class="precio-unitario">${{ item.precio }} CLP</ion-label>
                 <div class="aumentar-disminuir">
                   <ion-button (click)="bajarItem(item.producto_id)">-</ion-button>
                   <p> {{ item.cantidad }} </p>
                   <ion-button (click)="agregarItem(item.producto_id)">+</ion-button>
                 </div>
-                <ion-label class="precio">
-                  ${{ precioUnitario(item.precio, item.cantidad) }} CLP
-                </ion-label>
+                <ion-label class="precio">${{ precioUnitario(item.precio, item.cantidad) }} CLP</ion-label>
                 <ion-button color="danger" (click)="removeItem(item.producto_id)">
                   <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
                 </ion-button>
@@ -54,18 +48,15 @@
       </ion-col>
     </ion-row>
 
+    <!-- Botones de acción (Seguir comprando y pagar) -->
     <ion-row class="botonespagar">
-      <!-- <div>           </div> -->
       <ion-col>
         <ion-label>
-          <div class="bpagar"  [routerLink]="['/catalogo-producto']">
-            Seguir comprando
-          </div>
-          <!-- <ion-button color="warning" [routerLink]="['/catalogo-producto']"> Seguir comprando</ion-button> -->
+          <div class="bpagar" [routerLink]="['/catalogo-producto']">Seguir comprando</div>
         </ion-label>
       </ion-col>
       <ion-col class="total">
-          <ion-label >Total: <br>${{ total }}</ion-label>
+        <ion-label>Total: <br>${{ total }}</ion-label>
       </ion-col>
       <ion-col>
         <ion-label>
@@ -75,25 +66,24 @@
         </ion-label>
       </ion-col>
     </ion-row>
+
+    <!-- Formulario de cliente (si es visible) -->
     <ion-row>
       <ion-col>
         <div *ngIf="showClienteForm">
           <ion-col class="centrar">
-            <div class="titular">
-              Formulario de datos
-            </div>
+            <div class="titular">Formulario de datos</div>
           </ion-col>
           <ion-card class="tarjeta">
             <ion-card-content>
               <form class="form">
                 <div class="cuadrado"></div>
                 <ion-row class="rutcompleto">
-                  <!-- Campo para el RUT -->
+                  <!-- Campo RUT -->
                   <ion-col size="9">
                     <ion-label class="label" position="stacked">RUT</ion-label>
-                    <ion-input class="formulario" [(ngModel)]="customer.rut" name="rut"
-                    placeholder="RUT" (ionBlur)="buscar_cliente(customer.rut)"
-                               (ngModelChange)="validateRut(customer.rut)">
+                    <ion-input class="formulario" [(ngModel)]="customer.rut" name="rut" placeholder="RUT"
+                               (ionBlur)="buscar_cliente(customer.rut)" (ngModelChange)="validateRut(customer.rut)">
                     </ion-input>
                     <ion-text color="danger" *ngIf="!validateRut(customer.rut) && customer.rut">
                       Por favor, ingresa un RUT válido.
@@ -109,11 +99,13 @@
                     </ion-text>
                   </ion-col>
                 </ion-row>
+
+                <!-- Otros campos del formulario -->
                 <ion-row class="rutcompleto">
                   <ion-col>
                     <ion-label class="label" position="stacked">Correo Electrónico</ion-label>
-                    <ion-input type="email" class="formulario" [(ngModel)]="customer.correo_electronico" name="correo_electronico"
-                               placeholder="CORREO" (ngModelChange)="validateEmail(customer.correo_electronico)">
+                    <ion-input type="email" class="formulario" [(ngModel)]="customer.correo_electronico"
+                               name="correo_electronico" placeholder="CORREO" (ngModelChange)="validateEmail(customer.correo_electronico)">
                     </ion-input>
                     <ion-text color="danger" *ngIf="!validateEmail(customer.correo_electronico) && customer.correo_electronico">
                       Por favor, ingresa un correo electrónico válido.
@@ -139,23 +131,33 @@
                   </ion-col>
                 </ion-row>
 
-                <!-- <div class="button-center">
-                  <input type="checkbox" [(ngModel)]="guardarCliente" name="guardarCliente"> ¿Quiere guardar sus datos?
-                </div> -->
                 <div class="button-center">
                   <ion-button class="submit" (click)="checkout_pago()">Pagar</ion-button>
                 </div>
               </form>
             </ion-card-content>
-
           </ion-card>
         </div>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <footer class="footer">
+    <div class="container">
+      <p class="float-end">
+        <a href="#" class="back-to-top">Volver arriba</a>
+      </p>
+      <p class="footer-text">
+        &copy; 2024 <strong>GreenMarket</strong> Portafolio.
+        <a href="#">Privacidad</a> &middot;
+        <a href="#">Términos</a>
+      </p>
+    </div>
+  </footer>
 </ion-content>
+
+<!-- Plantilla cuando el carrito está vacío -->
 <ng-template #noItems>
-  <ion-item color="1" class="carritovacio" >
+  <ion-item color="1" class="carritovacio">
     <ion-label>El carrito está vacío</ion-label>
   </ion-item>
 </ng-template>

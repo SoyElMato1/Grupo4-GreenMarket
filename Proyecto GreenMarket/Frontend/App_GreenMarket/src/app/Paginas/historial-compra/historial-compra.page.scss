@@ -1,233 +1,212 @@
-.container {
+/* Estilo para el contenedor del formulario */
+.form-container {
+  // position: relative;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  background: rgb(114, 191, 120);
-  border-radius: 20px;
-  // font-size: 18px; /* Tamaño del texto ingresado */
-  height: 380px;
-  // width: 100%;
+  justify-content: center; /* Centra el formulario horizontalmente */
+  // align-items: center;     /* Centra el formulario verticalmente */
+  background: rgb(160, 214, 131);
+  color: black;
+  height: 1000px;
+  max-height: 100%;
+  // height: calc(100vh - 56px); /* Ajusta la altura del contenedor, considerando el encabezado */
+  // flex-direction: column;    /* Asegura que los elementos estén apilados verticalmente */
 }
 
+/* Estilo del botón */
+.btn-primary {
+  background-color: rgb(254, 255, 159); /* Color de fondo personalizado */
+  border-color: rgb(160, 214, 131);     /* Color del borde */
+  color: #000000; /* Color del texto */
+}
+
+/* Hover para el botón */
+.btn-primary:hover {
+  background-color: rgb(114, 191, 120); /* Color al pasar el ratón */
+  border-color: rgb(114, 191, 120);
+}
+
+/* Estilo para el contorno del botón */
+.btn-outline-secondary {
+  color: black;             /* Color del texto */
+  border-color: #333333;    /* Color del borde */
+}
+
+.btn-outline-secondary:hover {
+  background-color: rgb(114, 191, 120); /* Fondo al pasar el ratón */
+  color: black;             /* Color del texto */
+  border-color: rgb(254, 255, 159);
+}
+
+/* Estilos para la columna */
+.col-md-4 {
+  margin: 0 !important; /* Sobrescribe cualquier margen */
+}
+
+/* Estilos para el encabezado */
+.titular {
+  font-family: 'Bebas Neue', sans-serif;
+  background-color: rgb(114, 191, 120);
+  color: black;
+  text-align: center;
+  font-weight: bold;
+  font-size: 34px;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+/* Etiquetas */
+.label {
+  font-weight: bold;
+  font-size: 18px;
+  color: black;
+}
+
+/* Mensajes de error */
+.text-danger {
+  color: red;
+  font-size: 14px;
+}
+
+
+/* Estilo para el contenedor de la tabla de historial */
+.history-container {
+  // background: rgb(160, 214, 131);
+  padding: 20px;
+  color: black;
+  border-radius: 15px;
+  // font-size: 20px;
+  font-weight: bold;
+}
+
+/* Estilos generales */
 .bigimage {
   width: 100%;
-  min-height: 100vh; /* Asegura que el contenedor ocupe al menos el 100% del alto de la pantalla */
-  background:whitesmoke;
-  background-repeat: repeat;
-  background-position: center center;
-  background-size: cover;
-  background-attachment: scroll; /* Cambia a 'fixed' si quieres que el fondo esté fijo mientras el contenido se desplaza */
-  top: 0px;
-  left: 0px;
+  min-height: 100vh;
+  background: whitesmoke;
+  margin: 0;
+  padding: 0;
 }
-// .colormenus{
-//   // background: rgb(160, 214, 131);
-//   background: rgb(114, 191, 120);
-//   color: black;
 
-// }
-// .titulo{
-//   font-weight: bold;
-//   font-family: 'Bebas Neue', sans-serif;
-//   font-size: 50px;
-//   color: black;
-//   // border: 10px;
-//   // border-color: palevioletred;
-//   position: relative;
-//   text-align: start;
-//   display: flex;
-//   justify-content: start; /* Centra horizontalmente */
-//   align-items: start; /* Centra verticalmente */
-//   // font-weight: 900; /* Valores comunes: 400 (normal), 700 (negrita) */
-//   // font-family: 'Courier New', Courier, monospace;
-// }
-.btn {
+.titular {
+  font-family: 'Bebas Neue', sans-serif;
+
+  background-color: rgb(114, 191, 120);
   color: black;
-  background: rgb(160, 214, 131); /* Para que tenga fondo transparente */
-  background-color: rgb(160, 214, 131);
-}
-ion-button {
-  color: black;
-  font-weight: bold;
-  background: rgb(160, 214, 131); /* Para que tenga fondo transparente */
-  background-color: rgb(254, 255, 159);
-
-}
-// .titular {
-//   background-color: rgb(160, 214, 131);
-//   color: black;
-//   width: 320px ;
-//   height: 60px;
-//   display: flex;
-
-//   justify-content: center;
-//   align-items: center;
-//   font-weight: bold;
-//   text-align: center;
-//   position: relative;
-//   font-family: 'Bebas Neue', sans-serif;
-
-//   top: 10px;
-//   font-size: 40px;
-//   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
-// }
-// .titulardo {
-//   background-color: rgb(160, 214, 131);
-//   color: black;
-//   width: 320px ;
-//   height: 60px;
-//   display: flex;
-
-//   justify-content: center;
-//   align-items: center;
-//   font-weight: bold;
-//   // text-align: center;
-//   position: relative;
-//   font-family: 'Bebas Neue', sans-serif;
-
-//   top: 10px;
-//   font-size: 40px;
-//   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
-// }
-.ajustar{
   text-align: center;
-  display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center;
-  }
-  .centrar {
-    display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    align-items: center; /* Centra verticalmente */
-    // height: 100vh; /* O el tamaño del contenedor */
-  }
-
-  .btn-link {
-    background-color: #FFFF99;
-  }
-// .wave-full{
-//   width: 100%;
-//   min-height: 100vh;
-//   background:whitesmoke;
-// }
-// ion-buttons{
-//   font-size: bold;
-
-// }
-
-// .form {
-//   --bg-light: #efefef;
-//   --bg-dark: #707070;
-//   --clr: #58bc82;
-//   --clr-alpha: #9c9c9c60;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   gap: 1rem;
-//   width: 100%;
-
-
-//   color: black;
-//   font-weight: bold;
-//   font-size: 18px; /* Tamaño del texto ingresado */
-
-//   padding: 10px;
-//   max-width: 500px;
-//   min-width: 300px;
-
-
-// }
-
-// .form .input-span {
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   gap: 0.5rem;
-
-// }
-
-
-// .form input[type="email"]:focus,
-// .form input[type="password"]:focus {
-//   outline: 2px solid var(--clr);
-// }
+  font-weight: bold;
+  font-size: 34px;
+  padding: 10px;
+  border-radius: 10px;
+}
 
 .label {
-  align-self: flex-start;
+  font-weight: bold;
+  font-size: 18px;
   color: black;
-  font-weight: 600;
-  font-weight: bold;
-  font-size: 18px; /* Tamaño del texto ingresado */
-
 }
 
-.form .submit {
-  padding: 1rem 0.75rem;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
-  border-radius: 3rem;
-  background-color: #FFFF99;
-  color: var(--bg-light);
-  border: none;
-  cursor: pointer;
-  color:  black;
-  font-size: 18px; /* Tamaño del texto ingresado */
-
-  transition: all 300ms;
-  font-weight: bold;
-  font-size: 0.9rem;
-}
-
-
-.span {
-  text-decoration: none;
+.text-danger {
   color: red;
-  opacity: 70%;
+  font-size: 14px;
 }
 
-ion-input{
-  background-color: rgb(160, 214, 131);
-  font-size: large;
+/* Tabla */
+.table-header {
   font-weight: bold;
+  background-color: rgb(114, 191, 120);
+  color: black;
+  padding: 10px 0;
+  border-radius: 8px;
+}
+
+.table-row {
+  background-color: #f9f9f9;
   color: black;
 
-}
-// .boton{
-//   --background-color: #FFFF99;
-//   --background: #FFFF99;
-// }
-// .boton-cambiar{
-//   color: rgba(23, 23, 255, 0.842);
-//   font-weight: bold;
-//   text-decoration: underline;
-// }
-// .title {
-//   margin-bottom: 1rem;
-//   font-size: 1.5em;
-//   font-weight: 500;
-//   color: #f5f5f5;
-//  }
-//  ion-label{
-//     align-self: flex-start;
-//     color: #F5F5F5;
-//     font-weight: 600;
-//       font-size: 18px; /* Tamaño del texto ingresado */
-//  }
-//  .margen{
-//   margin-top: 50px;
-//  }
-//  .cuadrado{
-//   width: 100%;
-//   height: 500px;
-//   background: rgb(114, 191, 120);
-//   // background-color: rgb(160, 214, 131);
+  padding: 10px 0;
+  border-bottom: 1px solid #ddd;
 
-// }
-////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////
- ////////////////////////////////////////////////////////
- ///
+  /* Animación de desvanecimiento y desplazamiento */
+  opacity: 0; /* Comienza invisible */
+  transform: translateY(20px); /* Comienza desplazada */
+  animation: slideFadeIn 0.5s ease forwards;
+}
+
+.table-row:nth-child(1) { animation-delay: 0.5s; }
+.table-row:nth-child(2) { animation-delay: 1s; }
+.table-row:nth-child(3) { animation-delay: 1.5s; }
+
+/* Filas alternadas */
+.table-row-even {
+  background-color: rgb(160, 214, 131);
+}
+
+.table-row-odd {
+  background-color: rgb(114, 191, 120); /* Gris claro */
+}
+
+/* Efecto hover para todas las filas */
+.table-row-even:hover,
+.table-row-odd:hover {
+  background-color: rgb(254, 255, 159)  ; /* Verde suave */
+  cursor: pointer;
+}
+
+/* Animación de desvanecimiento y desplazamiento hacia arriba */
+@keyframes slideFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/* Estilo general del footer */
+.footer {
+  background: rgb(114, 191, 120); /* Color principal (60%) */
+  color: black;
+  text-align: center;
+  padding: 20px 0;
+  // border-top: 4px solid rgb(160, 214, 131); /* Línea superior (30%) */
+  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Enlaces dentro del footer */
+.footer a {
+  color: rgb(254, 255, 159); /* Color destacado (10%) */
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* Texto del footer */
+.footer-text {
+  font-size: 14px;
+  margin: 0;
+}
+
+.footer strong {
+  color: rgb(160, 214, 131); /* Destacar GreenMarket */
+}
+
+/* Botón "Volver arriba" */
+.back-to-top {
+  background-color: rgb(160, 214, 131); /* Botón en verde claro */
+  color: black;
+  padding: 8px 12px;
+  border-radius: 5px;
+  font-size: 12px;
+  font-weight: bold;
+  text-decoration: none;
+  transition: all 0.3s;
+}
+
+.back-to-top:hover {
+  background-color: rgb(254, 255, 159); /* Hover en amarillo */
+  color: black;
+}

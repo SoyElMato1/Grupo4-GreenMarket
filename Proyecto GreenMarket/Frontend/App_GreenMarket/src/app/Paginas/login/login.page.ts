@@ -182,17 +182,17 @@ export class LoginPage implements OnInit{
         // Redirigimos a otra página, como la página principal o dashboard
         // this.router.navigate(['/dashboard']);
       },
-      error: async (error) => {
-        console.error('Error al registrar proveedor', error);
+      // error: async (error) => {
+      //   console.error('Error al registrar proveedor', error);
 
-        // Mostramos un mensaje de error en caso de fallo
-        const toast = await this.toast.create({
-          message: 'Error al registrar el proveedor. Intente nuevamente.',
-          position: 'top',
-          duration: 2000
-        });
-        toast.present();
-      }
+      //   // Mostramos un mensaje de error en caso de fallo
+      //   const toast = await this.toast.create({
+      //     message: 'Error al registrar el proveedor. Intente nuevamente.',
+      //     position: 'top',
+      //     duration: 2000
+      //   });
+      //   toast.present();
+      // }
     });
   }
 

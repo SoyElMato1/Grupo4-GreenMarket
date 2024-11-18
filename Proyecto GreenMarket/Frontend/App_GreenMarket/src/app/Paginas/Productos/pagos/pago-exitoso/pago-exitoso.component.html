@@ -1,4 +1,3 @@
-
 <ion-content>
   <ion-grid class="fondo">
     <ion-row>
@@ -8,36 +7,56 @@
         </div>
       </ion-col>
     </ion-row>
+
+    <!-- Contenedor para la imagen -->
     <ion-row>
-      <ion-col>
-        <div class="container">
-          <h1>Pago Exitoso</h1>
-
-          <!-- Mensaje de confirmación general -->
-
-          <p *ngIf="!transaccionData && token">Cargando detalles de la transacción...</p>
-          <p *ngIf="!transaccionData && !token">No se pudo obtener la información del pago.</p>
-
-          <!-- Detalles de la transacción -->
-          <div *ngIf="transaccionData">
-            <p><strong>Método de Pago:</strong> {{ transaccionData.metodo_pago }}</p>
-            <p><strong>Monto:</strong> ${{ transaccionData.amount }}</p>
-            <p><strong>Orden de Compra:</strong> {{ transaccionData.buy_order }}</p>
-            <p><strong>Estado:</strong> {{ transaccionData.status }}</p>
-            <p><strong>ID de Sesión:</strong> {{ transaccionData.session_id }}</p>
-            <p><strong>Fecha de Transacción:</strong> {{ transaccionData.transaction_date | date: 'medium' }}</p>
-          </div>
+      <ion-col class="centrar">
+        <div class="imagen-contenedor">
+          <img src="../../../../../assets/images/logo.png" alt="Imagen de compra" class="imagen-centro" />
         </div>
-
       </ion-col>
     </ion-row>
 
-
     <ion-row>
       <ion-col>
+        <div class="container">
 
+          <!-- Mensaje de confirmación general -->
+          <p *ngIf="!transaccionData && token">Cargando detalles de la transacción...</p>
+          <p *ngIf="!transaccionData && !token">No se pudo obtener la información del pago.</p>
+
+          <!-- Tabla con los detalles de la transacción -->
+          <div *ngIf="transaccionData">
+            <table>
+              <tr>
+                <td><strong>Método de Pago:</strong></td>
+                <td>{{ transaccionData.metodo_pago }}</td>
+              </tr>
+              <tr>
+                <td><strong>Monto:</strong></td>
+                <td>${{ transaccionData.amount }}</td>
+              </tr>
+              <tr>
+                <td><strong>Orden de Compra:</strong></td>
+                <td>{{ transaccionData.buy_order }}</td>
+              </tr>
+              <!-- <tr>
+                <td><strong>Estado:</strong></td>
+                <td>{{ transaccionData.status }}</td>
+              </tr>
+              <tr>
+                <td><strong>ID de Sesión:</strong></td>
+                <td>{{ transaccionData.session_id }}</td>
+              </tr> -->
+              <tr>
+                <td><strong>Fecha de Transacción:</strong></td>
+                <td>{{ transaccionData.transaction_date | date: 'medium' }}</td>
+              </tr>
+            </table>
+          </div>
+
+        </div>
       </ion-col>
     </ion-row>
   </ion-grid>
 </ion-content>
-
