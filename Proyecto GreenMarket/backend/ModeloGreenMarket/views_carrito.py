@@ -112,7 +112,8 @@ def checkout(request):
                 'nombre': cliente_data.get('nombre'),
                 'correo_electronico': cliente_data.get('correo_electronico'),
                 'direccion': cliente_data.get('direccion'),
-                'dv': cliente_data.get('dv')
+                'dv': cliente_data.get('dv'),
+                'contrasena': cliente_data.get('contrasena')
             }
         )
 

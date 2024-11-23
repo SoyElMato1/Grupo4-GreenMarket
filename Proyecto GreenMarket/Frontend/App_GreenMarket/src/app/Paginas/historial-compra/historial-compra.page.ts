@@ -11,7 +11,10 @@ import { ProductoServiService } from 'src/app/Servicios/Producto/producto-servi.
 export class HistorialCompraPage implements OnInit {
   orders: any[] = [];
   rut: string = '';
-  rutForm: FormGroup;  // Formulario reducido solo para RUT
+  contrasena: string = '';
+  HistorialForm: FormGroup;  // Formulario reducido solo para RUT
+
+  showPasswordHistorial: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -19,24 +22,31 @@ export class HistorialCompraPage implements OnInit {
     private router: Router,
     private productoService: ProductoServiService,
   ) {
-    this.rutForm = this.formBuilder.group({
+    this.HistorialForm = this.formBuilder.group({
       rut: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(7), Validators.maxLength(8)]],
+      password: ['',[Validators.required, Validators.minLength(8), Validators.maxLength(12)]],
     });
   }
 
   ngOnInit() {}
 
+  togglePasswordVisibility(form: string) {
+    if (form === 'vercontraseña') {
+      this.showPasswordHistorial = !this.showPasswordHistorial;
+    }
+  }
+
   public campo(control: string) {
-    return this.rutForm.get(control);
+    return this.HistorialForm.get(control);
   }
 
   public campoTocado(control: string) {
-    return this.rutForm.get(control)?.touched;
+    return this.HistorialForm.get(control)?.touched;
   }
 
   async verificarHistorial() {
     // Verificación de validez del formulario
-    if (this.rutForm.invalid) {
+    if (this.HistorialForm.invalid) {
       const toast = await this.toastController.create({
         message: 'Ingrese un RUT válido.',
         duration: 2000,
@@ -47,7 +57,7 @@ export class HistorialCompraPage implements OnInit {
     }
 
     // Aquí podrías llamar a un servicio para buscar el historial de compras según el RUT
-    const rut = this.rutForm.value.username;
+    const rut = this.HistorialForm.value.username;
     console.log('Buscar historial de compras para RUT:', rut);
 
     // Navegación a la página de historial (ejemplo)
@@ -55,7 +65,7 @@ export class HistorialCompraPage implements OnInit {
   }
 
   consultarHistorial(): void {
-    if (this.rut) {
+    if (this.rut || this.contrasena) {
       this.productoService.getHistorial(this.rut).subscribe({
         next: (data) => {
           this.orders = data;

@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin, Group, Permission
+from django.contrib.auth.hashers import make_password
 
 # Create your models here.
 
@@ -104,13 +105,18 @@ class Proveedor(models.Model):
     rut = models.CharField(max_length=10, primary_key=True)
     dv = models.CharField(max_length=1)
     correo_electronico = models.EmailField(max_length=50)
-    contrasena = models.CharField(max_length=50)
+    contrasena = models.CharField(max_length=200)
     nombre = models.CharField(max_length=50)
     apellido = models.CharField(max_length=50)
     verificacion = models.BooleanField(default=False)
-    recompensa = models.IntegerField(default=0)
     direccion = models.CharField(max_length=200, null=True, blank=True)
     foto = models.ImageField(upload_to='proveedor_images/', null=True, blank=True)  # Campo de imagen
+
+    def save(self, *args, **kwargs):
+        # Codificar la contraseña si no está codificada aún
+        if not self.contrasena.startswith('pbkdf2_'):
+            self.contrasena = make_password(self.contrasena)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.nombre} {self.apellido} (RUT: {self.rut})'
@@ -126,47 +132,20 @@ class Proveedor(models.Model):
         )
         nuevo_producto.save()
         return nuevo_producto
-    
-    def calcular_recompensa(self):
-        # Calificaciones de los productos
-        calificaciones_productos = self.producto_set.aggregate(models.Sum('calificaciones__puntuacion'))['calificaciones__puntuacion__sum'] or 0
-        num_productos = self.producto_set.count()
-
-        # Calificación como proveedor
-        calificaciones_proveedor = self.calificaciones_proveedor.aggregate(models.Sum('puntuacion'))['puntuacion__sum'] or 0
-        num_calificaciones_proveedor = self.calificaciones_proveedor.count()
-
-        # Calcular promedios
-        if num_productos > 0:
-            promedio_productos = calificaciones_productos / num_productos
-        else:
-            promedio_productos = 0
-
-        if num_calificaciones_proveedor > 0:
-            promedio_proveedor = calificaciones_proveedor / num_calificaciones_proveedor
-        else:
-            promedio_proveedor = 0
-
-        # Sumar ambos promedios
-        puntuacion_total = promedio_productos + promedio_proveedor
-
-        # Lógica para asignar recompensa según la puntuación total (ajustada para el rango de 1 a 5)
-        if puntuacion_total >= 8:
-            self.recompensa = 100
-        elif 6 <= puntuacion_total < 8:
-            self.recompensa = 50
-        else:
-            self.recompensa = 10
-
-        # Guardar cambios
-        self.save()
 
 class Cliente(models.Model):
     rut = models.CharField(max_length=10, primary_key=True)
     dv = models.CharField(max_length=1, null=True)
     correo_electronico = models.EmailField(max_length=50, null=True)
+    contrasena = models.CharField(max_length=200)
     nombre = models.CharField(max_length=50, null=True)
     direccion = models.CharField(max_length=50, null=True)
+
+    def save(self, *args, **kwargs):
+        # Codificar la contraseña si no está codificada aún
+        if not self.contrasena.startswith('pbkdf2_'):
+            self.contrasena = make_password(self.contrasena)
+        super().save(*args, **kwargs)
 
     def __str__(self):
         return f'{self.nombre} (RUT: {self.rut})'

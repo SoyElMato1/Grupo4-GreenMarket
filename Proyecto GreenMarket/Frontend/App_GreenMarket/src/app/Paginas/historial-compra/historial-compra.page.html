@@ -6,7 +6,7 @@
         <!-- Columna izquierda para el formulario -->
   <div class="col-md-4 m-0 p-0 mt-5">
   <div class="form-container">
-    <form [formGroup]="rutForm" (ngSubmit)="verificarHistorial()" novalidate>
+    <form [formGroup]="HistorialForm" (ngSubmit)="verificarHistorial()" novalidate>
       <h2 class="mb-4 titular text-center">Consulta Historial de Compras</h2>
 
       <div class="form-group mb-3">
@@ -14,6 +14,20 @@
         <ion-input formControlName="rut" placeholder="Ej: 12345678" class="form-control" [(ngModel)]="rut"></ion-input>
         <div *ngIf="campo('rut')?.invalid && campoTocado('rut')" class="text-danger">
           El RUT es obligatorio y debe ser válido.
+        </div>
+      </div>
+      <div class="form-group mb-3">
+        <label class="label mb-2">Ingrese su contraseña</label>
+        <ion-input formControlName="contrasena" placeholder="contraseña" class="form-control" [(ngModel)]="contrasena" [type]="showPasswordHistorial ? 'text' : 'password'">
+          <ion-icon
+            [name]="showPasswordHistorial ? 'eye-off' : 'eye'"
+            slot="end"
+            (click)="togglePasswordVisibility('vercontraseña')"
+            style="cursor: pointer;">
+          </ion-icon>
+        </ion-input>
+        <div *ngIf="campo('contrasena')?.invalid && campoTocado('contrasena')" class="text-danger">
+          La contraseña es obligatoria
         </div>
       </div>
 

@@ -98,10 +98,10 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'HOST': 'localhost',
-        'PORT': '3306',
+        'PORT': '3307',
         'USER': 'root',
-        'PASSWORD': '0001',
-        'NAME': 'hola', #base de datos
+        'PASSWORD': '1234',
+        'NAME': 'greenmarket', #base de datos
     }
 }
 

@@ -4,6 +4,7 @@ import { Carrito } from 'src/app/Interfaces/carrito';
 import { ToastController } from '@ionic/angular';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';  // Importa las clases necesarias
 
 @Component({
   selector: 'app-carrito',
@@ -14,15 +15,34 @@ export class CarritoPage implements OnInit {
 
   cartItems: any[] = [];
   total = 0;
-  customer = { rut: '', dv: '', correo_electronico: '', nombre: '', direccion: '' };
+  // customer = { rut: '', dv: '', correo_electronico: '', contrasena: '', nombre: '', direccion: '' };
   mensaje: string = '';   // Mensaje para mostrar éxito o error
   public carrito!: Carrito;
   showClienteForm = false;
-  guardarCliente: boolean = false; // Esta es la propiedad que refleja el valor del checkbox
+  // guardarCliente: boolean = false; // Esta es la propiedad que refleja el valor del checkbox
+  showPasswordRegister: boolean = false;
+
+  customerForm: FormGroup;
+
+  togglePasswordVisibility(form: string) {
+    if (form === 'register') {
+      this.showPasswordRegister = !this.showPasswordRegister;
+    }
+  }
 
   constructor(private cartService: CarritoServiService,
               private toastController: ToastController,
-              private router: Router) { }
+              private router: Router, private fb: FormBuilder,) {
+                this.customerForm = this.fb.group({
+                  rut: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(7), Validators.maxLength(8)]], // Solo números
+                  dv: ['', [Validators.required, Validators.pattern('^[0-9Kk]{1}$')]], // Solo dígito verificador o K
+                  correo_electronico: ['', [Validators.required, Validators.email]],
+                  contrasena: ['', [Validators.required, Validators.minLength(8), Validators.maxLength(16),
+                    Validators.pattern(/(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[!@#$%^&*(),.?":{}|<>])/)]],
+                  nombre: ['', Validators.required, Validators.pattern('^[a-zA-ZñÑ]+$')],
+                  direccion: ['', Validators.required]
+                });
+              }
 
   ngOnInit() {
     this.loadCart();
@@ -32,25 +52,7 @@ export class CarritoPage implements OnInit {
     .subscribe(() => {
       // Aquí puedes actualizar los datos del carrito cuando la navegación termine
       this.loadCart();
-  });
-  }
-
-  toggleClienteForm() {
-    if (this.showClienteForm) {
-      this.resetClienteForm();
-    }
-    this.showClienteForm = !this.showClienteForm;
-  }
-
-  resetClienteForm() {
-    this.customer = {
-      rut: '',
-      dv: '',
-      correo_electronico: '',
-      nombre: '',
-      direccion: ''
-    };
-    this.guardarCliente = false;
+    });
   }
 
   precioUnitario (precio: number, cantidad: number): number{
@@ -79,8 +81,20 @@ export class CarritoPage implements OnInit {
   loadCustomerData() {
     const savedCustomer = localStorage.getItem('customerData');
     if (savedCustomer) {
-      this.customer = JSON.parse(savedCustomer);
+      const customer = JSON.parse(savedCustomer);
+      this.customerForm.patchValue(customer);  // Usa patchValue para cargar los datos
     }
+  }
+
+  toggleClienteForm() {
+    if (this.showClienteForm) {
+      this.resetClienteForm();
+    }
+    this.showClienteForm = !this.showClienteForm;
+  }
+
+  resetClienteForm() {
+    this.customerForm.reset();
   }
 
   // Función para eliminar un producto del carrito
@@ -130,17 +144,45 @@ export class CarritoPage implements OnInit {
 
   buscar_cliente(rut: string) {
     if (!rut) return; // Si el RUT está vacío, no hacer nada
-    this.cartService.cliente_obtener(rut ).subscribe(
+
+    this.cartService.cliente_obtener(rut).subscribe(
       (response: any) => {
         if (response) {
-          this.customer.dv = response.dv;
-          this.customer.correo_electronico = response.correo_electronico;
-          this.customer.nombre = response.nombre;
-          this.customer.direccion = response.direccion;
+          // Usa patchValue para actualizar los campos específicos del formulario
+          this.customerForm.patchValue({
+            rut: rut, // El RUT generalmente no lo necesitarías modificar, pero se incluye aquí por si lo deseas
+            dv: response.dv,
+            correo_electronico: response.correo_electronico,
+            contrasena: response.contrasena,
+            nombre: response.nombre,
+            direccion: response.direccion
+          });
+
+          // Si deseas que el cliente se registre después de cargar los datos, puedes hacerlo aquí
+          this.showClienteForm = true; // Muestra el formulario si es necesario
+          // this.guardarCliente = true;  // Marca para guardar los datos
         }
       },
+      (error) => {
+        console.error('Error al buscar el cliente:', error);
+      }
     );
   }
+
+  // buscar_cliente(rut: string) {
+  //   if (!rut) return; // Si el RUT está vacío, no hacer nada
+  //   this.cartService.cliente_obtener(rut ).subscribe(
+  //     (response: any) => {
+  //       if (response) {
+  //         this.customer.dv = response.dv;
+  //         this.customer.correo_electronico = response.correo_electronico;
+  //         this.customer.contrasena = response.contrasena
+  //         this.customer.nombre = response.nombre;
+  //         this.customer.direccion = response.direccion;
+  //       }
+  //     },
+  //   );
+  // }
 
   // guardar_cliente(){
   //   this.cartService.crearCliente(this.customer).subscribe(
@@ -150,54 +192,9 @@ export class CarritoPage implements OnInit {
   //   );
   // }
 
-
-
-  // Valida el RUT usando una expresión regular (formato chileno)
-  validateRut(rut: string): boolean {
-    const rutRegex = /^\d{7,8}$/; // Ejemplo para RUTs de 7 a 8 dígitos
-    return rutRegex.test(rut);
-  }
-
-  // Valida el dígito verificador
-  validateDV(dv: string): boolean {
-    return dv.length === 1 && /^[0-9kK]$/.test(dv);
-  }
-
-  // Valida el correo electrónico
-  validateEmail(email: string): boolean {
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return emailRegex.test(email);
-  }
-
-  // Valida que el nombre no esté vacío
-  validateName(name: string): boolean {
-    return name.trim().length > 0;
-  }
-
-  // Valida que la dirección no esté vacía
-  validateAddress(address: string): boolean {
-    return address.trim().length > 0;
-  }
-
   validateForm(): boolean {
-    if (!this.validateRut(this.customer.rut)) {
-      this.mostrarToast('Por favor, ingresa un RUT válido.');
-      return false;
-    }
-    if (!this.validateDV(this.customer.dv)) {
-      this.mostrarToast('Por favor, ingresa un dígito verificador válido.');
-      return false;
-    }
-    if (!this.validateEmail(this.customer.correo_electronico)) {
-      this.mostrarToast('Por favor, ingresa un correo electrónico válido.');
-      return false;
-    }
-    if (!this.validateName(this.customer.nombre)) {
-      this.mostrarToast('Por favor, ingresa un nombre.');
-      return false;
-    }
-    if (!this.validateAddress(this.customer.direccion)) {
-      this.mostrarToast('Por favor, ingresa una dirección.');
+    if (this.customerForm.invalid) {
+      this.mostrarToast('Por favor, completa el formulario correctamente.');
       return false;
     }
     return true;
@@ -283,6 +280,7 @@ export class CarritoPage implements OnInit {
 //         }
 //     );
 //   }
+
 checkout_pago() {
   // Verificar si el carrito tiene productos y si el formulario es válido
   if (this.cartItems.length === 0) {
@@ -301,18 +299,26 @@ checkout_pago() {
     cantidad: item.cantidad
   }));
 
-  const checkoutData = {
-    rut: this.customer.rut,
-    dv: this.customer.dv,
-    correo_electronico: this.customer.correo_electronico,
-    nombre: this.customer.nombre,
-    direccion: this.customer.direccion,
-    items: items,
+  const checkoutData = this.customerForm.value;
+
+  const checkoutPayload = {
+    ...checkoutData,
+    items,
     total: this.total
   };
 
+  // const checkoutData = {
+  //   rut: this.customer.rut,
+  //   dv: this.customer.dv,
+  //   correo_electronico: this.customer.correo_electronico,
+  //   nombre: this.customer.nombre,
+  //   direccion: this.customer.direccion,
+  //   items: items,
+  //   total: this.total
+  // };
+
   // Realizar el checkout y crear la orden
-  this.cartService.checkout(checkoutData).subscribe(
+  this.cartService.checkout(checkoutPayload).subscribe(
     (response: any) => {
       if (response && response.orden_id) {
         this.mostrarToast(`Orden creada. ID de la orden: ${response.orden_id}`);
@@ -329,7 +335,7 @@ checkout_pago() {
 }
 
 irAPagar(orden_id: any) {
-  if (!this.customer.rut || !this.customer.dv || !this.customer.correo_electronico || !this.customer.nombre || !this.customer.direccion) {
+  if (!this.validateForm()) {
     this.mostrarToast('Por favor, completa todos los campos.');
     return;
   }

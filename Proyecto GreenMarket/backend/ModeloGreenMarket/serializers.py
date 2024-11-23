@@ -28,24 +28,8 @@ class UserSerializer(serializers.ModelSerializer):
 class ProveedorSerializer(serializers.ModelSerializer):
     class Meta:
         model = Proveedor
-        fields = ['rut', 'dv', 'correo_electronico', 'contrasena', 'nombre', 'apellido', 'direccion','recompensa', 'verificacion','foto']
-        read_only_fields = ['recompensa', 'verificacion']  # Para que estos campos no puedan ser modificados directamente
-
-    def get_calificacion_productos(self, obj):
-        # Obtener la puntuación promedio de los productos
-        total_puntuacion = obj.producto_set.aggregate(models.Sum('calificaciones__puntuacion'))['calificaciones__puntuacion__sum'] or 0
-        num_productos = obj.producto_set.count()
-        if num_productos > 0:
-            return total_puntuacion / num_productos
-        return 0
-
-    def get_calificacion_proveedor(self, obj):
-        # Obtener la puntuación promedio del proveedor
-        total_puntuacion = obj.calificaciones_proveedor.aggregate(models.Sum('puntuacion'))['puntuacion__sum'] or 0
-        num_calificaciones = obj.calificaciones_proveedor.count()
-        if num_calificaciones > 0:
-            return total_puntuacion / num_calificaciones
-        return 0
+        fields = ['rut', 'dv', 'correo_electronico', 'contrasena', 'nombre', 'apellido', 'direccion','verificacion','foto']
+        read_only_fields = ['verificacion']  # Para que estos campos no puedan ser modificados directamente
     
 class calificacionProveedorSerializer(serializers.ModelSerializer):
     class Meta:
@@ -72,7 +56,7 @@ class calificacionProductoSerializer(serializers.ModelSerializer):
 class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
-        fields = ['rut', 'dv', 'correo_electronico', 'nombre', 'direccion']
+        fields = ['rut', 'dv', 'correo_electronico', 'contrasena', 'nombre', 'direccion']
 
 # Producto
 class CategoriaSerializer(serializers.ModelSerializer):
