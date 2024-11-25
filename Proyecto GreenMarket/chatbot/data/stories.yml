@@ -4,22 +4,44 @@ stories:
 
 - story: consultar planta
   steps:
-  - intent: get_plant_info
-    entities:
-      - plant_name
-  - action: action_get_plant_info
+    - intent: get_plant_info
+      entities:
+        - plant_name
+    - action: action_get_plant_info
 
 - story: saludo
   steps:
-  - intent: greet
-  - action: utter_greet
+    - intent: greet
+    - action: utter_greet
 
 - story: despedida
   steps:
-  - intent: goodbye
-  - action: utter_goodbye
+    - intent: goodbye
+    - action: utter_goodbye
 
 - story: bot desafiante
   steps:
-  - intent: bot_challenge
-  - action: utter_iamabot
+    - intent: bot_challenge
+    - action: utter_iamabot
+
+- story: identificar planta
+  steps:
+    - intent: identificar_planta
+    - action: action_identify_plant
+
+- story: listar_productos_story
+  steps:
+  - intent: listar_productos
+  - action: action_listar_productos
+
+- story: proveedores_producto_story
+  steps:
+  - intent: proveedores_producto
+    entities:
+      - producto: "producto"
+  - action: action_proveedor_producto
+
+- story: buscar proveedor de un producto
+  steps:
+  - intent: preguntar_proveedor
+  - action: action_buscar_proveedor

@@ -1,5 +1,4 @@
 version: "3.1"
-
 nlu:
 - intent: greet
   examples: |
@@ -7,25 +6,22 @@ nlu:
     - Buenas
     - Hola, ¿hay alguien ahí?
     - Hey
-
 - intent: goodbye
   examples: |
     - Adiós
     - Hasta luego
     - Nos vemos
-
+    - Gracias, hasta luego
 - intent: affirm
   examples: |
     - Sí
     - Claro
     - Exacto
-
 - intent: deny
   examples: |
     - No
     - De ninguna manera
     - Para nada
-
 - intent: ask_about_plants
   examples: |
     - Necesito información sobre [amapolas](plant_name).
@@ -34,7 +30,6 @@ nlu:
     - Dime sobre [lavanda](plant_name).
     - Cuéntame de una planta en específico
     - Dame información de alguna planta
-
 - intent: get_plant_info
   examples: |
     - Quiero saber sobre [rosales](plant_name)
@@ -73,31 +68,51 @@ nlu:
     - ¿Qué tipo de fertilizante necesita una [salvia](plant_name)?
     - ¿Cuánto sol necesita una [margarita](plant_name)?
     - ¿Cómo mantener en buenas condiciones una [helecho](plant_name)?
-
 - intent: ask_plant_care
   examples: |
     - ¿Cómo cuido un [rosa](plant_name)?
     - ¿Qué riego necesita un [cactus](plant_name)?
-    - ¿Es necesario abonar una [suculenta](plant_name)? 
+    - ¿Es necesario abonar una [suculenta](plant_name)?
     - ¿Cuáles son los cuidados de una planta como [geranio](plant_name)?
     - ¿Qué cuidados tiene una planta de interiores?
-
 - intent: ask_product_recommendation
   examples: |
     - ¿Qué planta me recomiendas para interiores?
     - Busco una planta que no requiera mucho sol.
     - ¿Cuál es la mejor planta para principiantes?
     - Recomiéndame una planta que sea fácil de cuidar
-
 - intent: enfermedades_plantas
   examples: |
     - ¿Cómo identifico si mi planta tiene una enfermedad?
     - ¿Qué hago si mis hojas están amarillas?
     - ¿Cuáles son las enfermedades comunes en plantas de interiores?
     - ¿Cómo trato una enfermedad en una planta como [suculenta](plant_name)?
-
 - intent: herramientas_jardineria
   examples: |
     - ¿Qué herramientas necesito para empezar a jardinería?
     - ¿Cuál es la mejor pala para plantar?
     - ¿Qué tipo de tijeras de podar debo usar?
+- intent: identificar_planta
+  examples: |
+    - ¿Puedes identificar esta planta?
+    - ¿Qué tipo de planta es esta?
+    - Quiero saber sobre esta plant
+- intent: listar_productos
+  examples: |
+    - ¿Qué productos tienen disponibles?
+    - Muéstrame los productos que tienen
+    - Quiero saber los productos disponibles
+    - Lista los productos
+- intent: proveedores_producto
+  examples: |
+    - ¿Quién trae [producto]?
+    - ¿Qué proveedor tiene [producto]?
+    - ¿Qué proveedor suministra [producto]?
+    - ¿Qué proveedor me puede vender [producto]?
+- intent: preguntar_proveedor
+  examples: |
+    - ¿Quién es el proveedor de [amapolas](plant_name_proveedor)?
+    - Dame el proveedor de [rosas](plant_name_proveedor)
+    - Necesito saber quién distribuye [tulipanes](plant_name_proveedor)
+    - ¿Qué proveedor tiene [orquídeas](plant_name_proveedor)?
+    - ¿De dónde provienen las [margaritas](plant_name_proveedor)?

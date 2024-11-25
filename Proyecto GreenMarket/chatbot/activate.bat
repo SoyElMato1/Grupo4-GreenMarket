@@ -10,4 +10,4 @@ python -m venv %nombre_entorno%
 call %nombre_entorno%\Scripts\activate.bat
 
 @REM Instalar dependencias
-pip install rasa
+pip install rasa django

@@ -15,7 +15,7 @@ export class CarritoPage implements OnInit {
 
   cartItems: any[] = [];
   total = 0;
-  // customer = { rut: '', dv: '', correo_electronico: '', contrasena: '', nombre: '', direccion: '' };
+  customer = { rut: '', dv: '', correo_electronico: '', contrasena: '', nombre: '', direccion: '' };
   mensaje: string = '';   // Mensaje para mostrar éxito o error
   public carrito!: Carrito;
   showClienteForm = false;
@@ -142,47 +142,47 @@ export class CarritoPage implements OnInit {
     await toast.present();
   }
 
-  buscar_cliente(rut: string) {
-    if (!rut) return; // Si el RUT está vacío, no hacer nada
-
-    this.cartService.cliente_obtener(rut).subscribe(
-      (response: any) => {
-        if (response) {
-          // Usa patchValue para actualizar los campos específicos del formulario
-          this.customerForm.patchValue({
-            rut: rut, // El RUT generalmente no lo necesitarías modificar, pero se incluye aquí por si lo deseas
-            dv: response.dv,
-            correo_electronico: response.correo_electronico,
-            contrasena: response.contrasena,
-            nombre: response.nombre,
-            direccion: response.direccion
-          });
-
-          // Si deseas que el cliente se registre después de cargar los datos, puedes hacerlo aquí
-          this.showClienteForm = true; // Muestra el formulario si es necesario
-          // this.guardarCliente = true;  // Marca para guardar los datos
-        }
-      },
-      (error) => {
-        console.error('Error al buscar el cliente:', error);
-      }
-    );
-  }
-
   // buscar_cliente(rut: string) {
   //   if (!rut) return; // Si el RUT está vacío, no hacer nada
-  //   this.cartService.cliente_obtener(rut ).subscribe(
+
+  //   this.cartService.cliente_obtener(rut).subscribe(
   //     (response: any) => {
   //       if (response) {
-  //         this.customer.dv = response.dv;
-  //         this.customer.correo_electronico = response.correo_electronico;
-  //         this.customer.contrasena = response.contrasena
-  //         this.customer.nombre = response.nombre;
-  //         this.customer.direccion = response.direccion;
+  //         // Usa patchValue para actualizar los campos específicos del formulario
+  //         this.customerForm.patchValue({
+  //           rut: rut, // El RUT generalmente no lo necesitarías modificar, pero se incluye aquí por si lo deseas
+  //           dv: response.dv,
+  //           correo_electronico: response.correo_electronico,
+  //           contrasena: response.contrasena,
+  //           nombre: response.nombre,
+  //           direccion: response.direccion
+  //         });
+
+  //         // Si deseas que el cliente se registre después de cargar los datos, puedes hacerlo aquí
+  //         this.showClienteForm = true; // Muestra el formulario si es necesario
+  //         // this.guardarCliente = true;  // Marca para guardar los datos
   //       }
   //     },
+  //     (error) => {
+  //       console.error('Error al buscar el cliente:', error);
+  //     }
   //   );
   // }
+
+  buscar_cliente(rut: string) {
+    if (!rut) return; // Si el RUT está vacío, no hacer nada
+    this.cartService.cliente_obtener(rut ).subscribe(
+      (response: any) => {
+        if (response) {
+          this.customer.dv = response.dv;
+          this.customer.correo_electronico = response.correo_electronico;
+          // this.customer.contrasena = response.contrasena
+          this.customer.nombre = response.nombre;
+          this.customer.direccion = response.direccion;
+        }
+      },
+    );
+  }
 
   // guardar_cliente(){
   //   this.cartService.crearCliente(this.customer).subscribe(

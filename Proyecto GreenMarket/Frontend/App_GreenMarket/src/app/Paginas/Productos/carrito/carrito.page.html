@@ -82,21 +82,21 @@
                   <!-- Campo RUT -->
                   <ion-col size="9">
                     <ion-label class="label" position="stacked">RUT</ion-label>
-                    <ion-input formControlName="rut" class="formulario" placeholder="RUT" type="text" ></ion-input>
-                    <!-- <ion-input class="formulario" [(ngModel)]="customer.rut" name="rut" placeholder="RUT"
-                              (ionBlur)="buscar_cliente(customer.rut)" (ngModelChange)="validateRut(customer.rut)">
-                    </ion-input> -->
+                    <!-- <ion-input formControlName="rut" class="formulario" placeholder="RUT" type="text" (ionBlur)="buscar_cliente(customer.rut)"></ion-input> -->
+                    <ion-input class="formulario" [(ngModel)]="customer.rut" name="rut" placeholder="RUT"
+                              (ionBlur)="buscar_cliente(customer.rut)" formControlName="rut">
+                    </ion-input>
                     <!-- <ion-text color="danger" *ngIf="!validateRut(customer.rut) && customer.rut">
                       Por favor, ingresa un RUT válido.
                     </ion-text> -->
                   </ion-col>
                   <ion-col>
                     <ion-label class="label" position="stacked">DV</ion-label>
-                    <ion-input formControlName="dv" class="dv-input" placeholder="0" type="text"></ion-input>
-                    <!-- <ion-input type="text" class="dv-input" [(ngModel)]="customer.dv" name="dv"
-                              placeholder="DV" (ngModelChange)="validateDV(customer.dv)">
+                    <!-- <ion-input formControlName="dv" class="dv-input" placeholder="0" type="text"></ion-input> -->
+                    <ion-input type="text" class="dv-input" [(ngModel)]="customer.dv" name="dv"
+                              placeholder="DV" formControlName="dv">
                     </ion-input>
-                    <ion-text color="danger" *ngIf="!validateDV(customer.dv) && customer.dv">
+                    <!-- <ion-text color="danger" *ngIf="!validateDV(customer.dv) && customer.dv">
                       Por favor, ingresa un dígito verificador válido.
                     </ion-text> -->
                   </ion-col>
@@ -106,18 +106,18 @@
                 <ion-row class="rutcompleto">
                   <ion-col>
                     <ion-label class="label" position="stacked">Correo Electrónico</ion-label>
-                    <ion-input formControlName="correo_electronico" class="formulario" placeholder="Correo Electrónico" type="email"></ion-input>
-                    <!-- <ion-input type="email" class="formulario" [(ngModel)]="customer.correo_electronico"
-                              name="correo_electronico" placeholder="CORREO" (ngModelChange)="validateEmail(customer.correo_electronico)">
+                    <!-- <ion-input formControlName="correo_electronico" class="formulario" placeholder="Correo Electrónico" type="email"></ion-input> -->
+                    <ion-input type="email" class="formulario" [(ngModel)]="customer.correo_electronico"
+                              name="correo_electronico" placeholder="CORREO" formControlName="correo_electronico">
                     </ion-input>
-                    <ion-text color="danger" *ngIf="!validateEmail(customer.correo_electronico) && customer.correo_electronico">
+                    <!-- <ion-text color="danger" *ngIf="!validateEmail(customer.correo_electronico) && customer.correo_electronico">
                       Por favor, ingresa un correo electrónico válido.
                     </ion-text> -->
                   </ion-col>
                   <ion-col>
                     <ion-label class="label" position="stacked">Contraseña</ion-label>
-                    <ion-input formControlName="contrasena" placeholder="Contraseña" [type]="showPasswordRegister ? 'text' : 'password'"
-                      class="formulario">
+                    <ion-input [type]="showPasswordRegister ? 'text' : 'password'" formControlName="contrasena" class="formulario"
+                    [(ngModel)]="customer.contrasena" formControlName="contrasena" placeholder="CONTRASEÑA">
                       <ion-icon
                         [name]="showPasswordRegister ? 'eye-off' : 'eye'"
                         slot="end"
@@ -125,15 +125,6 @@
                         style="cursor: pointer;">
                       </ion-icon>
                     </ion-input>
-                    <!-- <ion-input [type]="showPasswordRegister ? 'text' : 'password'" formControlName="contrasena" class="formulario"
-                    [(ngModel)]="customer.contrasena" (ngModelChange)="validatePassword(customer.contrasena)" placeholder="CONTRASEÑA">
-                      <ion-icon
-                        [name]="showPasswordRegister ? 'eye-off' : 'eye'"
-                        slot="end"
-                        (click)="togglePasswordVisibility('register')"
-                        style="cursor: pointer;">
-                      </ion-icon>
-                    </ion-input> -->
                     <!-- <ion-input type="password" class="formulario" [(ngModel)]="customer.contrasena"
                               name="correo_electronico" placeholder="contraseña" (ngModelChange)="validateEmail(customer.contrasena)">
                     </ion-input> -->
@@ -143,21 +134,21 @@
                   </ion-col>
                   <ion-col>
                     <ion-label class="label" position="stacked">Nombre</ion-label>
-                    <ion-input formControlName="nombre" class="formulario" placeholder="Nombre" type="text"></ion-input>
-                    <!-- <ion-input type="text" class="formulario" [(ngModel)]="customer.nombre" name="nombre"
-                              placeholder="NOMBRE" (ngModelChange)="validateName(customer.nombre)">
+                    <!-- <ion-input formControlName="nombre" class="formulario" placeholder="Nombre" type="text"></ion-input> -->
+                    <ion-input type="text" class="formulario" [(ngModel)]="customer.nombre" name="nombre"
+                              placeholder="NOMBRE" formControlName="nombre">
                     </ion-input>
-                    <ion-text color="danger" *ngIf="!validateName(customer.nombre) && customer.nombre">
+                    <!-- <ion-text color="danger" *ngIf="!validateName(customer.nombre) && customer.nombre">
                       Por favor, ingresa un nombre.
                     </ion-text> -->
                   </ion-col>
                   <ion-col>
                     <ion-label class="label" position="stacked">Dirección</ion-label>
-                    <ion-input class="formulario" formControlName="direccion" placeholder="Dirección" type="text"></ion-input>
-                    <!-- <ion-input type="text" class="formulario" [(ngModel)]="customer.direccion" name="direccion"
-                            placeholder="DIRECCIÓN" (ngModelChange)="validateAddress(customer.direccion)">
+                    <!-- <ion-input class="formulario" formControlName="direccion" placeholder="Dirección" type="text"></ion-input> -->
+                    <ion-input type="text" class="formulario" [(ngModel)]="customer.direccion" name="direccion"
+                            placeholder="DIRECCIÓN" formControlName="direccion">
                     </ion-input>
-                    <ion-text color="danger" *ngIf="!validateAddress(customer.direccion) && customer.direccion">
+                    <!-- <ion-text color="danger" *ngIf="!validateAddress(customer.direccion) && customer.direccion">
                       Por favor, ingresa una dirección.
                     </ion-text> -->
                   </ion-col>

@@ -92,6 +92,7 @@ def cliente_obtener(request, rut):
         'correo_electronico': cliente.correo_electronico,
         'nombre': cliente.nombre,
         'direccion': cliente.direccion,
+        'contrasena': cliente.contrasena
     }
     return JsonResponse(response_data)
 
