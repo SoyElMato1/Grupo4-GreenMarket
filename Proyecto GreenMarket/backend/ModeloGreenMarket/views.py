@@ -123,3 +123,4 @@ def historial_compras(request, rut):
         return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
     except Orden.DoesNotExist:
         return Response({"detail": "No se encontraron órdenes para este RUT."}, status=status.HTTP_404_NOT_FOUND)
+    
