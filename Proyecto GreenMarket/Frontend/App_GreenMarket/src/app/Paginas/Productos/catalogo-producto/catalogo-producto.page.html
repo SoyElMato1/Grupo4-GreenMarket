@@ -56,7 +56,9 @@
           <ion-col size="12" size-md="6" size-lg="4" *ngFor="let producto of productosFiltrados">
 
             <div class="card shadow-sm">
+              <!-- [src]="'http://localhost:8000/' + producto.imagen_producto" -->
               <img *ngIf="producto.imagen_producto"
+
               [src]="'http://localhost:8000/' + producto.imagen_producto"
               class="bd-placeholder-img card-img-top"
               alt="Foto del producto"

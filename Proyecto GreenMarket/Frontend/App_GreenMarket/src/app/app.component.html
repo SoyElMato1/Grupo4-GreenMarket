@@ -1,5 +1,5 @@
   <ion-app>
-<ion-header *ngIf="showHeader" >
+<ion-header *ngIf="showHeader">
   <ion-toolbar color="a" class="colormenus">
     <div class="container">
       <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
@@ -8,10 +8,10 @@
           <span class="fs-1 mb-0">GreenMarket</span> <!-- Ajusta aquí el margen -->
         </a>
       <ul class="nav nav-pills align-items-center"> <!-- Añade 'align-items-center' aquí -->
-          <li class="nav-item"><a href="login" class="nav-link active" aria-current="page">Inicio sesión</a></li>
-          <li class="nav-item"><a href="proveedor" class="nav-link">Provedores</a></li>
-          <li class="nav-item"><a href="catalogo-producto" class="nav-link">Productos</a></li>
-          <li class="nav-item"><a href="historial-compra" class="nav-link">Historial compras</a></li>
+          <li class="nav-item"><a [routerLink]="['/login']" class="nav-link active" aria-current="page">Inicio sesión</a></li>
+          <li class="nav-item"><a [routerLink]="['/proveedor']" class="nav-link">Proveedores</a></li>
+          <li class="nav-item"><a [routerLink]="['/catalogo-producto']" class="nav-link">Productos</a></li>
+          <li class="nav-item"><a [routerLink]="['/historial_compra']" class="nav-link">Historial compras</a></li>
           <ion-button color="a" class="carrito-icon" [routerLink]="['/carrito']">
             <span class="cart-count">{{cantidadCarrito}}</span>
             <ion-icon name="cart" class="big-icon"></ion-icon>

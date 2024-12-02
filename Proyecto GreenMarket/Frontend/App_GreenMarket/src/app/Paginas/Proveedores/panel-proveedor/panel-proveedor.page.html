@@ -7,7 +7,7 @@
       </ion-toolbar> -->
       <ion-toolbar color="A" class="colormenus">
 
-        <img class="avatar" [src]="'http://localhost:8000' + proveedor.foto" alt="Avatar" />
+        <img class="avatar" [src]="'http://localhost:8000/' + proveedor.foto" alt="Avatar" />
         <h4 class="name">{{ proveedor.nombre }} <br> {{ proveedor.apellido }} </h4>
       </ion-toolbar>
     </ion-header>
@@ -71,7 +71,7 @@
               <ion-card *ngIf="isEditMode == false" class="container">
                 <div class="card-body">
                   <img *ngIf="product.imagen_producto"
-                       [src]="'http://localhost:8000' + product.imagen_producto"
+                       [src]="'http://localhost:8000/' + product.imagen_producto"
                        class="profile-image"
                        alt="Foto del producto">
                   <img *ngIf="!product.imagen_producto"
@@ -169,7 +169,7 @@
                   </ion-select>
                 </ion-item>
                 <!-- <ion-button class="btn btn-primary" expand="full" type="submit">Agregar Producto</ion-button> -->
-                <button class="btn btn-primary" >Agregar al carrito</button>
+                <button class="btn btn-primary" >Agregar producto</button>
               </form>
             </ion-card-content>
           </ion-card>

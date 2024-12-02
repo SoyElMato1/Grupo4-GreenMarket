@@ -45,6 +45,7 @@
         <ion-col size="12" size-md="6" size-lg="4" *ngFor="let proveedor of proveedoresFiltrados">
           <div class="card shadow-sm">
             <!-- Imagen del proveedor -->
+            <!-- [src]="'http://localhost:8000/' + proveedor.foto" -->
             <img *ngIf="proveedor.foto"
               [src]="'http://localhost:8000/' + proveedor.foto"
               class="bd-placeholder-img card-img-top"

@@ -20,27 +20,7 @@
   top: 0px;
   left: 0px;
 }
-// .colormenus{
-//   // background: rgb(160, 214, 131);
-//   background: rgb(114, 191, 120);
-//   color: black;
 
-// }
-// .titulo{
-//   font-weight: bold;
-//   font-family: 'Bebas Neue', sans-serif;
-//   font-size: 50px;
-//   color: black;
-//   // border: 10px;
-//   // border-color: palevioletred;
-//   position: relative;
-//   text-align: start;
-//   display: flex;
-//   justify-content: start; /* Centra horizontalmente */
-//   align-items: start; /* Centra verticalmente */
-//   // font-weight: 900; /* Valores comunes: 400 (normal), 700 (negrita) */
-//   // font-family: 'Courier New', Courier, monospace;
-// }
 .btn {
   color: black;
   background: rgb(160, 214, 131); /* Para que tenga fondo transparente */
@@ -51,7 +31,6 @@ ion-button {
   font-weight: bold;
   background: rgb(160, 214, 131); /* Para que tenga fondo transparente */
   background-color: rgb(254, 255, 159);
-
 }
 .titular {
   background-color: rgb(160, 214, 131);
@@ -105,52 +84,6 @@ ion-button {
   .btn-link {
     background-color: #FFFF99;
   }
-// .wave-full{
-//   width: 100%;
-//   min-height: 100vh;
-//   background:whitesmoke;
-// }
-// ion-buttons{
-//   font-size: bold;
-
-// }
-
-// .form {
-//   --bg-light: #efefef;
-//   --bg-dark: #707070;
-//   --clr: #58bc82;
-//   --clr-alpha: #9c9c9c60;
-//   display: flex;
-//   flex-direction: column;
-//   align-items: center;
-//   gap: 1rem;
-//   width: 100%;
-
-
-//   color: black;
-//   font-weight: bold;
-//   font-size: 18px; /* Tamaño del texto ingresado */
-
-//   padding: 10px;
-//   max-width: 500px;
-//   min-width: 300px;
-
-
-// }
-
-// .form .input-span {
-//   width: 100%;
-//   display: flex;
-//   flex-direction: column;
-//   gap: 0.5rem;
-
-// }
-
-
-// .form input[type="email"]:focus,
-// .form input[type="password"]:focus {
-//   outline: 2px solid var(--clr);
-// }
 
 .label {
   align-self: flex-start;

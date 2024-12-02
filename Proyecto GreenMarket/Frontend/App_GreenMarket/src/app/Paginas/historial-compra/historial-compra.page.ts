@@ -24,7 +24,7 @@ export class HistorialCompraPage implements OnInit {
   ) {
     this.HistorialForm = this.formBuilder.group({
       rut: ['', [Validators.required, Validators.pattern('^[0-9]+$'), Validators.minLength(7), Validators.maxLength(8)]],
-      password: ['',[Validators.required, Validators.minLength(8), Validators.maxLength(12)]],
+      contrasena: ['',[Validators.required, Validators.minLength(8), Validators.maxLength(12)]],
     });
   }
 
