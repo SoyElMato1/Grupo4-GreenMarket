@@ -48,6 +48,7 @@ from tensorflow.keras.layers import Dense, GlobalAveragePooling2D
 from tensorflow.keras.models import Model
 from tensorflow.keras.optimizers import Adam
 import requests
+from typing import Optional
 
 
 
@@ -57,11 +58,11 @@ import requests
 
 
 API_PRODUCTOS = "http://127.0.0.1:8000/modelo/producto/"
-API_PROVEEDORES = "http://127.0.0.1:8000/modelo/provee/"
+API_PROVEEDORES = "http://127.0.0.1:8000/modelo/proveedores_por_producto/"
 
 
 
-
+#---------------------------------------------------------------------------------------------------------------------------
 class ActionGetPlantInfo(Action):
     def name(self) -> Text:
         return "action_get_plant_info"
@@ -178,7 +179,7 @@ class ActionListarProductos(Action):
         dispatcher.utter_message(text=mensaje)
         return []
 '''''''''
-
+#-------------------------------------------------------------------------------------------------------------------------------------
 class ActionProveedorProducto(Action):
     def name(self) -> str:
         return "action_proveedor_producto"
@@ -216,7 +217,7 @@ class ActionProveedorProducto(Action):
 
         dispatcher.utter_message(text=mensaje)
         return []
-    
+#-----------------------------------------------------------------------------------------------------------------------------   
 class ActionListarProductos(Action):
     def name(self) -> str:
         return "action_listar_productos"
@@ -239,52 +240,129 @@ class ActionListarProductos(Action):
             dispatcher.utter_message(text="Lo siento, no pude obtener la lista de productos.")
         
         return []
-
+#-----------------------------------------------------------------------------------------------------------------------------------
 class ActionBuscarProveedor(Action):
     def name(self) -> str:
         return "action_buscar_proveedor"
 
     def run(self, dispatcher, tracker, domain):
-         # Obtener el nombre del producto desde el slot
-        plant_name = tracker.get_slot("plant_name_proveedor")
-        
-        if plant_name:
-            # Consultar la API o base de datos
-            proveedor_info = self.obtener_proveedor(plant_name)
-            
-            if proveedor_info:
-                # Formatear la respuesta del proveedor
-                respuesta = (
-                    f"🏢 **Información del Proveedor** 🏢\n\n"
-                    f"🆔 **RUT:** {proveedor_info.get('rut', 'No disponible')}-{proveedor_info.get('dv', 'No disponible')}\n"
-                    f"📧 **Correo Electrónico:** {proveedor_info.get('correo_electronico', 'No disponible')}\n"
-                    f"👤 **Nombre:** {proveedor_info.get('nombre', 'No disponible')} {proveedor_info.get('apellido', 'No disponible')}\n"
-                    f"✨ Si necesitas más ayuda, no dudes en preguntar. 🌟"
-                )
-                dispatcher.utter_message(text=respuesta)
+        # Obtener el nombre del producto desde el slot 'plant_name_proveedor'
+        plant_name_proveedor = tracker.get_slot("plant_name_proveedor")
+
+        if plant_name_proveedor:
+            # Consultar la base de datos o API para obtener los proveedores asociados al producto
+            proveedores_info, producto_existe = self.obtener_proveedores(plant_name_proveedor)
+
+            if producto_existe:
+                if proveedores_info:
+                    # Construir una respuesta con todos los proveedores encontrados
+                    respuesta = f"🏢 **Proveedores para '{plant_name_proveedor}'** 🏢\n\n"
+                    for proveedor in proveedores_info:
+                        respuesta += (
+                            f"🆔 **RUT:** {proveedor.get('rut', 'No disponible')}\n"
+                            f"📧 **Correo Electrónico:** {proveedor.get('correo_electronico', 'No disponible')}\n"
+                            f"👤 **Nombre:** {proveedor.get('nombre', 'No disponible')}\n\n"
+                        )
+                    respuesta += "✨ Si necesitas más ayuda, no dudes en preguntar. 🌟"
+                    dispatcher.utter_message(text=respuesta)
+                else:
+                    dispatcher.utter_message(
+                        text=f"No encontré proveedores para '{plant_name_proveedor}'."
+                    )
             else:
                 dispatcher.utter_message(
-                    text=f"No encontré un proveedor asociado al producto '{plant_name}'."
+                    text=f"El producto '{plant_name_proveedor}' no está a la venta por el momento."
                 )
         else:
             dispatcher.utter_message(
-                text="No entendí el nombre del producto. ¿Puedes repetirlo?"
+                text="No entendí el nombre del producto para buscar los proveedores. ¿Puedes repetirlo?"
             )
-        
+
         return []
 
-    def obtener_proveedor(self, plant_name):
+    def obtener_proveedores(self, plant_name: str) -> tuple:
+        """
+        Consulta la API para obtener los proveedores asociados al producto especificado.
+        Retorna una tupla:
+        - (lista de proveedores, True/False si el producto existe)
+        """
         try:
-            # Reemplaza con la URL de tu API de proveedores
-            url = f"http://127.0.0.1:8000/modelo/provee/?planta={plant_name}"
+            # URL de la API
+            url = f"http://127.0.0.1:8000/modelo/proveedores_por_producto/?planta={plant_name}"
             response = requests.get(url)
+
+            # Debugging: Verificar el estado de la respuesta
+            print(f"Estado de la respuesta: {response.status_code}")
+            print(f"Contenido de la respuesta: {response.text}")
+
+            if response.status_code == 200:
+                data = response.json()
+                if isinstance(data, list) and data:  # Se encontraron proveedores
+                    return data, True
+                return None, True  # Producto existe, pero sin proveedores
+            elif response.status_code == 404:
+                return None, False  # Producto no encontrado
+            else:
+                print("La API devolvió un código inesperado.")
+                return None, False
+        except Exception as e:
+            print(f"Error al consultar los proveedores: {e}")
+            return None, False
+#-------------------------------------------------------------------------------------------------------        
+
+class ActionAgregarAlCarritoBot(Action):
+    def name(self) -> Text:
+        return "action_agregar_al_carrito"
+
+    def run(
+        self, dispatcher: CollectingDispatcher, tracker: Tracker, domain: Dict[Text, Any]
+    ) -> List[Dict[Text, Any]]:
+        # Obtener el nombre de la planta desde el slot
+        plant_name = tracker.get_slot("producto_carrito")
+        
+        if not plant_name:
+            dispatcher.utter_message(text="No pude identificar el producto que quieres agregar al carrito.")
+            return []
+
+        url = "http://127.0.0.1:8000/modelo/agregar_bot/"
+        payload = {"plant_name": plant_name}
+        headers = {"Content-Type": "application/json"}
+
+        try:
+            response = requests.post(url, json=payload, headers=headers)
             
             if response.status_code == 200:
                 data = response.json()
-                # Verifica que haya resultados y devuelve el primero
-                if data:
-                    return data[0]
-            return None
+                mensaje = data.get("mensaje", "Producto agregado al carrito.")
+                total = data.get("total", "0.00")
+                dispatcher.utter_message(
+                    text=f"{mensaje}\nTotal en carrito: {total}."
+                )
+            elif response.status_code == 404:
+                dispatcher.utter_message(text="El producto solicitado no está disponible.")
+            else:
+                dispatcher.utter_message(text="Hubo un error al agregar el producto al carrito.")
         except Exception as e:
-            print(f"Error al consultar la API: {e}")
-            return None
+            dispatcher.utter_message(text=f"Error al comunicarse con el backend: {e}")
+
+        return []
+    
+class ActionAnalizarPlanta(Action):
+    def name(self) -> str:
+        return "action_analizar_planta"
+
+    def run(self, dispatcher, tracker, domain):
+        image_url = tracker.get_slot("image_url")  # Obtener la URL de la imagen (o datos si es necesario)
+        
+        # Llamar a la API de Custom Vision o backend de Django
+        response = requests.post('http://127.0.0.1:8000/modelo/api/chat/upload/', files={'image': image_url})
+        resultado = response.json()
+
+        if "resultados" in resultado:
+            dispatcher.utter_message(f"¡He detectado estas plantas en la imagen! \n")
+            for res in resultado['resultados']:
+                dispatcher.utter_message(f"- {res['etiqueta']} con una probabilidad de {res['probabilidad']:.2f}")
+        else:
+            dispatcher.utter_message("Lo siento, no pude identificar ninguna planta.")
+        
+        return []

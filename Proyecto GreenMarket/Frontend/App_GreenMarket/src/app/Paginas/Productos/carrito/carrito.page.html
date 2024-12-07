@@ -1,186 +1,119 @@
-<ion-content>
-  <ion-grid class="fondo">
-    <!-- Título principal -->
-    <ion-row>
-      <ion-col class="centrar">
-        <div class="titular">Tu carrito de compras</div>
-      </ion-col>
-    </ion-row>
+<ion-content [fullscreen]="true">
+  <main>
+    <ion-grid class="fondo">
+      <!-- Título principal -->
+      <ion-row>
 
-    <!-- Encabezado de productos en el carrito -->
-    <ion-row>
-      <ion-col>
-        <ion-row class="header-row ion-justify-content-center ion-align-items-center">
-          <ion-col>
-            <ion-label>PRODUCTO</ion-label>
-          </ion-col>
-          <ion-col>
-            <ion-label>PRECIO</ion-label>
-          </ion-col>
-          <ion-col>
-            <ion-label>CANTIDAD</ion-label>
-          </ion-col>
-          <ion-col>
-            <ion-label class="precio">SUBTOTAL</ion-label>
-          </ion-col>
-        </ion-row>
+      </ion-row>
 
-        <!-- Lista de productos -->
-        <ion-row class="ion-justify-content-center ion-align-items-center">
-          <ion-col size="12" size-md="10" size-lg="8">
-            <ion-list class="listacarro" *ngIf="carrito && carrito.items.length > 0; else noItems">
-              <ion-item color="color2" *ngFor="let item of carrito.items">
-                <ion-label id="nombrep">{{ item.nombre }}</ion-label>
-                <ion-label class="precio-unitario">${{ item.precio }} CLP</ion-label>
-                <div class="aumentar-disminuir">
-                  <ion-button (click)="bajarItem(item.producto_id)">-</ion-button>
-                  <p> {{ item.cantidad }} </p>
-                  <ion-button (click)="agregarItem(item.producto_id)">+</ion-button>
+      <ion-row>
+        <!-- Columna para el carrito de compras -->
+        <ion-col size-md="5" size-lg="4">
+          <!-- <ion-col class="centrar">          </ion-col> -->
+            <!-- Puedes agregar aquí un título si lo deseas -->
+            <h1 style="color: black; font-weight: bold;" class="titular datos-cliente-title">Carritode compras</h1>
+            <br>
+
+          <!-- Resumen del carrito -->
+          <div>
+            <ul class="list-group mb-3">
+
+              <li style="background: rgb(160, 214, 131); color: black; font-weight: bold; font-size: 20px;" class="list-group-item d-flex justify-content-between lh-sm" *ngFor="let item of carrito?.items; let i = index">
+
+                <div>
+                  <h6 style="background: rgb(160, 214, 131); color: black; font-weight: bold; font-size: 24px;" class="my-0">{{ item.nombre}}</h6>
+                  <small style="background: rgb(160, 214, 131); color: black; font-weight: bold; font-size: 20px;" class="text-body-secondary">Cantidad: {{ item.cantidad }} x  </small>
+                  <span style=" color: black; font-weight: 800; font-size: 20px;" class="precio">${{ precioUnitario(item.precio, item.cantidad) }} CLP</span>
+
+
                 </div>
-                <ion-label class="precio">${{ precioUnitario(item.precio, item.cantidad) }} CLP</ion-label>
-                <ion-button color="danger" (click)="removeItem(item.producto_id)">
-                  <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
-                </ion-button>
-              </ion-item>
-            </ion-list>
-          </ion-col>
-        </ion-row>
-      </ion-col>
-    </ion-row>
-
-    <!-- Botones de acción (Seguir comprando y pagar) -->
-    <ion-row class="botonespagar">
-      <ion-col>
-        <ion-label>
-          <div class="bpagar" [routerLink]="['/catalogo-producto']">Seguir comprando</div>
-        </ion-label>
-      </ion-col>
-      <ion-col class="total">
-        <ion-label>Total: <br>${{ total }}</ion-label>
-      </ion-col>
-      <ion-col>
-        <ion-label>
-          <div class="bpagar" (click)="toggleClienteForm()">
-            {{ showClienteForm ? 'Cancelar' : 'Continuar' }}
+                  <!-- ARREGLAR  -->
+                  <!-- ARREGLAR  -->
+                  <!-- ARREGLAR  -->
+                  <!-- ARREGLAR  -->
+                  <!-- ARREGLAR  -->
+                  <!-- ARREGLAR  -->
+                <!-- Botones de suma y resta -->
+                <div class="d-flex">
+                  <div class="aumentar-disminuir">
+                    <ion-button (click)="bajarItem(item.producto_id)">-</ion-button>
+                    <p> {{ item.cantidad }} </p>
+                    <ion-button (click)="agregarItem(item.producto_id)">+</ion-button>
+                  </div>
+                  <ion-button color="danger" (click)="removeItem(item.producto_id)">
+                    <ion-icon slot="icon-only" name="trash-outline"></ion-icon>
+                  </ion-button>
+                </div>
+              </li>
+              <li style="background: rgb(160, 214, 131); color: black; font-weight: bold; font-size: 20px;" class="list-group-item d-flex justify-content-between">
+                <span>Total (CLP)</span>
+                <strong>${{ total }}</strong>
+              </li>
+            </ul>
+            <!-- <button class="btn btn-primary" expand="block" (click)="toggleClienteForm()">Continuar</button> -->
           </div>
-        </ion-label>
-      </ion-col>
-    </ion-row>
+        </ion-col>
 
-    <!-- Formulario de cliente (si es visible) -->
-    <ion-row>
-      <ion-col>
-        <div *ngIf="showClienteForm">
-          <ion-col class="centrar">
-            <div class="titular">Formulario de datos</div>
-          </ion-col>
-          <ion-card class="tarjeta">
-            <ion-card-content>
-              <form class="form" [formGroup]="customerForm">
-                <div class="cuadrado"></div>
-                <ion-row class="rutcompleto">
-                  <!-- Campo RUT -->
-                  <ion-col size="9">
-                    <ion-label class="label" position="stacked">RUT</ion-label>
-                    <!-- <ion-input formControlName="rut" class="formulario" placeholder="RUT" type="text" (ionBlur)="buscar_cliente(customer.rut)"></ion-input> -->
-                    <ion-input class="formulario" [(ngModel)]="customer.rut" name="rut" placeholder="RUT"
-                              (ionBlur)="buscar_cliente(customer.rut)" formControlName="rut">
-                    </ion-input>
-                    <!-- <ion-text color="danger" *ngIf="!validateRut(customer.rut) && customer.rut">
-                      Por favor, ingresa un RUT válido.
-                    </ion-text> -->
-                  </ion-col>
-                  <ion-col>
-                    <ion-label class="label" position="stacked">DV</ion-label>
-                    <!-- <ion-input formControlName="dv" class="dv-input" placeholder="0" type="text"></ion-input> -->
-                    <ion-input type="text" class="dv-input" [(ngModel)]="customer.dv" name="dv"
-                              placeholder="DV" formControlName="dv">
-                    </ion-input>
-                    <!-- <ion-text color="danger" *ngIf="!validateDV(customer.dv) && customer.dv">
-                      Por favor, ingresa un dígito verificador válido.
-                    </ion-text> -->
-                  </ion-col>
-                </ion-row>
+        <!-- Columna para el formulario de cliente (siempre visible) -->
+        <ion-col size-md="7" size-lg="8">
+          <form [formGroup]="customerForm">
+            <h4 style="color: black; font-weight: bold;" class="titular datos-cliente-title">Datos del cliente</h4>
 
-                <!-- Otros campos del formulario -->
-                <ion-row class="rutcompleto">
-                  <ion-col>
-                    <ion-label class="label" position="stacked">Correo Electrónico</ion-label>
-                    <!-- <ion-input formControlName="correo_electronico" class="formulario" placeholder="Correo Electrónico" type="email"></ion-input> -->
-                    <ion-input type="email" class="formulario" [(ngModel)]="customer.correo_electronico"
-                              name="correo_electronico" placeholder="CORREO" formControlName="correo_electronico">
-                    </ion-input>
-                    <!-- <ion-text color="danger" *ngIf="!validateEmail(customer.correo_electronico) && customer.correo_electronico">
-                      Por favor, ingresa un correo electrónico válido.
-                    </ion-text> -->
-                  </ion-col>
-                  <ion-col>
-                    <ion-label class="label" position="stacked">Contraseña</ion-label>
-                    <ion-input [type]="showPasswordRegister ? 'text' : 'password'" formControlName="contrasena" class="formulario"
-                    [(ngModel)]="customer.contrasena" formControlName="contrasena" placeholder="CONTRASEÑA">
-                      <ion-icon
-                        [name]="showPasswordRegister ? 'eye-off' : 'eye'"
-                        slot="end"
-                        (click)="togglePasswordVisibility('register')"
-                        style="cursor: pointer;">
-                      </ion-icon>
-                    </ion-input>
-                    <!-- <ion-input type="password" class="formulario" [(ngModel)]="customer.contrasena"
-                              name="correo_electronico" placeholder="contraseña" (ngModelChange)="validateEmail(customer.contrasena)">
-                    </ion-input> -->
-                    <!-- <ion-text color="danger" *ngIf="!validatePassword(customer.contrasena) && customer.contrasena">
-                      Por favor, ingresa una contraseña valida.
-                    </ion-text> -->
-                  </ion-col>
-                  <ion-col>
-                    <ion-label class="label" position="stacked">Nombre</ion-label>
-                    <!-- <ion-input formControlName="nombre" class="formulario" placeholder="Nombre" type="text"></ion-input> -->
-                    <ion-input type="text" class="formulario" [(ngModel)]="customer.nombre" name="nombre"
-                              placeholder="NOMBRE" formControlName="nombre">
-                    </ion-input>
-                    <!-- <ion-text color="danger" *ngIf="!validateName(customer.nombre) && customer.nombre">
-                      Por favor, ingresa un nombre.
-                    </ion-text> -->
-                  </ion-col>
-                  <ion-col>
-                    <ion-label class="label" position="stacked">Dirección</ion-label>
-                    <!-- <ion-input class="formulario" formControlName="direccion" placeholder="Dirección" type="text"></ion-input> -->
-                    <ion-input type="text" class="formulario" [(ngModel)]="customer.direccion" name="direccion"
-                            placeholder="DIRECCIÓN" formControlName="direccion">
-                    </ion-input>
-                    <!-- <ion-text color="danger" *ngIf="!validateAddress(customer.direccion) && customer.direccion">
-                      Por favor, ingresa una dirección.
-                    </ion-text> -->
-                  </ion-col>
-                </ion-row>
+            <ion-row class="g-3" style="color: black; font-weight: bold;">
+              <!-- Campos del formulario -->
+              <ion-col size="6">
+                <ion-label class="">RUT</ion-label>
+                <ion-input class="input-form" [(ngModel)]="customer.rut" name="rut" placeholder=" 12345678"
+                          (ionBlur)="buscar_cliente(customer.rut)" formControlName="rut">
+                </ion-input>
+              </ion-col>
+              <ion-col size="6" style="color: gray;">
+                <ion-label class="form-label" position="stacked">DV</ion-label>
+                <ion-input style="color: gray;" class="input-form" type="text" [(ngModel)]="customer.dv" name="dv"
+                          placeholder=" 0" formControlName="dv">
+                </ion-input>
+              </ion-col>
+              <ion-col size="12" style="color: gray;">
+                <ion-label class="form-label" position="stacked">Correo Electrónico</ion-label>
+                <ion-input style="color: gray;" class="input-form" type="email" [(ngModel)]="customer.correo_electronico"
+                          name="correo_electronico" placeholder=" ejemplo@gmai..com" formControlName="correo_electronico">
+                </ion-input>
+              </ion-col>
+              <ion-col size="12" style="color: gray;">
+                <ion-label class="form-label" position="stacked">Contraseña</ion-label>
+                <ion-input class="input-form" [type]="showPasswordRegister ? 'text' : 'password'" formControlName="contrasena"
+                  [(ngModel)]="customer.contrasena" placeholder=" ########">
+                  <ion-icon
+                    [name]="showPasswordRegister ? 'eye-off' : 'eye'"
+                    slot="end"
+                    (click)="togglePasswordVisibility('register')"
+                    style="cursor: pointer;">
+                  </ion-icon>
+                </ion-input>
+              </ion-col>
+              <ion-col size="12" style="color: gray;">
+                <ion-label class="form-label" position="stacked">Nombre</ion-label>
+                <ion-input class="input-form" type="text" [(ngModel)]="customer.nombre" name="nombre"
+                          placeholder=" Primer nombre " formControlName="nombre">
+                </ion-input>
+              </ion-col>
+              <ion-col size="12" style="color: gray;">
+                <ion-label class="form-label" position="stacked">Dirección</ion-label>
+                <ion-input class="input-form" type="text" [(ngModel)]="customer.direccion" name="direccion"
+                        placeholder=" Ejemplo calle #123" formControlName="direccion">
+                </ion-input>
+              </ion-col>
+            </ion-row>
+            <hr class="my-2" style="color: gray;">
+            <button class="btn btn-primary" expand="block" (click)="checkout_pago()">Pagar</button>
+          </form>
+        </ion-col>
+      </ion-row>
 
-                <div class="button-center">
-                  <ion-button [disabled]="customerForm.invalid" class="submit" (click)="checkout_pago()">Pagar</ion-button>
-                </div>
-              </form>
-            </ion-card-content>
-          </ion-card>
-        </div>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <footer class="footer">
-    <div class="container">
-      <p class="float-end">
-        <a href="#" class="back-to-top">Volver arriba</a>
-      </p>
-      <p class="footer-text">
-        &copy; 2024 <strong>GreenMarket</strong> Portafolio.
-        <a href="#">Privacidad</a> &middot;
-        <a href="#">Términos</a>
-      </p>
-    </div>
-  </footer>
+      <!-- Carrito vacío -->
+      <div *ngIf="carrito?.items?.length === 0" class="text-center mt-4">
+        <p>El carrito está vacío</p>
+      </div>
+    </ion-grid>
+  </main>
 </ion-content>
-
-<!-- Plantilla cuando el carrito está vacío -->
-<ng-template #noItems>
-  <ion-item color="1" class="carritovacio">
-    <ion-label>El carrito está vacío</ion-label>
-  </ion-item>
-</ng-template>

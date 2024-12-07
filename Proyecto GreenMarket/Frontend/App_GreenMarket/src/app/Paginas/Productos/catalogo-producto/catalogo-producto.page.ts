@@ -20,7 +20,10 @@ export class CatalogoProductoPage implements OnInit {
   cantidadCarrito: number = 0;
   showSearchBar = false
 
-  productosFiltrados: any[] = []
+  productosFiltrados: any[] = [];
+  categorias: any[] = [];
+
+  categoriaSeleccionada: string | null = null;
 
   constructor(private productoService: ProductoServiService,
               private serviciocarrito: CarritoServiService,
@@ -28,6 +31,7 @@ export class CatalogoProductoPage implements OnInit {
               private toastController: ToastController, private router: Router) { }
 
   ngOnInit(): void {
+    this.cargarCategorias();
     this.loadProductos();
     this.router.events
     .pipe(filter(event => event instanceof NavigationEnd))
@@ -62,6 +66,26 @@ export class CatalogoProductoPage implements OnInit {
         console.error('Error al cargar los productos:', error);
       }
     );
+  }
+
+  cargarCategorias() {
+    this.productoService.filtrarCategoria().subscribe((data: any) => {
+      this.categorias = data;
+      console.log('Categorías cargadas:', this.categorias);
+    });
+  }
+
+  filtrarPorCategoria(categoriaId: number, nombreCategoria: string) {
+    console.log('Productos antes de filtrar:', this.productos);
+    this.productosFiltrados = this.productos.filter(producto => producto.id_categoria === categoriaId);
+    this.categoriaSeleccionada = nombreCategoria;
+    console.log('Productos filtrados:', this.productosFiltrados);
+  }
+
+  quitarFiltro() {
+    this.productosFiltrados = [...this.productos]; // Restaurar todos los productos
+    this.categoriaSeleccionada = null; // Eliminar la categoría seleccionada
+    console.log('Filtro eliminado, productos restaurados:', this.productosFiltrados);
   }
 
   agregarAlCarrito(productoId: number) {

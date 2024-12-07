@@ -143,3 +143,59 @@ def checkout(request):
         return JsonResponse({'mensaje': 'Orden creada', 'orden_id': orden.id, 'cliente': ClienteSerializer(cliente).data})
 
     return JsonResponse({'error': 'Método no permitido'}, status=405)
+
+#------------------------ Views Chatbot -------------------------------------
+@csrf_exempt
+@require_POST
+@permission_classes([AllowAny])
+def agregar_al_carrito_bot(request):
+    import json
+    from django.http import JsonResponse
+
+    try:
+        # Intentamos decodificar los datos JSON enviados
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        plant_name = body.get('plant_name')
+        
+        if not plant_name:
+            return JsonResponse({'error': 'El nombre de la planta es obligatorio'}, status=400)
+
+        # Obtener o crear un carrito anónimo (ya que el bot puede no tener usuario autenticado)
+        carrito, _ = CarritoM.objects.get_or_create(cliente=None)
+
+        # Buscar productos por nombre
+        productos = Producto.objects.filter(nombre_producto=plant_name)
+
+        if not productos.exists():
+            return JsonResponse({'error': 'Producto no encontrado'}, status=404)
+
+        # Si hay más de un producto con el mismo nombre, tomaremos el primero
+        producto = productos.first()
+
+        # Agregar al carrito
+        item_carrito, creado = ItemCarrito.objects.get_or_create(
+            carrito=carrito,
+            producto=producto,
+            defaults={'precio': producto.precio, 'cantidad': 1}
+        )
+        if not creado:
+            item_carrito.cantidad += 1
+            item_carrito.save()
+
+        # Respuesta con los detalles del carrito
+        items = carrito.items.all()
+        total = sum(item.subtotal() for item in items)
+        items_serializados = [
+            {
+                'producto_id': item.producto.codigo_producto,
+                'nombre': item.producto.nombre_producto,
+                'cantidad': item.cantidad,
+                'precio': str(item.precio),
+                'subtotal': str(item.subtotal()),
+            }
+            for item in items
+        ]
+        return JsonResponse({'mensaje': 'Producto agregado al carrito', 'items': items_serializados, 'total': str(total)})
+    except Exception as e:
+        return JsonResponse({'error': str(e)}, status=500)

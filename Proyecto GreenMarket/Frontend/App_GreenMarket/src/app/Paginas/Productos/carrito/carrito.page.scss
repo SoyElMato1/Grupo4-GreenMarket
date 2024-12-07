@@ -1,87 +1,8 @@
-ion-toolbar {
-  position: relative;
-}
-
 ion-button {
   --background: yellow;
   --color: black;
   padding: 4px;
 }
-
-button-div {
-  cursor: pointer;
-  background-color: rgba(231, 244, 86, 0.97);
-  color: rgb(0, 0, 0);
-  padding: 10px 20px;
-  font-size: 20px;
-  font-weight: bold;
-  border-radius: 5px;
-  text-align: center;
-  transition: background-color 0.3s;
-
-}
-.button-div:hover {
-  background-color: #0056b3;
-}
-
-
-.card{
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-// .form{
-//   // width: 30%; /* Ancho del formulario */
-//   float: left;
-// }
-// .cuadrado{
-
-//   background-color: #0056b3;
-//   width: 450px;
-//   height: 350px;
-//   position: relative;
-//   margin: 0 auto;
-//   left: 70px;
-//   float: right;
-//   border: black 2px solid;
-// }
-
-
-.total{
-  display: flex;  /* Flexbox para centrar */
-  justify-content: center;  /* Centrar horizontalmente */
-  align-items: center;  /* Centrar verticalmente */
-  text-align: center;  /* Alineación del texto */
-  font-weight: bold;
-}
-
-//es la parte del fotmulario
-.tarjeta {
-  background-color:rgb(114, 191, 120);
-  max-width: 928px;/* Aseguramos que el encabezado ocupe todo el ancho disponible */
-  border-radius: 20px;
-  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
-  max-width: 928px;/* Aseguramos que el encabezado ocupe todo el ancho disponible */
-  padding: 10px 15px; /* Añadimos un poco de padding para que no quede tan justo */
-  margin: 0 auto;
-
-}
-
-.formulario {
-  background-color: rgb(160, 214, 131);
-  color: black;
-  font-weight: bold;
-  font-size: 18px; /* Tamaño del texto ingresado */
-  // width: 500 auto;
-  // max-width: 500px;
-  background-color: rgb(160, 214, 131);
-  // display: flex;
-  padding: 10px;
-  max-width: 500px;
-  min-width: 300px;
-
-}
-
 
 //es la parte del fotmulario
 .ajustar{
@@ -90,205 +11,12 @@ display: flex;
 justify-content: center; /* Centra horizontalmente */
 align-items: center;
 }
-.centrar {
-  display: flex;
-  justify-content: center; /* Centra horizontalmente */
-  align-items: center; /* Centra verticalmente */
-  // height: 100vh; /* O el tamaño del contenedor */
-}
-.titular {
-  background-color: rgb(160, 214, 131);
-  color: black;
-  width: 320px;
-  height: 60px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-weight: bold;
-  text-align: center;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 40px;
-  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
-}
+
 .fondo{
   width: 100%;
   min-height: 100vh;
   background:whitesmoke;
   // background: linear-radient(744deg,#8bfd9b,#52df65 60%,#9bc2a0);
-}
-
-.colormenus{
-  // background: rgb(160, 214, 131);
-  background: rgb(114, 191, 120);
-  color: black;
-
-}
-.titulo{
-  font-weight: bold;
-  text-align: center;
-}
-
-
-
-
-// --------------------------------------------------------------
-// --------------------------------------------------------------
-// ----------------------------------------------------------------
-// --------------------------------------------------------------------
-.header-row ion-label {
-  font-weight: bold;
-  text-align: center;
-}
-
-// .precio {
-//   font-weight: bold;
-// }
-
-
-
-
-.header-row ion-col {
-  text-align: center; /* Centrar los textos */
-  padding: 10px; /* Añadir espacio dentro de cada columna */
-  border-right: 2px solid rgb(0, 0, 0); /* Línea blanca entre los títulos */
-
-}
-
-.header-row ion-col:last-child {
-  border-right: none; /* Eliminar la línea en la última columna */
-}
-// ---------------------------------------------
-// -----------------------------------------
-// -------------------------------------------
-// --------------------------------------------
-// COSAS DEL LISATDO DONDE VAN LOS PRODUCTOS
-
-
-// COSAS DEL LISATDO DONDE VAN LOS PRODUCTOS
-// ---------------------------------------------
-// -----------------------------------------
-// -------------------------------------------
-// --------------------------------------------
-// ---------------------------------------------
-// -----------------------------------------
-// -------------------------------------------
-// --------------------------------------------
-// ---------------------------------------------
-// -----------------------------------------
-// -------------------------------------------
-// --------------------------------------------
-// Ubicacion de los botones del carrito
-
-.bpagar {
-  background-color:rgb(254, 255, 159);  /* Fondo verde oscuro */
-  color:black; /* Color de texto blanco */
-  font-weight: bold;           /* Texto en negrita */
-  border-radius: 8px;          /* Bordes redondeados */
-  padding: 10px 0px;          /* Espaciado interno */
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra ligera */
-  transition: background-color 0.3s ease;   /* Animación suave de fondo */
-
-  display: flex;               /* Usamos Flexbox para centrar el contenido */
-  justify-content: center;     /* Centra horizontalmente */
-  align-items: center;         /* Centra verticalmente */
-  text-align: center;          /* Centrar texto en múltiples líneas */
-}
-
-.botonespagar{
-  background: rgb(114, 191, 120);
-  color:black; /* Color de texto blanco */
-  font-weight: bold;
-  display: flex; /* Usamos Flexbox para centrar el contenido */
-  justify-content: space-between; /* Distribuye el contenido de cada columna */
-  align-items: center; /* Centra verticalmente */
-  text-align: center;
-
-  max-width: 928px;/* Aseguramos que el encabezado ocupe todo el ancho disponible */
-  padding: 10px 15px; /* Añadimos un poco de padding para que no quede tan justo */
-  margin: 0 auto;
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-}
-.header-row {
-  background: rgb(114, 191, 120);
-  color:black; /* Color de texto blanco */
-  font-weight: bold;
-  margin-top: 0; /* Elimina el margen superior */
-  padding-top: 0; /* Elimina el padding superior */
-  display: flex; /* Usamos Flexbox para centrar el contenido */
-  justify-content: space-between; /* Distribuye el contenido de cada columna */
-  align-items: center; /* Centra verticalmente */
-  text-align: center;
-  // min-width: 800px;
-  max-width: 928px;/* Aseguramos que el encabezado ocupe todo el ancho disponible */
-  padding: 10px 15px; /* Añadimos un poco de padding para que no quede tan justo */
-  border-top-left-radius: 20px; /* Borde redondeado solo en la esquina superior izquierda */
-  border-top-right-radius: 20px; /* Borde redondeado solo en la esquina superior derecha */
-  margin: 0 auto; /* Centra horizontalmente el encabezado */
-  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
-
-}
-
-
-
-// .listacarro {
-//   max-width: 100%; /* Mantiene el mismo ancho que la cabecera */
-//   margin: 0 auto; /* Centra el listado dentro de la columna */
-// }
-
-.bpagar:hover {
-  background-color: rgb(160, 214, 131);
-   /* Color de fondo más claro al pasar el ratón */
-}
-
-.bpagar:active {
-  background-color: #233023;   /* Color de fondo más oscuro al hacer clic */
-}
-// /////////////////////////////
-// FORMAS DE DENTRO DEL CARRO
-/////////////////////////////
-// .listacarro{
-
-
-/* Ajuste del layout */
-.ion-row {
-  display: flex;
-  justify-content: center; /* Centra el contenido horizontalmente */
-  align-items: center; /* Centra el contenido verticalmente */
-  margin-top: 0; /* Elimina el margen superior */
-  padding-top: 0; /* Elimina el padding superior */
-}
-
-.listacarro {
-  background-color: rgb(160, 214, 131); /* Color de fondo para la lista */
-  width: 100%; /* Ocupa todo el ancho disponible */
-  max-width: 1000px;
-  // min-width: 800px;
-  border: #2F4232 2px solid;
-  position: relative;
-  justify-content:center ;
-  align-items: center;
-  max-width: 928px;/* Aseguramos que el encabezado ocupe todo el ancho disponible */
-  padding: 10px 15px; /* Añadimos un poco de padding para que no quede tan justo */
-  border-bottom-left-radius: 20px;
-  border-bottom-right-radius: 20px;
-  color: black;
-  border-top-left-radius: 20px; /* Borde redondeado solo en la esquina superior izquierda */
-  border-top-right-radius: 20px; /* Borde redondeado solo en la esquina superior derecha */
-  margin: 0 auto; /* Centra horizontalmente el encabezado */
-  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
-
-}
-
-ion-item {
-  display: flex;
-  justify-content: space-between; /* Distribuye el contenido de los items */
-  align-items: center; /* Alinea verticalmente los elementos dentro del item */
-  padding: 10px;
-  // text-align: center;
-  width: 100%;
-  max-width: 1000px;
-
 }
 
 /* Ajuste del ion-label para centrar los textos */
@@ -307,154 +35,130 @@ ion-button {
   --padding-start: 5px;
   --padding-end: 5px;
 }
-.label{
-  color: black;
 
+
+.input-form {
+    color: black;
+    background-color: rgb(160, 214, 131);  /* Color de fondo */
+    border: 1px solid black;                /* Borde negro */
+    font-weight: bold;                      /* Texto en negrita */
+    padding: 8px 12px;                      /* Espaciado interno */
+    border-radius: 4px;                     /* Bordes redondeados */
+    color: gray;                           /* Color del texto */
+    font-size: 1rem;                        /* Tamaño de la fuente */
+    width: 100%;                            /* Ancho del input */
+    box-sizing: border-box;                 /* Asegura que el padding no afecte el tamaño total */
 }
-.titulo{
-  font-weight: bold;
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: 50px;
+
+.input-form:focus {
+    outline: none;                          /* Elimina el borde azul del focus */
+    border-color:rgb(114, 191, 120);                /* Borde de color verde oscuro al hacer focus */
+    box-shadow: 0 0 5px rgb(114, 191, 120)a(0, 128, 0, 0.5); /* Sombra verde para el focus */
+}
+.custom-input::placeholder {
+  font-style: italic;
+  color: gray; /* Opcional: Cambia el color */
+  font-size: 14px; /* Opcional: Ajusta el tamaño */
+  font-weight: normal; /* Opcional: Ajusta el peso */
+}
+.titular {
+  background-color: rgb(160, 214, 131);
   color: black;
-  // border: 10px;
-  // border-color: palevioletred;
-  position: relative;
-  text-align: start;
+  // width: 320px;
+  // height: 60px;
   display: flex;
-  justify-content: start; /* Centra horizontalmente */
-  align-items: start; /* Centra verticalmente */
-  // font-weight: 900; /* Valores comunes: 400 (normal), 700 (negrita) */
-  // font-family: 'Courier New', Courier, monospace;
-}
-
-/* Ajuste de precio */
-.precio {
-  flex: 1;
-  position: relative;
-  left: 8.9%;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
   text-align: center;
-  color: black;
-  font-weight: bold   ;
-}
-.precio-unitario{
-  flex: 1;
-  position: relative;
-  right: 8.3%;
-  text-align: center;
-  color: black;
-  font-weight: bold   ;
-}
-#nombrep{
-  flex: 1;
-  position: relative;
-  right: 4%;
-  text-align: center;
-  color: black;
-  font-weight: bold   ;
-}
-.color2{
-  color: black;
-}
-
-.carritovacio{
-  color: black;
-  background-color: rgb(160, 214, 131);
-
-  margin-top: 0; /* Elimina el margen superior */
-  padding-top: 0; /* Elimina el padding superior */
-  display: flex; /* Usamos Flexbox para centrar el contenido */
-  // justify-content: space-between; /* Distribuye el contenido de cada columna */
-  align-items: center; /* Centra verticalmente */
-  text-align: center;
-  // min-width: 800px;
-  font-weight: 700;
-
-  max-width: 928px;/* Aseguramos que el encabezado ocupe todo el ancho disponible */
-  padding: 10px 15px; /* Añadimos un poco de padding para que no quede tan justo */
-  margin: 0 auto;
-  border: rgb(0, 0, 0) 2px solid;
-  border-radius: 10px;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px;
   box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
-
 }
-
-
-  .rutcompleto {
-    font-weight: bold;
-    font-size: 18px; /* Tamaño del texto ingresado */
-    max-width: 600px;
-    min-width: 300px;
-  }
-
-/* Estilo del campo RUT */
-.rut-input {
-  background-color: rgb(160, 214, 131);
+.titulard {
+  margin: 0px;
+  background-color: rgb(114, 191, 120);
   color: black;
+  // width: 320px;
+  // height: 60px;
+  max-width: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   font-weight: bold;
-  font-size: 18px; /* Tamaño del texto ingresado */
-  max-width: 600px;
-}
-
-/* Estilo del campo DV */
-.dv-input {
-  background-color: rgb(160, 214, 131);
-  color: black;
-  font-weight: bold;
-  font-size: 18px; /* Tamaño del texto ingresado */
-  width: 50px; /* Ajusta el ancho para que sea más corto */
-  padding: 10px;
-  max-width: 600px;
-}
-
-/* Estilo general del footer */
-.footer {
-  background: rgb(114, 191, 120); /* Color principal (60%) */
-  color: black;
   text-align: center;
-  padding: 20px 0;
-  // border-top: 4px solid rgb(160, 214, 131); /* Línea superior (30%) */
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
 }
-
-/* Enlaces dentro del footer */
-.footer a {
-  color: rgb(254, 255, 159); /* Color destacado (10%) */
-  text-decoration: none;
+.datos-cliente-title {
+  margin-top: 0; /* Asegura que no suba o baje */
+  margin-bottom: 1rem; /* Espacio debajo si lo necesitas */
+}
+// para el carrito
+.carito{
+  background:  rgb(160, 214, 131);
+  color: #000000;
   font-weight: bold;
 }
-
-.footer a:hover {
-  text-decoration: underline;
+/* Botón principal */
+.btn-primary {
+  background-color: rgb(160, 214, 131); /* Color de fondo personalizado */
+  border-color: rgb(160, 214, 131);     /* Color del borde */
+  color: #000000;                       /* Color del texto */
+  font-size: 1rem;                      /* Tamaño del texto reducido */
+  padding: 8px 20px;                    /* Espaciado interno reducido */
+  border-radius: 8px;                   /* Bordes redondeados */
+  width: 100%;                          /* Ancho responsivo */
+  max-width: 1250px;                    /* Ancho máximo */
+  text-align: center;                   /* Centrar el texto */
+  transition: all 0.3s ease;            /* Suavizar las transiciones */
+  border: solid 1px black;
 }
 
-/* Texto del footer */
-.footer-text {
-  font-size: 14px;
-  margin: 0;
+.btn-primary:hover {
+  background-color: rgb(254, 255, 159); /* Color al pasar el ratón */
+  border-color: rgb(254, 255, 159);
+  border: solid 1px black;
 }
 
-.footer strong {
-  color: rgb(160, 214, 131); /* Destacar GreenMarket */
+/* Botón contorneado */
+.btn-outline-secondary {
+  color: black;                         /* Color del texto */
+  border-color: #333333;                /* Color del borde */
+  font-size: 1rem;                      /* Tamaño del texto reducido */
+  padding: 8px 20px;                    /* Espaciado interno reducido */
+  border-radius: 8px;                   /* Bordes redondeados */
+  width: 100%;                          /* Ancho responsivo */
+  max-width: 1250px;                    /* Ancho máximo */
+  text-align: center;                   /* Centrar el texto */
+  transition: all 0.3s ease;            /* Suavizar las transiciones */
 }
 
-/* Botón "Volver arriba" */
-.back-to-top {
-  background-color: rgb(160, 214, 131); /* Botón en verde claro */
-  color: black;
-  padding: 8px 12px;
-  border-radius: 5px;
-  font-size: 12px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: all 0.3s;
+.btn-outline-secondary:hover {
+  background-color: rgb(254, 255, 159); /* Fondo al pasar el ratón */
+  color: black;                         /* Color del texto */
+  border-color: rgb(254, 255, 159);
+  border: solid 1px black;
+}
+//posible solucion  los nombres dentro del carrito
+span.text-body-secondary {
+  margin: 0;                /* Elimina el margen */
+  padding: 0;               /* Elimina el relleno, si lo hay */
+  display: inline;          /* Asegura que se comporte como texto en línea */
 }
 
-.back-to-top:hover {
-  background-color: rgb(254, 255, 159); /* Hover en amarillo */
-  color: black;
-}
+.precio{
+  position: relative;
+  text-align: center;
+  align-items: center;
 
-// -----------------------------------------------------------------------------------------------
-// -----------------------------------------------------------------------------------------------
-// -----------------------------------------------------------------------------------------------
-// SACADO DEL CSS DEL LOGIN Y REGISTRO
+}
+/* Ajustes responsivos */
+@media (max-width: 768px) {
+  .btn-primary,
+  .btn-outline-secondary {
+    font-size: 0.9rem;                  /* Reducir más el tamaño del texto */
+    padding: 6px 16px;                  /* Espaciado interno reducido */
+  }
+}

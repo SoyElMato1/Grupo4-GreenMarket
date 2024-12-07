@@ -1,4 +1,3 @@
-
 .fondomenu {
   // margin: 16px;
   // width: 200px;
@@ -206,3 +205,206 @@
     color: black;                /* Color del texto */
     border-color: rgb(254, 255, 159);
   }
+  .btn-primary {
+    background-color: rgb(160, 214, 131);/* Color de fondo personalizado */
+    border-color: rgb(160, 214, 131);     /* Color del borde */
+    color: #000000;            /* Color del texto */
+  }
+
+  .btn-primary:hover {
+    background-color: rgb(254, 255, 159); /* Color al pasar el ratón */
+    border-color: rgb(254, 255, 159);
+  }
+
+  /* Estilo para el botón contorneado */
+  .btn-outline-secondary {
+    color: black;             /* Color del texto */
+    border-color: #333333;      /* Color del borde */
+  }
+
+  .btn-outline-secondary:hover {
+    background-color: rgb(254, 255, 159);  /* Fondo al pasar el ratón */
+    color: black;                /* Color del texto */
+    border-color: rgb(254, 255, 159);
+  }
+
+
+/* Estilo para el botón */
+ion-button {
+  --background: yellow; /* Color de fondo del botón */
+  --color: black;       /* Color del texto */
+  padding: 4px;         /* Espaciado interno */
+}
+
+/* Contenedor principal del formulario */
+.ajustar {
+  text-align: center;
+  display: flex;
+  justify-content: center; /* Centra horizontalmente */
+  align-items: center;     /* Centra verticalmente */
+  background: rgb(160, 214, 131);
+}
+
+/* Fondo del formulario */
+.fondo {
+  width: 100%;
+  min-height: 100vh;      /* Asegura que ocupe toda la altura */
+  background: whitesmoke; /* Color de fondo */
+}
+
+/* Estilo para los labels */
+ion-label {
+  flex: 1;
+  text-align: center;
+}
+
+.productosForm {
+  flex: 1;
+  text-align: center;
+  color: black;
+  font-size: 20px;
+}
+
+/* Ajuste para botones de cantidad */
+.aumentar-disminuir {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo de los campos de entrada */
+.input-form {
+  color: black;
+  background-color: rgb(160, 214, 131); /* Fondo verde */
+  border: 1px solid black;             /* Borde negro */
+  font-weight: bold;                   /* Texto en negrita */
+  padding: 8px 12px;                   /* Espaciado interno */
+  border-radius: 4px;                  /* Bordes redondeados */
+  font-size: 1rem;                     /* Tamaño del texto */
+  width: 100%;                         /* Ancho completo */
+  box-sizing: border-box;              /* Ajuste para incluir padding */
+}
+
+.input-form:focus {
+  outline: none;                         /* Elimina el borde azul por defecto */
+  border-color: rgb(114, 191, 120);      /* Borde verde oscuro */
+  box-shadow: 0 0 5px rgba(114, 191, 120, 0.5); /* Sombra verde */
+}
+
+/* Estilo para el texto del placeholder */
+.custom-input::placeholder {
+  font-style: italic;
+  color: gray;
+  font-size: 14px;
+}
+
+/* Encabezado del formulario */
+.titular {
+  background-color: rgb(160, 214, 131);
+  color: black;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  text-align: center;
+  font-family: 'Bebas Neue', sans-serif;
+  font-size: 40px;
+  box-shadow: 0px 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Títulos en secciones específicas */
+.datos-cliente-title {
+  margin-top: 0;
+  margin-bottom: 1rem; /* Espaciado opcional */
+}
+
+/* Estilo del botón principal */
+.btn-primary {
+  background-color: rgb(160, 214, 131);
+  border-color: rgb(160, 214, 131);
+  color: #000000;
+  font-size: 1rem;
+  padding: 8px 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 1250px;
+  text-align: center;
+  transition: all 0.3s ease;
+  border: solid 1px black;
+}
+
+.btn-primary:hover {
+  background-color: rgb(254, 255, 159);
+  border-color: rgb(254, 255, 159);
+}
+
+/* Botones contorneados */
+.btn-outline-secondary {
+  color: black;
+  border-color: #333333;
+  font-size: 1rem;
+  padding: 8px 20px;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 1250px;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+  background-color: rgb(254, 255, 159);
+  color: black;
+  border-color: rgb(254, 255, 159);
+}
+//pa la fotoooooooooo
+/* From Uiverse.io by Yaya12085 */
+.custum-file-upload {
+  height: 200px;
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  align-items: space-between;
+  gap: 20px;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  border: 2px dashed #cacaca;
+  background-color: rgba(255, 255, 255, 1);
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0px 48px 35px -48px rgba(0,0,0,0.1);
+}
+
+.custum-file-upload .icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custum-file-upload .icon svg {
+  height: 80px;
+  fill: rgba(75, 85, 99, 1);
+}
+
+.custum-file-upload .text {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.custum-file-upload .text span {
+  font-weight: 400;
+  color: rgba(75, 85, 99, 1);
+}
+
+.custum-file-upload input {
+  display: none;
+}
+/* Ajuste responsivo para botones */
+@media (max-width: 768px) {
+  .btn-primary,
+  .btn-outline-secondary {
+    font-size: 0.9rem;
+    padding: 6px 16px;
+  }
+}

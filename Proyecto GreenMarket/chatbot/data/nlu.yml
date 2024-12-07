@@ -32,42 +32,43 @@ nlu:
     - Dame información de alguna planta
 - intent: get_plant_info
   examples: |
-    - Quiero saber sobre [rosales](plant_name)
-    - Información de [cactus](plant_name)
-    - ¿Tienes información sobre [helechos](plant_name)?
-    - ¿Puedes contarme sobre [orquídeas](plant_name)?
-    - Dime sobre alguna planta
-    - Me interesa aprender sobre plantas como [lavanda](plant_name)
-    - ¿Cómo cuido una [rosa](plant_name)?
-    - Dime los cuidados para la [lavanda](plant_name).
-    - Quiero saber sobre la [hortensia](plant_name).
-    - ¿Cuáles son las necesidades de una [orquídea](plant_name)?
-    - Información sobre [girasol](plant_name), por favor.
-    - ¿Cómo mantener una [camelia](plant_name)?
-    - ¿Cómo cuidar una [suculenta](plant_name)?
-    - ¿Cómo cuidar una [lirio](plant_name)?
-    - ¿Cómo cuidar una [tulipán](plant_name)?
-    - ¿Cuántas veces debo regar la [aloe vera](plant_name)?
-    - ¿Qué tipo de luz necesita un [cactus](plant_name)?
-    - ¿Cómo podar una [bougainvillea](plant_name)?
-    - ¿Cuál es el clima ideal para un [ficus](plant_name)?
-    - ¿Puedo poner una [monstera](plant_name) en el exterior?
-    - ¿Qué cuidados necesita una [azalea](plant_name)?
-    - ¿Cómo cuidar una [petunia](plant_name)?
-    - Información sobre [geranio](plant_name).
-    - ¿Cuánto debo regar una [palmera](plant_name)?
-    - ¿Cuánta luz necesita una [bromelia](plant_name)?
-    - ¿Cuál es la temperatura ideal para un [pothos](plant_name)?
-    - ¿Qué tipo de tierra es buena para una [dalia](plant_name)?
-    - ¿Cada cuánto se riega un [jazmín](plant_name)?
-    - ¿La [caléndula](plant_name) requiere mucho sol?
-    - Dime cómo cuidar una [hortensia](plant_name)
-    - ¿Qué temperatura necesita una [begonia](plant_name)?
-    - ¿Cómo debo regar una [violeta africana](plant_name)?
-    - Información detallada sobre la [verbena](plant_name).
-    - ¿Qué tipo de fertilizante necesita una [salvia](plant_name)?
-    - ¿Cuánto sol necesita una [margarita](plant_name)?
-    - ¿Cómo mantener en buenas condiciones una [helecho](plant_name)?
+    - Quiero saber sobre [rosales](plant_name) y [hortensias](plant_name)
+    - Información de [cactus](plant_name) y [lavanda](plant_name)
+    - ¿Tienes información sobre [helechos](plant_name) y [orquídeas](plant_name)?
+    - ¿Puedes contarme sobre [orquídeas](plant_name) y [dalia](plant_name)?
+    - Dime sobre alguna planta como [girasol](plant_name) y [camelia](plant_name)
+    - Me interesa aprender sobre plantas como [lavanda](plant_name) y [suculentas](plant_name)
+    - ¿Cómo cuido una [rosa](plant_name) y una [tulipán](plant_name)?
+    - Dime los cuidados para la [lavanda](plant_name) y el [jazmín](plant_name).
+    - Quiero saber sobre la [hortensia](plant_name) y la [petunia](plant_name).
+    - ¿Cuáles son las necesidades de una [orquídea](plant_name) y de un [geranio](plant_name)?
+    - Información sobre [girasol](plant_name) y [aloe vera](plant_name), por favor.
+    - ¿Cómo mantener una [camelia](plant_name) y un [ficus](plant_name)?
+    - ¿Cómo cuidar una [suculenta](plant_name) y una [monstera](plant_name)?
+    - ¿Cómo cuidar una [lirio](plant_name) y una [begonia](plant_name)?
+    - ¿Cómo cuidar una [tulipán](plant_name) y una [dalia](plant_name)?
+    - ¿Cuántas veces debo regar la [aloe vera](plant_name) y el [pothos](plant_name)?
+    - ¿Qué tipo de luz necesita un [cactus](plant_name) y un [bougainvillea](plant_name)?
+    - ¿Cómo podar una [bougainvillea](plant_name) y un [geranio](plant_name)?
+    - ¿Cuál es el clima ideal para un [ficus](plant_name) y un [salvia](plant_name)?
+    - ¿Puedo poner una [monstera](plant_name) y un [azalea](plant_name) en el exterior?
+    - ¿Qué cuidados necesita una [azalea](plant_name) y una [palmera](plant_name)?
+    - ¿Cómo cuidar una [petunia](plant_name) y un [romero](plant_name)?
+    - Información sobre [geranio](plant_name) y [bromelia](plant_name).
+    - ¿Cuánto debo regar una [palmera](plant_name) y una [margarita](plant_name)?
+    - ¿Cuánta luz necesita una [bromelia](plant_name) y una [violeta africana](plant_name)?
+    - ¿Cuál es la temperatura ideal para un [pothos](plant_name) y un [jazmín](plant_name)?
+    - ¿Qué tipo de tierra es buena para una [dalia](plant_name) y una [azalea](plant_name)?
+    - ¿Cada cuánto se riega un [jazmín](plant_name) y una [caléndula](plant_name)?
+    - ¿La [caléndula](plant_name) requiere mucho sol y qué cuidados necesita una [margarita](plant_name)?
+    - Dime cómo cuidar una [hortensia](plant_name) y una [salvia](plant_name)
+    - ¿Qué temperatura necesita una [begonia](plant_name) y un [geranio](plant_name)?
+    - ¿Cómo debo regar una [violeta africana](plant_name) y una [verbena](plant_name)?
+    - Información detallada sobre la [verbena](plant_name) y la [bromelia](plant_name).
+    - ¿Qué tipo de fertilizante necesita una [salvia](plant_name) y una [clematide](plant_name)?
+    - ¿Cuánto sol necesita una [margarita](plant_name) y un [geranio](plant_name)?
+    - ¿Cómo mantener en buenas condiciones una [helecho](plant_name) y una [romero](plant_name)?
+    - ¿Cómo debo cuidar una [flor de pascua](plant_name)?
 - intent: ask_plant_care
   examples: |
     - ¿Cómo cuido un [rosa](plant_name)?
@@ -111,8 +112,75 @@ nlu:
     - ¿Qué proveedor me puede vender [producto]?
 - intent: preguntar_proveedor
   examples: |
-    - ¿Quién es el proveedor de [amapolas](plant_name_proveedor)?
-    - Dame el proveedor de [rosas](plant_name_proveedor)
-    - Necesito saber quién distribuye [tulipanes](plant_name_proveedor)
-    - ¿Qué proveedor tiene [orquídeas](plant_name_proveedor)?
-    - ¿De dónde provienen las [margaritas](plant_name_proveedor)?
+    - ¿Quién es el proveedor de [amapolas](plant_name_proveedor) y [hortensia](plant_name_proveedor)?
+    - Dame el proveedor de [rosas](plant_name_proveedor) y [crisantemo](plant_name_proveedor)
+    - Necesito saber quién distribuye [tulipanes](plant_name_proveedor) y [azalea](plant_name_proveedor)
+    - ¿Qué proveedor tiene [orquídeas](plant_name_proveedor) y [dalia](plant_name_proveedor)?
+    - ¿De dónde provienen las [margaritas](plant_name_proveedor) y [violetas](plant_name_proveedor)?
+    - ¿Quién es el que vende [girasol](plant_name_proveedor) y [pensamiento](plant_name_proveedor)?
+    - ¿Quién proveedor vende [lavanda](plant_name_proveedor) y [helecho](plant_name_proveedor)?
+    - ¿Dónde puedo conseguir [hortensias](plant_name_proveedor) y [jazmines](plant_name_proveedor)?
+    - ¿Qué proveedor tiene [lirio](plant_name_proveedor) y [geranios](plant_name_proveedor)?
+    - ¿Quién vende [tulipanes](plant_name_proveedor) y [petunias](plant_name_proveedor)?
+    - ¿Cuál es el proveedor de [claveles](plant_name_proveedor) y [begonias](plant_name_proveedor)?
+    - ¿Quién distribuye [hiedra](plant_name_proveedor) y [orquídeas](plant_name_proveedor)?
+    - ¿Dónde puedo comprar [ciclamen](plant_name_proveedor) y [gladiolos](plant_name_proveedor)?
+    - ¿Qué proveedor ofrece [ipomea](plant_name_proveedor) y [glicinas](plant_name_proveedor)?
+    - ¿Dónde encuentro [camelia](plant_name_proveedor) y [iris](plant_name_proveedor)?
+    - ¿Quién tiene [flor de pascua](plant_name_proveedor) y [lobelias](plant_name_proveedor)?
+    - ¿Quién distribuye [salvia](plant_name_proveedor) y [lantanas](plant_name_proveedor)?
+    - ¿Qué proveedor vende [clematide](plant_name_proveedor) y [peonias](plant_name_proveedor)?
+    - ¿Qué proveedor tiene [agapanto](plant_name_proveedor) y [echinacea](plant_name_proveedor)?
+    - ¿Quién tiene disponibles [alstroemeria](plant_name_proveedor) y [calibrachoa](plant_name_proveedor)?
+    - ¿Quién vende [romero](plant_name_proveedor)?
+
+
+- intent: agregar_al_carrito
+  examples: |
+    - pon en mi carrito [amapolas](producto_carrito)
+    - agrega [hortensias](producto_carrito) a mi carrito
+    - añade [rosas](producto_carrito) al carrito
+    - quiero que pongas [crisantemo](producto_carrito) en mi carrito
+    - mete [tulipanes](producto_carrito) al carrito
+    - agrega [azalea](producto_carrito) a mi carrito
+    - coloca [orquídeas](producto_carrito) en mi carrito
+    - quiero añadir [dalia](producto_carrito) al carrito
+    - mete [margaritas](producto_carrito) en el carrito
+    - agrega [violetas](producto_carrito) a mi carrito
+    - añade [girasol](producto_carrito) a mi carrito
+    - pon [pensamiento](producto_carrito) en mi carrito
+    - agrega [lavanda](producto_carrito) al carrito
+    - coloca [helecho](producto_carrito) en mi carrito
+    - pon en el carrito [hortensias](producto_carrito)
+    - quiero que pongas [jazmines](producto_carrito) en el carrito
+    - agrega [lirio](producto_carrito) al carrito
+    - añade [geranios](producto_carrito) a mi carrito
+    - mete [tulipanes](producto_carrito) al carrito
+    - pon en el carrito [petunias](producto_carrito)
+    - quiero que pongas [claveles](producto_carrito) en mi carrito
+    - agrega [begonias](producto_carrito) a mi carrito
+    - añade [hiedra](producto_carrito) a mi carrito
+    - pon [orquídeas](producto_carrito) en mi carrito
+    - coloca [ciclamen](producto_carrito) en mi carrito
+    - agrega [gladiolos](producto_carrito) a mi carrito
+    - mete [ipomea](producto_carrito) al carrito
+    - pon [glicinas](producto_carrito) en el carrito
+    - añade [camelia](producto_carrito) a mi carrito
+    - coloca [iris](producto_carrito) en mi carrito
+    - pon en mi carrito [flor de pascua](producto_carrito)
+    - añade [lobelias](producto_carrito) a mi carrito
+    - agrega [salvia](producto_carrito) al carrito
+    - mete [lantanas](producto_carrito) al carrito
+    - pon [clematide](producto_carrito) en el carrito
+    - coloca [peonias](producto_carrito) en mi carrito
+    - añade [agapanto](producto_carrito) a mi carrito
+    - pon [echinacea](producto_carrito) en mi carrito
+    - mete [alstroemeria](producto_carrito) al carrito
+    - coloca [calibrachoa](producto_carrito) en mi carrito
+    - pon [romero](producto_carrito) en el carrito
+- intent: enviar_imagen
+  examples: |
+    - Aquí está la imagen de la planta
+    - Te mando una foto
+    - Mira esta imagen
+    - Esta es la foto

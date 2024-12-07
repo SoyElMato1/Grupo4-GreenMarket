@@ -7,7 +7,7 @@
       </ion-toolbar> -->
       <ion-toolbar color="A" class="colormenus">
 
-        <img class="avatar" [src]="'http://localhost:8000/' + proveedor.foto" alt="Avatar" />
+        <img class="avatar" [src]="'http://localhost:8000' + proveedor.foto" alt="Avatar" />
         <h4 class="name">{{ proveedor.nombre }} <br> {{ proveedor.apellido }} </h4>
       </ion-toolbar>
     </ion-header>
@@ -71,7 +71,7 @@
               <ion-card *ngIf="isEditMode == false" class="container">
                 <div class="card-body">
                   <img *ngIf="product.imagen_producto"
-                       [src]="'http://localhost:8000/' + product.imagen_producto"
+                       [src]="'http://localhost:8000' + product.imagen_producto"
                        class="profile-image"
                        alt="Foto del producto">
                   <img *ngIf="!product.imagen_producto"
@@ -102,28 +102,28 @@
           <ng-template #noProducts>
             <p>No hay productos para mostrar.</p>
           </ng-template>
-          <ion-row>
+          <ion-row >
             <ion-card *ngIf="isEditMode == true && productoSeleccionado">
-              <ion-card-header>
-                <ion-card-title>
+              <ion-card-header style="background: rgb(114, 191, 120); color: black;" color="a">
+                <ion-card-title style="background: rgb(114, 191, 120);" color="a">
                   Editar producto {{ productoSeleccionado }}
                 </ion-card-title>
               </ion-card-header>
-              <ion-card-content>
-                <form [formGroup]="editarForm" (ngSubmit)="putProducto(productoSeleccionado)">
-                  <ion-item>
-                    <ion-label position="stacked">Nombre del Producto</ion-label>
-                    <ion-input formControlName="nombre_producto" name="nombre_producto" required></ion-input>
+              <ion-card-content style="background: rgb(114, 191, 120); color: black;" color="a">
+                <form  style="background: rgb(114, 191, 120);" color="a" [formGroup]="editarForm" (ngSubmit)="putProducto(productoSeleccionado)" >
+                  <ion-item style="background: rgb(114, 191, 120);" color="a">
+                    <ion-label style="background: rgb(114, 191, 120);" color="a"  position="stacked">Nombre del Producto</ion-label>
+                    <ion-input style="background: rgb(114, 191, 120);" color="a"formControlName="nombre_producto" name="nombre_producto" required></ion-input>
                   </ion-item>
-                  <ion-item>
-                    <ion-label position="stacked">Precio</ion-label>
-                    <ion-input formControlName="precio" type="number" name="precio" required></ion-input>
+                  <ion-item style="background: rgb(114, 191, 120);" color="a">
+                    <ion-label style="background: rgb(114, 191, 120);" color="a" position="stacked">Precio</ion-label>
+                    <ion-input style="background: rgb(114, 191, 120);" color="a" formControlName="precio" type="number" name="precio" required></ion-input>
                   </ion-item>
-                  <ion-item>
-                    <ion-label position="stacked">Imagen del Producto</ion-label>
+                  <ion-item style="background: rgb(114, 191, 120); " color="a" >
+                    <ion-label style="background: rgb(114, 191, 120); " color="a" position="stacked">Imagen del Producto</ion-label>
                     <input type="file" accept=".png, .jpg, .jpeg, .bmp" (change)="onFileSelected($event)">
                   </ion-item>
-                  <ion-item>
+                  <ion-item style="background: rgb(114, 191, 120); " color="a" >
                     <ion-label position="stacked">Categoría</ion-label>
                     <ion-select formControlName="id_categoria" name="id_categoria" required>
                       <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.id">{{ categoria.nombre_categoria }}</ion-select-option>
@@ -135,44 +135,85 @@
               </ion-card-content>
             </ion-card>
           </ion-row>
-          <ion-card  style="background: rgb(114, 191, 120);" color="a" *ngIf="isEditMode == false">
+
+          <!-- <ion-card class="fondo" *ngIf="isEditMode == false">        </ion-card> -->
+
             <ion-card-header>
-              <ion-card-title style="color: black;">Agregar Producto</ion-card-title>
+              <ion-card-title class="titular">Agregar Producto</ion-card-title>
             </ion-card-header>
-            <ion-card-content  style="background: rgb(114, 191, 120);" color="a">
+            <ion-card-content>
               <form [formGroup]="productoForm" (ngSubmit)="postProducto()">
-                <ion-item  style="background: rgb(114, 191, 120); color: black;" color="a">
-                  <ion-label  position="stacked">Nombre del Producto</ion-label>
-                  <ion-input class="formulario" color="a" formControlName="nombre_producto" name="nombre_producto" required></ion-input>
-                </ion-item>
-                <ion-item  style="background: rgb(114, 191, 120);color: black;" color="a">
-                  <ion-label position="stacked">Precio</ion-label>
-                  <ion-input formControlName="precio" type="number" name="precio" required></ion-input>
-                </ion-item>
-                <ion-item  style="background: rgb(114, 191, 120);color: black;" color="a">
-                  <ion-label position="stacked">Descripción</ion-label>
-                  <ion-textarea formControlName="descripcion" (ionInput)="contarCaracteres()" maxlength="300" placeholder="Escribe la descripción aquí..."></ion-textarea>
-                </ion-item>
-                <ion-text  style="background: rgb(114, 191, 120);color: black;" color="a" color="medium">
+                <!-- <ion-item class="ajustar">          </ion-item> -->
+                  <ion-label position="stacked" class="productosForm">Nombre del Producto</ion-label>
+                  <ion-input
+                    class="input-form"
+                    formControlName="nombre_producto"
+                    name="nombre_producto"
+                    required
+                  ></ion-input>
+
+                <!-- <ion-item class="ajustar">          </ion-item> -->
+                  <ion-label position="stacked" class="productosForm">Precio</ion-label>
+                  <ion-input
+                    class="input-form"
+                    formControlName="precio"
+                    type="number"
+                    name="precio"
+                    required
+                  ></ion-input>
+
+                <!-- <ion-item class="ajustar">        </ion-item> -->
+                  <ion-label position="stacked" class="productosForm">Descripción</ion-label>
+                  <ion-textarea
+                    class="input-form"
+                    formControlName="descripcion"
+                    (ionInput)="contarCaracteres()"
+                    maxlength="300"
+                    placeholder="Escribe la descripción aquí..."
+                  ></ion-textarea>
+
+                <ion-text class="datos-cliente-title">
                   {{ descripcion.length }} / 300 caracteres
                 </ion-text>
-                <ion-item  style="background: rgb(114, 191, 120);color: black;" color="a">
+                <!-- <ion-item class="ajustar">        </ion-item> -->
+                  <!-- <input
+                    class="custom-input"
+                    type="file"
+                    accept=".png, .jpg, .jpeg, .bmp"
+                    (change)="onFileSelected($event)"
+                  /> -->
+                  <div class="custum-file-upload">
+                    <label for="file">
+                      <div class="icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="" viewBox="0 0 24 24">
+                          <path
+                            d="M10 1C9.73478 1 9.48043 1.10536 9.29289 1.29289L3.29289 7.29289C3.10536 7.48043 3 7.73478 3 8V20C3 21.6569 4.34315 23 6 23H7C7.55228 23 8 22.5523 8 22C8 21.4477 7.55228 21 7 21H6C5.44772 21 5 20.5523 5 20V9H10C10.5523 9 11 8.55228 11 8V3H18C18.5523 3 19 3.44772 19 4V9C19 9.55228 19.4477 10 20 10C20.5523 10 21 9.55228 21 9V4C21 2.34315 19.6569 1 18 1H10ZM9 7H6.41421L9 4.41421V7ZM14 15.5C14 14.1193 15.1193 13 16.5 13C17.8807 13 19 14.1193 19 15.5V16V17H20C21.1046 17 22 17.8954 22 19C22 20.1046 21.1046 21 20 21H13C11.8954 21 11 20.1046 11 19C11 17.8954 11.8954 17 13 17H14V16V15.5ZM16.5 11C14.142 11 12.2076 12.8136 12.0156 15.122C10.2825 15.5606 9 17.1305 9 19C9 21.2091 10.7909 23 13 23H20C22.2091 23 24 21.2091 24 19C24 17.1305 22.7175 15.5606 20.9844 15.122C20.7924 12.8136 18.858 11 16.5 11Z"
+                          ></path>
+                        </svg>
+                      </div>
+                      <div class="text">
+                        <span>Haz clic para subir imagen</span>
+                      </div>
+                      <input type="file" id="file" (change)="onFileSelected($event)" accept=".png, .jpg, .jpeg, .bmp" />
+                    </label>
+                  </div>
 
 
-                  <ion-label position="stacked"></ion-label>
-                  <input type="file" accept=".png, .jpg, .jpeg, .bmp" (change)="onFileSelected($event)">
-                </ion-item>
-                <ion-item  style="background: rgb(114, 191, 120);color: black;" color="a">
-                  <ion-label position="stacked">Categoría</ion-label>
-                  <ion-select formControlName="id_categoria" name="id_categoria" required>
-                    <ion-select-option *ngFor="let categoria of categorias" [value]="categoria.id_categoria">{{ categoria.nombre_categoria }}</ion-select-option>
+                <!-- <ion-item class="ajustar">         </ion-item> -->
+                  <ion-label class="productosForm" position="stacked">Categoría</ion-label>
+                  <ion-select formControlName="id_categoria" name="id_categoria" class="productosForm" required>
+                    <ion-select-option
+                      *ngFor="let categoria of categorias"
+                      [value]="categoria.id_categoria"
+                      >{{ categoria.nombre_categoria }}</ion-select-option
+                    >
                   </ion-select>
-                </ion-item>
-                <!-- <ion-button class="btn btn-primary" expand="full" type="submit">Agregar Producto</ion-button> -->
-                <button class="btn btn-primary" >Agregar producto</button>
+
+                <button class="btn-primary">Agregar al catalogo  </button>
               </form>
             </ion-card-content>
-          </ion-card>
+
+
         </ion-grid>
       </div>
     </div>

@@ -1,9 +1,3 @@
-.colormenus{
-  // background: rgb(160, 214, 131);
-  background: rgb(114, 191, 120);
-  color: black;
-}
-
 .centrar {
   display: flex;
   justify-content: center; /* Centra horizontalmente */
@@ -40,58 +34,162 @@
   font-size: 40px;
 }
 
-.profile-card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 20px;
-}
 
-.profile-image {
-  width: 100%;
-  max-width: 400px;
-  height: 265px;
+//ESTILOS DE LAS CARTAS
+
+
+.detalle-producto-content {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-
-.profile-image img {
-  width: 100%;
   height: 100%;
-  object-fit: cover;
+  background-color: #f8f9fa; /* Fondo claro para mejor contraste */
 }
 
-.card-title {
-  font-size: 22px;
+.tarjeta-detalle {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Sombra suave */
+  border-radius: 12px; /* Bordes redondeados */
+  overflow: hidden; /* Asegura que la imagen quede dentro del borde */
+}
+
+.tarjeta-detalle .card-body {
+  padding: 1.5rem; /* Espaciado interno cómodo */
+}
+
+
+/* From Uiverse.io by andrew-demchenk0 */
+/* From Uiverse.io by PriyanshuGupta28 */
+.rating {
+  display: inline-block;
+}
+
+.rating input {
+  display: none;
+}
+
+.rating label {
+  float: right;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.3s;
+}
+
+.rating label:before {
+  content: '\2605';
+  font-size: 30px;
+}
+
+.rating input:checked ~ label,
+.rating label:hover,
+.rating label:hover ~ label {
+  color: rgb(254, 255, 159);
+  transition: color 0.3s;
+}
+#texto{
   font-weight: bold;
-  color: black;
-  background-color: rgb(160, 214, 131);
-  padding: 10px;
-  width: 100%;
-  text-align: center;
-  margin-bottom: 10px;
+  font-size: 30px;
 }
-
-.profile-stats {
+#textod{
+  font-weight: 500;
+  font-size: 30px;
+  color: #000000;
+  font-weight: 700;
+}
+#textodd{
+  font-weight: 500;
+  font-size: 20px;
+  color: #000000;
+  font-weight: 700;
+}
+//Agregar al carrtito
+.button {
+  position: relative;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  width: 100%;
-  padding: 15px;
+  width: 150px;
+  height: 40px;
+  cursor: pointer;
+  background-color: rgb(160, 214, 131);
+  border: 1px solid black;
+  overflow: hidden;
+  transition: background 0.3s, border 0.3s;
 }
 
-.profile-details {
-  width: 100%;
-  text-align: center;
-  padding: 5px;
+.button .text {
+  color:black;
+  font-weight: 600;
+  transform: translateX(30px);
+  transition: color 0.3s, transform 0.3s;
 }
 
-.precio {
-  font-weight: bold;
-  color: #007b00;
-  font-size: 18px;
-  margin-top: 5px;
+.button .icon {
+  position: absolute;
+  right: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 39px;
+  background-color: rgb(152, 217, 117);
+  transition: width 0.3s, transform 0.3s, background-color 0.3s;
+
+  border-left:#000000 1px solid ;
+}
+
+.button svg {
+  width: 24px;
+  stroke: #000000;
+}
+
+.button:hover {
+  background-color:rgb(160, 214, 131);
+}
+
+.button:hover .text {
+  color: transparent;
+}
+
+.button:hover .icon {
+  width: 100%;
+  transform: translateX(0);
+}
+
+.button:active {
+  border-color: #2e8644;
+}
+
+.button:active .icon {
+  background-color: #2e8644;
+}
+
+//ajustes sacados de gpt
+.titular {
+  margin-bottom: 20px; /* Espacio debajo del título principal */
+}
+
+.tarjeta-detalle {
+  margin-top: 20px; /* Espacio superior para separar la tarjeta */
+  margin-bottom: 20px; /* Espacio inferior para separar la tarjeta */
+}
+
+.tarjeta-detalle .card-body {
+  padding: 2rem; /* Espaciado interno más cómodo */
+}
+
+.rating {
+  margin-bottom: 15px; /* Espacio debajo del componente de calificación */
+}
+
+#texto {
+  margin-bottom: 15px; /* Espacio debajo del título del producto */
+}
+
+#textodd {
+  margin-bottom: 15px; /* Espacio debajo de la descripción */
+}
+
+.button {
+  margin-top: 15px; /* Espacio superior para el botón */
 }
 
 @media (max-width: 768px) {

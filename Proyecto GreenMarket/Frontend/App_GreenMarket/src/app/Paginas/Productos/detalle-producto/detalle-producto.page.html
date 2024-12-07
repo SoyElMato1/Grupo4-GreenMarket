@@ -1,7 +1,7 @@
-
-<ion-content >
+<ion-content class="detalle-producto-content">
   <div class="bigimage">
     <ion-grid>
+      <!-- TÃ­tulo principal -->
       <ion-row>
         <ion-col class="centrar">
           <div class="titular" id="productos">
@@ -9,20 +9,65 @@
           </div>
         </ion-col>
       </ion-row>
-      <ion-row class="ion-text-center">
-        <ion-col size="12" size-md="6" size-lg="4" *ngIf="producto">
-          <ion-card class="profile-card">
-            <div class="profile-image">
-              <img [src]="'http://localhost:8000/' + producto.imagen_producto" alt="{{ producto.nombre_producto }}" class="profile-image" />
-            </div>
-            <ion-card-content class="profile-stats">
-              <div class="card-title">{{ producto.nombre_producto }}</div>
-              <div class="profile-details">
-                <p>{{ producto.descripcion }}</p>
-                <p class="precio">Precio: {{ producto.precio | currency }}</p>
+
+      <!-- Contenedor de la tarjeta centrada -->
+      <ion-row class="justify-content-center">
+        <ion-col size="12" size-md="8" size-lg="6" *ngIf="producto">
+          <div class="card mb-3 tarjeta-detalle">
+            <div class="row g-0" style="background: rgb(114, 191, 120);">
+              <!-- Imagen del producto -->
+              <div class="col-md-6">
+                <img *ngIf="producto.imagen_producto"
+                  [src]="'http://localhost:8000/' + producto.imagen_producto"
+                  class="img-fluid rounded-start"
+                  alt="Foto del producto"  width="450" height="250">
+                <img *ngIf="!producto.imagen_producto"
+                  src="assets/images/descarga.jpeg"
+                  class="img-fluid rounded-start"
+                  alt="Imagen por defecto"  width="200" height="200">
               </div>
-            </ion-card-content>
-          </ion-card>
+
+              <!-- Detalles del producto -->
+              <div class="col-md-6">
+
+                <div class="card-body">
+                  <h5 id="texto" class="card-title">{{ producto.nombre_producto }}</h5>
+                  <p id="textodd" class="card-text">{{ producto.descripcion }}</p>
+
+
+                  <div class="rating">
+                    <input [value]="5" [name]="'rating' + producto.codigo_producto" [id]="'star5-' + producto.codigo_producto" type="radio">
+                    <label [for]="'star5-' + producto.codigo_producto"></label>
+
+                    <input [value]="4" [name]="'rating' + producto.codigo_producto" [id]="'star4-' + producto.codigo_producto" type="radio">
+                    <label [for]="'star4-' + producto.codigo_producto"></label>
+
+                    <input [value]="3" [name]="'rating' + producto.codigo_producto" [id]="'star3-' + producto.codigo_producto" type="radio">
+                    <label [for]="'star3-' + producto.codigo_producto"></label>
+
+                    <input [value]="2" [name]="'rating' + producto.codigo_producto" [id]="'star2-' + producto.codigo_producto" type="radio">
+                    <label [for]="'star2-' + producto.codigo_producto"></label>
+
+                    <input [value]="1" [name]="'rating' + producto.codigo_producto" [id]="'star1-' + producto.codigo_producto" type="radio">
+                    <label [for]="'star1-' + producto.codigo_producto"></label>
+                  </div>
+                  <p id="textod" >
+                    ${{ producto.precio }}
+                  </p>
+                  <button class="button" (click)="agregarAlCarrito(producto.codigo_producto)">
+                    <span class="text">Agregar</span>
+                    <span class="icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="none">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                      </svg>
+                    </span>
+                  </button>
+
+                </div>
+              </div>
+            </div>
+          </div>
         </ion-col>
       </ion-row>
     </ion-grid>

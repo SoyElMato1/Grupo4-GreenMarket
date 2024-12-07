@@ -1,19 +1,34 @@
 <ion-content>
   <div class="chatbot">
-    <h2 >JardenBot
-      <img src="../../../assets/images/Designer.png" alt="Logo GreenMarket" class="me-2" width="100" height="100"> <!-- Reemplaza con la ruta de tu imagen -->
+    <!-- Título y logo -->
+    <h2 class="titular">
+      JardenBot
+      <img src="../../../assets/images/Designer.png" alt="Logo GreenMarket" class="me-2 chatbot-logo">
     </h2>
 
+    <!-- Mensajes del chatbot -->
     <div class="messages">
-      <div *ngFor="let message of messages" [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'bot'}">
-        <strong *ngIf="message.sender === 'user'">Tú:</strong>
-        <strong *ngIf="message.sender === 'bot'">Bot:</strong> {{ message.text }}
+      <div
+        *ngFor="let message of messages"
+        [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'bot'}"
+        class="message-bubble"
+      >
+        <strong *ngIf="message.sender === 'user'"><ion-icon slot="start" name="people-outline"></ion-icon></strong>
+        <strong *ngIf="message.sender === 'bot'"><img src="../../../assets/images/Designer.png" alt="Logo GreenMarket" class="me-2 chatbot-logo"></strong> {{ message.text }}
       </div>
     </div>
+
     <!-- Contenedor para la caja de texto y el botón de envío -->
-    <div style="display: flex; align-items: center;">
+    <div class="message-input-container">
       <textarea [(ngModel)]="userMessage" placeholder="Escribe tu mensaje..." class="message-input"></textarea>
       <button (click)="sendMessage()" class="send-button">Enviar</button>
     </div>
+
+    <!-- Contenedor para la carga de imagen -->
+    <div class="image-upload">
+      <input type="file" (change)="onImageSelected($event)" />
+      <button (click)="sendImage()">Enviar Imagen</button>
+    </div>
+
   </div>
 </ion-content>

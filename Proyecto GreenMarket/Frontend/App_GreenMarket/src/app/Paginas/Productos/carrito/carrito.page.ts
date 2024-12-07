@@ -142,33 +142,6 @@ export class CarritoPage implements OnInit {
     await toast.present();
   }
 
-  // buscar_cliente(rut: string) {
-  //   if (!rut) return; // Si el RUT está vacío, no hacer nada
-
-  //   this.cartService.cliente_obtener(rut).subscribe(
-  //     (response: any) => {
-  //       if (response) {
-  //         // Usa patchValue para actualizar los campos específicos del formulario
-  //         this.customerForm.patchValue({
-  //           rut: rut, // El RUT generalmente no lo necesitarías modificar, pero se incluye aquí por si lo deseas
-  //           dv: response.dv,
-  //           correo_electronico: response.correo_electronico,
-  //           contrasena: response.contrasena,
-  //           nombre: response.nombre,
-  //           direccion: response.direccion
-  //         });
-
-  //         // Si deseas que el cliente se registre después de cargar los datos, puedes hacerlo aquí
-  //         this.showClienteForm = true; // Muestra el formulario si es necesario
-  //         // this.guardarCliente = true;  // Marca para guardar los datos
-  //       }
-  //     },
-  //     (error) => {
-  //       console.error('Error al buscar el cliente:', error);
-  //     }
-  //   );
-  // }
-
   buscar_cliente(rut: string) {
     if (!rut) return; // Si el RUT está vacío, no hacer nada
     this.cartService.cliente_obtener(rut ).subscribe(
@@ -184,14 +157,6 @@ export class CarritoPage implements OnInit {
     );
   }
 
-  // guardar_cliente(){
-  //   this.cartService.crearCliente(this.customer).subscribe(
-  //     (response) => {
-  //       console.log('Cliente creado exitosamente', response);
-  //     },
-  //   );
-  // }
-
   validateForm(): boolean {
     if (this.customerForm.invalid) {
       this.mostrarToast('Por favor, completa el formulario correctamente.');
@@ -199,87 +164,6 @@ export class CarritoPage implements OnInit {
     }
     return true;
   }
-
-
-// checkout_pago() {
-//   // Verificar si el carrito tiene productos y si el formulario es válido
-//   if (this.cartItems.length === 0) {
-//     this.mostrarToast('El carrito está vacío. Agrega productos antes de proceder al pago.');
-//     return;
-//   }
-
-//   if (!this.validateForm()) {
-//     this.mostrarToast('Completa el formulario antes de seguir.');
-//     return;
-//   }
-
-//   // Crear los datos para el checkout
-//   const items = this.cartItems.map(item => ({
-//     producto_id: item.producto_id,
-//     cantidad: item.cantidad
-//   }));
-
-//   const checkoutData = {
-//     rut: this.customer.rut,
-//     dv: this.customer.dv,
-//     correo_electronico: this.customer.correo_electronico,
-//     nombre: this.customer.nombre,
-//     direccion: this.customer.direccion,
-//     items: items,
-//     total: this.total
-//   };
-
-//   // Realizar el checkout y crear la orden
-//   this.cartService.checkout(checkoutData).subscribe(
-//     (response: any) => {
-//       if (response && response.orden_id) {
-//         this.mostrarToast(`Orden creada. ID de la orden: ${response.orden_id}`);
-//         // Aquí puedes continuar con el proceso de pago
-//       } else {
-//         this.mostrarToast('Error: No se recibió el ID de la orden.');
-//       }
-//     },
-//     (error) => {
-//       console.error('Error al crear la orden', error);
-//       this.mostrarToast('Error al crear la orden. Inténtalo de nuevo.');
-//     }
-//   );
-// }
-
-
-//   irAPagar() {
-//     if (!this.customer.rut || !this.customer.dv || !this.customer.correo_electronico || !this.customer.nombre || !this.customer.direccion) {
-//           this.mostrarToast('Por favor, completa todos los campos.');
-//           return;
-//         }
-//     this.cartService.iniciarPago({ total: this.total }).subscribe(
-//         response => {
-//             console.log(response);
-
-//             if (response.success) {
-//                 const form = document.createElement('form');
-//                 form.method = 'POST';
-//                 form.action = response.transaction_url;
-
-//                 const tokenField = document.createElement('input');
-//                 tokenField.type = 'hidden';
-//                 tokenField.name = 'token_ws';
-//                 tokenField.value = response.token;
-
-//                 form.appendChild(tokenField);
-//                 document.body.appendChild(form);
-
-//                 form.submit(); // Redirige al usuario al formulario de pago de Transbank
-//             } else {
-//                 alert('Error al iniciar pago: ' + response.message);
-//             }
-//         },
-//         error => {
-//             console.error(error);
-//             alert('Ocurrió un error al iniciar el pago.');
-//         }
-//     );
-//   }
 
 checkout_pago() {
   // Verificar si el carrito tiene productos y si el formulario es válido
@@ -306,16 +190,6 @@ checkout_pago() {
     items,
     total: this.total
   };
-
-  // const checkoutData = {
-  //   rut: this.customer.rut,
-  //   dv: this.customer.dv,
-  //   correo_electronico: this.customer.correo_electronico,
-  //   nombre: this.customer.nombre,
-  //   direccion: this.customer.direccion,
-  //   items: items,
-  //   total: this.total
-  // };
 
   // Realizar el checkout y crear la orden
   this.cartService.checkout(checkoutPayload).subscribe(

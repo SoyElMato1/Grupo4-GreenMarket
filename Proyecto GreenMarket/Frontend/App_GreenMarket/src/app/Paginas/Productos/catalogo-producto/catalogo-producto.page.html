@@ -7,25 +7,26 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Categorias</a>
+              <h1 class="nav-link active" aria-current="page">Categorias</h1>
             </li>
 
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                Filtro de seleccion
+              <a class="nav-link dropdown-toggle"  role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                Filtro de selección
               </a>
               <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Plantas</a></li>
-                <li><a class="dropdown-item" href="#">Plantas</a></li>
-                       <li><a class="dropdown-item" href="#">Plantas</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
+                <li *ngFor="let categoria of categorias">
+                  <a class="dropdown-item"  (click)="filtrarPorCategoria(categoria.id_categoria, categoria.nombre_categoria)" >{{ categoria.nombre_categoria }}</a>
+                </li>
+                <a class="dropdown-item" *ngIf="categoriaSeleccionada" (click)="quitarFiltro()">Quitar filtro</a>
               </ul>
             </li>
             <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+              <a class="nav-link disabled" aria-disabled="true">{{ categoriaSeleccionada || 'Sin filtro' }}</a>
             </li>
+            <!-- <li class="nav-item">
+              <button class="button" *ngIf="categoriaSeleccionada" (click)="quitarFiltro()">Quitar filtro</button>
+            </li> -->
           </ul>
           <form class="d-flex" role="search">
             <ion-input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" (ionInput)="onSearch($event)"></ion-input>
@@ -56,9 +57,7 @@
           <ion-col size="12" size-md="6" size-lg="4" *ngFor="let producto of productosFiltrados">
 
             <div class="card shadow-sm">
-              <!-- [src]="'http://localhost:8000/' + producto.imagen_producto" -->
               <img *ngIf="producto.imagen_producto"
-
               [src]="'http://localhost:8000/' + producto.imagen_producto"
               class="bd-placeholder-img card-img-top"
               alt="Foto del producto"
@@ -68,7 +67,7 @@
                 <h5>{{ producto.nombre_producto }}</h5>
                 <h5>${{ producto.precio }}</h5>
 
-            <div class="rating">
+            <!-- <div class="rating">
               <input [value]="5" [name]="'rating' + producto.codigo_producto" [id]="'star5-' + producto.codigo_producto" type="radio">
               <label [for]="'star5-' + producto.codigo_producto"></label>
 
@@ -84,10 +83,20 @@
               <input [value]="1" [name]="'rating' + producto.codigo_producto" [id]="'star1-' + producto.codigo_producto" type="radio">
               <label [for]="'star1-' + producto.codigo_producto"></label>
             </div>
-                <p class="card-text">{{ producto.descripcion }}</p>
+                <p class="card-text">{{ producto.descripcion }}</p> -->
 
                 <div class="d-flex justify-content-between align-items-center">
-                  <button class="btn btn-primary" (click)="agregarAlCarrito(producto.codigo_producto)">Agregar al carrito</button>
+                  <button class="button" (click)="agregarAlCarrito(producto.codigo_producto)">
+                    <span class="text">Agregar</span>
+                    <span class="icon">
+                      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" stroke="currentColor" fill="none">
+                        <line x1="12" y1="5" x2="12" y2="19"></line>
+                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                      </svg>
+                    </span>
+                  </button>
+
+                  <button class="btn btn-primary" (click)="verDetalleProducto(producto.codigo_producto)">Detalle del producto</button>
                   <!-- <button class="btn btn-outline-secondary" (click)="verDetalleProducto(producto.codigo_producto)">Detalle</button> -->
                 </div>
               </div>
@@ -98,8 +107,6 @@
       </div>
 
     </div>
-
-    <!-- Footer -->
 
   </main>
   <footer class="footer">
@@ -115,4 +122,3 @@
     </div>
   </footer>
 </ion-content>
-

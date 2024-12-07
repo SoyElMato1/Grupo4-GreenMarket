@@ -16,11 +16,16 @@ intents:
 - proveedores_producto
 - recomendacion_plantas
 - saludo
+- affirm
+- agregar_al_carrito  # Nueva intención para agregar productos al carrito
+- enviar_imagen  
 entities:
 - plant_name
 - producto
 - planta
 - plant_name_proveedor
+- nombre_producto
+- producto_carrito
 slots:
   plant_name:
     type: text
@@ -32,6 +37,11 @@ slots:
     mappings:
     - type: from_entity
       entity: plant_name_proveedor
+  producto_carrito:
+    type: text
+    mappings:
+    - type: from_entity
+      entity: producto_carrito
 
 responses:
   utter_greet:
@@ -57,3 +67,5 @@ actions:
 - action_listar_productos
 - action_proveedor_producto
 - action_buscar_proveedor
+- action_agregar_al_carrito
+- action_analizar_imagen

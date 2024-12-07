@@ -1,145 +1,206 @@
-
 .container-fluid{
-font-weight: 900;
-font-size: 20px;
-  // background-color: rgb(160, 214, 131);
-  // border: #000000 2px solid;
-}
-.card {
-  margin-bottom: 1.5rem;
-  // background-color: rgb(114, 191, 120);
-}
-.boton{
-  color: rgb(160, 214, 131);
-  background-color: rgb(160, 214, 131);
-}
-.card-body {
-  background-color: rgb(114, 191, 120);
-  color: #000000; /* Color del texto */
-  font-weight: bold;
-}
-footer {
-  background-color: #343a40;
-  color: #fff;
-  padding: 1.5rem 0;
-}
+  font-weight: 900;
+  font-size: 20px;
+    // background-color: rgb(160, 214, 131);
+    // border: #000000 2px solid;
+  }
+  .card {
+    margin-bottom: 1.5rem;
+    // background-color: rgb(114, 191, 120);
+  }
+  .boton{
+    color: rgb(160, 214, 131);
+    background-color: rgb(160, 214, 131);
+  }
+  .card-body {
+    background-color: rgb(114, 191, 120);
+    color: #000000; /* Color del texto */
+    font-weight: bold;
+  }
+  footer {
+    background-color: #343a40;
+    color: #fff;
+    padding: 1.5rem 0;
+  }
 
-footer a {
-  color: #fff;
-  text-decoration: underline;
-}
+  footer a {
+    color: #fff;
+    text-decoration: underline;
+  }
 
-.btn-primary {
-  background-color: rgb(160, 214, 131);/* Color de fondo personalizado */
-  border-color: rgb(160, 214, 131);     /* Color del borde */
-  color: #000000;            /* Color del texto */
-}
+  .btn-primary {
+    background-color: rgb(160, 214, 131);/* Color de fondo personalizado */
+    border-color: rgb(160, 214, 131);     /* Color del borde */
+    border: #000000 1px solid;
+    font-weight: 700;
+    color: #000000;            /* Color del texto */
+  }
 
-.btn-primary:hover {
-  background-color: rgb(254, 255, 159); /* Color al pasar el ratón */
-  border-color: rgb(254, 255, 159);
-}
+  .btn-primary:hover {
+    background-color: rgb(254, 255, 159); /* Color al pasar el ratón */
+    border-color: rgb(254, 255, 159);
+  }
 
-/* Estilo para el botón contorneado */
-.btn-outline-secondary {
-  color: black;             /* Color del texto */
-  border-color: #333333;      /* Color del borde */
-}
+  /* Estilo para el botón contorneado */
+  .btn-outline-secondary {
+    color: black;             /* Color del texto */
+    border-color: #333333;      /* Color del borde */
+  }
 
-.btn-outline-secondary:hover {
-  background-color: rgb(254, 255, 159);  /* Fondo al pasar el ratón */
-  color: black;                /* Color del texto */
-  border-color: rgb(254, 255, 159);
-}
-////////////////////////////////////////////
-/// ///////////////////////////////////////
-/// //////////////////////////////////////
-//////////////////////////////////
+  .btn-outline-secondary:hover {
+    background-color: rgb(254, 255, 159);  /* Fondo al pasar el ratón */
+    color: black;                /* Color del texto */
+    border-color: rgb(254, 255, 159);
+  }
+  ////////////////////////////////////////////
+  /// ///////////////////////////////////////
+  /// //////////////////////////////////////
+  //////////////////////////////////
 
-/* From Uiverse.io by andrew-demchenk0 */
-/* From Uiverse.io by PriyanshuGupta28 */
-.rating {
-  display: inline-block;
-}
+  /* From Uiverse.io by andrew-demchenk0 */
+  /* From Uiverse.io by PriyanshuGupta28 */
+  .rating {
+    display: inline-block;
+  }
 
-.rating input {
-  display: none;
-}
+  .rating input {
+    display: none;
+  }
 
-.rating label {
-  float: right;
-  cursor: pointer;
-  color: #ccc;
-  transition: color 0.3s;
-}
+  .rating label {
+    float: right;
+    cursor: pointer;
+    color: #ccc;
+    transition: color 0.3s;
+  }
 
-.rating label:before {
-  content: '\2605';
-  font-size: 30px;
-}
+  .rating label:before {
+    content: '\2605';
+    font-size: 30px;
+  }
 
-.rating input:checked ~ label,
-.rating label:hover,
-.rating label:hover ~ label {
-  color: rgb(254, 255, 159);
-  transition: color 0.3s;
-}
-.bigimage {
-  width: 100%;
-  min-height: 100vh; /* Asegura que el contenedor ocupe al menos el 100% del alto de la pantalla */
+  .rating input:checked ~ label,
+  .rating label:hover,
+  .rating label:hover ~ label {
+    color: rgb(254, 255, 159);
+    transition: color 0.3s;
+  }
+  .bigimage {
+    width: 100%;
+    min-height: 100vh; /* Asegura que el contenedor ocupe al menos el 100% del alto de la pantalla */
 
-  background:whitesmoke;
-  background-repeat: repeat;
-  background-position: center center;
-  background-size: cover;
-  background-attachment: scroll; /* Cambia a 'fixed' si quieres que el fondo esté fijo mientras el contenido se desplaza */
-  top: 0px;
-  left: 0px;
-}
-/* Estilo general del footer */
-.footer {
-  background: rgb(114, 191, 120); /* Color principal (60%) */
-  color: black;
-  text-align: center;
-  padding: 20px 0;
-  border-top: 4px solid rgb(160, 214, 131); /* Línea superior (30%) */
-  box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
-}
+    background:whitesmoke;
+    background-repeat: repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: scroll; /* Cambia a 'fixed' si quieres que el fondo esté fijo mientras el contenido se desplaza */
+    top: 0px;
+    left: 0px;
+  }
+  /* Estilo general del footer */
+  .footer {
+    background: rgb(114, 191, 120); /* Color principal (60%) */
+    color: black;
+    text-align: center;
+    padding: 20px 0;
+    border-top: 4px solid rgb(160, 214, 131); /* Línea superior (30%) */
+    box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+  }
 
-/* Enlaces dentro del footer */
-.footer a {
-  color: rgb(254, 255, 159); /* Color destacado (10%) */
-  text-decoration: none;
-  font-weight: bold;
-}
+  /* Enlaces dentro del footer */
+  .footer a {
+    color: rgb(254, 255, 159); /* Color destacado (10%) */
+    text-decoration: none;
+    font-weight: bold;
+  }
 
-.footer a:hover {
-  text-decoration: underline;
-}
+  .footer a:hover {
+    text-decoration: underline;
+  }
 
-/* Texto del footer */
-.footer-text {
-  font-size: 14px;
-  margin: 0;
-}
+  /* Texto del footer */
+  .footer-text {
+    font-size: 14px;
+    margin: 0;
+  }
 
-.footer strong {
-  color: rgb(160, 214, 131); /* Destacar GreenMarket */
-}
+  .footer strong {
+    color: rgb(160, 214, 131); /* Destacar GreenMarket */
+  }
 
-/* Botón "Volver arriba" */
-.back-to-top {
-  background-color: rgb(160, 214, 131); /* Botón en verde claro */
-  color: black;
-  padding: 8px 12px;
-  border-radius: 5px;
-  font-size: 12px;
-  font-weight: bold;
-  text-decoration: none;
-  transition: all 0.3s;
-}
+  /* Botón "Volver arriba" */
+  .back-to-top {
+    background-color: rgb(160, 214, 131); /* Botón en verde claro */
+    color: black;
+    padding: 8px 12px;
+    border-radius: 5px;
+    font-size: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
 
-.back-to-top:hover {
-  background-color: rgb(254, 255, 159); /* Hover en amarillo */
-  color: black;
-}
+  .back-to-top:hover {
+    background-color: rgb(254, 255, 159); /* Hover en amarillo */
+    color: black;
+  }
+  //Agregar al carrtito
+  .button {
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 150px;
+    height: 40px;
+    cursor: pointer;
+    background-color: rgb(160, 214, 131);
+    border: 1px solid black;
+    overflow: hidden;
+    transition: background 0.3s, border 0.3s;
+  }
+
+  .button .text {
+    color:black;
+    font-weight: 600;
+    transform: translateX(30px);
+    transition: color 0.3s, transform 0.3s;
+  }
+
+  .button .icon {
+    position: absolute;
+    right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    width: 39px;
+    background-color: rgb(152, 217, 117);
+    transition: width 0.3s, transform 0.3s, background-color 0.3s;
+
+    border-left:#000000 1px solid ;
+  }
+
+  .button svg {
+    width: 24px;
+    stroke: #000000;
+  }
+
+  .button:hover {
+    background-color:rgb(160, 214, 131);
+  }
+
+  .button:hover .text {
+    color: transparent;
+  }
+
+  .button:hover .icon {
+    width: 100%;
+    transform: translateX(0);
+  }
+
+  .button:active {
+    border-color: #2e8644;
+  }
+
+  .button:active .icon {
+    background-color: #2e8644;
+  }

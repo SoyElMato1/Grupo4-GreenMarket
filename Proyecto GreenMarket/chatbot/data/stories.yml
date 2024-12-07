@@ -45,3 +45,11 @@ stories:
   steps:
   - intent: preguntar_proveedor
   - action: action_buscar_proveedor
+
+- story: agregar producto al carrito
+  steps:
+  - intent: agregar_al_carrito
+    entities:
+    - producto_carrito: "amapolas"
+  - action: action_agregar_al_carrito
+

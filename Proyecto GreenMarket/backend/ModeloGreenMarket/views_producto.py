@@ -24,6 +24,7 @@ def producto(request):
         productos = Producto.objects.all()
         serializer = ProductoSerializer(productos, many=True)
         return JsonResponse(serializer.data, safe=False)
+
 @csrf_exempt
 @api_view(['POST'])
 @permission_classes([AllowAny])
@@ -35,32 +36,6 @@ def agregar_productos(request):
             productos_serializer.save()
             return JsonResponse(productos_serializer.data, status=status.HTTP_201_CREATED)
         return JsonResponse(productos_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-# Todos los productos de un Proveedor
-# @csrf_exempt
-# @api_view(['GET'])
-# @permission_classes([IsAuthenticated])  # Requiere autenticación
-# def obtener_productos(request):
-#     """
-#     Lista productos por el RUT del proveedor o agrega un nuevo producto.
-#     """
-#     # Filtrar productos por el RUT del proveedor
-#     if request.method == 'GET':
-#         rut_proveedor = request.GET.get('rut')
-        
-#         if rut_proveedor:
-#             try:
-#                 proveedor = Proveedor.objects.get(rut=rut_proveedor)
-#                 productos = Producto.objects.filter(id_proveedor=proveedor)
-#             except Proveedor.DoesNotExist:
-#                 return JsonResponse({"error": "Proveedor no encontrado"}, status=status.HTTP_404_NOT_FOUND)
-#         else:
-#             productos = Producto.objects.all()
-        
-#         serializer = ProductoSerializer(productos, many=True)
-#         return JsonResponse(serializer.data, safe=False)
-
-
 
 @csrf_exempt
 @api_view(['GET'])
