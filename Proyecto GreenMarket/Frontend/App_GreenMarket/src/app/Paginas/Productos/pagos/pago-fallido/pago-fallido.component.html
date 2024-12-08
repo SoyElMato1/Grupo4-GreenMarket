@@ -1,8 +1,29 @@
-<div>
-  <h1>Pago Fallido</h1>
-  <p>{{ message }}</p>
-  <button (click)="irAInicio()">Regresar a la tienda</button>
-</div>
+<ion-content>
+  <ion-grid class="fondo">
+    <ion-row>
+      <ion-col class="centrar">
+        <div class="titular">
+        Algo salio mal
+        </div>
+      </ion-col>
+    </ion-row>
 
+    <!-- Contenedor para la imagen -->
+    <ion-row>
+      <ion-col class="centrar">
+        <div class="imagen-contenedor">
+          <img src="../../../../../assets/images/equisroja.jpeg" alt="Imagen de compra" class="imagen-centro" />
+        </div>
+      </ion-col>
+    </ion-row>
 
-
+    <ion-row>
+      <ion-col>
+        <div class="container">
+          El pago no se pudo procesar de forma correcta, porfavor, intente de nuevo o en caso de
+          seguir con probleamas contacte con servicio al cliente
+        </div>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

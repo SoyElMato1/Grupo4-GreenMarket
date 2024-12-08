@@ -327,7 +327,7 @@ ion-label {
   padding: 8px 20px;
   border-radius: 8px;
   width: 100%;
-  max-width: 1250px;
+  max-width: 1350px;
   text-align: center;
   transition: all 0.3s ease;
   border: solid 1px black;
@@ -346,7 +346,7 @@ ion-label {
   padding: 8px 20px;
   border-radius: 8px;
   width: 100%;
-  max-width: 1250px;
+  max-width: 1350px;
   text-align: center;
   transition: all 0.3s ease;
 }
@@ -400,6 +400,10 @@ ion-label {
 .custum-file-upload input {
   display: none;
 }
+
+/////////////////////////////////
+
+
 /* Ajuste responsivo para botones */
 @media (max-width: 768px) {
   .btn-primary,

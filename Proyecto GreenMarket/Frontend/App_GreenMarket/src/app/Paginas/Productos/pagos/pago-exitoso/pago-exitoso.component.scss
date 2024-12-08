@@ -94,3 +94,41 @@ table td strong {
 table tr:last-child td {
   border-bottom: none;
 }
+.formulario-editar {
+  background-color: rgb(114, 191, 120); /* Fondo verde */
+  padding: 16px; /* Añade espacio interno */
+  border-radius: 8px; /* Bordes redondeados */
+}
+
+.formulario-editar ion-item {
+  // background: white; /* Fondo blanco para cada campo */
+  border-radius: 6px;
+  margin-bottom: 12px; /* Separación entre elementos */
+  padding: 8px;
+}
+
+.formulario-editar ion-button {
+  background-color: #4caf50; /* Verde más oscuro para los botones */
+  color: white; /* Texto blanco */
+  margin-top: 12px;
+}
+
+.formulario-editar ion-button:hover {
+  filter: brightness(0.9); /* Efecto al pasar el ratón */
+}
+
+.formulario {
+  background-color: rgb(160, 214, 131);
+  background: rgb(160, 214, 131);
+  color: black;
+  font-weight: bold;
+  // font-size: 18px; /* Tamaño del texto ingresado */
+  // // width: 500 auto;
+  // // max-width: 500px;
+  // background-color: rgb(160, 214, 131);
+  // // display: flex;
+  // padding: 10px;
+  // max-width: 500px;
+  // min-width: 300px;
+
+}
