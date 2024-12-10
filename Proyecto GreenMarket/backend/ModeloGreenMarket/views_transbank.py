@@ -118,9 +118,6 @@ def pago_exitoso(request):
         print("Error durante el procesamiento del pago:", str(e))  # Registro del error
         return JsonResponse({'success': False, 'error': str(e)})
 
-
-
-
 def procesar_pago(request):
     # Suponiendo que tienes la respuesta de Transbank como un diccionario `response`
     response = {
@@ -176,27 +173,6 @@ def detalles_pago_exitoso(request):
 
     except transaccion.DoesNotExist:
         return JsonResponse({'success': False, 'message': 'Transacción no encontrada'}, status=404)
-
-
-#def pago_exitoso(request):
-#    token_ws = request.GET.get('token_ws')
-#
- #   if not token_ws:
-  #      return JsonResponse({'success': False, 'message': 'Token no proporcionado'})
-#
- #   try:
-  #      response = Transaction().commit(token_ws)
-   #     print("Response de Transbank:", response)  # Verificar la respuesta de Transbank
-#
- #       if response['status'] == 'AUTHORIZED':
-  #          # Redirigir a la ruta de Angular con el resultado de la transacción
-   #         return redirect(f'http://localhost:4200/pago-exitoso?order={response}')
-    #    else:
-     #       return redirect('pago_fallido')
-#
- #   except Exception as e:
-  #      print("Error durante el procesamiento del pago:", str(e))  # Registro del error
-   #     return JsonResponse({'success': False, 'error': str(e)})
 
 @permission_classes([AllowAny])
 def pago_fallido(request):

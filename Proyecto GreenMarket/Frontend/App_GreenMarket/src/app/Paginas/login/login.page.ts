@@ -29,9 +29,15 @@ export class LoginPage implements OnInit{
 
   loginForm: FormGroup;
   registerForm: FormGroup;
+  restoreForm: FormGroup;
+  tokenForm: FormGroup;
 
   showPasswordLogin: boolean = false;
   showPasswordRegister: boolean = false;
+  requires2FA: boolean = false;
+  restorePassword: boolean = false;
+  recuperacion: boolean = false;
+  code: string = '';
 
   handleButtonClick() {
     this.toggleCrudForm();
@@ -60,6 +66,13 @@ export class LoginPage implements OnInit{
         nom_user: ['', [Validators.required, Validators.pattern('^[a-zA-ZñÑ]+$')]], // Letras con "ñ" y "Ñ" permitidas
         ap_user: ['', [Validators.required, Validators.pattern('^[a-zA-ZñÑ]+$')]], // Letras con "ñ" y "Ñ" permitidas
     });
+    this.restoreForm = this.formBuilder.group({
+      email: ['', [Validators.required]]
+    });
+    this.tokenForm = this.formBuilder.group({
+      token:[''],
+      contrasena:[''],
+    });
   }
 
   ngOnInit() {}
@@ -77,6 +90,45 @@ export class LoginPage implements OnInit{
       this.loginForm.reset();
       this.loginForm.updateValueAndValidity();
     }
+  }
+
+  onVerify2FA(): void {
+    this.authservice.verify2FA(this.username, this.code).subscribe(
+      async (response: any) => {
+        console.log('Verificación 2FA exitosa:', response);
+        const token = response.token;
+        const userRole = response.user.rol;
+        const userData = { rol: userRole };
+
+        localStorage.setItem('rol', userRole);
+        localStorage.setItem('authToken', token);
+        localStorage.setItem('user_data', JSON.stringify(userData));
+        // Redirigir según el rol
+        if (userRole === 'admin') {
+          this.router.navigate(['/panel-administrador']);
+        } else if (userRole === 'proveedor') {
+          this.router.navigate(['/panel-proveedor']);
+        } else {
+          this.router.navigate(['/home']);
+        }
+        this.requires2FA = false;
+        const toast = await this.toast.create({
+          message: 'Bienvenido!',
+          position: 'top',
+          duration: 2000,
+        });
+        toast.present();
+      },
+      async (error) => {
+        console.error('Error al verificar 2FA:', error);
+        const toast = await this.toast.create({
+          message: 'Error al verificar el código 2FA',
+          position: 'top',
+          duration: 2000,
+        });
+        toast.present();
+      }
+    );
   }
 
   async login() {
@@ -97,15 +149,24 @@ export class LoginPage implements OnInit{
     // Llamar al servicio de autenticación con los valores
     this.authservice.login(username, password).subscribe(
       async (response: any) => {
-        if (response) {
-          const token = response.token; // Asegúrate de que la respuesta incluya el token
-          const userRole = response.user.rol; // Suponiendo que la respuesta incluye el rol del usuario
-          const userData = {
-            rol: userRole,
-            // Puedes agregar otros datos del usuario si es necesario
-          };
+        if (response.requires_2fa) {
+          this.requires2FA = true;
+          console.log(this.requires2FA)
+          this.username = username;
+          const toast = await this.toast.create({
+            message: 'Código enviado a tu correo',
+            position: 'top',
+            duration: 2000
+          });
+          toast.present();
+        } else if (response.token) {
+          // Si no requiere 2FA, procesar como login normal
+          console.log(this.requires2FA)
+          const token = response.token;
+          const userRole = response.user.rol;
+          const userData = { rol: userRole };
 
-          // Almacenar tanto el token como los datos del usuario en localStorage
+          localStorage.setItem('rol', userRole);
           localStorage.setItem('authToken', token);
           localStorage.setItem('user_data', JSON.stringify(userData));
 
@@ -194,6 +255,79 @@ export class LoginPage implements OnInit{
         toast.present();
       }
     });
+  }
+
+  restore (){
+    this.restorePassword = true;
+    this.showLoginForm = false
+  }
+
+  requestPassword(): void {
+    // Verificar si el campo de correo electrónico está lleno
+    const email = this.restoreForm.get('email')?.value;
+    if (!email) {
+      this.toast.create({
+        message: 'Por favor, ingresa tu correo electrónico.',
+        position: 'top',
+        duration: 2000,
+      }).then(toast => toast.present());
+      return;
+    }
+    this.authservice.requestPassword(email).subscribe(
+      async (response: any) => {
+        this.recuperacion = true;
+        console.log('Solicitud de restablecimiento enviada:', response);
+        const toast = await this.toast.create({
+          message: 'Correo de restablecimiento enviado correctamente.',
+          position: 'top',
+          duration: 2000,
+        });
+        toast.present();
+      },
+      async (error) => {
+        console.error('Error al solicitar el restablecimiento:', error);
+        const toast = await this.toast.create({
+          message: 'Error al enviar el correo de restablecimiento.',
+          position: 'top',
+          duration: 2000,
+        });
+        toast.present();
+      }
+    );
+  }
+
+  onUpdatePassword(): void {
+    const token = this.tokenForm.get('token')?.value;
+    const newPassword = this.tokenForm.get('contrasena')?.value;
+    if (!token || !newPassword) {
+      this.toast.create({
+        message: 'Por favor, completa todos los campos.',
+        position: 'top',
+        duration: 2000,
+      }).then(toast => toast.present());
+      return;
+    }
+    this.authservice.updatePassword(token, newPassword).subscribe(
+      async (response: any) => {
+        console.log('Contraseña actualizada exitosamente:', response);
+        const toast = await this.toast.create({
+          message: 'Contraseña actualizada con éxito.',
+          position: 'top',
+          duration: 2000,
+        });
+        toast.present();
+        this.router.navigate(['/login']); // Redirigir al login
+      },
+      async (error) => {
+        console.error('Error al actualizar la contraseña:', error);
+        const toast = await this.toast.create({
+          message: 'Error al actualizar la contraseña.',
+          position: 'top',
+          duration: 2000,
+        });
+        toast.present();
+      }
+    );
   }
 
 }

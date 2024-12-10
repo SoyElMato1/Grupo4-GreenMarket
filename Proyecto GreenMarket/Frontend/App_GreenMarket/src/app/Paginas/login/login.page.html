@@ -6,7 +6,7 @@
     <div class="container" style="max-width: 500px;">
 
       <!-- Formulario de Inicio de Sesión -->
-      <div *ngIf="showLoginForm">
+      <div *ngIf="showLoginForm && !requires2FA && !restorePassword">
         <!-- <ion-card class="container py-5 my-5">        </ion-card> -->
           <form [formGroup]="loginForm" (ngSubmit)="login()" novalidate>
             <h2 class="mb-4 titular text-center">Inicio de sesión</h2>
@@ -47,12 +47,82 @@
               <ion-button color="a" (click)="handleButtonClick()">Regístrate aquí</ion-button>
               <!-- <ion-button/ion-button> -->
             </div>
+            <div class="text-center mt-3">
+              <ion-button color="a" (click)="restore()">Recuperar contraseña</ion-button>
+            </div>
           </form>
+      </div>
 
+      <!--                          VERIFICACIÓN EN DOS PASOS                                   -->
+      <div *ngIf="requires2FA">
+        <h2>Verificar Código 2FA</h2>
+        <form (ngSubmit)="onVerify2FA()">
+          <label for="code">Código:</label>
+          <input type="text" id="code" [(ngModel)]="code" name="code" required />
+          <button type="submit" >Verificar</button>
+        </form>
+      </div>
+
+
+
+      <!--                      RECUPERAR CONTRASEÑA               -->
+      <div *ngIf="restorePassword" >
+        <h2>Recuperar Contraseña</h2>
+        <form [formGroup]="restoreForm" (ngSubmit)="requestPassword()">
+          <ion-item>
+            <ion-label position="stacked">Correo Electrónico</ion-label>
+            <ion-input
+              type="email"
+              formControlName="email"
+              placeholder="Ingresa tu correo"></ion-input>
+          </ion-item>
+          <div *ngIf="campoTocado('email') && campo('email')?.invalid" class="error">
+            <p *ngIf="campo('email')?.errors?.['required']">El correo es obligatorio.</p>
+            <p *ngIf="campo('email')?.errors?.['email']">Formato de correo inválido.</p>
+          </div>
+          <ion-button expand="block" type="submit" [disabled]="restoreForm.get('email')?.invalid">
+            Enviar Correo de Recuperación
+          </ion-button>
+        </form>
+      </div>
+
+      <div *ngIf="recuperacion"  >
+        <h2>Actualizar Contraseña</h2>
+        <form [formGroup]="tokenForm" (ngSubmit)="onUpdatePassword()">
+          <ion-item>
+            <ion-label position="stacked">Token</ion-label>
+            <ion-input
+              type="text"
+              formControlName="token"
+              placeholder="Ingresa el token recibido"></ion-input>
+          </ion-item>
+          <div *ngIf="campoTocado('token') && campo('token')?.invalid" class="error">
+            <p *ngIf="campo('token')?.errors?.['required']">El token es obligatorio.</p>
+          </div>
+          <ion-item>
+            <ion-label position="stacked">Nueva Contraseña</ion-label>
+            <ion-input
+              [type]="showPasswordLogin ? 'text' : 'password'"
+              formControlName="contrasena"
+              placeholder="Ingresa tu nueva contraseña"></ion-input>
+            <ion-icon
+              name="eye"
+              slot="end"
+              (click)="togglePasswordVisibility('login')"
+              [name]="showPasswordLogin ? 'eye-off' : 'eye'"></ion-icon>
+          </ion-item>
+          <div *ngIf="campoTocado('contrasena') && campo('contrasena')?.invalid" class="error">
+            <p *ngIf="campo('contrasena')?.errors?.['required']">La contraseña es obligatoria.</p>
+            <p *ngIf="campo('contrasena')?.errors?.['minlength']">Debe tener al menos 8 caracteres.</p>
+          </div>
+          <ion-button expand="block" type="submit" [disabled]="tokenForm.get('token')?.invalid || tokenForm.get('contrasena')?.invalid">
+            Actualizar Contraseña
+          </ion-button>
+        </form>
       </div>
 
       <!-- Formulario de Registro -->
-      <div *ngIf="!showLoginForm" >
+      <div *ngIf="!showLoginForm && !requires2FA && !restorePassword" >
         <!-- <ion-card class="container py-5 my-5">        </ion-card> -->
           <form [formGroup]="registerForm" (ngSubmit)="onRegister()" novalidate>
             <h2 class="mb-4 titulardo  text-center">Regístrate aquí</h2>

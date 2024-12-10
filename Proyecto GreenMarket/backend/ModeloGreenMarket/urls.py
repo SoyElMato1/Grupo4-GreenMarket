@@ -50,6 +50,9 @@ urlpatterns = [
     path('login/', login_view, name='admin_login'),
     path('logout/', logout_view, name='logout'),
     path('registro_proveedor/', register_proveedor_view, name='registro proveedor'),
+    path('verify_2fa_code/', verify_2fa_code, name='verify_2fa_code'),
+    path('request_password/', request_password, name='request_password'),
+    path('reset_password/', reset_password, name='reset_password'),
 
 #bot
     path('analizar_imagen/', analizar_imagen, name='analizar_imagen'),

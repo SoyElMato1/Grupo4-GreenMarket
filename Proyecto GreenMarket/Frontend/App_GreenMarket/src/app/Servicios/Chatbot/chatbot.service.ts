@@ -8,6 +8,8 @@ import { Observable } from 'rxjs';
 export class ChatbotService {
   private rasaUrl = 'http://localhost:5005/webhooks/rest/webhook'; // Cambia esto si tu Rasa está en otra URL
   private uploadUrl = 'http://127.0.0.1:8000/modelo/api/chat/upload'; // URL del backend para carga de imágenes
+  // private uploadUrl = 'https://greenmarket.up.railway.app/modelo/api/chat/upload';
+
 
   constructor(private http: HttpClient) {}
 

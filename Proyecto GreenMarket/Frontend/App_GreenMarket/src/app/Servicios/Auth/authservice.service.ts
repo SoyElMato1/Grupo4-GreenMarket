@@ -10,7 +10,7 @@ import { Proveedor } from 'src/app/Interfaces/proveedor';
 export class AuthserviceService {
 
   private apiUrl = 'http://localhost:8000/modelo/';
-  // private apiUrl = 'http://3.229.39.19:8000/modelo/';
+  // private apiUrl = 'https://greenmarket.up.railway.app/modelo/';
   constructor(private http: HttpClient, private router: Router) { }
 
   login(username: string, password: string): Observable<any> {
@@ -25,6 +25,22 @@ export class AuthserviceService {
         }
       })
     );
+  }
+
+  verify2FA(username: string, code: string): Observable<any> {
+    const url = `${this.apiUrl}verify_2fa_code/`;
+    const body = { username, code };
+    return this.http.post(url, body);
+  }
+  requestPassword(email: string): Observable<any> {
+    const url = `${this.apiUrl}request_password/`;
+    const body = { email };
+    return this.http.post(url, body);
+  }
+  updatePassword(token: string, newPassword: string): Observable<any> {
+    const url = `${this.apiUrl}reset_password/`;
+    const body = { token, new_password: newPassword };
+    return this.http.post(url, body);
   }
 
   getProveedorPerfil(): Observable<any> {

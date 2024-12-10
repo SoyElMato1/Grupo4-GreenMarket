@@ -1,34 +1,51 @@
-<ion-content>
-  <div class="chatbot">
-    <!-- Título y logo -->
-    <h2 class="titular">
-      JardenBot
-      <img src="../../../assets/images/Designer.png" alt="Logo GreenMarket" class="me-2 chatbot-logo">
-    </h2>
+<ion-content [fullscreen]="true" keyboard-attach="true" resize="false">
+  <div class="chat-container">
+    <ion-card class="card">
+      <ion-card-header class="card-header" style="background: rgb(114, 191, 120);" color="a">
+        <ion-item lines="none" style="background: rgb(114, 191, 120);" color="a">
+          <ion-label style="color: black;" style="background: rgb(114, 191, 120);" color="a">
+            <h2 class="titular">
+              JardenBot
+              <img src="../../../assets/images/Designer.png" alt="Logo GreenMarket" class="me-2 chatbot-logo">
+            </h2>
+          </ion-label>
+        </ion-item>
+      </ion-card-header>
 
-    <!-- Mensajes del chatbot -->
-    <div class="messages">
-      <div
-        *ngFor="let message of messages"
-        [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'bot'}"
-        class="message-bubble"
-      >
-        <strong *ngIf="message.sender === 'user'"><ion-icon slot="start" name="people-outline"></ion-icon></strong>
-        <strong *ngIf="message.sender === 'bot'"><img src="../../../assets/images/Designer.png" alt="Logo GreenMarket" class="me-2 chatbot-logo"></strong> {{ message.text }}
-      </div>
-    </div>
+      <ion-card-content class="msg_card_body" >
+        <div class="messages">
+          <div *ngFor="let message of messages" [ngClass]="{'user-message': message.sender === 'user', 'bot-message': message.sender === 'bot'}" class="message-bubble">
+            <strong *ngIf="message.sender === 'user'"><ion-icon slot="start" name="people-outline"></ion-icon></strong>
+            <strong *ngIf="message.sender === 'bot'"><img src="../../../assets/images/Designer.png" alt="Logo GreenMarket" class="me-2 chatbot-logo"></strong>
+            {{ message.text }}
+          </div>
+        </div>
+      </ion-card-content>
 
-    <!-- Contenedor para la caja de texto y el botón de envío -->
-    <div class="message-input-container">
-      <textarea [(ngModel)]="userMessage" placeholder="Escribe tu mensaje..." class="message-input"></textarea>
-      <button (click)="sendMessage()" class="send-button">Enviar</button>
-    </div>
+      <ion-footer style="background: rgb(114, 191, 120);" color="a">
+        <ion-item style="background: rgb(114, 191, 120); color: rgb(114, 191, 120);" color="a">
+          <!-- Input para cargar imagen -->
+          <div>
+            <input type="file" (change)="onImageSelected($event)" accept="image/*" id="file-input" />
+            <label for="file-input" class="button" *ngIf="!imageSelected">
+              <ion-button style="color: rgb(254, 255, 159);" color="a" (click)="sendMessage()" slot="end">
+                <img src="../../../assets/images/camara-fotografica.png" alt="Camera Icon" width="34" height="34" />
+                <!-- <ion-icon name="camera"></ion-icon> -->
+              </ion-button>
+            </label>
+            <button *ngIf="imageSelected" class="" (click)="sendImage()">Enviar Imagen</button>
+          </div>
 
-    <!-- Contenedor para la carga de imagen -->
-    <div class="image-upload">
-      <input type="file" (change)="onImageSelected($event)" />
-      <button (click)="sendImage()">Enviar Imagen</button>
-    </div>
+          <!-- Caja de texto para escribir el mensaje -->
+          <ion-input class="escribir" style="background:rgb(160, 214, 131); color: black;" color="a" [(ngModel)]="userMessage" placeholder="Escribe tu mensaje..." clearInput></ion-input>
 
+          <!-- BotÃ³n de enviar mensaje -->
+          <ion-button style="color:  rgb(254, 255, 159);" color="a" (click)="sendMessage()" slot="end">
+            <ion-icon name="paper-plane"></ion-icon>
+          </ion-button>
+
+        </ion-item>
+      </ion-footer>
+    </ion-card>
   </div>
 </ion-content>

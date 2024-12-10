@@ -68,17 +68,6 @@ export class PanelProveedorPage implements OnInit {
       console.error("No se encontró el RUT del proveedor en el localStorage");
     }
   }
-                                // Proveedor funciones
-  loadPerfil() {
-    this.authService.getProveedorPerfil().subscribe(
-      (data) => {
-        this.proveedor = data;
-      },
-      (error) => {
-        console.error('Error al cargar el perfil', error);
-      }
-    );
-  }
 
   actualizarFoto(event: Event) {
     const input = event.target as HTMLInputElement;
@@ -116,6 +105,55 @@ export class PanelProveedorPage implements OnInit {
       }
     );
   }
+
+                                // Proveedor funciones
+  loadPerfil() {
+    this.authService.getProveedorPerfil().subscribe(
+      (data) => {
+        this.proveedor = data;
+      },
+      (error) => {
+        console.error('Error al cargar el perfil', error);
+      }
+    );
+  }
+
+  // actualizarFoto(event: Event) {
+  //   const input = event.target as HTMLInputElement;
+  //   if (input.files && input.files[0]) {
+  //     this.fotoSeleccionada = input.files[0];
+  //   }
+  // }
+
+  // // Método para guardar cambios en el perfil, incluyendo la foto
+  // actualizarPerfil() {
+  //   const rut = localStorage.getItem('rut'); // Asegúrate de que esto esté definido
+  //   const formData = new FormData();
+  //   formData.append('nombre', this.proveedor.nombre);
+  //   formData.append('apellido', this.proveedor.apellido);
+  //   formData.append('correo_electronico', this.proveedor.correo_electronico);
+  //   formData.append('direccion',this.proveedor.direccion)
+  //   if (this.fotoSeleccionada) {
+  //     formData.append('foto', this.fotoSeleccionada); // Adjunta la foto seleccionada
+  //   }
+
+  //   this.authService.actualizarPerfilProveedor(formData).subscribe(
+  //     async (response) => {
+  //       const toast = await this.toast.create({
+  //         message: 'Perfil actualizado correctamente.',
+  //         duration: 2000,
+  //       });
+  //       toast.present();
+  //        // Recargar la página después de mostrar el mensaje
+  //       setTimeout(() => {
+  //         window.location.reload();
+  //       }, 2000); // Espera 2 segundos antes de recargar para permitir que el toast se muestre
+  //     },
+  //     (error) => {
+  //       console.error('Error al actualizar el perfil', error);
+  //     }
+  //   );
+  // }
 
   // Cambiar la sección actual
   setSection(section: string) {

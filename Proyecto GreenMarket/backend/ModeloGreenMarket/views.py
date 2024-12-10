@@ -163,7 +163,7 @@ def historial_compras(request, rut):
     except Orden.DoesNotExist:
         return Response({"detail": "No se encontraron órdenes para este RUT."}, status=status.HTTP_404_NOT_FOUND)
 
-# --------------------------- Chatbot---------------------------
+# --------------------------- Chatbot ---------------------------
 def analizar_imagen(request):
     if request.method == "POST" and request.FILES.get('image'):
         image = request.FILES['image']

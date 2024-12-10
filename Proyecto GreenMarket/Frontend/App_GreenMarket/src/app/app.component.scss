@@ -90,23 +90,24 @@ ion-buttons{
     font-weight: bold;
   }
 
-  // .titulo{
 
-
-
-  //   // border: 10px;
-
-  //   // position: relative;
-  //   // text-align: start;
-  //   // display: flex;
-  //   // justify-content: center; /* Centra horizontalmente */
-  //   // align-items: center; /* Centra verticalmente */
-  //   // font-weight: 900; /* Valores comunes: 400 (normal), 700 (negrita) */
-  //   // font-family: 'Courier New', Courier, monospace;
-  // }
   .titular {
     background-color: rgb(160, 214, 131);
     color: black;
+    width: 300px;
+    height: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 40px;
+  }
+  .titular2 {
+    background-color: rgb(114, 191, 120);
+    color: black;
+    // border: #f901af 1px solid;
     width: 300px;
     height: 60px;
     display: flex;
@@ -427,5 +428,37 @@ header {
 @media (max-width: 768px) {
   .profile-stats {
     min-width: 100px;
+  }
+}
+/* Ocultar el botón del carrito en pantallas pequeñas */
+@media (max-width: 768px) {
+  .carrito-icon {
+    display: none !important;
+  }
+}
+/* Estilos para pantallas pequeñas */
+// @media (max-width: 768px) {
+//   .fs-1 {
+//     font-size: 24px; /* Aumenta el tamaño de la fuente */
+//     width: 100%; /* El título ocupará todo el ancho disponible */
+//     text-align: center; /* Centra el título en la pantalla */
+//     margin-top: 20px; /* Aumenta el margen superior para bajar el título */
+//     margin-bottom: 10px; /* Ajusta el margen inferior si es necesario */
+//   }
+// }
+
+.fondodelmenu{
+  --background: rgb(160, 214, 131); /* Cambia este color al que prefieras */
+}
+.menu-button {
+  width: 100%;
+  background-color: rgb(160, 214, 131);
+  // display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  ion-item, ion-icon, ion-label {
+      margin-right: 8px;
+      color: black;
+      font-size: 30px;
   }
 }

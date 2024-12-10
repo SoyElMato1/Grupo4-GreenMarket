@@ -10,7 +10,7 @@ import { EventEmitter } from '@angular/core';
 export class CarritoServiService {
 
   private apiUrl = 'http://127.0.0.1:8000/modelo/';
-  // private apiUrl = 'http://3.229.39.19:8000/modelo/';
+  // private apiUrl = 'https://greenmarket.up.railway.app/modelo/';
   // BehaviorSubject to track number of items in the cart
   private cartItemCount = new BehaviorSubject<number>(0);
   cantidadCarrito = new EventEmitter<number>();

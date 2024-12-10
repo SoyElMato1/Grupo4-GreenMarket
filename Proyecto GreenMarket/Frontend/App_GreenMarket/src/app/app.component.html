@@ -1,29 +1,55 @@
-  <ion-app>
-<ion-header *ngIf="showHeader">
-  <ion-toolbar color="a" class="colormenus">
-    <div class="container">
-      <header class="d-flex flex-wrap justify-content-center py-3 mb-4 border-bottom">
-        <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
-          <img src="../../../../assets/images/logo.png" alt="Logo GreenMarket" class="me-2" width="40" height="32"> <!-- Reemplaza con la ruta de tu imagen -->
-          <span class="fs-1 mb-0">GreenMarket</span> <!-- Ajusta aquí el margen -->
-        </a>
-      <ul class="nav nav-pills align-items-center"> <!-- Añade 'align-items-center' aquí -->
-          <li class="nav-item"><a [routerLink]="['/login']" class="nav-link active" aria-current="page">Inicio sesión</a></li>
-          <li class="nav-item"><a [routerLink]="['/proveedor']" class="nav-link">Proveedores</a></li>
-          <li class="nav-item"><a [routerLink]="['/catalogo-producto']" class="nav-link">Productos</a></li>
-          <li class="nav-item"><a [routerLink]="['/historial_compra']" class="nav-link">Historial compras</a></li>
-          <ion-button color="a" class="carrito-icon" [routerLink]="['/carrito']">
-            <span class="cart-count">{{cantidadCarrito}}</span>
-            <ion-icon name="cart" class="big-icon"></ion-icon>
-            <!-- <ion-badge color="danger" *ngIf="cartItemCount > 0">{{ cartItemCount }}</ion-badge> -->
-          </ion-button>
-      </ul>
-      </header>
-    </div>
-  </ion-toolbar>
+<ion-app>
+  <!-- Menú lateral (configuración corregida) -->
+  <ion-menu side="start" menuId="first" contentId="main-content" class="d-md-none">
+    <ion-header color="a" style="background:rgb(114, 191, 120);">
+      <ion-toolbar color="a"  class="titular2">
+        <ion-title style="font-size: 30px;" >Menú</ion-title>
+      </ion-toolbar>
 
-</ion-header>
-<ion-content>
+    </ion-header>
+    <ion-content  class="fondodelmenu"  color="a" >
+      <ion-list color="a" class="menu-button">
+        <ion-item color="a" class="coloritem"  [routerLink]="['/login']" (click)="closeMenu()">Inicio sesión</ion-item>
+        <ion-item color="a" class="coloritem"  [routerLink]="['/proveedor']" (click)="closeMenu()">Proveedores</ion-item>
+        <ion-item color="a" class="coloritem"  [routerLink]="['/catalogo-producto']" (click)="closeMenu()">Productos</ion-item>
+        <ion-item color="a" class="coloritem" [routerLink]="['/historial_compra']" (click)="closeMenu()">Historial compras</ion-item>
+        <ion-item color="a" class="coloritem"  [routerLink]="['/carrito']" (click)="closeMenu()">Carrito ({{cantidadCarrito}})</ion-item>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+
+  <!-- Encabezado -->
+  <ion-header *ngIf="showHeader">
+    <ion-toolbar color="a" class="colormenus">
+      <div class="container">
+        <header class="d-flex flex-wrap justify-content-between py-3 mb-4 border-bottom">
+          <div class="d-flex align-items-center">
+            <!-- Botón del menú visible solo en pantallas pequeñas -->
+            <ion-menu-button  color="dark" class="d-md-none me-5"></ion-menu-button>
+            <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto link-body-emphasis text-decoration-none">
+              <img src="../../../../assets/images/logo.png" alt="Logo GreenMarket" class="me-2" width="40" height="32">
+              <span  class="fs-1 mb-0">GreenMarket</span>
+            </a>
+          </div>
+
+          <!-- Botones normales (solo en pantallas grandes) -->
+          <ul class="nav nav-pills align-items-center d-none d-md-flex">
+            <li class="nav-item"><a [routerLink]="['/login']" class="nav-link active">Inicio sesión</a></li>
+            <li class="nav-item"><a [routerLink]="['/proveedor']" class="nav-link">Proveedores</a></li>
+            <li class="nav-item"><a [routerLink]="['/catalogo-producto']" class="nav-link">Productos</a></li>
+            <li class="nav-item"><a [routerLink]="['/historial_compra']" class="nav-link">Historial compras</a></li>
+            <ion-button color="a" class="carrito-icon" [routerLink]="['/carrito']">
+              <span class="cart-count">{{cantidadCarrito}}</span>
+              <ion-icon name="cart" class="big-icon"></ion-icon>
+            </ion-button>
+          </ul>
+        </header>
+      </div>
+    </ion-toolbar>
+  </ion-header>
+
+  <!-- Contenido principal (contentId debe coincidir con el de ion-menu) -->
+  <ion-content id="main-content">
     <ion-router-outlet></ion-router-outlet>
-</ion-content>
+  </ion-content>
 </ion-app>

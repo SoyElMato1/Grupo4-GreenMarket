@@ -67,6 +67,19 @@
   font-size: 14px;
 }
 
+.input-form {
+  color: black;
+  background-color: rgb(160, 214, 131);  /* Color de fondo */
+  border: 1px solid black;                /* Borde negro */
+  font-weight: bold;                      /* Texto en negrita */
+  padding: 8px 12px;                      /* Espaciado interno */
+  border-radius: 4px;                     /* Bordes redondeados */
+  color: gray;                           /* Color del texto */
+  font-size: 1rem;                        /* Tamaño de la fuente */
+  width: 100%;                            /* Ancho del input */
+  box-sizing: border-box;                 /* Asegura que el padding no afecte el tamaño total */
+}
+
 
 /* Estilo para el contenedor de la tabla de historial */
 .history-container {
@@ -113,7 +126,7 @@
 /* Tabla */
 .table-header {
   font-weight: bold;
-  background-color: rgb(114, 191, 120);
+
   color: black;
   padding: 10px 0;
   border-radius: 8px;
@@ -136,21 +149,21 @@
 .table-row:nth-child(2) { animation-delay: 1s; }
 .table-row:nth-child(3) { animation-delay: 1.5s; }
 
-/* Filas alternadas */
-.table-row-even {
-  background-color: rgb(160, 214, 131);
-}
+// /* Filas alternadas */
+// .table-row-even {
+//   background-color: rgb(160, 214, 131);
+// }
 
-.table-row-odd {
-  background-color: rgb(114, 191, 120); /* Gris claro */
-}
+// .table-row-odd {
+//   background-color: rgb(114, 191, 120); /* Gris claro */
+// }
 
-/* Efecto hover para todas las filas */
-.table-row-even:hover,
-.table-row-odd:hover {
-  background-color: rgb(254, 255, 159)  ; /* Verde suave */
-  cursor: pointer;
-}
+// /* Efecto hover para todas las filas */
+// .table-row-even:hover,
+// .table-row-odd:hover {
+//   background-color: rgb(254, 255, 159)  ; /* Verde suave */
+//   cursor: pointer;
+// }
 
 /* Animación de desvanecimiento y desplazamiento hacia arriba */
 @keyframes slideFadeIn {
@@ -209,4 +222,17 @@
 .back-to-top:hover {
   background-color: rgb(254, 255, 159); /* Hover en amarillo */
   color: black;
+}
+.table-hover tbody tr:hover {
+  background-color: #343a40 !important; /* Color más oscuro al pasar el mouse */
+}
+
+ul {
+  padding-left: 20px;
+}
+
+@media (max-width: 768px) {
+  .table {
+    font-size: 12px; /* Reducir texto en dispositivos pequeños */
+  }
 }

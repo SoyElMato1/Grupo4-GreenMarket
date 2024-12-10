@@ -48,7 +48,11 @@ const routes: Routes = [
   {
     path: 'historial_compra',
     loadChildren: () => import('./Paginas/historial-compra/historial-compra.module').then( m => m.HistorialCompraPageModule)
+  },  {
+    path: 'recuperar',
+    loadChildren: () => import('./Paginas/Proveedores/recuperar/recuperar.module').then( m => m.RecuperarPageModule)
   },
+
 
  // Añade la ruta del chatbot
 

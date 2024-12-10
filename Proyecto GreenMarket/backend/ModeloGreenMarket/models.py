@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin, Group, Permission
 from django.contrib.auth.hashers import make_password
+from datetime import timedelta, timezone
+from django.utils.timezone import now
+import random
 
 # Create your models here.
 
@@ -116,6 +119,14 @@ class Proveedor(models.Model):
         # Codificar la contraseña si no está codificada aún
         if not self.contrasena.startswith('pbkdf2_'):
             self.contrasena = make_password(self.contrasena)
+
+        # Eliminar la imagen anterior si se está subiendo una nueva
+        if self.pk:
+            old_instance = Proveedor.objects.filter(pk=self.pk).first()
+            if old_instance and old_instance.foto != self.foto:
+                if old_instance.foto and old_instance.foto.path:
+                    old_instance.foto.delete(save=False)
+                    
         super().save(*args, **kwargs)
 
     def __str__(self):
@@ -132,6 +143,25 @@ class Proveedor(models.Model):
         )
         nuevo_producto.save()
         return nuevo_producto
+    
+
+class TwoFactor(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    code = models.CharField(max_length=6)
+    created_at = models.DateTimeField(auto_now_add=True)
+    def is_valid(self):
+        return now() < self.created_at + timedelta(minutes=10)
+    def generate_code(self):
+        self.code = f"{random.randint(100000, 999999)}"
+        self.save()
+
+class PasswordReset(models.Model):
+    usuario = models.ForeignKey(User, on_delete=models.CASCADE)
+    token = models.CharField(max_length=64, unique=True)
+    creado = models.DateTimeField(auto_now_add=True)
+    def is_valid(self):
+        expiration_time = self.creado + timedelta(hours=24)
+        return now() < expiration_time
 
 class Cliente(models.Model):
     rut = models.CharField(max_length=10, primary_key=True)

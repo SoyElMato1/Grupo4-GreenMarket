@@ -1,81 +1,99 @@
 <ion-content [fullscreen]="true">
   <div class="bigimage">
     <div class="container-fluid">
-      <div class="row">
+      <div class="row justify-content-center">
 
         <!-- Columna izquierda para el formulario -->
-  <div class="col-md-4 m-0 p-0 mt-5">
-  <div class="form-container">
-    <form [formGroup]="HistorialForm" (ngSubmit)="verificarHistorial()" novalidate>
-      <h2 class="mb-4 titular text-center">Consulta Historial de Compras</h2>
+        <ion-col size-md="7" size-lg="6">
+          <form [formGroup]="HistorialForm" (ngSubmit)="verificarHistorial()" novalidate>
+            <h4 class="titular datos-cliente-title text-center" style="color: black; font-weight: bold;">
+              Consulta Historial de Compras
+            </h4>
 
-      <div class="form-group mb-3">
-        <label class="label mb-2">Ingrese su RUT</label>
-        <ion-input formControlName="rut" placeholder="Ej: 12345678" class="form-control" [(ngModel)]="rut"></ion-input>
-        <div *ngIf="campo('rut')?.invalid && campoTocado('rut')" class="text-danger">
-          El RUT es obligatorio y debe ser válido.
-        </div>
-      </div>
-      <div class="form-group mb-3">
-        <label class="label mb-2">Ingrese su contraseña</label>
-        <ion-input formControlName="contrasena" placeholder="contraseña" class="form-control" [(ngModel)]="contrasena" [type]="showPasswordHistorial ? 'text' : 'password'">
-          <ion-icon
-            [name]="showPasswordHistorial ? 'eye-off' : 'eye'"
-            slot="end"
-            (click)="togglePasswordVisibility('vercontraseña')"
-            style="cursor: pointer;">
-          </ion-icon>
-        </ion-input>
-        <div *ngIf="campo('contrasena')?.invalid && campoTocado('contrasena')" class="text-danger">
-          La contraseña es obligatoria
-        </div>
-      </div>
+            <ion-row class="g-3" style="color: black; font-weight: bold;">
+              <!-- Campo RUT -->
+              <ion-col size="12">
+                <ion-label class="form-label" position="stacked">RUT</ion-label>
+                <ion-input
+                  class="input-form"
+                  [(ngModel)]="rut"
+                  name="rut"
+                  placeholder="Ej: 12345678"
+                  formControlName="rut">
+                </ion-input>
+                <div *ngIf="campo('rut')?.invalid && campoTocado('rut')" class="text-danger">
+                  El RUT es obligatorio y debe ser válido.
+                </div>
+              </ion-col>
 
-      <button class="btn btn-primary" (click)="consultarHistorial()">Consultar Historial</button>
-    </form>
-  </div>
-</div>
+              <!-- Campo Contraseña -->
+              <ion-col size="12">
+                <ion-label class="form-label" position="stacked">Contraseña</ion-label>
+                <ion-input
+                  class="input-form"
+                  [type]="showPasswordHistorial ? 'text' : 'password'"
+                  [(ngModel)]="contrasena"
+                  name="contrasena"
+                  placeholder="########"
+                  formControlName="contrasena">
+                </ion-input>
+                <div *ngIf="campo('contrasena')?.invalid && campoTocado('contrasena')" class="text-danger">
+                  La contraseña es obligatoria.
+                </div>
+              </ion-col>
+            </ion-row>
+
+            <hr class="my-2" style="color: gray;">
+            <button class="btn btn-primary w-100" type="submit" (click)="consultarHistorial()">Consultar Historial</button>
+          </form>
+        </ion-col>
 
         <!-- Columna derecha para la tabla de historial de compras -->
-        <div class="col-md-8">
-          <div *ngIf="orders && orders.length > 0" class="history-container mt-4">
-            <h2 class="text-center titular ">Historial de Compras</h2>
-            <ion-grid>
-              <ion-row class="table-header">
-                <ion-col>Fecha de Compra</ion-col>
-                <ion-col>Cliente</ion-col>
-                <ion-col>Total</ion-col>
-                <ion-col>Estado de Pago</ion-col>
-
-                <ion-col>Productos</ion-col>
-              </ion-row>
-
-                            <ion-row *ngFor="let order of orders; let i = index"
-                      [ngClass]="{'table-row-even': i % 2 === 0, 'table-row-odd': i % 2 !== 0}">
-                <ion-col>{{ order.orden_date | date: 'dd/MM/yyyy HH:mm' }}</ion-col>
-                <ion-col>{{ rut }}</ion-col>
-                <ion-col>{{ order.total | currency }}</ion-col>
-                <ion-col>{{ order.pagado ? 'Pagado' : 'Rechazado' }}</ion-col>
-                <ion-col>
-                  <ul>
-                    <li *ngFor="let item of order.items">
-                      <strong></strong> {{ item.nombre }}, Cantidad: {{ item.cantidad }}
-                    </li>
-                  </ul>
-                </ion-col>
-              </ion-row>
-
-            </ion-grid>
+        <div class="col-md-10 text-center mt-4">
+          <div *ngIf="orders && orders.length > 0" class="history-container">
+            <h2 class="text-center titular">Historial de Compras</h2>
+            <div class="table-responsive">
+              <table  class="table table-hover">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Fecha</th>
+                    <th scope="col">Cliente</th>
+                    <th scope="col">Total</th>
+                    <th scope="col">Estado</th>
+                    <th scope="col">Productos</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let order of orders; let i = index">
+                    <th scope="row">{{ i + 1 }}</th>
+                    <td>{{ order.orden_date | date: 'dd/MM/yyyy HH:mm' }}</td>
+                    <td>{{ rut }}</td>
+                    <td>{{ order.total | currency }}</td>
+                    <td>{{ order.pagado ? 'Pagado' : 'Rechazado' }}</td>
+                    <td>
+                      <ul>
+                        <li *ngFor="let item of order.items">
+                          {{ item.nombre }}, Cant: {{ item.cantidad }}
+                        </li>
+                      </ul>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </div>
 
           <!-- Mensaje cuando no hay órdenes -->
-          <div style="color: black; font-size: 30px; font-weight: bold;" *ngIf="orders && orders.length === 0" class="text-center mt-4">
-            <p>No tienes órdenes en tu historial</p>
+          <div *ngIf="orders && orders.length === 0" class="text-center mt-4">
+            <p class="text-dark fw-bold" style="font-size: 1.5rem;">No tienes órdenes en tu historial</p>
           </div>
         </div>
+
       </div>
     </div>
   </div>
+
   <footer class="footer">
     <div class="container">
       <p class="float-end">

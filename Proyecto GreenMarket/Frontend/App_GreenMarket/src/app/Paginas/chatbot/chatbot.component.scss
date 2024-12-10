@@ -1,35 +1,3 @@
-.chatbot {
-  background-color: rgb(114, 191, 120); /* Color de fondo suave */
-  border: 1px solid rgb(160, 214, 131); /* Borde ligero */
-  padding: 15px; /* Espaciado interno */
-  width: 100%; /* Ancho completo */
-  height: 90vh; /* Altura completa de la pantalla */
-  display: flex;
-  flex-direction: column;
-  box-sizing: border-box;
-  position: fixed; /* Fijar el chatbot a la derecha */
-  right: 0; /* Alinear al borde derecho */
-  top: 50%; /* Centrar verticalmente */
-  transform: translateY(-50%); /* Ajustar el centrado vertical */
-  max-width: 1000px; /* Aumentar el ancho a 1000px */
-}
-
-h2 {
-  font-size: 1.5em; /* Tamaño del texto del título */
-  text-align: center; /* Centrar el título */
-  color: black; /* Color negro para el título */
-  margin-bottom: 15px; /* Espacio inferior */
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.chatbot-logo {
-  margin-left: 10px;
-  width: 40px;
-  height: 40px;
-}
-
 .messages {
   flex: 1; /* Ocupa el espacio disponible */
   overflow-y: auto; /* Desplazamiento vertical si es necesario */
@@ -63,45 +31,23 @@ h2 {
   margin-right: auto; /* Empujar hacia la izquierda */
 }
 
-.message-input-container {
+
+// //la fotoooooooooooo
+// /* Estilo para el contenedor */
+.image-upload {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 10px;
-  margin-top: 10px;
-  position: relative;
+  color: #000000;
 }
 
-.message-input {
-  flex: 1; /* Ocupa todo el espacio disponible */
-  height: 50px; /* Altura consistente con el botón */
-  padding: 10px; /* Espaciado interno */
-  font-size: 1rem; /* Tamaño de la fuente */
-  color: black; /* Color negro para el texto */
-  font-weight: bold;
-  font-size: 20px;
-  background-color: rgb(160, 214, 131); /* Color de fondo */
-  border-radius: 10px; /* Bordes redondeados */
-  box-sizing: border-box;
-  border: #000000 2px solid;
+/* Ocultar el input original */
+#file-input {
+  display: none;
+  color: #000000;
 }
 
-.send-button {
-  background-color: rgb(254, 255, 159); /* Color de fondo del botón */
-  color: black; /* Color del texto del botón */
-  border: black 2px solid; /* Bordes negros */
-  padding: 0 20px; /* Ajuste del padding */
-  cursor: pointer; /* Cambia el cursor al pasar sobre el botón */
-  height: 50px; /* Igualar la altura con la caja de texto */
-  font-size: 1rem; /* Tamaño de la fuente */
-  border-radius: 10px; /* Bordes redondeados */
-  display: flex; /* Centrado del texto dentro del botón */
-  justify-content: center; /* Centrado horizontal */
-  align-items: center; /* Centrado vertical */
-}
-
-.send-button:hover {
-  background-color: rgb(160, 214, 131); /* Color en hover */
-}
 
 .titular {
   background-color: rgb(160, 214, 131);
@@ -115,74 +61,151 @@ h2 {
   font-weight: bold;
   text-align: center;
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 40px;
+  font-size: 60px;
   margin: 0 auto; /* Centra el título horizontalmente */
 }
-
-/* Media queries para pantallas pequeñas */
-@media (max-width: 480px) {
-  .chatbot {
-    top: 10%; /* Ajustar la posición en pantallas pequeñas */
-    width: 100%; /* Ocupa todo el ancho */
-    max-width: 100%; /* Sin límite de ancho */
-  }
-
-  h2 {
-    font-size: 1.2em; /* Reducir el tamaño del título */
-  }
-
-  .messages .user-message,
-  .messages .bot-message {
-    font-size: 0.9rem; /* Reducir el tamaño de los mensajes */
-  }
-
-  .message-input {
-    font-size: 0.9rem; /* Reducir el tamaño de la fuente */
-    height: 40px; /* Reducir la altura */
-  }
-
-  .send-button {
-    font-size: 0.9rem; /* Reducir el tamaño de la fuente */
-    padding: 0 15px; /* Reducir el padding */
-    height: 40px; /* Reducir la altura */
-  }
+.chat-container{
+  // max-height: 1000px;
+  background:whitesmoke;
+  // border: 1px solid rgb(160, 214, 131); /* Borde ligero */
 }
 
-@media (max-width: 768px) {
-  .chatbot {
-    top: 20%; /* Ajustar posición vertical */
-    width: 90%; /* Más estrecho */
-    max-width: 95%; /* Limitar ancho máximo */
+/* Estilos generales */
+/* Estilos generales */
+body, html {
+  height: 100%;
+  margin: 0;
+  background: rgb(44, 47, 59);
+  background: linear-gradient(to right, rgb(38, 51, 61), rgb(50, 55, 65), rgb(33, 33, 78));
+}
+
+.chat-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Aseguramos que ocupe toda la altura disponible */
+  padding: 10px;
+}
+
+.card {
+  height: 100%; /* Aseguramos que la tarjeta ocupe toda la altura del contenedor */
+  border-radius: 15px !important;
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  border-radius: 15px 15px 0 0 !important;
+  border-bottom: 0 !important;
+  padding: 15px 10px;
+  background-color: rgba(0, 0, 0, 0.6); /* Fondo ligeramente más oscuro para el header */
+}
+
+.card-header ion-item {
+  padding: 0;
+}
+
+.card-header ion-avatar {
+  margin-right: 10px;
+}
+
+.chatbot-logo {
+  margin-left: 10px;
+  width: 40px;
+  height: 40px;
+}
+
+.card-header ion-label h2 {
+  font-size: 35px;
+  color: rgb(0, 0, 0);
+}
+
+.card-header ion-label p {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.msg_card_body {
+  padding: 10px;
+  flex-grow: 1; /* Hace que el cuerpo del mensaje ocupe todo el espacio restante */
+  overflow-y: auto;
+}
+
+.messages {
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+.message {
+  margin-bottom: 10px;
+}
+
+.message ion-chip {
+  margin-bottom: 5px;
+  max-width: 75%;
+}
+
+.message ion-chip ion-label {
+  word-wrap: break-word;
+  white-space: normal;
+}
+
+/* Estilo para el footer (input de mensaje y botones) */
+ion-footer {
+  background-color: rgba(0, 0, 0, 0.4);
+  border-radius: 0 0 15px 15px;
+  padding: 10px;
+}
+
+ion-item {
+  padding: 0;
+}
+
+ion-input {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 15px;
+  color: white;
+  height: 45px;
+  padding: 0 10px;
+}
+
+ion-input::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+ion-button {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 50%;
+  height: 45px;
+  width: 45px;
+  padding: 0;
+}
+
+ion-button ion-icon {
+  color: white;
+}
+.escribir{
+  background:rgb(160, 214, 131);
+  color: black;
+  border: #000000 solid 2px;
+}
+/* Ajustes para pequeños dispositivos */
+@media(max-width: 576px) {
+  .card {
+    margin: 0 10px;
   }
 
   .messages {
-    padding-right: 5px; /* Reducir espaciado */
+    padding: 5px;
   }
 
-  .message-input {
-    font-size: 0.9rem;
-    height: 45px; /* Ajustar altura */
+  ion-input {
+    font-size: 14px;
   }
 
-  .send-button {
-    font-size: 0.9rem;
-    padding: 0 12px; /* Ajustar padding */
-    height: 45px; /* Ajustar altura */
-  }
-}
-
-@media (max-width: 768px) {
-  .titular {
-    width: 80%; /* Más estrecho */
-    font-size: 30px; /* Reducir tamaño */
-    height: 50px; /* Ajustar altura */
-  }
-}
-
-@media (max-width: 480px) {
-  .titular {
-    width: 90%; /* Más estrecho en pantallas pequeñas */
-    font-size: 25px; /* Reducir tamaño */
-    height: 40px; /* Ajustar altura */
+  ion-button {
+    height: 35px;
+    width: 35px;
   }
 }

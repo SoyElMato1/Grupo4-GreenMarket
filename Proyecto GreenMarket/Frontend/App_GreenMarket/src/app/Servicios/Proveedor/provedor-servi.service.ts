@@ -9,7 +9,7 @@ import { Proveedor } from 'src/app/Interfaces/proveedor';
   providedIn: 'root'
 })
 export class ProvedorServiService {
-  // private baseUrl = 'http://3.229.39.19:8000/modelo/provee/';
+  // private baseUrl = 'https://greenmarket.up.railway.app/modelo/provee/';
   private baseUrl = 'http://127.0.0.1:8000/modelo/provee/';  // URL de tu API en el backend
 
   constructor(private http: HttpClient) { }
