@@ -30,7 +30,17 @@ export class AuthserviceService {
   verify2FA(username: string, code: string): Observable<any> {
     const url = `${this.apiUrl}verify_2fa_code/`;
     const body = { username, code };
-    return this.http.post(url, body);
+    return this.http.post(url, body).pipe(
+      tap((response: any) => {
+        if (response.token) {
+          localStorage.setItem('authToken', response.token); // Guarda el token en localStorage
+          localStorage.setItem('userRole', response.user.rol); // Guarda el rol del usuario si lo necesitas
+          localStorage.setItem('rut', username);
+        } else {
+          console.error('Token no encontrado en la respuesta');
+        }
+      })
+    );
   }
   requestPassword(email: string): Observable<any> {
     const url = `${this.apiUrl}request_password/`;

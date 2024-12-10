@@ -69,54 +69,19 @@
       <div *ngIf="restorePassword" >
         <h2>Recuperar Contraseña</h2>
         <form [formGroup]="restoreForm" (ngSubmit)="requestPassword()">
-          <ion-item>
+
             <ion-label position="stacked">Correo Electrónico</ion-label>
             <ion-input
               type="email"
               formControlName="email"
               placeholder="Ingresa tu correo"></ion-input>
-          </ion-item>
+
           <div *ngIf="campoTocado('email') && campo('email')?.invalid" class="error">
             <p *ngIf="campo('email')?.errors?.['required']">El correo es obligatorio.</p>
             <p *ngIf="campo('email')?.errors?.['email']">Formato de correo inválido.</p>
           </div>
-          <ion-button expand="block" type="submit" [disabled]="restoreForm.get('email')?.invalid">
+          <ion-button expand="block" type="submit" color="a" [disabled]="restoreForm.get('email')?.invalid">
             Enviar Correo de Recuperación
-          </ion-button>
-        </form>
-      </div>
-
-      <div *ngIf="recuperacion"  >
-        <h2>Actualizar Contraseña</h2>
-        <form [formGroup]="tokenForm" (ngSubmit)="onUpdatePassword()">
-          <ion-item>
-            <ion-label position="stacked">Token</ion-label>
-            <ion-input
-              type="text"
-              formControlName="token"
-              placeholder="Ingresa el token recibido"></ion-input>
-          </ion-item>
-          <div *ngIf="campoTocado('token') && campo('token')?.invalid" class="error">
-            <p *ngIf="campo('token')?.errors?.['required']">El token es obligatorio.</p>
-          </div>
-          <ion-item>
-            <ion-label position="stacked">Nueva Contraseña</ion-label>
-            <ion-input
-              [type]="showPasswordLogin ? 'text' : 'password'"
-              formControlName="contrasena"
-              placeholder="Ingresa tu nueva contraseña"></ion-input>
-            <ion-icon
-              name="eye"
-              slot="end"
-              (click)="togglePasswordVisibility('login')"
-              [name]="showPasswordLogin ? 'eye-off' : 'eye'"></ion-icon>
-          </ion-item>
-          <div *ngIf="campoTocado('contrasena') && campo('contrasena')?.invalid" class="error">
-            <p *ngIf="campo('contrasena')?.errors?.['required']">La contraseña es obligatoria.</p>
-            <p *ngIf="campo('contrasena')?.errors?.['minlength']">Debe tener al menos 8 caracteres.</p>
-          </div>
-          <ion-button expand="block" type="submit" [disabled]="tokenForm.get('token')?.invalid || tokenForm.get('contrasena')?.invalid">
-            Actualizar Contraseña
           </ion-button>
         </form>
       </div>

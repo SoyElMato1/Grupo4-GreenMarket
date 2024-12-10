@@ -47,7 +47,7 @@ urlpatterns = [
     path('detalles-pago-exitoso/', detalles_pago_exitoso, name='detalles_pago_exitoso'),
 
 #Login 
-    path('login/', login_view, name='admin_login'),
+    path('login/', login_view, name='login'),
     path('logout/', logout_view, name='logout'),
     path('registro_proveedor/', register_proveedor_view, name='registro proveedor'),
     path('verify_2fa_code/', verify_2fa_code, name='verify_2fa_code'),

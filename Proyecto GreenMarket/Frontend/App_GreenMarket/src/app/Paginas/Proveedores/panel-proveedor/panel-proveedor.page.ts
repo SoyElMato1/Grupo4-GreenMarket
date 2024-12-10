@@ -306,6 +306,7 @@ export class PanelProveedorPage implements OnInit {
             localStorage.removeItem('userRole');
             localStorage.removeItem('user_data');
             localStorage.removeItem('rut');
+            localStorage.removeItem('rol');
 
             // Redirigir al usuario a la página de login
             this.router.navigate(['/login']);

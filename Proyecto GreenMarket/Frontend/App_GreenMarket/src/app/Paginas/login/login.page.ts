@@ -283,6 +283,9 @@ export class LoginPage implements OnInit{
           duration: 2000,
         });
         toast.present();
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000); // Espera 2 segundos antes de recargar para permitir que el toast se muestre
       },
       async (error) => {
         console.error('Error al solicitar el restablecimiento:', error);

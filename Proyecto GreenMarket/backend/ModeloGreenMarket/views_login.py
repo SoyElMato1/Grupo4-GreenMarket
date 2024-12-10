@@ -26,26 +26,71 @@ def login_view(request):
             username = data.get('username')
             password = data.get('password')
 
+            # Validación de campos requeridos
             if username is None or password is None:
                 return JsonResponse({'error': 'Username and password are required'}, status=400)
 
+            # Autenticación del usuario
             user = authenticate(request, username=username, password=password)
             if user is not None:
-                token, created = Token.objects.get_or_create(user=user)
-
+                # Generar o recuperar el token
+                token, _ = Token.objects.get_or_create(user=user)
                 login(request, user)
+
+                # Generar y enviar código de autenticación en dos pasos (2FA)
+                two_factor, _ = TwoFactor.objects.get_or_create(user=user)
+                two_factor.generate_code()
+
+                if user.correo_user:
+                    try:
+                        send_mail(
+                            'Tu código de verificación',
+                            f'Tu código es: {two_factor.code}',
+                            settings.DEFAULT_FROM_EMAIL,
+                            [user.correo_user],
+                            fail_silently=False,
+                            html_message=f'''
+                                <html>
+                                    <body style="font-family: Arial, sans-serif; color: #333; background-color: #f4f4f4; padding: 20px;">
+                                        <div style="max-width: 600px; margin: 0 auto; background-color: #fff; border-radius: 10px; padding: 20px;">
+                                            <h2 style="color: #0056b3; text-align: center;">Verificación de tu Cuenta</h2>
+                                            <p style="font-size: 16px; line-height: 1.6;">Hola { user.nom_user },</p>
+                                            <p style="font-size: 16px; line-height: 1.6;">
+                                                Utiliza el siguiente código de verificación:
+                                            </p>
+                                            <p style="font-size: 24px; font-weight: bold; color: #007bff; text-align: center; padding: 10px 0; letter-spacing: 2px;">
+                                                { two_factor.code }
+                                            </p>
+                                        </div>
+                                        <footer style="text-align: center; padding: 20px 0; background-color: #28a745; color: #fff; border-radius: 10px; margin-top: 40px;">
+                                            <p style="font-size: 14px;">&copy; 2024 GreenMarket. Todos los derechos reservados.</p>
+                                        </footer>
+                                    </body>
+                                </html>''',
+                        )
+                    except Exception as e:
+                        return JsonResponse({'error': f'Failed to send email: {str(e)}'}, status=500)
+                else:
+                    return JsonResponse({'error': 'User does not have a valid email address'}, status=400)
+
+                # Respuesta indicando que se requiere 2FA
                 return JsonResponse({
-                    'token': token.key,
+                    'message': '2FA code sent to your email. Please verify.',
+                    'requires_2fa': 'True',
                     'user': {
+                        'username': user.username,
                         'rol': user.rol
                     }
                 })
-            else:
-                return JsonResponse({'error': 'Invalid credentials'}, status=400)
+
+            # Credenciales inválidas
+            return JsonResponse({'error': 'Invalid credentials'}, status=400)
 
         except json.JSONDecodeError:
+            # Manejo de errores en el formato JSON
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
 
+    # Método HTTP no permitido
     return JsonResponse({'error': 'Invalid request method'}, status=405)
 
 @csrf_exempt  # Solo temporalmente para pruebas, no en producción
@@ -136,6 +181,31 @@ def request_password(request):
                     settings.DEFAULT_FROM_EMAIL,
                     [email],
                     fail_silently=False,
+                    html_message=f'''
+                        <html>
+                            <body style="font-family: Arial, sans-serif; color: #333; background-color: #f4f4f4; padding: 20px;">
+                                <div style="max-width: 600px; margin: 0 auto; background-color: #fff; border-radius: 10px; padding: 20px;">
+                                    <h2 style="color: #0056b3; text-align: center;">Petición de recuperación de contraseña</h2>
+                                    <p style="font-size: 16px; line-height: 1.6;">Hola { user.nom_user }</p>
+                                    <p style="font-size: 16px; line-height: 1.6;">
+                                        Para recuperar tu contraseña, haz clic en el siguiente botón:
+                                    </p>
+                                    <p style="text-align: center; margin-bottom: 30px;">
+                                        <a href="http://localhost:8100/recuperar?token={token}" 
+                                            style="background-color: #007bff; color: #fff; padding: 12px 25px; text-decoration: none; border-radius: 5px; font-size: 16px;">
+                                            Recuperar Contraseña
+                                        </a>
+                                    </p>
+                                    <p style="font-size: 14px; line-height: 1.6; color: #777; text-align: center;">
+                                        Si no solicitaste esta recuperación, por favor ignora este mensaje.
+                                    </p>
+                                </div>
+                                <footer style="text-align: center; padding: 20px 0; background-color: #28a745; color: #fff; border-radius: 10px; margin-top: 40px;">
+                                    <p style="font-size: 14px;">&copy; 2024 GreenMarket. Todos los derechos reservados.</p>
+                                </footer>
+                            </body>
+                        </html>
+                        ''',
                 )
                 PasswordReset.objects.get_or_create(usuario = user, token = token)
                 return JsonResponse({'message': 'Reseteo de contraseña enviado'}, status=200)

@@ -32,7 +32,16 @@ SECRET_KEY = 'django-insecure-eq0gx0&ri!hd1u6($cei%qa=gr^^i1#s2i4&e#dzue9nlpw6l_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
+
+#Aqui va el correo, se debe poner correo pagina
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_HOST_USER = 'greenmarket408@gmail.com'  # Tu correo de Gmail
+EMAIL_HOST_PASSWORD = 'cwaj yiug pjce kzid'  # Contraseña de la cuenta o contraseña de aplicación
+DEFAULT_FROM_EMAIL = 'greenmarket408@gmail.com'  # Dirección de correo que aparecerá como remitente
 
 
 # Application definition

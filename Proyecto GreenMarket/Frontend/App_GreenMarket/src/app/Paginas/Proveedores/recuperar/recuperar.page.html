@@ -1,13 +1,25 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>recuperar</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">recuperar</ion-title>
-    </ion-toolbar>
-  </ion-header>
-</ion-content>
+<div class="reset-password-container">
+  <h2>Restablecer Contraseña</h2>
+  <form [formGroup]="resetForm" (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label position="stacked">Nueva Contraseña</ion-label>
+      <ion-input
+        formControlName="password"
+        type="password"
+        placeholder="Ingresa tu nueva contraseña">
+      </ion-input>
+      <ion-icon
+        name="eye"
+        slot="end"
+        (click)="togglePasswordVisibility()">
+      </ion-icon>
+    </ion-item>
+    <div *ngIf="resetForm.get('password')?.touched && resetForm.get('password')?.invalid" class="error">
+      <p *ngIf="resetForm.get('password')?.errors?.['required']">La contraseña es obligatoria.</p>
+      <p *ngIf="resetForm.get('password')?.errors?.['minlength']">Debe tener al menos 8 caracteres.</p>
+    </div>
+    <ion-button expand="block" type="submit" [disabled]="resetForm.invalid">
+      Actualizar Contraseña
+    </ion-button>
+  </form>
+</div>
