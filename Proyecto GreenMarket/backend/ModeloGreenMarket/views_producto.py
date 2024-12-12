@@ -160,3 +160,32 @@ def actualizar_eliminar_producto(request, id):
     elif request.method == 'DELETE':
         producto.delete()
         return HttpResponse(status=status.HTTP_204_NO_CONTENT)
+    
+#-----------------------------------Lista proveedores por el nombre del producto(chatbot)--------------------
+
+@csrf_exempt
+@api_view(["GET"])
+@permission_classes([AllowAny])
+def proveedores_por_producto(request):
+    if request.method == "GET":
+        plant_name = request.GET.get("planta", "").strip()  # Limpia saltos de línea y espacios
+        if not plant_name:
+            return JsonResponse({"error": "No se especificó el nombre de la planta."}, status=400)
+
+        # Filtra los productos por nombre
+        productos = Producto.objects.filter(nombre_producto__iexact=plant_name)
+
+        if productos.exists():
+            proveedores = [
+                {
+                    "rut": producto.id_proveedor.rut,
+                    "nombre": producto.id_proveedor.nombre,
+                    "correo_electronico": producto.id_proveedor.correo_electronico,
+                }
+                for producto in productos
+            ]
+            return JsonResponse(proveedores, safe=False, status=200)
+        else:
+            return JsonResponse({"error": f"No se encontraron productos con el nombre '{plant_name}'."}, status=404)
+
+    return JsonResponse({"error": "Método no permitido."}, status=405)

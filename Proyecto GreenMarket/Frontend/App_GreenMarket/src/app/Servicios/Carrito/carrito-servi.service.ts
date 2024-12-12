@@ -4,12 +4,14 @@ import { BehaviorSubject, tap } from 'rxjs';
 import { Observable } from 'rxjs';
 import { Carrito } from 'src/app/Interfaces/carrito';
 import { EventEmitter } from '@angular/core';
+import { environment } from 'src/environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class CarritoServiService {
 
-  private apiUrl = 'http://127.0.0.1:8000/modelo/';
+  private apiUrl = environment.APIbackend;
   // private apiUrl = 'https://greenmarket.up.railway.app/modelo/';
   // BehaviorSubject to track number of items in the cart
   private cartItemCount = new BehaviorSubject<number>(0);

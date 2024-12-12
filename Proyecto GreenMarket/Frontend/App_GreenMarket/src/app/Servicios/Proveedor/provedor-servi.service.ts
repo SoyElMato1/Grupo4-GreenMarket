@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
 import { Producto } from 'src/app/Interfaces/producto';
 import { Proveedor } from 'src/app/Interfaces/proveedor';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
@@ -10,13 +11,13 @@ import { Proveedor } from 'src/app/Interfaces/proveedor';
 })
 export class ProvedorServiService {
   // private baseUrl = 'https://greenmarket.up.railway.app/modelo/provee/';
-  private baseUrl = 'http://127.0.0.1:8000/modelo/provee/';  // URL de tu API en el backend
+  private baseUrl = environment.APIbackend;  // URL de tu API en el backend
 
   constructor(private http: HttpClient) { }
 
   // Método para obtener todos los proveedores
   getProveedores(): Observable<Producto[]> {
-    return this.http.get<Producto[]>(this.baseUrl).pipe(
+    return this.http.get<Producto[]>(`${this.baseUrl}provee/`).pipe(
       map((productos) =>
         productos.map(producto => {
           // Puedes agregar más lógica aquí si es necesario
@@ -43,7 +44,7 @@ export class ProvedorServiService {
 
   // Eliminar un proveedor
   deleteProveedor(rut: string): Observable<void> {
-    return this.http.delete<void>(`${this.baseUrl}${rut}/`);
+    return this.http.delete<void>(`${this.baseUrl}provee/${rut}/`);
   }
 
 }

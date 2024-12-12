@@ -1,13 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ChatbotService {
-  private rasaUrl = 'http://localhost:5005/webhooks/rest/webhook'; // Cambia esto si tu Rasa está en otra URL
-  private uploadUrl = 'http://127.0.0.1:8000/modelo/api/chat/upload'; // URL del backend para carga de imágenes
+
+  private rasaUrl = environment.APIRasa; // Cambia esto si tu Rasa está en otra URL
+  private uploadUrl = environment.APIbackend; // URL del backend para carga de imágenes
   // private uploadUrl = 'https://greenmarket.up.railway.app/modelo/api/chat/upload';
 
 
@@ -24,6 +26,6 @@ export class ChatbotService {
     const formData = new FormData();
     formData.append('image', image);
 
-    return this.http.post(this.uploadUrl, formData);
+    return this.http.post( `${this.uploadUrl}api/chat/upload`, formData);
 }
 }

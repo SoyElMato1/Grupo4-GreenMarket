@@ -3,13 +3,14 @@ import { HttpClient,HttpHeaders  } from '@angular/common/http';
 import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { Proveedor } from 'src/app/Interfaces/proveedor';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthserviceService {
 
-  private apiUrl = 'http://localhost:8000/modelo/';
+  private apiUrl = environment.APIbackend;
   // private apiUrl = 'https://greenmarket.up.railway.app/modelo/';
   constructor(private http: HttpClient, private router: Router) { }
 

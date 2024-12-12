@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  // APIProveedor: 'http://localhost:8000/proveedor',
+  APIbackend: 'http://localhost:8000/modelo',
+  APIRasa: 'http://localhost:5005/webhooks/rest/webhook',
   // variable creada para la ruta la cual se va a utilizar para la conexión con el backend
 };
 

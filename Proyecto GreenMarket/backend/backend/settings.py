@@ -20,9 +20,6 @@ TRANSBANK_API_KEY = '579B532A7440BB0C9079DED94D31EA1615BACEB56610332264630D42D0A
 TRANSBANK_COMMERCE_CODE = '597055555532'
 TRANSBANK_ENVIRONMENT = 'integration'  # Usa 'integration' para el entorno de pruebas
 
-# OPENAI
-OPENAI_API_KEY = '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'
-
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
@@ -42,7 +39,6 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = 'greenmarket408@gmail.com'  # Tu correo de Gmail
 EMAIL_HOST_PASSWORD = 'cwaj yiug pjce kzid'  # Contraseña de la cuenta o contraseña de aplicación
 DEFAULT_FROM_EMAIL = 'greenmarket408@gmail.com'  # Dirección de correo que aparecerá como remitente
-
 
 # Application definition
 
@@ -156,7 +152,7 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-MEDIA_URL = '/media/'
+MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'ModeloGreenMarket.User'
