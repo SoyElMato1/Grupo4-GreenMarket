@@ -9,7 +9,6 @@ import { environment } from 'src/environments/environment';
 export class ProductoServiService {
 
   private apiUrl = environment.APIbackend;
-  // private apiUrl = 'https://greenmarket.up.railway.app/modelo/';
 
   constructor(private http: HttpClient) { }
 

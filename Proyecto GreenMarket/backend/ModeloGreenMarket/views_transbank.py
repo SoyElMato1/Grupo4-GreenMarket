@@ -6,11 +6,11 @@ from transbank.webpay.webpay_plus.transaction import Transaction, WebpayOptions
 from transbank.common.integration_type import IntegrationType
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.dateparse import parse_datetime
-from .models import transaccion
+from .models import *
 from transbank.webpay.webpay_plus.transaction import Transaction
 import uuid
 import logging
-from .models import Orden
+from django.core.mail import send_mail
 
 #------------------------Vista Transbank---------------------------------------
 logger = logging.getLogger(__name__)
@@ -86,7 +86,7 @@ def pago_exitoso(request):
     try:
         # Commit de la transacción en Transbank
         response = Transaction().commit(token_ws)
-        print("Response de Transbank:", response)  # Verificar la respuesta de Transbank
+        # print("Response de Transbank:", response)  # Verificar la respuesta de Transbank
 
         if response['status'] == 'AUTHORIZED':
             # Extraer datos necesarios para guardar la transacción
@@ -108,6 +108,49 @@ def pago_exitoso(request):
             pagado = True,
             orden_date = parse_datetime(response['transaction_date'])
             )
+            Venta.objects.filter(buy_order = response['buy_order']).update(
+            pagado = True,
+            fecha_venta = parse_datetime(response['transaction_date'])
+            )
+            ventas = Venta.objects.filter(buy_order=response['buy_order'])
+            proveedores = Proveedor.objects.filter(rut__in=[venta.id_proveedor.rut for venta in ventas])
+            # generar_reporte_pdf(response["buy_order"], ventas, proveedores)
+            notificados = set()
+            for venta in ventas:
+                print(venta)
+                if venta.id_proveedor not in notificados:
+                    try:
+                        proveedor = Proveedor.objects.get(rut=venta.id_proveedor.rut)
+                        send_mail(
+                                'Notificación de Venta',
+                                f'La venta con ID {venta.id_venta} ha sido marcada como pagada.',
+                                'greenmarket408@gmail.com',
+                                [proveedor.correo_electronico],  # Email del proveedor
+                                fail_silently=False,
+                                html_message=f'''
+                                <html>
+                                    <body style="font-family: Arial, sans-serif; color: #333; background-color: #f4f4f4; padding: 20px;">
+                                        <div style="max-width: 600px; margin: 0 auto; background-color: #fff; border-radius: 10px; padding: 20px;">
+                                            <h2 style="color: #0056b3; text-align: center;">Notificación de Venta</h2>
+                                            <p style="font-size: 16px; line-height: 1.6;">Hola {proveedor.nombre} {proveedor.apellido},</p>
+                                            <p style="font-size: 16px; line-height: 1.6;">
+                                                Te informamos que has realizado una venta por {venta.monto_total} y ha sido marcada como pagada.
+                                            </p>
+                                            <p style="font-size: 14px; line-height: 1.6; color: #777; text-align: center;">
+                                                Si tienes alguna consulta, por favor contáctanos.
+                                            </p>
+                                        </div>
+                                        <footer style="text-align: center; padding: 20px 0; background-color: #28a745; color: #fff; border-radius: 10px; margin-top: 40px;">
+                                            <p style="font-size: 14px;">&copy; 2024 GreenMarket. Todos los derechos reservados.</p>
+                                        </footer>
+                                    </body>
+                                </html>
+                                ''',
+                            )
+                        notificados.add(venta.id_proveedor)
+                    except Proveedor.DoesNotExist:
+                        print("error proveedor no encontrado al enviar correo")
+
             # Redirigir a la ruta de Angular con el resultado de la transacción
             return redirect(f'http://localhost:8100/pago-exitoso?order={response["buy_order"]}')
         else:

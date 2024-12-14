@@ -10,7 +10,6 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class ProvedorServiService {
-  // private baseUrl = 'https://greenmarket.up.railway.app/modelo/provee/';
   private baseUrl = environment.APIbackend;  // URL de tu API en el backend
 
   constructor(private http: HttpClient) { }

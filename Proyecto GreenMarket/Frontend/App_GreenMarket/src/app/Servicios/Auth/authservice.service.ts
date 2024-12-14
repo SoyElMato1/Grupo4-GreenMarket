@@ -11,7 +11,6 @@ import { environment } from 'src/environments/environment';
 export class AuthserviceService {
 
   private apiUrl = environment.APIbackend;
-  // private apiUrl = 'https://greenmarket.up.railway.app/modelo/';
   constructor(private http: HttpClient, private router: Router) { }
 
   login(username: string, password: string): Observable<any> {
@@ -43,6 +42,7 @@ export class AuthserviceService {
       })
     );
   }
+
   requestPassword(email: string): Observable<any> {
     const url = `${this.apiUrl}request_password/`;
     const body = { email };
@@ -104,6 +104,10 @@ export class AuthserviceService {
   getUserRole(): string | null {
     const user = JSON.parse(localStorage.getItem('user_data')!);
     return user ? user.rol : null;
+  }
+
+  getHistorialProveedor(rut : string): Observable<any[]>{
+    return this.http.get<any[]>(`${this.apiUrl}historialVenta/${rut}/`);
   }
 
 }

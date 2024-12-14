@@ -2,7 +2,7 @@ import json
 from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from rest_framework.parsers import JSONParser
-from .models import Producto, Cliente, Orden, CarritoM, ItemCarrito
+from .models import *
 from .carrito import Carrito
 from django.views.decorators.csrf import csrf_exempt
 from .serializers import ClienteSerializer
@@ -97,7 +97,6 @@ def ver_carrito(request):
 
     return JsonResponse({'items': items_serializados, 'total': str(total)})
 
-
 @csrf_exempt
 def checkout(request):
     if request.method == 'POST':
@@ -125,6 +124,11 @@ def checkout(request):
         carrito = Carrito(request)
         items, total = carrito.obtener_items()
 
+        productos = [
+                (item['producto'], item['cantidad'], item['producto'].id_proveedor) 
+                for item in items
+            ]
+        
         # Crear la lista de ítems para la orden
         items_orden = [{'producto_id': item['producto'].codigo_producto, 'cantidad': item['cantidad']} for item in items]
 
@@ -135,6 +139,29 @@ def checkout(request):
             total=total,
             pagado=False,
         )
+
+        productos_por_proveedor = {}
+        for producto, cantidad, proveedor in productos:
+            if proveedor not in productos_por_proveedor:
+                productos_por_proveedor[proveedor] = []
+            productos_por_proveedor[proveedor].append((producto, cantidad))
+        # Crear una venta por cada proveedor
+        ventas = {}
+        for proveedor, items in productos_por_proveedor.items():
+            # Calcular el monto total para todos los productos de este proveedor
+            total_por_proveedor = sum(producto.precio * cantidad for producto, cantidad in items)
+            # Crear la venta para el proveedor
+            venta = Venta.objects.create(
+                id_proveedor=proveedor,
+                monto_total=total_por_proveedor,
+                pagado=False,
+                id_orden = orden,
+                items = items_orden
+            )
+            ventas[proveedor] = {
+                'venta': venta,
+                'productos': items,
+            }
 
         # Limpiar el carrito después de crear la orden
         carrito.limpiar()

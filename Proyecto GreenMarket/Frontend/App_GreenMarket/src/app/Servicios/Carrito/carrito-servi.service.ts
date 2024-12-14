@@ -12,7 +12,6 @@ import { environment } from 'src/environments/environment';
 export class CarritoServiService {
 
   private apiUrl = environment.APIbackend;
-  // private apiUrl = 'https://greenmarket.up.railway.app/modelo/';
   // BehaviorSubject to track number of items in the cart
   private cartItemCount = new BehaviorSubject<number>(0);
   cantidadCarrito = new EventEmitter<number>();
@@ -65,14 +64,8 @@ export class CarritoServiService {
 
   checkout(data: any) {
     const headers = { 'Content-Type': 'application/json' }; // Asegúrate de tener las cabeceras
-    return this.http.post('http://127.0.0.1:8000/modelo/crear_oden/', data, { headers });
+    return this.http.post(`${this.apiUrl}crear_oden/`, data, { headers });
   }
-
-  //PRODUCCION
-  // checkout(data: any) {
-  //   const headers = { 'Content-Type': 'application/json' }; // Asegúrate de tener las cabeceras
-  //   return this.http.post('https://web-production-8ca5.up.railway.app/modelo/crear_oden/', data, { headers });
-  // }
 
   cliente_obtener(rut: string): Observable<any> {
     console.log(`Fetching client with RUT: ${rut}`);  // Agrega esto para verificar el RUT en consola

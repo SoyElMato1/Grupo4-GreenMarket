@@ -10,8 +10,6 @@ export class ChatbotService {
 
   private rasaUrl = environment.APIRasa; // Cambia esto si tu Rasa está en otra URL
   private uploadUrl = environment.APIbackend; // URL del backend para carga de imágenes
-  // private uploadUrl = 'https://greenmarket.up.railway.app/modelo/api/chat/upload';
-
 
   constructor(private http: HttpClient) {}
 
@@ -27,5 +25,5 @@ export class ChatbotService {
     formData.append('image', image);
 
     return this.http.post( `${this.uploadUrl}api/chat/upload`, formData);
-}
+  }
 }

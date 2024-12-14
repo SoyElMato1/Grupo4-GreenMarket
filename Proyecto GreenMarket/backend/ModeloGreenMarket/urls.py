@@ -25,6 +25,7 @@ urlpatterns = [
     path('provee/', Ver_proveedor, name='proveedor'),
     path('proveedores/<int:id>/', proveedor_detalle, name='proveedor_detalle'),
     path('proveedores_por_producto/', proveedores_por_producto, name='proveedores_por_producto'),
+    path('historialVenta/<str:rut>/', historial_ventas, name='historial_proveedor'),
 
 # Carrito
     path('agregar/<int:producto_id>/', agregar_al_carrito, name='agregar_al_carrito'),

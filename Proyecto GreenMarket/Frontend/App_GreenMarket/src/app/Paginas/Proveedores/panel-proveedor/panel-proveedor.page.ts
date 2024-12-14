@@ -23,6 +23,7 @@ export class PanelProveedorPage implements OnInit {
   isEditMode = false;
 
   categorias: any[] = [];
+  ventas: any[] =[];
   currentSection: string = 'dashboard'; // Sección por defecto
   alertController: any;
 
@@ -59,6 +60,7 @@ export class PanelProveedorPage implements OnInit {
       // Aquí puedes actualizar cuando la navegación termine
       this.loadPerfil();
       this.getProductos();
+      this.getHistorial();
     });
     this.getCategorias();
     this.rutProveedor = localStorage.getItem('rut');
@@ -118,56 +120,10 @@ export class PanelProveedorPage implements OnInit {
     );
   }
 
-  // actualizarFoto(event: Event) {
-  //   const input = event.target as HTMLInputElement;
-  //   if (input.files && input.files[0]) {
-  //     this.fotoSeleccionada = input.files[0];
-  //   }
-  // }
-
-  // // Método para guardar cambios en el perfil, incluyendo la foto
-  // actualizarPerfil() {
-  //   const rut = localStorage.getItem('rut'); // Asegúrate de que esto esté definido
-  //   const formData = new FormData();
-  //   formData.append('nombre', this.proveedor.nombre);
-  //   formData.append('apellido', this.proveedor.apellido);
-  //   formData.append('correo_electronico', this.proveedor.correo_electronico);
-  //   formData.append('direccion',this.proveedor.direccion)
-  //   if (this.fotoSeleccionada) {
-  //     formData.append('foto', this.fotoSeleccionada); // Adjunta la foto seleccionada
-  //   }
-
-  //   this.authService.actualizarPerfilProveedor(formData).subscribe(
-  //     async (response) => {
-  //       const toast = await this.toast.create({
-  //         message: 'Perfil actualizado correctamente.',
-  //         duration: 2000,
-  //       });
-  //       toast.present();
-  //        // Recargar la página después de mostrar el mensaje
-  //       setTimeout(() => {
-  //         window.location.reload();
-  //       }, 2000); // Espera 2 segundos antes de recargar para permitir que el toast se muestre
-  //     },
-  //     (error) => {
-  //       console.error('Error al actualizar el perfil', error);
-  //     }
-  //   );
-  // }
-
   // Cambiar la sección actual
   setSection(section: string) {
     this.currentSection = section;
   }
-
-  /// Cosas de producto
-
-  // onFileSelected(event: Event) {
-  //   const input = event.target as HTMLInputElement;
-  //   if (input.files && input.files[0]) {
-  //     this.selectedImage = input.files[0];
-  //   }
-  // }
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
@@ -321,6 +277,24 @@ export class PanelProveedorPage implements OnInit {
             toast.present();
         }
     );
+  }
+
+  getHistorial() {
+    if (this.rutProveedor) {
+      this.authService.getHistorialProveedor(this.rutProveedor).subscribe(data => {
+        this.ventas = data;
+        this.ventas.forEach(order => {
+          order.items.forEach((item: any) => {
+            this.proService.productoId(item.producto_id).subscribe({
+              next: (producto) => item.nombre = producto.nombre_producto,
+              error: (err) => console.error(`No se pudo obtener el producto con ID ${item.producto_id}`)
+            });
+          });
+        });
+      });
+    } else {
+      console.error('No se encontró el RUT del proveedor en el localStorage');
+    }
   }
 
 }

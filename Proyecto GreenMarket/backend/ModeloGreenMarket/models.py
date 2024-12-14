@@ -219,15 +219,6 @@ class CalificacionProducto(models.Model):
     def __str__(self):
         return f'Calificación de {self.producto}: {self.puntuacion}'
 
-# class MetodoPago (models.Model):
-#     id_metodo_pago = models.AutoField(primary_key=True)
-#     nombre_metodo = models.CharField(max_length=50)
-
-# class transaccion (models.Model):
-#     id_transaccion = models.AutoField(primary_key=True)
-#     monto = models.IntegerField()
-#     fecha = models.DateField()
-#     id_metodo_pago = models.ForeignKey(MetodoPago, on_delete=models.CASCADE)
 class transaccion(models.Model):
     metodo_pago = models.CharField(max_length=2)  # Ahora es un campo CharField para almacenar códigos como 'VD', 'VN'
     amount = models.DecimalField(max_digits=10, decimal_places=2)
@@ -261,6 +252,7 @@ class ItemCarrito(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField(default=1)
     precio = models.DecimalField(max_digits=10, decimal_places=2)  # Se almacena el precio al momento de la compra
+    id_proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
 
     def subtotal(self):
         return self.precio * self.cantidad
@@ -270,13 +262,10 @@ class ItemCarrito(models.Model):
 
 class Venta (models.Model):
     id_venta = models.AutoField(primary_key=True)
-    fecha_venta = models.DateField()
+    fecha_venta = models.DateField(auto_now_add=True, blank=True)
     monto_total = models.IntegerField()
-    id_cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE)
-    transaccion = models.ForeignKey(transaccion, on_delete=models.SET_NULL, null=True)
-
-    def save(self, *args, **kwargs):
-        # Validar que el carrito no esté asociado ya a otra venta
-        if Venta.objects.filter(carrito=self.carrito).exists():
-            raise ValueError("Este carrito ya está asociado a una venta.")
-        super(Venta, self).save(*args, **kwargs)
+    items = models.JSONField()
+    pagado = models.BooleanField()
+    buy_order = models.CharField(max_length=150)
+    id_proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
+    id_orden = models.ForeignKey(Orden, on_delete=models.CASCADE)

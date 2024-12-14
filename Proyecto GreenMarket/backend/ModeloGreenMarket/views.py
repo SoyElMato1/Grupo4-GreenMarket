@@ -150,7 +150,7 @@ def guardar_cliente(request):
         return JsonResponse(cliente_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     return JsonResponse({'error': 'Método no permitido'}, status=405)
 
-# -------------------------- Historial compra -----------------------------
+# -------------------------- Historial -----------------------------
 @csrf_exempt
 @api_view(['GET'])
 @permission_classes([AllowAny])
@@ -161,6 +161,18 @@ def historial_compras(request, rut):
         serializer = OrdenSerializer(ordenes, many=True)
         return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
     except Orden.DoesNotExist:
+        return Response({"detail": "No se encontraron órdenes para este RUT."}, status=status.HTTP_404_NOT_FOUND)
+    
+@csrf_exempt
+@api_view(['GET'])
+@permission_classes([AllowAny])
+def historial_ventas(request, rut):
+    try:
+        ventas = Venta.objects.all()
+        ventas = Venta.objects.filter(id_proveedor=rut)
+        serializer = VentaSerializer(ventas, many=True)
+        return JsonResponse(serializer.data, safe=False, status=status.HTTP_200_OK)
+    except Venta.DoesNotExist:
         return Response({"detail": "No se encontraron órdenes para este RUT."}, status=status.HTTP_404_NOT_FOUND)
 
 # --------------------------- Chatbot ---------------------------
