@@ -74,10 +74,15 @@ class TransaccionSerializer(serializers.ModelSerializer):
         model = transaccion
         fields = ['id_transaccion', 'monto', 'fecha']
 
+# class VentaSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Venta
+#         fields = ['id_venta', 'fecha_venta', 'monto_total', 'id_proveedor', 'pagado', 'items']
+
 class VentaSerializer(serializers.ModelSerializer):
     class Meta:
         model = Venta
-        fields = ['id_venta', 'fecha_venta', 'monto_total', 'id_proveedor', 'pagado', 'items']
+        fields = ['id_venta', 'fecha_venta', 'monto_total', 'id_cliente', 'id_carrito', 'transaccion']
 
 class OrdenSerializer(serializers.ModelSerializer):
     class Meta:

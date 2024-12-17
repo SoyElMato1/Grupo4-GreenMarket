@@ -252,7 +252,7 @@ class ItemCarrito(models.Model):
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     cantidad = models.PositiveIntegerField(default=1)
     precio = models.DecimalField(max_digits=10, decimal_places=2)  # Se almacena el precio al momento de la compra
-    id_proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
+    # id_proveedor = models.ForeignKey(Proveedor, on_delete=models.CASCADE)
 
     def subtotal(self):
         return self.precio * self.cantidad

@@ -140,28 +140,28 @@ def checkout(request):
             pagado=False,
         )
 
-        productos_por_proveedor = {}
-        for producto, cantidad, proveedor in productos:
-            if proveedor not in productos_por_proveedor:
-                productos_por_proveedor[proveedor] = []
-            productos_por_proveedor[proveedor].append((producto, cantidad))
-        # Crear una venta por cada proveedor
-        ventas = {}
-        for proveedor, items in productos_por_proveedor.items():
-            # Calcular el monto total para todos los productos de este proveedor
-            total_por_proveedor = sum(producto.precio * cantidad for producto, cantidad in items)
-            # Crear la venta para el proveedor
-            venta = Venta.objects.create(
-                id_proveedor=proveedor,
-                monto_total=total_por_proveedor,
-                pagado=False,
-                id_orden = orden,
-                items = items_orden
-            )
-            ventas[proveedor] = {
-                'venta': venta,
-                'productos': items,
-            }
+        # productos_por_proveedor = {}
+        # for producto, cantidad, proveedor in productos:
+        #     if proveedor not in productos_por_proveedor:
+        #         productos_por_proveedor[proveedor] = []
+        #     productos_por_proveedor[proveedor].append((producto, cantidad))
+        # # Crear una venta por cada proveedor
+        # ventas = {}
+        # for proveedor, items in productos_por_proveedor.items():
+        #     # Calcular el monto total para todos los productos de este proveedor
+        #     total_por_proveedor = sum(producto.precio * cantidad for producto, cantidad in items)
+        #     # Crear la venta para el proveedor
+        #     venta = Venta.objects.create(
+        #         id_proveedor=proveedor,
+        #         monto_total=total_por_proveedor,
+        #         pagado=False,
+        #         id_orden = orden,
+        #         items = items_orden
+        #     )
+        #     ventas[proveedor] = {
+        #         'venta': venta,
+        #         'productos': items,
+        #     }
 
         # Limpiar el carrito después de crear la orden
         carrito.limpiar()
